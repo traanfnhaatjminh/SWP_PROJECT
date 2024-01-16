@@ -1,0 +1,34 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Jan 13, 2024, 3:34:25 PM
+    Author     : minh1
+*/
+
+.logo{
+    font-size: 40px;
+    color: whitesmoke;
+}
+
+.product-name{
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
+}
+
+.dropdown-toggle {
+    cursor: pointer; /* Đổi chuột thành hình bàn tay khi di qua phần tử */
+}
+
+.blog-item h3,p{
+    font-family: serif;
+}
+
+.blog-list{
+    margin-top: 2%;
+}
+
+
+
