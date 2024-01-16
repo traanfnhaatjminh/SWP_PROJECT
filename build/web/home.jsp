@@ -36,43 +36,74 @@
     </head>
     <body>
         <jsp:include page="menu.jsp"></jsp:include>
-        
-        <!-- /SECTION -->
-        <div class="container">
-            <div class="store-filter clearfix center-content">
-                <div class="store-sort">
-                    <label>
-                        Sort By:
-                        <select class="input-select">
-                            <option value="0">Latest blog</option>
-                            <option value="1">Oldest blog</option>
-                        </select>
-                    </label>
 
-                    <label>
-                        Show:
-                        <select class="input-select">
-                            <option value="0">20</option>
-                            <option value="1">50</option>
-                        </select>
-                    </label>
+            <!-- /SECTION -->
+            <div class="container">
+                <div class="store-filter clearfix center-content">
+                    <div class="store-sort">
+                        <label>
+                            Sort By:
+                            <select class="input-select">
+                                <option value="0">Latest blog</option>
+                                <option value="1">Oldest blog</option>
+                            </select>
+                        </label>
+
+                        <label>
+                            Show:
+                            <select class="input-select">
+                                <option value="0">20</option>
+                                <option value="1">50</option>
+                            </select>
+                        </label>
+                    </div>
                 </div>
-            </div>
-            <div class="row blog-list">
-                <div class="products-slick" data-nav="#slick-nav-1">
-                    <c:forEach items="${listB}" var="c">
-                        <div class="col-md-4">
-                            <div class="blog-item">
-                                <img width="100%" src="${c.blogImage}" alt="Blog Image 1" class="img-fluid">
-                                <h3 class="product-name">${c.blogTitle}</h3>
-                                <p class="product-name">${c.content}</p>
-                                <a href="#" class="btn btn-default">Read More</a>
+                <!--                <div class="row blog-list">
+                                    <div class="products-slick" data-nav="#slick-nav-1">
+            <c:forEach items="${listB}" var="c">
+                <div class="col-md-4">
+                    <div class="blog-item">
+                        <img width="100%" src="${c.blogImage}" alt="Blog Image 1" class="img-fluid">
+                        <h3 class="product-name">${c.blogTitle}</h3>
+                        <p class="product-name">${c.content}</p>
+                        <a href="#" class="btn btn-default">Read More</a>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
+        <div id="slick-nav-1" class="products-slick-nav">
+        </div>
+    </div>-->
+
+            <div class="row">
+
+                <!-- Products tab & slick -->
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="products-tabs">
+                            <!-- tab -->
+                            <div id="tab1" class="tab-pane active">
+                                <div class="products-slick" data-nav="#slick-nav-1">
+                                    <!-- product -->
+                                    <c:forEach items="${listB}" var="c">
+                                        <div class="col-md-4">
+                                            <div class="product-body">
+                                                <img width="100%" src="${c.blogImage}" alt="Blog Image 1" class="img-fluid">
+                                                <h3 class="product-name">${c.blogTitle}</h3>
+                                                <p class="product-name">${c.content}</p>
+                                                <a href="#" class="btn btn-default">Read More</a>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
+                                </div>
+                                <div id="slick-nav-1" class="products-slick-nav">
+                                </div>
                             </div>
+                            <!-- /tab -->
                         </div>
-                    </c:forEach>
+                    </div>
                 </div>
-                <div id="slick-nav-1" class="products-slick-nav">
-                </div>
+                <!-- Products tab & slick -->
             </div>
         </div>
 
@@ -170,9 +201,9 @@
             <!-- /container -->
         </div>
         <!-- /NEWSLETTER -->
-        
+
         <jsp:include page="footer.jsp"></jsp:include>
-        
+
         <!-- jQuery Plugins -->
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
@@ -180,5 +211,6 @@
         <script src="js/nouislider.min.js"></script>
         <script src="js/jquery.zoom.min.js"></script>
         <script src="js/main.js"></script>
+
     </body>
 </html>

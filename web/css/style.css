@@ -1155,7 +1155,7 @@ textarea.input {
 
 .products-slick .slick-list {
   padding-bottom: 60px;
-  margin-bottom: -60px;
+  margin-bottom: 0px;
   z-index: 2;
 }
 
