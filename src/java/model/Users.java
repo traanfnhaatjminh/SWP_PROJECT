@@ -9,21 +9,24 @@ package model;
  * @author minh1
  */
 public class Users {
+
     private int userID;
     private String userName;
     private String email;
     private String password;
     private int roleID;
+    private double userPoint;
 
     public Users() {
     }
 
-    public Users(int userID, String userName, String email, String password, int roleID) {
+    public Users(int userID, String userName, String email, String password, int roleID, double userPoint) {
         this.userID = userID;
         this.userName = userName;
         this.email = email;
         this.password = password;
         this.roleID = roleID;
+        this.userPoint = userPoint;
     }
 
     public int getUserID() {
@@ -65,5 +68,13 @@ public class Users {
     public void setRoleID(int roleID) {
         this.roleID = roleID;
     }
-    
+
+    public double getUserPoint() {
+        return userPoint;
+    }
+
+    public void setUserPoint(double userPoint) {
+        this.userPoint = userPoint;
+    }
+
 }

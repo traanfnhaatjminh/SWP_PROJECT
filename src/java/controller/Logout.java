@@ -5,7 +5,6 @@
 
 package controller;
 
-import dal.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,17 +12,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import model.Blog;
-import model.Category;
-import model.Product;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
- * @author minh1
+ * @author DUONG VIET DUY
  */
-@WebServlet(name="HomePage", urlPatterns={"/home"})
-public class HomePage extends HttpServlet {
+@WebServlet(name="Logout", urlPatterns={"/logout"})
+public class Logout extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,14 +31,9 @@ public class HomePage extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        DAO d = new DAO();
-        List<Category> listC = d.getAllCategory();
-        List<Product> listNewP = d.getTopProduct();
-        List<Blog> listB = d.getAllBlog();
-        request.setAttribute("listC", listC);
-        request.setAttribute("listNewP", listNewP);
-        request.setAttribute("listB", listB);
-        request.getRequestDispatcher("home.jsp").forward(request, response);
+        HttpSession session = request.getSession();
+        session.removeAttribute("uname");
+        response.sendRedirect("login.jsp");
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

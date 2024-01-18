@@ -247,7 +247,7 @@
                                             <img src="${c.image}" alt="">
                                         </div>
                                         <div class="product-body">
-                                            <h3 class="product-name"><a href="#">${c.name}</a></h3>
+                                            <h3 class="product-name"><a href="detail?pid=${c.id}">${c.name}</a></h3>
                                             <h4 class="product-price">
                                                 ${c.price} VND 
                                                 <!--<del class="product-old-price">990.00</del>-->

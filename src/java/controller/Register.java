@@ -13,17 +13,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import model.Blog;
-import model.Category;
-import model.Product;
+import model.Users;
 
 /**
  *
- * @author minh1
+ * @author DUONG VIET DUY
  */
-@WebServlet(name="HomePage", urlPatterns={"/home"})
-public class HomePage extends HttpServlet {
+@WebServlet(name="Register", urlPatterns={"/register"})
+public class Register extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,14 +32,23 @@ public class HomePage extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        DAO d = new DAO();
-        List<Category> listC = d.getAllCategory();
-        List<Product> listNewP = d.getTopProduct();
-        List<Blog> listB = d.getAllBlog();
-        request.setAttribute("listC", listC);
-        request.setAttribute("listNewP", listNewP);
-        request.setAttribute("listB", listB);
-        request.getRequestDispatcher("home.jsp").forward(request, response);
+        String user = request.getParameter("user");
+        String email = request.getParameter("email");
+        String pass = request.getParameter("pass");
+        String confirm_pass = request.getParameter("confirm_pass");
+        if(!pass.equals(confirm_pass)){
+            response.sendRedirect("login.jsp");
+        }else{
+            DAO dao = new DAO();
+            Users u = dao.checkExisted(user);
+            if(u == null){
+                dao.signup(user, email, pass);
+                response.sendRedirect("login.jsp");
+            }else{
+                response.sendRedirect("register.jsp");
+            }
+                
+        }
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

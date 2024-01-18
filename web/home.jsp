@@ -58,22 +58,6 @@
                         </label>
                     </div>
                 </div>
-                <!--                <div class="row blog-list">
-                                    <div class="products-slick" data-nav="#slick-nav-1">
-            <c:forEach items="${listB}" var="c">
-                <div class="col-md-4">
-                    <div class="blog-item">
-                        <img width="100%" src="${c.blogImage}" alt="Blog Image 1" class="img-fluid">
-                        <h3 class="product-name">${c.blogTitle}</h3>
-                        <p class="product-name">${c.content}</p>
-                        <a href="#" class="btn btn-default">Read More</a>
-                    </div>
-                </div>
-            </c:forEach>
-        </div>
-        <div id="slick-nav-1" class="products-slick-nav">
-        </div>
-    </div>-->
 
             <div class="row">
 
@@ -140,7 +124,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="product-body">
-                                                    <h3 class="product-name"><a href="#">${c.name}</a></h3>
+                                                    <h3 class="product-name"><a href="detail?pid=${c.id}">${c.name}</a></h3>
                                                     <h4 class="product-price">
                                                         ${c.price} VND 
                                                         <!--<del class="product-old-price">990.00</del>-->

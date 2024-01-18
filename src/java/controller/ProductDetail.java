@@ -14,16 +14,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
-import model.Blog;
 import model.Category;
 import model.Product;
 
 /**
  *
- * @author minh1
+ * @author DUONG VIET DUY
  */
-@WebServlet(name="HomePage", urlPatterns={"/home"})
-public class HomePage extends HttpServlet {
+@WebServlet(name="ProductDetail", urlPatterns={"/detail"})
+public class ProductDetail extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,14 +34,25 @@ public class HomePage extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+//        try (PrintWriter out = response.getWriter()) {
+//            /* TODO output your page here. You may use following sample code. */
+//            out.println("<!DOCTYPE html>");
+//            out.println("<html>");
+//            out.println("<head>");
+//            out.println("<title>Servlet ProductDetail</title>");  
+//            out.println("</head>");
+//            out.println("<body>");
+//            out.println("<h1>Servlet ProductDetail at " + request.getContextPath () + "</h1>");
+//            out.println("</body>");
+//            out.println("</html>");
+//        }
+        String id = request.getParameter("pid");
         DAO d = new DAO();
+        Product p = d.getProductByID(id);
         List<Category> listC = d.getAllCategory();
-        List<Product> listNewP = d.getTopProduct();
-        List<Blog> listB = d.getAllBlog();
+        request.setAttribute("detail", p);
         request.setAttribute("listC", listC);
-        request.setAttribute("listNewP", listNewP);
-        request.setAttribute("listB", listB);
-        request.getRequestDispatcher("home.jsp").forward(request, response);
+        request.getRequestDispatcher("productDetail.jsp").forward(request, response);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

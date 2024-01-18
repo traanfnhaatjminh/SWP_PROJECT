@@ -12,6 +12,7 @@ import java.util.List;
 import model.Blog;
 import model.Category;
 import model.Product;
+import model.Users;
 
 /**
  *
@@ -116,6 +117,28 @@ public class DAO extends DBContext {
         return list;
     }
 
+    public Product getProductByID(String id) {
+        String sql = "SELECT * from product\n"
+                + "where id = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                return new Product(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getDouble(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getInt(7));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
     public List<Blog> getAllBlog() {
         List<Blog> list = new ArrayList<>();
         String sql = "select * from Blog";
@@ -135,6 +158,63 @@ public class DAO extends DBContext {
             System.out.println(e);
         }
         return list;
+    }
+
+    public Users checkUsers(String user, String pass) {
+        String sql = "select * from Users\n"
+                + "where [userName] = ? AND [pass] = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, user);
+            st.setString(2, pass);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                return new Users(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getDouble(6));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public Users checkExisted(String user) {
+        String sql = "SELECT * FROM Users\n"
+                + "where [userName] = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, user);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return new Users(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getInt(5),
+                        rs.getDouble(6));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return null;
+    }
+
+    public void signup(String user, String email, String pass) {
+        String sql = "insert into Users "
+                + "values(?,?,?,1,0)";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, user);
+            st.setString(2, email);
+            st.setString(3, pass);
+            st.executeUpdate();
+        } catch (SQLException e) {
+        }
     }
 
 }

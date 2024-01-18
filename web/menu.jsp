@@ -19,7 +19,15 @@
             </ul>
             <ul class="header-links pull-right">
                 <!--<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>-->
-                <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+                <c:if test="${sessionScope.uname == null}">
+                    <li><a href="login.jsp"><i class="fa fa-"></i> Login</a></li>
+
+                </c:if>
+                <c:if test="${sessionScope.uname != null}">
+                    <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+                    <li><a href="logout"><i class="fa fa-"></i> Logout</a></li>
+
+                </c:if>
             </ul>
         </div>
     </div>
@@ -126,9 +134,9 @@
                 <ul class="main-nav nav navbar-nav">
                     <li class="active"><a href="home">Home</a></li>
                     <li><a href="#">Hot Deals</a></li>
-                    <c:forEach items="${listC}" var="c">
+                        <c:forEach items="${listC}" var="c">
                         <li><a href="categoryDetail?cid=${c.cid}">${c.cname}</a></li>
-                    </c:forEach>
+                        </c:forEach>
                 </ul>
                 <!-- /NAV -->
             </div>
