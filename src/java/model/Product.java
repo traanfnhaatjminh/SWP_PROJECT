@@ -12,7 +12,8 @@ public class Product {
 
     private int id;
     private String name;
-    private double price;
+    private double original_price;
+    private double sale_price;
     private int quantity;
     private String describe, image;
     private int cid;
@@ -20,10 +21,11 @@ public class Product {
     public Product() {
     }
 
-    public Product(int id, String name, double price, int quantity, String describe, String image, int cid) {
+    public Product(int id, String name, double original_price, double sale_price, int quantity, String describe, String image, int cid) {
         this.id = id;
         this.name = name;
-        this.price = price;
+        this.original_price = original_price;
+        this.sale_price = sale_price;
         this.quantity = quantity;
         this.describe = describe;
         this.image = image;
@@ -46,12 +48,20 @@ public class Product {
         this.name = name;
     }
 
-    public double getPrice() {
-        return price;
+    public double getOriginal_price() {
+        return original_price;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setOriginal_price(double original_price) {
+        this.original_price = original_price;
+    }
+
+    public double getSale_price() {
+        return sale_price;
+    }
+
+    public void setSale_price(double sale_price) {
+        this.sale_price = sale_price;
     }
 
     public int getQuantity() {
@@ -84,11 +94,6 @@ public class Product {
 
     public void setCid(int cid) {
         this.cid = cid;
-    }
-
-    @Override
-    public String toString() {
-        return "Product{" + "id=" + id + ", name=" + name + ", price=" + price + ", quantity=" + quantity + ", describe=" + describe + ", image=" + image + ", cid=" + cid + '}';
     }
 
 }

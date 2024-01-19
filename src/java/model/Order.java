@@ -22,7 +22,7 @@ public class Order {
 //FOREIGN KEY (orderStatusID) REFERENCES orderStatus(orderStatusID)
 
     private int orderID;
-    private int userID;
+    private int customerID;
     private String orderName;
     private int orderStatusID;
     private int orderDiscount;
@@ -34,9 +34,9 @@ public class Order {
     public Order() {
     }
 
-    public Order(int orderID, int userID, String orderName, int orderStatusID, int orderDiscount, String orderDate, String notes, String orderAddress, int orderPhone) {
+    public Order(int orderID, int customerID, String orderName, int orderStatusID, int orderDiscount, String orderDate, String notes, String orderAddress, int orderPhone) {
         this.orderID = orderID;
-        this.userID = userID;
+        this.customerID = customerID;
         this.orderName = orderName;
         this.orderStatusID = orderStatusID;
         this.orderDiscount = orderDiscount;
@@ -54,12 +54,12 @@ public class Order {
         this.orderID = orderID;
     }
 
-    public int getUserID() {
-        return userID;
+    public int getCustomerID() {
+        return customerID;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
     }
 
     public String getOrderName() {

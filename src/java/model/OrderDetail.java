@@ -20,8 +20,9 @@ public class OrderDetail {
 
     private int orderID;
     private int productID;
-    private double orderPrice;
+    private double productPrice;
     private int quantity;
+    private double totalCost;
 
     public OrderDetail() {
     }
@@ -42,12 +43,20 @@ public class OrderDetail {
         this.productID = productID;
     }
 
-    public double getOrderPrice() {
-        return orderPrice;
+    public double getProductPrice() {
+        return productPrice;
     }
 
-    public void setOrderPrice(double orderPrice) {
-        this.orderPrice = orderPrice;
+    public void setProductPrice(double productPrice) {
+        this.productPrice = productPrice;
+    }
+
+    public double getTotalCost() {
+        return totalCost;
+    }
+
+    public void setTotalCost(double totalCost) {
+        this.totalCost = totalCost;
     }
 
     public int getQuantity() {
