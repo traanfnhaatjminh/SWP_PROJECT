@@ -41,7 +41,7 @@
             <div class="row">
                 <!-- LOGO -->
                 <div class="col-md-3">
-                    <div class="header-logo">
+                    <div class="header-logo ">
                         <a href="home" class="logo">
                             $MAKER
                         </a>
@@ -49,19 +49,8 @@
                 </div>
                 <!-- /LOGO -->
 
-                <!-- SEARCH BAR -->
-                <div class="col-md-6">
-                    <div class="header-search text-center">
-                        <form>
-                            <input type="text" class="input" placeholder="Search here">
-                            <button type="submit" class="search-btn">Search</button>
-                        </form>
-                    </div>
-                </div>
-                <!-- /SEARCH BAR -->
-
                 <!-- ACCOUNT -->
-                <div class="col-md-3 clearfix">
+                <div class="col-md-3 clearfix" style="float: right">
                     <div class="header-ctn">
                         <!-- Cart -->
                         <div class="dropdown">

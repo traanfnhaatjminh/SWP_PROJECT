@@ -36,84 +36,69 @@
     </head>
     <body>
         <jsp:include page="menu.jsp"></jsp:include>
-
-            <!-- /SECTION -->
-            <div class="container">
-                <div class="store-filter clearfix center-content">
-                    <div class="store-sort">
-                        <label>
-                            Sort By:
-                            <select class="input-select">
-                                <option value="0">Latest blog</option>
-                                <option value="1">Oldest blog</option>
-                            </select>
-                        </label>
-
-                        <label>
-                            Show:
-                            <select class="input-select">
-                                <option value="0">20</option>
-                                <option value="1">50</option>
-                            </select>
-                        </label>
-                    </div>
-                </div>
-
-            <div class="row">
-
-                <!-- Products tab & slick -->
-                <div class="col-md-12">
+            <div class="section">
+                <!-- container -->
+                <div class="container">
+                    <!-- row -->
                     <div class="row">
-                        <div class="products-tabs">
-                            <!-- tab -->
-                            <div id="tab1" class="tab-pane active">
-                                <div class="products-slick" data-nav="#slick-nav-1">
-                                    <!-- product -->
-                                    <c:forEach items="${listB}" var="c">
-                                        <div class="col-md-4">
-                                            <div class="product-body">
-                                                <img width="100%" src="${c.blogImage}" alt="Blog Image 1" class="img-fluid">
-                                                <h3 class="product-name">${c.blogTitle}</h3>
-                                                <p class="product-name">${c.content}</p>
-                                                <a href="#" class="btn btn-default">Read More</a>
-                                            </div>
-                                        </div>
-                                    </c:forEach>
+
+                        <div class="col-md-12">
+                            <div class="slick-slider" style="text-align: center; background-color: whitesmoke">
+                                <!-- Slide 1 -->
+                                <div class="slide"> <!-- Set the width and margin for the image container -->
+                                    <img src="https://scontent.fhan14-3.fna.fbcdn.net/v/t39.30808-6/407952110_373587438548216_4304779013064929915_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=dLxGeeB1VKgAX8JZjBo&_nc_ht=scontent.fhan14-3.fna&oh=00_AfCOARYBwVwwKNXQJntzG0Rok6SneAJ9qYncbQ1oW0dXsg&oe=65ACB153" alt="Slide 1" style="width: 50%; margin: 0 auto;">
+                                    <div class="slide-caption">
+                                        <p style="font-size: 20px; margin-top: 1%">𝐓𝐄𝐓𝐕𝐎𝐕𝐄𝐍 𝐌𝐄𝐑𝐂𝐇 - Sự kết hợp chưa bao giờ có giữa $maker x Lonely Stonie!!!</p>
+                                    </div>
                                 </div>
-                                <div id="slick-nav-1" class="products-slick-nav">
+                                <!-- Slide 2 -->
+                                <div class="slide"> <!-- Set the width and margin for the image container -->
+                                    <img src="https://scontent.fhan14-2.fna.fbcdn.net/v/t39.30808-6/407973804_373587568548203_1578083566043200816_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=OkZHSoLXEBcAX9oOMtf&_nc_ht=scontent.fhan14-2.fna&oh=00_AfDPtQhzGqDayhMh1M_pugxxcmSy97Qefb2ATUu31EoCwQ&oe=65AD5FC3" alt="Slide 2" style="width: 50%; margin: 0 auto;">
+                                    <div class="slide-caption">
+                                        <p style="font-size: 20px; margin-top: 1%">$MAKER và LONELY Stonie chính thức ra mắt các sản phẩm thuộc BST vào ngày 04.12, bao gồm Tee in Black, Short in Black,Money Island Tee in Cream, Money Island Short in Cream </p>
+                                    </div>
                                 </div>
+
+                                <div class="slide"> <!-- Set the width and margin for the image container -->
+                                    <img src="https://scontent.fhan14-1.fna.fbcdn.net/v/t39.30808-6/407994871_373587491881544_5926347277153163150_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=VSRBy4vNBBQAX_aRK8M&_nc_ht=scontent.fhan14-1.fna&oh=00_AfC6yhRdvPNkKfy6h8w119_UHwaBZhk6kkxuFu_fPOLsgA&oe=65ADA0CD" alt="Slide 2" style="width: 50%; margin: 0 auto;">
+                                    <div class="slide-caption">
+                                        <p style="font-size: 20px; margin-top: 1%">Toàn bộ các “SẢN PHẨM” đẹp nhất đã lên kệ tại website chính thức $maker, bạn có thể nhắn tin trực tiếp cho chúng mình để được tư vấn và trải nghiệm mua sắm Online.</p>
+                                    </div>
+                                </div>
+
                             </div>
-                            <!-- /tab -->
                         </div>
+                        <!-- /Image Slider -->
+
                     </div>
+                    <!-- /row -->
                 </div>
-                <!-- Products tab & slick -->
+                <!-- /container -->
             </div>
-        </div>
+            <!-- /SECTION -->
+            <!-- SECTION -->
+            <div class="section">
+                <!-- container -->
+                <div class="container">
+                    <!-- row -->
+                    <div class="row">
 
-        <!-- SECTION -->
-        <div class="section">
-            <!-- container -->
-            <div class="container">
-                <!-- row -->
-                <div class="row">
-
-                    <!-- section title -->
-                    <div class="col-md-12">
-                        <div class="section-title">
-                            <h3 class="title">New Arrivals</h3>
+                        <!-- section title -->
+                        <div class="col-md-12">
+                            <div class="section-title">
+                                <h3 class="title">New Arrivals</h3>
+                            </div>
                         </div>
-                    </div>
-                    <!-- /section title -->
+                        <!-- /section title -->
 
-                    <!-- Products tab & slick -->
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="products-tabs">
-                                <!-- tab -->
-                                <div id="tab1" class="tab-pane active">
-                                    <div class="products-slick" data-nav="#slick-nav-1">
-                                        <!-- product -->
+                        <!-- Products tab & slick -->
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="products-tabs">
+                                    <!-- tab -->
+                                    <div id="tab1" class="tab-pane active">
+                                        <div class="products-slick" data-nav="#slick-nav-1">
+                                            <!-- product -->
                                         <c:forEach items="${listNewP}" var="c">
                                             <div class="product">
                                                 <div class="product-img">
@@ -149,6 +134,8 @@
             </div>
             <!-- /container -->
         </div>
+
+        <%--<jsp:include page="blog.jsp"></jsp:include>--%>
 
         <!-- NEWSLETTER -->
         <div id="newsletter" class="section">
@@ -195,6 +182,24 @@
         <script src="js/nouislider.min.js"></script>
         <script src="js/jquery.zoom.min.js"></script>
         <script src="js/main.js"></script>
-
+        <script>
+            $(document).ready(function () {
+                // Initialize Slick Slider
+                $('.slick-slider').slick({
+                    autoplay: true,
+                    autoplaySpeed: 3000, // Set the autoplay speed in milliseconds
+                    dots: true, // Show dots for navigation
+                    arrows: false, // Hide arrows
+                    responsive: [
+                        {
+                            breakpoint: 768,
+                            settings: {
+                                dots: false // Hide dots on smaller screens
+                            }
+                        }
+                    ]
+                });
+            });
+        </script>
     </body>
 </html>
