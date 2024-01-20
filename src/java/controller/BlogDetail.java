@@ -21,8 +21,8 @@ import model.Category;
  *
  * @author minh1
  */
-@WebServlet(name = "searchBlog", urlPatterns = {"/searchBlog"})
-public class searchBlog extends HttpServlet {
+@WebServlet(name = "BlogDetail", urlPatterns = {"/blogDetail"})
+public class BlogDetail extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +41,10 @@ public class searchBlog extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet searchBlog</title>");
+            out.println("<title>Servlet BlogDetail</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet searchBlog at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet BlogDetail at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,46 +62,22 @@ public class searchBlog extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        String search = request.getParameter("searchBlog");
-        if (search == null || search.equals("")) {
+        String id_raw = request.getParameter("id");
+        try {
+            int id = Integer.parseInt(id_raw);
             DAO d = new DAO();
-            List<Blog> listB = d.getAllBlog();
+            Blog b = d.getBlogDetailByID(id);
+            String bcn = d.getBlogCategoryNameByID(id);
             List<Category> listC = d.getAllCategory();
             List<BlogCategory> listBC = d.getAllBlogCategory();
-            Blog b = new Blog();
-            b = d.getLatestBlog();
-            request.setAttribute("listBlog", listB);
             request.setAttribute("listC", listC);
             request.setAttribute("listBlogCategory", listBC);
-            request.setAttribute("latestBlog", b);
-            request.setAttribute("error", "Please input to search!!!");
-        } else {
-            DAO d = new DAO();
-            List<Blog> listB = d.getAllBlogSearch(search);
-            if (listB.isEmpty()) {
-                List<Category> listC = d.getAllCategory();
-                List<BlogCategory> listBC = d.getAllBlogCategory();
-                Blog b = new Blog();
-                b = d.getLatestBlog();
-                request.setAttribute("listC", listC);
-                request.setAttribute("listBlogCategory", listBC);
-                request.setAttribute("latestBlog", b);
-                request.setAttribute("searchValue", search);
-                request.setAttribute("error", "No found result!!!");
-            } else {
-                List<Category> listC = d.getAllCategory();
-                List<BlogCategory> listBC = d.getAllBlogCategory();
-                Blog b = new Blog();
-                b = d.getLatestBlog();
-                request.setAttribute("listBlog", listB);
-                request.setAttribute("listC", listC);
-                request.setAttribute("listBlogCategory", listBC);
-                request.setAttribute("latestBlog", b);
-                request.setAttribute("searchValue", search);
-            }
+            request.setAttribute("blogDetail", b);
+            request.setAttribute("blogCategoryName", bcn);
+            request.getRequestDispatcher("blogDetail.jsp").forward(request, response);
+        } catch (NumberFormatException e) {
+            System.out.println(e);
         }
-        request.getRequestDispatcher("blog.jsp").forward(request, response);
     }
 
     /**

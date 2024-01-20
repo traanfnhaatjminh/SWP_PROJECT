@@ -308,6 +308,7 @@
                 <div class="container">
                     <div class="row clearfix">
                         <div class="col-lg-9 col-md-12 left-box">
+                        <c:if test="${error == null}">
                             <form action="sortBlog" style="margin: 2% 0">
                                 <label for="sortSelect">Sort by:</label>
                                 <select name="sortSelect" id="sortSelect">
@@ -315,6 +316,7 @@
                                 </select>
                                 <input type="submit" value="Sort">
                             </form>
+                        </c:if>
                         <c:forEach items="${listBlog}" var="c">
                             <div class="col-md-4">
                                 <div class="card single_post">
@@ -322,7 +324,7 @@
                                         <div class="img-post">
                                             <img class="d-block img-fluid" src="${c.blogImage}" alt="First slide">
                                         </div>
-                                        <h3 class="product-name"><a href="blog-details.html">${c.blogTitle}</a></h3>
+                                        <h3 class="product-name"><a href="blogDetail?id=${c.blogID}">${c.blogTitle}</a></h3>
                                         <p class="product-name">${c.content}</p>
                                         <p>Date: ${c.postDate}</p>
                                         <p>Author: ${c.author}</p>
@@ -330,15 +332,17 @@
                                 </div>
                             </div>
                         </c:forEach>
-                        <div class="store-filter clearfix col-md-12">
-                            <ul class="store-pagination">
-                                <li class="active">1</li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                            </ul>
-                        </div>
+                        <c:if test="${error == null}">
+                            <div class="store-filter clearfix col-md-12">
+                                <ul class="store-pagination">
+                                    <li class="active">1</li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                                </ul>
+                            </div>
+                        </c:if>
                     </div>
                     <div class="col-lg-3 col-md-12 right-box">
                         <div class="card">

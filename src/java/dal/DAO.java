@@ -233,6 +233,44 @@ public class DAO extends DBContext {
         return null;
     }
 
+    public String getBlogCategoryNameByID(int blogID) {
+        String sql = "select bc.blogCategoryName from Blog b join Blog_Category bc\n"
+                + "on b.blogCategoryID = bc.blogCategoryID\n"
+                + "where b.blogID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, blogID);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                return rs.getString("blogCategoryName");
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public Blog getBlogDetailByID(int id) {
+        String sql = "select * from Blog\n"
+                + "where blogID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                return new Blog(rs.getInt("blogID"),
+                        rs.getString("blogTitle"),
+                        rs.getString("blogImage"),
+                        rs.getString("postDate"),
+                        rs.getString("content"),
+                        rs.getString("author"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
     public List<Blog> getAllBlog() {
         List<Blog> list = new ArrayList<>();
         String sql = "select * from Blog";
