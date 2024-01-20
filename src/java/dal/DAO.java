@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Blog;
 import model.Category;
+import model.Post;
 import model.Product;
 import model.Users;
 
@@ -31,7 +32,8 @@ public class DAO extends DBContext {
                 Product c = new Product(
                         rs.getInt("id"),
                         rs.getString("name"),
-                        rs.getDouble("price"),
+                        rs.getDouble("original_price"),
+                        rs.getDouble("sale_price"),
                         rs.getInt("quantity"),
                         rs.getString("describe"),
                         rs.getString("image"),
@@ -66,7 +68,7 @@ public class DAO extends DBContext {
 
     public List<Product> getTopProduct() {
         List<Product> list = new ArrayList<>();
-        String sql = "SELECT TOP 6 *\n"
+        String sql = "SELECT TOP 8 *\n"
                 + "FROM product\n"
                 + "ORDER BY id DESC;";
         try {
@@ -77,12 +79,35 @@ public class DAO extends DBContext {
                 Product c = new Product(
                         rs.getInt("id"),
                         rs.getString("name"),
-                        rs.getDouble("price"),
+                        rs.getDouble("original_price"),
+                        rs.getDouble("sale_price"),
                         rs.getInt("quantity"),
                         rs.getString("describe"),
                         rs.getString("image"),
                         rs.getInt("cid")
                 );
+                list.add(c);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Post> getTopPost() {
+        List<Post> list = new ArrayList<>();
+        String sql = "select top 2 * from Post\n"
+                + "order by postID desc";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Post c = new Post(
+                        rs.getInt("postID"),
+                        rs.getString("postTitle"),
+                        rs.getString("postImage"),
+                        rs.getString("postContent"));
                 list.add(c);
             }
         } catch (SQLException e) {
@@ -104,11 +129,13 @@ public class DAO extends DBContext {
                 Product c = new Product(
                         rs.getInt("id"),
                         rs.getString("name"),
-                        rs.getDouble("price"),
+                        rs.getDouble("original_price"),
+                        rs.getDouble("sale_price"),
                         rs.getInt("quantity"),
                         rs.getString("describe"),
                         rs.getString("image"),
-                        rs.getInt("cid"));
+                        rs.getInt("cid")
+                );
                 list.add(c);
             }
         } catch (SQLException e) {
@@ -125,13 +152,15 @@ public class DAO extends DBContext {
             st.setString(1, id);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                return new Product(rs.getInt(1),
+                return new Product(
+                        rs.getInt(1),
                         rs.getString(2),
                         rs.getDouble(3),
-                        rs.getInt(4),
-                        rs.getString(5),
+                        rs.getDouble(4),
+                        rs.getInt(5),
                         rs.getString(6),
-                        rs.getInt(7));
+                        rs.getString(7),
+                        rs.getInt(8));
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -169,12 +198,17 @@ public class DAO extends DBContext {
             st.setString(2, pass);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                return new Users(rs.getInt(1),
+                return new Users(
+                        rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
                         rs.getString(4),
-                        rs.getInt(5),
-                        rs.getDouble(6));
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getInt(9),
+                        rs.getDouble(10));
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -190,12 +224,17 @@ public class DAO extends DBContext {
             st.setString(1, user);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                return new Users(rs.getInt(1),
+                return new Users(
+                        rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
                         rs.getString(4),
-                        rs.getInt(5),
-                        rs.getDouble(6));
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getInt(9),
+                        rs.getDouble(10));
             }
         } catch (SQLException e) {
             System.out.println(e);

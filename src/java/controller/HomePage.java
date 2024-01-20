@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Blog;
 import model.Category;
+import model.Post;
 import model.Product;
 
 /**
@@ -38,10 +39,12 @@ public class HomePage extends HttpServlet {
         DAO d = new DAO();
         List<Category> listC = d.getAllCategory();
         List<Product> listNewP = d.getTopProduct();
+        List<Post> listP = d.getTopPost();
         List<Blog> listB = d.getAllBlog();
         request.setAttribute("listC", listC);
         request.setAttribute("listNewP", listNewP);
         request.setAttribute("listB", listB);
+        request.setAttribute("listTopPost", listP);
         request.getRequestDispatcher("home.jsp").forward(request, response);
     } 
 
