@@ -71,4 +71,3 @@
     </div>
     <!-- /top footer -->
 </footer>
-<!-- /FOOTER -->

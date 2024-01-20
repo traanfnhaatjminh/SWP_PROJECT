@@ -17,16 +17,18 @@ public class Blog {
     private String blogImage;
     private String postDate;
     private String content;
+    private String author;
 
     public Blog() {
     }
 
-    public Blog(int blogID, String blogTitle, String blogImage, String postDate, String content) {
+    public Blog(int blogID, String blogTitle, String blogImage, String postDate, String content, String author) {
         this.blogID = blogID;
         this.blogTitle = blogTitle;
         this.blogImage = blogImage;
         this.postDate = postDate;
         this.content = content;
+        this.author = author;
     }
 
     public int getBlogID() {
@@ -67,6 +69,14 @@ public class Blog {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
 }

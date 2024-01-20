@@ -39,48 +39,25 @@
             <div class="section">
                 <!-- container -->
                 <div class="container">
-                    <!-- row -->
-                    <div class="row">
+                    <div class="slick-slider" style="text-align: center; background-color: whitesmoke">
+                    <c:forEach items="${listTopSlider}" var="c">
 
-                        <div class="col-md-12">
-                            <div class="slick-slider" style="text-align: center; background-color: whitesmoke">
-                                <!-- Slide 1 -->
-                                <div class="slide"> 
-                                    <a href="#"><img src="https://scontent.fhan14-3.fna.fbcdn.net/v/t39.30808-6/407952110_373587438548216_4304779013064929915_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=dLxGeeB1VKgAX8JZjBo&_nc_ht=scontent.fhan14-3.fna&oh=00_AfCOARYBwVwwKNXQJntzG0Rok6SneAJ9qYncbQ1oW0dXsg&oe=65ACB153" alt="Slide 1" style="width: 50%; margin: 0 auto;"></a>
-                                    <div class="slide-caption">
-                                        <p style="font-size: 20px; margin-top: 1%">𝐓𝐄𝐓𝐕𝐎𝐕𝐄𝐍 𝐌𝐄𝐑𝐂𝐇 - Sự kết hợp chưa bao giờ có giữa $maker x Lonely Stonie!!!</p>
-                                    </div>
-                                </div>
-                                <!-- Slide 2 -->
-                                <div class="slide"> 
-                                    <a href="#"><img src="https://scontent.fhan14-2.fna.fbcdn.net/v/t39.30808-6/407973804_373587568548203_1578083566043200816_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=OkZHSoLXEBcAX9oOMtf&_nc_ht=scontent.fhan14-2.fna&oh=00_AfDPtQhzGqDayhMh1M_pugxxcmSy97Qefb2ATUu31EoCwQ&oe=65AD5FC3" alt="Slide 2" style="width: 50%; margin: 0 auto;"></a>
-
-                                    <div class="slide-caption">
-                                        <p style="font-size: 20px; margin-top: 1%">$MAKER và LONELY Stonie chính thức ra mắt các sản phẩm thuộc BST vào ngày 04.12, bao gồm Tee in Black, Short in Black,Money Island Tee in Cream, Money Island Short in Cream </p>
-                                    </div>
-                                </div>
-
-                                <div class="slide">
-                                    <a href="#"><img src="https://scontent.fhan14-1.fna.fbcdn.net/v/t39.30808-6/407994871_373587491881544_5926347277153163150_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=VSRBy4vNBBQAX_aRK8M&_nc_ht=scontent.fhan14-1.fna&oh=00_AfC6yhRdvPNkKfy6h8w119_UHwaBZhk6kkxuFu_fPOLsgA&oe=65ADA0CD" alt="Slide 2" style="width: 50%; margin: 0 auto;">
-                                    </a>
-                                    <div class="slide-caption">
-                                        <p style="font-size: 20px; margin-top: 1%">Toàn bộ các “SẢN PHẨM” đẹp nhất đã lên kệ tại website chính thức $maker, bạn có thể nhắn tin trực tiếp cho chúng mình để được tư vấn và trải nghiệm mua sắm Online.</p>
-                                    </div>
-                                </div>
-
+                        <div class="slide"> 
+                            <a href="#"><img src="${c.sliderImage}" alt="Slide 1" style="width: 50%; margin: 0 auto;"></a>
+                            <div class="slide-caption">
+                                <p style="font-size: 20px; margin-top: 1%">${c.sliderTitle}</p>
                             </div>
                         </div>
-                        <!-- /Image Slider -->
 
-                    </div>
-                    <!-- /row -->
+                    </c:forEach>
                 </div>
-                <!-- /container -->
             </div>
-            <!-- /SECTION -->
+            <!-- /container -->
+        </div>
+        <!-- /SECTION -->
 
-            <div class="container">
-                <div class="row">
+        <div class="container">
+            <div class="row">
                 <c:forEach items="${listTopPost}" var="c">
                     <div class="col-md-6">
                         <img src="${c.postImage}" class="img-fluid" alt="alt" style="width: 100%; height: auto;">
@@ -150,39 +127,29 @@
             <!-- Products tab & slick -->
         </div>
         <!-- /row -->
-    </div>
-    <!-- /container -->
-</div>
 
-<%--<jsp:include page="blog.jsp"></jsp:include>--%>
+        <%--<jsp:include page="blog.jsp"></jsp:include>--%>
 
-<jsp:include page="footer.jsp"></jsp:include>
+        <jsp:include page="footer.jsp"></jsp:include>
 
-<!-- jQuery Plugins -->
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/slick.min.js"></script>
-<script src="js/nouislider.min.js"></script>
-<script src="js/jquery.zoom.min.js"></script>
-<script src="js/main.js"></script>
-<script>
-    $(document).ready(function () {
-        // Initialize Slick Slider
-        $('.slick-slider').slick({
-            autoplay: true,
-            autoplaySpeed: 3000, // Set the autoplay speed in milliseconds
-            dots: true, // Show dots for navigation
-            arrows: false, // Hide arrows
-            responsive: [
-                {
-                    breakpoint: 768,
-                    settings: {
-                        dots: false // Hide dots on smaller screens
-                    }
-                }
-            ]
-        });
-    });
-</script>
-</body>
+        <!-- jQuery Plugins -->
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/slick.min.js"></script>
+        <script src="js/nouislider.min.js"></script>
+        <script src="js/jquery.zoom.min.js"></script>
+        <script src="js/main.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('.slick-slider').slick({
+                    dots: true, // Hiển thị chấm tròn chỉ số
+                    infinite: true,
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    autoplay: true,
+                    autoplaySpeed: 2000
+                });
+            });
+        </script>
+    </body>
 </html>

@@ -15,17 +15,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
 import model.Blog;
+import model.BlogCategory;
 import model.Category;
-import model.Post;
-import model.Product;
-import model.Slider;
 
 /**
  *
  * @author minh1
  */
-@WebServlet(name="HomePage", urlPatterns={"/home"})
-public class HomePage extends HttpServlet {
+@WebServlet(name="BlogList", urlPatterns={"/blog"})
+public class BlogList extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -37,18 +35,18 @@ public class HomePage extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        DAO d = new DAO();
-        List<Category> listC = d.getAllCategory();
-        List<Product> listNewP = d.getTopProduct();
-        List<Post> listP = d.getTopPost();
-        List<Slider> listS = d.getTopSlider(1, 3);
-        List<Blog> listB = d.getAllBlog();
-        request.setAttribute("listC", listC);
-        request.setAttribute("listNewP", listNewP);
-        request.setAttribute("listB", listB);
-        request.setAttribute("listTopPost", listP);
-        request.setAttribute("listTopSlider", listS);
-        request.getRequestDispatcher("home.jsp").forward(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet BlogList</title>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet BlogList at " + request.getContextPath () + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -62,7 +60,18 @@ public class HomePage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        DAO d = new DAO();
+        List<Category> listC = d.getAllCategory();
+        List<BlogCategory> listBC = d.getAllBlogCategory();
+        List<Blog> listB = d.getAllBlog();
+        Blog b = new Blog();
+        b = d.getLatestBlog();
+        request.setAttribute("listC", listC);
+        request.setAttribute("listBlogCategory", listBC);
+        request.setAttribute("listBlog", listB);
+        request.setAttribute("latestBlog", b);
+        request.getRequestDispatcher("blog.jsp").forward(request, response);
     } 
 
     /** 

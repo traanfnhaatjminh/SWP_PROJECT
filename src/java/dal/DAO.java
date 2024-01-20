@@ -10,9 +10,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Blog;
+import model.BlogCategory;
 import model.Category;
 import model.Post;
 import model.Product;
+import model.Slider;
 import model.Users;
 
 /**
@@ -66,6 +68,25 @@ public class DAO extends DBContext {
         return list;
     }
 
+    public List<BlogCategory> getAllBlogCategory() {
+        List<BlogCategory> list = new ArrayList<>();
+        String sql = "select * from Blog_Category";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                BlogCategory c = new BlogCategory(
+                        rs.getInt("blogCategoryID"),
+                        rs.getString("blogCategoryName"));
+                list.add(c);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
     public List<Product> getTopProduct() {
         List<Product> list = new ArrayList<>();
         String sql = "SELECT TOP 8 *\n"
@@ -86,6 +107,30 @@ public class DAO extends DBContext {
                         rs.getString("image"),
                         rs.getInt("cid")
                 );
+                list.add(c);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Slider> getTopSlider(int start, int end) {
+        List<Slider> list = new ArrayList<>();
+        String sql = "select top 3 * from Slider\n"
+                + "where sliderID between ? and ?\n"
+                + "order by sliderID asc";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setInt(1, start);
+            st.setInt(2, end);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Slider c = new Slider(
+                        rs.getInt("sliderID"),
+                        rs.getString("sliderTitle"),
+                        rs.getString("sliderImage"));
                 list.add(c);
             }
         } catch (SQLException e) {
@@ -144,6 +189,26 @@ public class DAO extends DBContext {
         return list;
     }
 
+    public Blog getLatestBlog() {
+        String sql = "select top 1 * from Blog\n"
+                + "order by blogID desc";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                return new Blog(rs.getInt("blogID"),
+                        rs.getString("blogTitle"),
+                        rs.getString("blogImage"),
+                        rs.getString("postDate"),
+                        rs.getString("content"),
+                        rs.getString("author"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
     public Product getProductByID(String id) {
         String sql = "SELECT * from product\n"
                 + "where id = ?";
@@ -180,7 +245,8 @@ public class DAO extends DBContext {
                         rs.getString("blogTitle"),
                         rs.getString("blogImage"),
                         rs.getString("postDate"),
-                        rs.getString("content"));
+                        rs.getString("content"),
+                        rs.getString("author"));
                 list.add(b);
             }
         } catch (SQLException e) {

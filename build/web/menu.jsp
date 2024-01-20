@@ -113,25 +113,6 @@
     </div>
     <!-- /MAIN HEADER -->
 
-    <!-- NAVIGATION -->
-    <nav id="navigation">
-        <!-- container -->
-        <div class="container">
-            <!-- responsive-nav -->
-            <div id="responsive-nav">
-                <!-- NAV -->
-                <ul class="main-nav nav navbar-nav">
-                    <li class="active"><a href="home">Home</a></li>
-                    <li><a href="#">Hot Deals</a></li>
-                        <c:forEach items="${listC}" var="c">
-                        <li><a href="categoryDetail?cid=${c.cid}">${c.cname}</a></li>
-                        </c:forEach>
-                </ul>
-                <!-- /NAV -->
-            </div>
-            <!-- /responsive-nav -->
-        </div>
-        <!-- /container -->
-    </nav>
+    <jsp:include page="navigation.jsp"></jsp:include>
 </header>
 <!-- /HEADER -->
