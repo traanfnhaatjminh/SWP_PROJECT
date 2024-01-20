@@ -79,4 +79,11 @@ public class Blog {
         this.author = author;
     }
 
+    @Override
+    public String toString() {
+        return "Blog{" + "blogID=" + blogID + ", blogTitle=" + blogTitle + ", blogImage=" + blogImage + ", postDate=" + postDate + ", content=" + content + ", author=" + author + '}';
+    }
+    
+    
+
 }

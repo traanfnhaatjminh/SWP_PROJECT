@@ -308,6 +308,13 @@
                 <div class="container">
                     <div class="row clearfix">
                         <div class="col-lg-9 col-md-12 left-box">
+                            <form action="sortBlog" style="margin: 2% 0">
+                                <label for="sortSelect">Sort by:</label>
+                                <select name="sortSelect" id="sortSelect">
+                                    <option value="postDateRecent">Recent Updated Date</option>
+                                </select>
+                                <input type="submit" value="Sort">
+                            </form>
                         <c:forEach items="${listBlog}" var="c">
                             <div class="col-md-4">
                                 <div class="card single_post">
@@ -323,16 +330,31 @@
                                 </div>
                             </div>
                         </c:forEach>
+                        <div class="store-filter clearfix col-md-12">
+                            <ul class="store-pagination">
+                                <li class="active">1</li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="col-lg-3 col-md-12 right-box">
                         <div class="card">
                             <div class="body search">
-                                <div class="input-group m-b-0">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                <form action="searchBlog">
+                                    <div class="input-group m-b-0">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" name="searchBlog" value="${searchValue}" placeholder="Search...">
+                                        <button type="submit" class="btn btn-primary">Search</button>
+                                        <c:if test="${error != null}">
+                                            <h5 class="text-danger">${error}</h5>
+                                        </c:if>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Search...">
-                                </div>
+                                </form>
                             </div>
                         </div>
                         <div class="card">

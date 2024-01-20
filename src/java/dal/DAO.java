@@ -255,6 +255,53 @@ public class DAO extends DBContext {
         return list;
     }
 
+    public List<Blog> getAllBlogSearch(String searchValue) {
+        List<Blog> list = new ArrayList<>();
+        String sql = "select * from Blog\n"
+                + "where blogTitle like N'%' + ? + '%'";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setString(1, searchValue);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Blog b = new Blog(rs.getInt("blogID"),
+                        rs.getString("blogTitle"),
+                        rs.getString("blogImage"),
+                        rs.getString("postDate"),
+                        rs.getString("content"),
+                        rs.getString("author"));
+                list.add(b);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Blog> getAllBlogRecent() {
+        List<Blog> list = new ArrayList<>();
+        String sql = "select * from Blog\n"
+                + "order by postDate desc";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Blog b = new Blog(rs.getInt("blogID"),
+                        rs.getString("blogTitle"),
+                        rs.getString("blogImage"),
+                        rs.getString("postDate"),
+                        rs.getString("content"),
+                        rs.getString("author"));
+                list.add(b);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
     public Users checkUsers(String user, String pass) {
         String sql = "select * from Users\n"
                 + "where [userName] = ? AND [pass] = ?";
@@ -320,6 +367,12 @@ public class DAO extends DBContext {
             st.executeUpdate();
         } catch (SQLException e) {
         }
+    }
+
+    public static void main(String[] args) {
+        DAO d = new DAO();
+        List<Blog> listB = d.getAllBlogSearch("hướng dẫn");
+        System.out.println(listB);
     }
 
 }
