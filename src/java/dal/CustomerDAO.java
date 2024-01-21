@@ -88,4 +88,46 @@ public class CustomerDAO extends DBContext {
         }
     }
 
+    public Customer checkAccount(String email) {
+        String sql = "select * from Customer\n"
+                + "where [email] = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, email);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                return new Customer(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8)
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public Customer register(String fullName, String gender, String phone, String email, String password, String address) {
+        String sql = "INSERT INTO Customer\n"
+                + "VALUES (?,?,?,?,?,?)";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, fullName);
+            st.setString(2, gender);
+            st.setString(3, phone);
+            st.setString(4, email);
+            st.setString(5, password);
+            st.setString(6, address);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
 }

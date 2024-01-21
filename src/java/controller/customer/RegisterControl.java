@@ -3,9 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller;
+package controller.customer;
 
-import dal.DAO;
+import dal.CustomerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,19 +13,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import model.Blog;
-import model.Category;
-import model.Post;
-import model.Product;
-import model.Slider;
 
 /**
  *
- * @author minh1
+ * @author DUONG VIET DUY
  */
-@WebServlet(name="HomePage", urlPatterns={"/home"})
-public class HomePage extends HttpServlet {
+@WebServlet(name="RegisterControl", urlPatterns={"/register"})
+public class RegisterControl extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -36,20 +30,28 @@ public class HomePage extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-//        response.setContentType("text/html;charset=UTF-8");
-//        DAO d = new DAO();
-//        List<Category> listC = d.getAllCategory();
-//        List<Product> listNewP = d.getTopProduct();
-//        List<Post> listP = d.getTopPost();
-//        List<Slider> listS = d.getTopSlider(1, 3);
-//        List<Blog> listB = d.getAllBlog();
-//        request.setAttribute("listC", listC);
-//        request.setAttribute("listNewP", listNewP);
-//        request.setAttribute("listB", listB);
-//        request.setAttribute("listTopPost", listP);
-//        request.setAttribute("listTopSlider", listS);
-//        request.getRequestDispatcher("home.jsp").forward(request, response);
-    } 
+        response.setContentType("text/html;charset=UTF-8");
+        String full_name = request.getParameter("full_name");
+        String gender = request.getParameter("gender");
+        String phone = request.getParameter("phone");
+        String email = request.getParameter("email");
+        String pass = request.getParameter("pass");
+        String confirm_pass = request.getParameter("confirm_pass");
+        String address = request.getParameter("address");
+        if(!pass.equals(confirm_pass)){
+            response.sendRedirect("register.jsp");
+        } else {
+            CustomerDAO dao = new CustomerDAO();
+            model.Customer customer = dao.checkAccount(email);
+            if(customer == null) {
+                dao.register(full_name, gender, phone, email, pass, address);
+                request.setAttribute("ms", "Register Success");
+                request.getRequestDispatcher("register.jsp").forward(request, response);
+            } else {
+                response.sendRedirect("register.jsp");
+            }
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -62,19 +64,7 @@ public class HomePage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        DAO d = new DAO();
-        List<Category> listC = d.getAllCategory();
-        List<Product> listNewP = d.getTopProduct();
-        List<Post> listP = d.getTopPost();
-        List<Slider> listS = d.getTopSlider(1, 3);
-        List<Blog> listB = d.getAllBlog();
-        request.setAttribute("listC", listC);
-        request.setAttribute("listNewP", listNewP);
-        request.setAttribute("listB", listB);
-        request.setAttribute("listTopPost", listP);
-        request.setAttribute("listTopSlider", listS);
-        request.getRequestDispatcher("home.jsp").forward(request, response);
+        processRequest(request, response);
     } 
 
     /** 
