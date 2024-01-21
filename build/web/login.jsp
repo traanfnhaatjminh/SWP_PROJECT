@@ -75,13 +75,8 @@
 </head>
 <body>
 <div class="login-form">
-    <form action="userlogin" method="post">
+    <form action="customer?action=checkLogin" method="post">
         <h2 class="text-center">Sign in</h2>		
-        <div class="text-center social-btn">
-            <a href="#" class="btn btn-primary btn-block"><i class="fa fa-facebook"></i> Sign in with <b>Facebook</b></a>
-            <a href="#" class="btn btn-danger btn-block"><i class="fa fa-google"></i> Sign in with <b>Google</b></a>
-        </div>
-		<div class="or-seperator"><i>or</i></div>
         <div class="form-group">
         	<div class="input-group">                
                 <div class="input-group-prepend">
@@ -89,7 +84,7 @@
                         <span class="fa fa-user"></span>
                     </span>                    
                 </div>
-                <input type="text" class="form-control" name="user" placeholder="Username" required="required">
+                    <input type="email" class="form-control" name="c_email" placeholder="Email" required="required">
             </div>
         </div>
 		<div class="form-group">
@@ -99,14 +94,19 @@
                         <i class="fa fa-lock"></i>
                     </span>                    
                 </div>
-                <input type="password" class="form-control" name="pass" placeholder="Password" required="required">
+                <input type="password" class="form-control" name="c_pass" placeholder="Password" required="required">
             </div>
         </div>        
         <div class="form-group">
             <button type="submit" class="btn btn-success btn-block login-btn">Sign in</button>
         </div>
         <div class="clearfix">
-            <label class="float-left form-check-label"><input type="checkbox"> Remember me</label>
+            <label class="float-left form-check-label" for="remember">
+                <input type="checkbox" name="remember" value="ON" id="remember">
+            </label>
+            <label>
+                Remember
+            </label>
             <a href="#" class="float-right text-success">Forgot Password?</a>
         </div>  
         

@@ -61,6 +61,7 @@ public class BlogList extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String active = request.getParameter("menu");
         DAO d = new DAO();
         List<Category> listC = d.getAllCategory();
         List<BlogCategory> listBC = d.getAllBlogCategory();
@@ -71,6 +72,7 @@ public class BlogList extends HttpServlet {
         request.setAttribute("listBlogCategory", listBC);
         request.setAttribute("listBlog", listB);
         request.setAttribute("latestBlog", b);
+        request.setAttribute("menu", active);
         request.getRequestDispatcher("blog.jsp").forward(request, response);
     } 
 

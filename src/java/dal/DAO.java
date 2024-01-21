@@ -340,33 +340,8 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public Users checkUsers(String user, String pass) {
-        String sql = "select * from Users\n"
-                + "where [userName] = ? AND [pass] = ?";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, user);
-            st.setString(2, pass);
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                return new Users(
-                        rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getString(7),
-                        rs.getString(8),
-                        rs.getInt(9),
-                        rs.getDouble(10));
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return null;
-    }
-
+    
+   
     public Users checkExisted(String user) {
         String sql = "SELECT * FROM Users\n"
                 + "where [userName] = ?";
