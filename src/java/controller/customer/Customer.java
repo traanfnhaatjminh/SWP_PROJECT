@@ -4,6 +4,7 @@
  */
 package controller.customer;
 
+import dal.CustomerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -74,6 +75,68 @@ public class Customer extends HttpServlet {
             HttpSession session = request.getSession();
             session.removeAttribute("customer");
             response.sendRedirect("home");
+        }
+        if (action.equals("updateinfor")) {
+            try {
+                HttpSession session = request.getSession();
+                model.Customer customer = (model.Customer) session.getAttribute("customer");
+                if (customer != null) {
+                    String customer_name = request.getParameter("fullName");
+                    String customer_gender = request.getParameter("gender");
+                    String customer_phone = request.getParameter("phone");
+                    String customer_address = request.getParameter("address");
+                    String customer_avatar = request.getParameter("avatar");
+                    int customer_id = customer.getCustomerID();
+                    CustomerDAO dao = new CustomerDAO();
+                    dao.updateInfor(customer_name, customer_gender, customer_phone, customer_address, customer_avatar, customer_id);
+                    model.Customer customer1 = new model.Customer(
+                            customer.getCustomerID(),
+                            customer_name,
+                            customer_gender,
+                            customer_phone,
+                            customer.getEmail(),
+                            customer.getPassword(),
+                            customer_address,
+                            customer_avatar);
+                    session.setAttribute("customer", customer1);
+                    request.setAttribute("messageinfor", "update success");
+                    request.getRequestDispatcher("editprofile.jsp").forward(request, response);
+                } else {
+                    response.sendRedirect("customer?action=login");
+                }
+            } catch (Exception e) {
+            }
+        }
+        if (action.equals("changepassword")) {
+            try {
+                String customer_email = request.getParameter("email");
+                String customer_opass = request.getParameter("oldpass");
+                String customer_npass = request.getParameter("newpass");
+                CustomerDAO dao = new CustomerDAO();
+                model.Customer customer = dao.check(customer_email, customer_opass);
+                if (customer == null) {
+                    String ms = "old password incorrect";
+                    request.setAttribute("ms", ms);
+                    request.getRequestDispatcher("changepass.jsp").forward(request, response);
+                } else {
+                    dao.changePass(customer_npass, customer_email);
+                    model.Customer customer1 = new model.Customer(
+                            customer.getCustomerID(),
+                            customer.getFullName(),
+                            customer.getGender(),
+                            customer.getPhone(),
+                            customer_email,
+                            customer_npass,
+                            customer.getAddress(),
+                            customer.getAvatar());
+
+                    HttpSession session = request.getSession();
+                    session.setAttribute("customer", customer1);
+                    request.setAttribute("mess", "change password success");
+                    request.getRequestDispatcher("changepass.jsp").forward(request, response);
+                }
+            } catch (Exception e) {
+            }
         }
     }
 
