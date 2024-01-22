@@ -45,7 +45,7 @@ public class Customer extends HttpServlet {
             dal.CustomerDAO dao = new dal.CustomerDAO();
             model.Customer customer = dao.Login(customer_email, customer_pass);
             if (customer == null) {
-                request.setAttribute("message", "Tai khoan khong ton tai!");
+                request.setAttribute("error", "Account does not exist or wrong password!");
                 request.getRequestDispatcher("customer?action=login").forward(request, response);
             } else {
                 HttpSession session = request.getSession();

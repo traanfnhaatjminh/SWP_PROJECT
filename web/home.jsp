@@ -36,17 +36,20 @@
     </head>
     <body>
         <jsp:include page="menu.jsp"></jsp:include>
+        <jsp:include page="navigation.jsp"></jsp:include>
             <div class="section">
                 <!-- container -->
                 <div class="container">
                     <div class="slick-slider" style="text-align: center; background-color: whitesmoke">
                     <c:forEach items="${listTopSlider}" var="c">
+
                         <div class="slide"> 
                             <a href="#"><img src="${c.sliderImage}" alt="Slide 1" style="width: 50%; margin: 0 auto;"></a>
                             <div class="slide-caption">
                                 <p style="font-size: 20px; margin-top: 1%">${c.sliderTitle}</p>
                             </div>
                         </div>
+
                     </c:forEach>
                 </div>
             </div>
@@ -108,7 +111,7 @@
                                                     </h4>
                                                 </div>
                                                 <div class="add-to-cart">
-                                                    <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                                    <a href="buyProduct?productId=${c.id}&num=1" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</a>
                                                 </div>
                                             </div>
                                         </div>

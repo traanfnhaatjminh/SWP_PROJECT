@@ -114,7 +114,7 @@ public class CustomerDAO extends DBContext {
 
     public Customer register(String fullName, String gender, String phone, String email, String password, String address) {
         String sql = "INSERT INTO Customer\n"
-                + "VALUES (?,?,?,?,?,?)";
+                + "VALUES (?,?,?,?,?,?,?)";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, fullName);
@@ -123,6 +123,7 @@ public class CustomerDAO extends DBContext {
             st.setString(4, email);
             st.setString(5, password);
             st.setString(6, address);
+            st.setString(7, "");
             st.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
