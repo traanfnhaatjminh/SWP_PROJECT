@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import model.Category;
 import model.Customer;
 import model.Order;
 import model.Product;
@@ -46,10 +47,11 @@ public class CheckoutContorller extends HttpServlet {
             }
             model.Cart cart = new model.Cart(txt, list);
             List<Product> listNewP = d.getTopProduct();
-
+            List<Category> listC = d.getAllCategory();
             request.setAttribute("listNewP", listNewP);
             request.setAttribute("cart", cart);
             request.setAttribute("customer", customer);
+            request.setAttribute("listC", listC);
             request.setAttribute("size", cart.getList().size());
             request.getRequestDispatcher("checkout.jsp").forward(request, response);
         } else {

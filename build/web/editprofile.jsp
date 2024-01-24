@@ -35,28 +35,30 @@
                 <form action="customer?action=updateinfor" method="POST">
                     <p style="background-color: rgb(63, 60, 60); color: white; padding: 30px 30px; text-align: center;">This is Edit about personal</p>
                     <h3 style="">Edit Your Profile</h3>
-                    <p style="color: red; align-content: center;">
-                            ${requestScope.messageinfor}
-                        </p>
+                    <p style="color: green; align-content: center;">
+                        ${requestScope.messageinfor}
+                    </p>
                     <label class="form-label">FullName</label>
                     <input type="text" class="form-control mb-1" name="fullName" value="${sessionScope.customer.fullName}">
                     <label class="form-label">Phone</label>
-                    <input type="text" class="form-control mb-1" name="phone" value="${sessionScope.customer.phone}">
+                    <input type="tel" pattern="[0-9]{10}" class="form-control mb-1" name="phone" value="${sessionScope.customer.phone}">
                     <label class="form-label">Email</label>
                     <input type="text" class="form-control mb-1" readonly name="user_name" value="${sessionScope.customer.email}">
                     <label class="form-label">Adress</label>
                     <input type="text" class="form-control mb-1" name="address" value="${sessionScope.customer.address}">
                     <label class="form-label">Gender</label>
-                    <input type="text" class="form-control mb-1" name="gender" value="${sessionScope.customer.gender}">
+                    <select class="form-control mb-1" name="gender">
+                        <option value="male" ${sessionScope.customer.gender == 'male' ? 'selected' : ''}>Male</option>
+                        <option value="female" ${sessionScope.customer.gender == 'female' ? 'selected' : ''}>Female</option>
+                    </select>
                     <label class="form-label">Avatar</label>
                     <input type="text" class="form-control mb-1" name="avatar" value="${sessionScope.customer.avatar}">
                     <button type="submit">Save Changes</button>
                 </form>
 
             </div>    
-                    <button><a href="profile.jsp">Back</a></button>  
+            <button><a href="profile.jsp">Back</a></button>  
         </div>
-
 
         <script
             src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"

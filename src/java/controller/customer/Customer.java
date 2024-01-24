@@ -112,6 +112,12 @@ public class Customer extends HttpServlet {
                 String customer_email = request.getParameter("email");
                 String customer_opass = request.getParameter("oldpass");
                 String customer_npass = request.getParameter("newpass");
+                String customer_repass = request.getParameter("repass");
+                if(!customer_npass.equals(customer_repass)){
+                    request.setAttribute("mss", "Password do not match!");
+                    request.getRequestDispatcher("changepass.jsp").forward(request, response);
+                    return;
+                }
                 CustomerDAO dao = new CustomerDAO();
                 model.Customer customer = dao.check(customer_email, customer_opass);
                 if (customer == null) {

@@ -11,13 +11,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import model.Category;
 import model.Item;
 import model.Product;
 import model.Users;
 
 /**
  *
- * @author HuynhPhan
+ * @author 
  */
 @WebServlet(name = "Cart", urlPatterns = {"/cart"})
 public class Cart extends HttpServlet {
@@ -42,9 +43,11 @@ public class Cart extends HttpServlet {
         }
         model.Cart cart = new model.Cart(txt, list);
         List<Product> listNewP = d.getTopProduct();
+        List<Category> listC = d.getAllCategory();
         request.setAttribute("listNewP", listNewP);
         request.setAttribute("cart", cart);
         request.setAttribute("size", cart.getList().size());
+        request.setAttribute("listC", listC);
         request.getRequestDispatcher("cart.jsp").forward(request, response);
     }
 

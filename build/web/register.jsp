@@ -137,25 +137,35 @@
                     ${requestScope.error_pass}
                 </p>
                 <div class="form-group">
-                    <input type="text" class="form-control input-lg" name="full_name" placeholder="Full name" required="required">
+                    <label>Full name</label>
+                    <input type="text" class="form-control input-lg" name="full_name" required="required">
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control input-lg" name="gender" placeholder="Gender" required="required">
+                    <label>Gender</label>
+                    <select class="form-control mb-2" name="gender">
+                        <option value="female" ${customer.gender== 'female' ?  'selected' :'' }  >Female</option>
+                        <option value="male" ${customer.gender== 'male' ?  'selected' :'' } >Male</option>
+                    </select>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control input-lg" name="phone" placeholder="Phone" required="required">
+                    <label>Phone</label>
+                    <input type="tel" pattern="^09[0-9]{8}$" class="form-control input-lg" name="phone" required="required">
                 </div>  
                 <div class="form-group">
-                    <input type="email" class="form-control input-lg" name="email" placeholder="Email" required="required">
+                    <label>Email</label>
+                    <input type="email" class="form-control input-lg" name="email" required="required">
                 </div>  
                 <div class="form-group">
-                    <input type="password" class="form-control input-lg" name="pass" placeholder="Password" required="required">
+                    <label>Password</label>
+                    <input type="password" class="form-control input-lg" name="pass" required="required">
                 </div> 
                 <div class="form-group">
-                    <input type="password" class="form-control input-lg" name="confirm_pass" placeholder="Confirm Password" required="required">
+                    <label>Confirm Password</label>
+                    <input type="password" class="form-control input-lg" name="confirm_pass" required="required">
                 </div>  
                 <div class="form-group">
-                    <input type="text" class="form-control input-lg" name="address" placeholder="Address" required="required">
+                    <label>Address</label>
+                    <input type="text" class="form-control input-lg" name="address" required="required">
                 </div>  
                 <div class="form-group">
                     <button type="submit" class="btn btn-success btn-lg btn-block signup-btn">Register</button>

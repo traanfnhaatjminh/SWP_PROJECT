@@ -46,7 +46,16 @@
                     </ul>
                     <ul class="header-links pull-right">
                         <!--<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>-->
-                        <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+                        <c:if test="${sessionScope.customer == null}">
+                            <li><a href="register.jsp"><i class="fa fa-"></i> Register</a></li>
+                            <li><a href="login.jsp"><i class="fa fa-"></i> Login</a></li>
+
+                        </c:if>
+                        <c:if test="${sessionScope.customer != null}">
+                            <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+                            <li><a href="logout"><i class="fa fa-"></i> Logout</a></li>
+
+                        </c:if>
                     </ul>
                 </div>
             </div>
@@ -84,44 +93,12 @@
                             <div class="header-ctn">
                                 <!-- Cart -->
                                 <div class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                    <a class="dropdown-toggle" href="cart">
                                         <i class="fa fa-shopping-cart"></i>
                                         <span>Shopping Cart</span>
-                                        <div class="qty">3</div>
+                                        <div class="qty">${size}</div>
                                     </a>
-                                    <div class="cart-dropdown">
-                                        <div class="cart-list">
-                                            <div class="product-widget">
-                                                <div class="product-img">
-                                                    <img src="./img/product01.png" alt="">
-                                                </div>
-                                                <div class="product-body">
-                                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                                    <h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-                                                </div>
-                                                <button class="delete"><i class="fa fa-close"></i></button>
-                                            </div>
-
-                                            <div class="product-widget">
-                                                <div class="product-img">
-                                                    <img src="./img/product02.png" alt="">
-                                                </div>
-                                                <div class="product-body">
-                                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                                    <h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-                                                </div>
-                                                <button class="delete"><i class="fa fa-close"></i></button>
-                                            </div>
-                                        </div>
-                                        <div class="cart-summary">
-                                            <small>3 Item(s) selected</small>
-                                            <h5>SUBTOTAL: $2940.00</h5>
-                                        </div>
-                                        <div class="cart-btns">
-                                            <a href="#">View Cart</a>
-                                            <a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                                 <!-- /Cart -->
 
@@ -234,7 +211,7 @@
                                             </h4>
                                         </div>
                                         <div class="add-to-cart">
-                                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                            <a href="buyProduct?productId=${c.id}&num=1" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</a>
                                         </div>
                                     </div>
                                 </div>

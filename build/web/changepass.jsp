@@ -37,14 +37,15 @@
                 <form action="customer?action=changepassword" method="POST">
                     <p style="color:red">${requestScope.ms}</p>
                     <p style="color:red">${requestScope.mess}</p>
+                    <p style="color:red">${requestScope.mss}</p>
                     <label class="form-label">Email</label>
                     <input type="text" class="form-control mb-1" name="email" value="${sessionScope.customer.email}">
                     <label class="form-label">Old PassWord</label>
-                    <input type="text" class="form-control mb-1" name="oldpass" value="">
+                    <input type="password" class="form-control mb-1" name="oldpass" value="">
                     <label class="form-label">New PassWord</label>
-                    <input type="text" class="form-control mb-1" name="newpass" value="">
+                    <input type="password" class="form-control mb-1" name="newpass" value="">
                     <label class="form-label">Repeat PassWord</label>
-                    <input type="text" class="form-control mb-1" name="repass" value="">
+                    <input type="password" class="form-control mb-1" name="repass" value="">
                     <button type="submit">Save Changes</button>
                 </form>
 

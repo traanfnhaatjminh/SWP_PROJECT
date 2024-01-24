@@ -68,6 +68,34 @@ public class DAO extends DBContext {
         return list;
     }
 
+    public List<Product> getLatestProduct() {
+        List<Product> list = new ArrayList<>();
+        String sql = "SELECT TOP 4 *\n"
+                + "FROM product\n"
+                + "ORDER BY id DESC;";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Product c = new Product(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getDouble("original_price"),
+                        rs.getDouble("sale_price"),
+                        rs.getInt("quantity"),
+                        rs.getString("describe"),
+                        rs.getString("image"),
+                        rs.getInt("cid")
+                );
+                list.add(c);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
     public List<BlogCategory> getAllBlogCategory() {
         List<BlogCategory> list = new ArrayList<>();
         String sql = "select * from Blog_Category";
@@ -339,7 +367,34 @@ public class DAO extends DBContext {
         }
         return list;
     }
-
+    
+    public ArrayList<Product> getAllProductSearch(String search) {
+        ArrayList<Product> list = new ArrayList<>();
+        search = "%"+search+"%";
+        String sql = "select * from product where name like N'%' + ? + '%'";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setString(1, search);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Product c = new Product(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getDouble("original_price"),
+                        rs.getDouble("sale_price"),
+                        rs.getInt("quantity"),
+                        rs.getString("describe"),
+                        rs.getString("image"),
+                        rs.getInt("cid")
+                );
+                list.add(c);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
 
     public static void main(String[] args) {
         DAO d = new DAO();

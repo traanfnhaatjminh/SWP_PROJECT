@@ -22,8 +22,8 @@
                     <a href="blog?menu=blog">Blog</a>
                 </li>
                 <c:forEach items="${listC}" var="c">
-                    <!--<li><a href="categoryDetail?cid=${c.cid}">${c.cname}</a></li>-->
-                </c:forEach>
+                    <li><a href="categoryDetail?cid=${c.cid}">${c.cname}</a></li>
+                    </c:forEach>
             </ul>
             <!-- /NAV -->
         </div>

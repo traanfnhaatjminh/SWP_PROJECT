@@ -59,6 +59,7 @@
                     <form class="card mt-4" action="forgotPassword" method="POST">
                         <div class="card-body">
                             <div class="form-group">
+                                <p class="text-danger">${requestScope.errorMessage}</p>
                                 <label for="email-for-pass">Enter your email address</label> <input
                                     class="form-control" type="text" name="email" id="email-for-pass" required=""><small
                                     class="form-text text-muted"></small>
