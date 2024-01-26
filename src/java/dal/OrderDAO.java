@@ -10,10 +10,7 @@ import model.Customer;
 import model.Item;
 import model.Users;
 
-/**
- *
- * @author DELL
- */
+
 public class OrderDAO extends DBContext {
 
     public void addOrder(String name, String phone, String address, String email, String gender, String notes, Cart cart, Customer customer) {

@@ -129,8 +129,6 @@
         </div>
         <!-- /row -->
 
-        <%--<jsp:include page="blog.jsp"></jsp:include>--%>
-
         <jsp:include page="footer.jsp"></jsp:include>
 
         <!-- jQuery Plugins -->

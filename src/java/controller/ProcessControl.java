@@ -14,10 +14,8 @@ import model.Cart;
 import model.Item;
 import model.Product;
 
-/**
- *
- * @author DELL
- */
+
+ 
 @WebServlet(name = "ProcessControl", urlPatterns = {"/process"})
 public class ProcessControl extends HttpServlet {
 

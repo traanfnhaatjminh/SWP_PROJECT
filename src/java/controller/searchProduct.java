@@ -18,10 +18,7 @@ import java.util.List;
 import model.Category;
 import model.Product;
 
-/**
- *
- * @author minh1
- */
+
 @WebServlet(name = "searchProduct", urlPatterns = {"/searchProduct"})
 public class searchProduct extends HttpServlet {
 

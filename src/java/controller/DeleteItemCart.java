@@ -18,10 +18,7 @@ import model.Cart;
 import model.Item;
 import model.Product;
 
-/**
- *
- * @author DELL
- */
+
 @WebServlet(name = "DeleteItemCart", urlPatterns = {"/deleteItem"})
 public class DeleteItemCart extends HttpServlet {
 

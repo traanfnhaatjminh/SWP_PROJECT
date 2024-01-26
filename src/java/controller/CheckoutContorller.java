@@ -21,10 +21,6 @@ import model.Order;
 import model.Product;
 import model.Users;
 
-/**
- *
- * @author HuynhPhan
- */
 @WebServlet(name = "CheckoutContorller", urlPatterns = {"/checkout"})
 public class CheckoutContorller extends HttpServlet {
 

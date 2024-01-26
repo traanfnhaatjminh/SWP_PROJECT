@@ -4,7 +4,7 @@
     Author     : minh1
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -35,7 +35,6 @@
         <style type="text/css">
             body {
                 background-color: #f4f7f6;
-                margin-top: 20px;
             }
 
             .card {
@@ -304,6 +303,7 @@
     </head>
     <body>
         <jsp:include page="menu.jsp"></jsp:include>
+        <jsp:include page="navigation.jsp"></jsp:include>
             <div id="main-content" class="blog-page">
                 <div class="container">
                     <div class="row clearfix">
