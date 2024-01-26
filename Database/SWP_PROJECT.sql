@@ -258,3 +258,4 @@ values
 (2, N'$MAKER và LONELY Stonie chính thức ra mắt các sản phẩm thuộc BST vào ngày 04.12, bao gồm Money Island Tee in Cream, Money Island Short in Cream','https://scontent.fhan14-2.fna.fbcdn.net/v/t39.30808-6/407973804_373587568548203_1578083566043200816_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=OkZHSoLXEBcAX9oOMtf&_nc_ht=scontent.fhan14-2.fna&oh=00_AfDPtQhzGqDayhMh1M_pugxxcmSy97Qefb2ATUu31EoCwQ&oe=65AD5FC3'),
 (3, N'Toàn bộ các “SẢN PHẨM” đẹp nhất đã lên kệ tại website chính thức $maker, bạn có thể nhắn tin trực tiếp cho chúng mình để được tư vấn và trải nghiệm mua sắm Online.','https://scontent.fhan14-1.fna.fbcdn.net/v/t39.30808-6/407994871_373587491881544_5926347277153163150_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=VSRBy4vNBBQAX_aRK8M&_nc_ht=scontent.fhan14-1.fna&oh=00_AfC6yhRdvPNkKfy6h8w119_UHwaBZhk6kkxuFu_fPOLsgA&oe=65ADA0CD')
 
+--hahahahahahaha 
