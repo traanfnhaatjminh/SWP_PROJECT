@@ -4,7 +4,7 @@
     Author     : minh1
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -304,6 +304,7 @@
     </head>
     <body>
         <jsp:include page="menu.jsp"></jsp:include>
+        <jsp:include page="navigation.jsp"></jsp:include>
             <div id="main-content" class="blog-page">
                 <div class="container">
                     <div class="row clearfix">
@@ -368,7 +369,7 @@
                             <div class="body widget">
                                 <ul class="list-unstyled categories-clouds m-b-0">
                                     <c:forEach items="${listBlogCategory}" var="c">
-                                        <li><a href="#">${c.name}</a></li>
+                                        <li><a href="blogCategory?id=${c.id}">${c.name}</a></li>
                                         </c:forEach>
                                 </ul>
                             </div>

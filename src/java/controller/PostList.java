@@ -23,8 +23,8 @@ import model.Product;
  *
  * @author minh1
  */
-@WebServlet(name = "BlogList", urlPatterns = {"/blog"})
-public class BlogList extends HttpServlet {
+@WebServlet(name = "PostList", urlPatterns = {"/post"})
+public class PostList extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +43,10 @@ public class BlogList extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet BlogList</title>");
+            out.println("<title>Servlet PostList</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet BlogList at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet PostList at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -89,7 +89,7 @@ public class BlogList extends HttpServlet {
         request.setAttribute("latestBlog", b);
         request.setAttribute("menu", active);
         request.setAttribute("size", cart.getList().size());
-        request.getRequestDispatcher("blog.jsp").forward(request, response);
+        request.getRequestDispatcher("post.jsp").forward(request, response);
     }
 
     /**

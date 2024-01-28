@@ -305,101 +305,132 @@
     <body>
         <jsp:include page="menu.jsp"></jsp:include>
         <jsp:include page="navigation.jsp"></jsp:include>
-            <div id="main-content" class="blog-page">
-                <div class="container">
-                    <div class="row clearfix">
-                        <div class="col-lg-9 col-md-12 left-box">
-                        <c:if test="${error == null}">
-                            <form action="sortBlog" style="margin: 2% 0">
-                                <label for="sortSelect">Sort by:</label>
-                                <select name="sortSelect" id="sortSelect">
-                                    <option value="postDateRecent">Recent Updated Date</option>
-                                </select>
-                                <input type="submit" value="Sort">
-                            </form>
-                        </c:if>
-                        <c:forEach items="${listBlog}" var="c">
-                            <div class="col-md-4">
-                                <div class="card single_post">
-                                    <div class="body">
-                                        <div class="img-post">
-                                            <img class="d-block img-fluid" src="${c.blogImage}" alt="First slide">
-                                        </div>
-                                        <h3 class="product-name"><a href="blogDetail?id=${c.blogID}">${c.blogTitle}</a></h3>
-                                        <p class="product-name">${c.content}</p>
-                                        <p>Date: ${c.postDate}</p>
-                                        <p>Author: ${c.author}</p>
-                                    </div>
-                                </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3">
+                        <h2 style="margin-top: 7%" class="grid-title"><i class="fa fa-filter"></i> Filters</h2>
+                        <hr>
+
+                        <form id="categoryFilterForm" action="FilterServlet">
+                            <h4>By category:</h4>
+                        <c:forEach items="${listBlogCategory}" var="c">
+                            <div class="checkbox">
+                                <label><input name="categories" type="checkbox" value="${c.name}" class="icheck">${c.name}</label>
                             </div>
                         </c:forEach>
-                        <c:if test="${error == null}">
-                            <div class="store-filter clearfix col-md-12">
-                                <ul class="store-pagination">
-                                    <li class="active">1</li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                                </ul>
-                            </div>
-                        </c:if>
-                    </div>
-                    <div class="col-lg-3 col-md-12 right-box">
-                        <div class="card">
-                            <div class="body search">
-                                <form action="searchBlog">
-                                    <div class="input-group m-b-0">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fa fa-search"></i></span>
-                                        </div>
-                                        <input type="text" class="form-control" name="searchBlog" value="${searchValue}" placeholder="Search...">
-                                        <button type="submit" class="btn btn-primary">Search</button>
-                                        <c:if test="${error != null}">
-                                            <h5 class="text-danger">${error}</h5>
-                                        </c:if>
+
+                        <h4>By status:</h4>
+                        <div class="checkbox">
+                            <label><input name="status" type="checkbox" value="public" class="icheck">Public</label>
+                            <label><input name="status" type="checkbox" value="private" class="icheck">Private</label>
+                        </div>
+                        <button type="submit" class="btn btn-secondary">Submit</button>
+                    </form>
+
+                    <!-- END FILTER BY CATEGORY -->
+
+                    <div class="padding"></div>
+                </div>
+                <!-- END FILTERS -->
+                <div id="main-content" class="blog-page col-md-9">
+                    <div class="container">
+                        <div class="row clearfix">
+                            <div class="col-lg-9 col-md-12 left-box">
+                                <form action="addPost" style="margin: 2% 0">
+                                    <label for="addPost">ADD A NEW POST:</label>
+                                    <button type="submit" class="btn btn-secondary">ADD</button>
+                                </form>
+                                <div class="store-filter clearfix">
+                                    <div class="store-sort">
+                                        <form action="sortPost">
+                                            SORT BY:
+                                            <select name="sortSelect">
+                                                <option value="0">Title from A to Z</option>
+                                                <option value="1">Title from Z to A</option>
+                                                <c:forEach items="${listBlogCategory}" var="c">
+                                                    <option value="1">Category: ${c.name}</option>
+                                                </c:forEach>
+                                                <option value="1">Status: Public</option>
+                                                <option value="1">Status: Private</option>
+                                            </select>
+                                            <button type="submit" class="btn btn-secondary">Sort</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <form action="searchPost">
+                                    <div class="input-group">
+                                        SEARCH: <input type="text" class="" placeholder="Search" />
+                                        <button type="submit" class="btn btn-secondary">Search</button>
                                     </div>
                                 </form>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="header">
-                                <h2>Categories</h2>
-                            </div>
-                            <div class="body widget">
-                                <ul class="list-unstyled categories-clouds m-b-0">
-                                    <c:forEach items="${listBlogCategory}" var="c">
-                                        <li><a href="blogCategory?id=${c.id}">${c.name}</a></li>
-                                        </c:forEach>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="header">
-                                <h2>Latest Blog</h2>
-                            </div>
-                            <div class="body widget popular-post">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="single_post">
-                                            <h3 class="product-name"><a href="blog-details.html">${latestBlog.blogTitle}</a></h3>
-                                            <p class="product-name">${latestBlog.content}</p>
-                                            <p>Date: ${latestBlog.postDate}</p>
-                                            <p>Author: ${latestBlog.author}</p>
-                                            <div class="img-post">
-                                                <img src="${latestBlog.blogImage}"
-                                                     alt=" Image">
+
+                                <c:forEach items="${listBlog}" var="c">
+                                    <div class="col-md-4">
+                                        <div class="card single_post">
+                                            <div class="body">
+                                                <div class="img-post">
+                                                    <img class="d-block img-fluid" src="${c.blogImage}" alt="First slide">
+                                                </div>
+                                                <h3 class="product-name"><a href="blogDetail?id=${c.blogID}">${c.blogTitle}</a></h3>
+                                                <p class="product-name">${c.content}</p>
+                                                <p>Date: ${c.postDate}</p>
+                                                <p>Author: ${c.author}</p>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </c:forEach>
+                                <c:if test="${error == null}">
+                                    <div class="store-filter clearfix col-md-12">
+                                        <ul class="store-pagination">
+                                            <li class="active">1</li>
+                                            <li><a href="#">2</a></li>
+                                            <li><a href="#">3</a></li>
+                                            <li><a href="#">4</a></li>
+                                            <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </c:if>
                             </div>
+                            <!--                            <div class="col-lg-3 col-md-12 right-box">
+                                                            <div class="card">
+                                                                <div class="body search">
+                                                                    <form action="searchBlog">
+                                                                        <div class="input-group m-b-0">
+                                                                            <div class="input-group-prepend">
+                                                                                <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                                                            </div>
+                                                                            <input type="text" class="form-control" name="searchBlog" value="${searchValue}" placeholder="Search...">
+                                                                            <button type="submit" class="btn btn-primary">Search</button>
+                            <c:if test="${error != null}">
+                                <h5 class="text-danger">${error}</h5>
+                            </c:if>
                         </div>
-
+                    </form>
+                </div>
+            </div>
+            <div class="card">
+                <div class="header">
+                    <h2>Categories</h2>
+                </div>
+                <div class="body widget">
+                    <ul class="list-unstyled categories-clouds m-b-0">
+                            <c:forEach items="${listBlogCategory}" var="c">
+                                <li><a href="blogCategory?id=${c.id}">${c.name}</a></li>
+                            </c:forEach>
+                    </ul>
+                </div>
+            </div>
+        </div>-->
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <script>
+            import { Ripple, initMDB } from "mdb-ui-kit";
+
+            initMDB({Ripple});
+        </script>
         <jsp:include page="footer.jsp"></jsp:include>
     </body>
 </html>

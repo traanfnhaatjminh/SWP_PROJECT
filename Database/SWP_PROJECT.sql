@@ -92,6 +92,8 @@ blogCategoryID int,
 FOREIGN KEY (blogCategoryID) REFERENCES Blog_Category(blogCategoryID),
 )
 
+select * from Blog
+where blogID = ?
 
 create table Blog_Category(
 blogCategoryID int primary key,
@@ -118,15 +120,17 @@ where b.blogID = ?
 select * from Blog
 where blogID = ?
 
+delete from Blog
+
 insert into Blog(blogID, blogTitle, blogImage, postDate, content, author, blogCategoryID)
 values
-(4, N'Thời Trang: Nghệ Thuật Tự Chủ và Sự Phát Triển Vượt Bậc', 'https://scontent.fhan2-4.fna.fbcdn.net/v/t39.30808-6/411148108_18382762387069644_8280629814671464533_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=3635dc&_nc_ohc=qP7mHXz8u3EAX_ghWtA&_nc_ht=scontent.fhan2-4.fna&oh=00_AfAB2-j2biGThCqx-PxSvlZJiIWBLpunTdZfjgK2pCYMXw&oe=65B0DB34','2024/1/16', 
+(4, N'Thời Trang: Nghệ Thuật Tự Chủ và Sự Phát Triển Vượt Bậc', 'https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/422899704_18389556349069644_2140229012135770377_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=3635dc&_nc_ohc=Wn3TOX2cxY4AX_-mr6K&_nc_ht=scontent.fhan18-1.fna&oh=00_AfBuR-NQ5u6tlvor5rASikpTK82Mj7Q_gYuFTcBJATzVAQ&oe=65BAEF39','2024/1/16', 
 N'Thời trang không chỉ là cách chúng ta ăn mặc mỗi ngày; nó là biểu tượng của cái đẹp, cái độc đáo và sự sáng tạo. Thời trang không chỉ thể hiện gu thẩm mỹ cá nhân mà còn là ngôn ngữ giao tiếp của chính bản thân chúng ta.
 Ngày nay, thời trang không chỉ được tạo ra từ thế giới của các nhà thiết kế nổi tiếng mà còn bắt nguồn từ đời sống hàng ngày, nghệ thuật đương đại và sự đa dạng văn hóa. Chúng ta sẽ cùng nhau khám phá những xu hướng đang thịnh hành và cách chúng ảnh hưởng đến cộng đồng thời trang.
 Nhìn xa về tương lai, chúng ta sẽ dự đoán những xu hướng sáng tạo và đa dạng trong thế giới thời trang. Cùng nhau suy nghĩ về những thách thức và cơ hội mà thời trang đang đối mặt trong thời kỳ tiếp theo.
 Hãy đồng hành cùng chúng tôi trong hành trình khám phá vô tận của thế giới thời trang. Thời trang không chỉ là việc ăn mặc, mà là cách chúng ta diễn đạt bản thân và giao tiếp với thế giới xung quanh. Chúng ta là những nghệ sĩ tự do trên sân khấu lớn của cuộc sống, mỗi bộ trang phục là một tác phẩm nghệ thuật tự chủ.
 ','Tran Nhat Minh',1),
-(3, N'BẬT MÍ NHỮNG NGUYÊN TẮC PHỐI MÀU QUẦN ÁO SÀNH ĐIỆU', 'https://scontent.fhan2-4.fna.fbcdn.net/v/t39.30808-6/418757647_18387104926069644_3641350815995318898_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=3635dc&_nc_ohc=8-oF4NUBrXYAX-7RH-7&_nc_ht=scontent.fhan2-4.fna&oh=00_AfBa-xB9AjLOGQb72KTXWKCdm7wcy52Iprn_GCYjp3zkcw&oe=65AFC2D6','2024/1/16', 
+(3, N'BẬT MÍ NHỮNG NGUYÊN TẮC PHỐI MÀU QUẦN ÁO SÀNH ĐIỆU', 'https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/422163872_18388762270069644_2710017834290488235_n.jpg?stp=c0.119.1440.1440a_dst-jpg_s851x315&_nc_cat=100&ccb=1-7&_nc_sid=3d9721&_nc_ohc=RmO_BLHFLYoAX9jsfaq&_nc_ht=scontent.fhan18-1.fna&oh=00_AfDApUufMWzoIzxZ12zB5RgAW-3PdCNCZzQJpa7NpRqwew&oe=65BA84E1','2024/1/16', 
 N'Nguyên tắc phối màu quần áo theo bánh xe màu sắc:
 1.Mix quần áo theo nguyên tắc màu sắc tương phản:
 Quy tắc phối màu quần áo theo cặp màu tương phản, tức là: Bạn sẽ mix đồ theo hai màu đối diện nhau trên bánh xe màu sắc. Cặp màu tương phải giúp tạo nên một set đồ rực rỡ, nổi bật. Cách phối màu này cực kỳ phù hợp với những các bạn trẻ ưa thích màu sắc, sự tươi trẻ và nổi bật nhất trong bộ cánh của mình.
@@ -137,7 +141,7 @@ Ton sur ton là cụm từ vô cùng quen thuộc đối với tín đồ thời
 4.Phối màu quần áo theo gam màu trung tính:
 Xám, trắng, ghi, nâu là những gam màu trung tính được yêu thích nhất trong thời trang. Bạn hãy nắm chắc nguyên tắc kết hợp 1 gam màu trung tính sáng và 1 gam màu trung tính tối trên bộ đồ của bạn. Couple TX chắc chắn bạn sẽ ngạc nhiên với vẻ đẹp sang trọng, khéo léo, lại hết sức nổi bật của chính mình.
 ','Tran Nhat Minh',2),
-(2, N'Cách giữ quần áo luôn mới và bền lâu trong thời gian dài', 'https://scontent.fhan2-3.fna.fbcdn.net/v/t39.30808-6/415523161_18386108434069644_8625410621395145107_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=3635dc&_nc_ohc=7VClmt38UT0AX8AiQa4&_nc_ht=scontent.fhan2-3.fna&oh=00_AfDz0Na7ez4GVLZcCEFMhxAsyjer0iW6v-fFpPWSNVbq_Q&oe=65B0A1D4', '2024/1/14', N'Làm cách nào để tẩy vết bẩn mà không làm phai quần áo?
+(2, N'Cách giữ quần áo luôn mới và bền lâu trong thời gian dài', 'https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/421354093_18388596295069644_1957189789341927481_n.jpg?stp=c0.119.1440.1440a_dst-jpg_s851x315&_nc_cat=101&ccb=1-7&_nc_sid=3d9721&_nc_ohc=7_b0rXNhlEMAX9bw5Mr&_nc_ht=scontent.fhan18-1.fna&oh=00_AfBoE6CMmr1f5HQFMQiNOi4zyv_Eugu-SUlNhaT44ygX-Q&oe=65BBFFAF', '2024/1/14', N'Làm cách nào để tẩy vết bẩn mà không làm phai quần áo?
 Làm sạch vết bẩn càng nhanh càng tốt chính là cách giúp quần áo sạch đơn giản và hiệu quả nhất. Việc làm sạch nhanh sẽ giúp quần áo không bị bám bẩn và luôn mới. 
 Tôi nên phân loại và giặt quần áo nhiều màu như thế nào?
 Tốt nhất bạn nên giặt riêng quần áo có hoa văn có màu riêng, đồ sẫm màu và đồ sáng. Thông thường, vải màu đã được xử lý để tránh bay màu, nhưng tốt nhất bạn nên giặt những loại quần áo này ở nhiệt độ nước mát hơn.
@@ -147,7 +151,7 @@ Làm thế nào để chăm sóc quần áo thể thao?
 Quần áo thể thao và quần áo tập thể dục có thể khó chăm sóc vì chúng thường được làm từ các loại vải đặc biệt. Thế nên, bạn hãy giặt quần áo thể thao ở không bao giờ quá 40 độ để giúp quần áo không bị giãn hoạt mất đi chức năng vốn có của chúng. 
 Làm cách nào để quần áo trắng trở lại?
 Bạn hãy thử treo chúng dưới ánh sáng mặt trời, vì ánh nắng mặt trời có thể có tác dụng tẩy trắng tự nhiên. Ngoài ra, bạn cũng có thể làm trắng quần áo với một số mẹo tẩy trắng quần áo hiệu quả, nhanh chóng.','Tran Nhat Minh',4),
-(1, N'Hướng Dẫn Cách Chọn Size Quần Áo Đúng Cách', 'https://scontent.fhan2-4.fna.fbcdn.net/v/t39.30808-6/414671296_18384639349069644_256342315157973909_n.jpg?stp=dst-jpg_s960x960&_nc_cat=104&ccb=1-7&_nc_sid=3635dc&_nc_ohc=yoYFCY6XawwAX8p4MDl&_nc_ht=scontent.fhan2-4.fna&oh=00_AfDaUAZcgv5EAKMCaWIA0od8T_SfyNV1iiPylb4vG1C5Yg&oe=65B17E4C', '2024/1/14', N'Mua sắm trực tuyến có thể mang lại nhiều tiện ích, nhưng việc chọn size đúng có thể là một thách thức. Để giúp bạn có trải nghiệm mua sắm trơn tru, dưới đây là hướng dẫn chi tiết về cách chọn size quần áo một cách chính xác.
+(1, N'Hướng Dẫn Cách Chọn Size Quần Áo Đúng Cách', 'https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/420547972_18387937657069644_4498810863449367523_n.jpg?stp=c0.119.1440.1440a_dst-jpg_s851x315&_nc_cat=104&ccb=1-7&_nc_sid=3d9721&_nc_ohc=uFQKKpj0SmAAX_mg3BB&_nc_ht=scontent.fhan18-1.fna&oh=00_AfA2Q4EYDOh11Y_3jEtMBAiEgyAZ4y0wkOWP1Re2g5Bpig&oe=65BA5D0F', '2024/1/14', N'Mua sắm trực tuyến có thể mang lại nhiều tiện ích, nhưng việc chọn size đúng có thể là một thách thức. Để giúp bạn có trải nghiệm mua sắm trơn tru, dưới đây là hướng dẫn chi tiết về cách chọn size quần áo một cách chính xác.
 **1. Đo Lường Cơ Bản
 Khi bắt đầu, hãy có bảng đo lường cơ bản của bạn gồm:
 Ngực: Đo vòng quanh phần rộng nhất của ngực, dưới cánh tay.
@@ -233,6 +237,7 @@ postContent nvarchar(100)
 
 select top 2 * from Post
 order by postID desc
+delete from Post
 
 insert into Post (postID, postTitle, postImage, postContent)
 values 
@@ -254,8 +259,8 @@ select * from slider
 
 insert into Slider(sliderID, sliderTitle, sliderImage)
 values 
-(1, N'𝐓𝐄𝐓𝐕𝐎𝐕𝐄𝐍 𝐌𝐄𝐑𝐂𝐇 - Sự kết hợp chưa bao giờ có giữa $maker x Lonely Stonie!!!','https://scontent.fhan14-3.fna.fbcdn.net/v/t39.30808-6/407952110_373587438548216_4304779013064929915_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=dLxGeeB1VKgAX8JZjBo&_nc_ht=scontent.fhan14-3.fna&oh=00_AfCOARYBwVwwKNXQJntzG0Rok6SneAJ9qYncbQ1oW0dXsg&oe=65ACB153'),
-(2, N'$MAKER và LONELY Stonie chính thức ra mắt các sản phẩm thuộc BST vào ngày 04.12, bao gồm Money Island Tee in Cream, Money Island Short in Cream','https://scontent.fhan14-2.fna.fbcdn.net/v/t39.30808-6/407973804_373587568548203_1578083566043200816_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=OkZHSoLXEBcAX9oOMtf&_nc_ht=scontent.fhan14-2.fna&oh=00_AfDPtQhzGqDayhMh1M_pugxxcmSy97Qefb2ATUu31EoCwQ&oe=65AD5FC3'),
-(3, N'Toàn bộ các “SẢN PHẨM” đẹp nhất đã lên kệ tại website chính thức $maker, bạn có thể nhắn tin trực tiếp cho chúng mình để được tư vấn và trải nghiệm mua sắm Online.','https://scontent.fhan14-1.fna.fbcdn.net/v/t39.30808-6/407994871_373587491881544_5926347277153163150_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=dd5e9f&_nc_ohc=VSRBy4vNBBQAX_aRK8M&_nc_ht=scontent.fhan14-1.fna&oh=00_AfC6yhRdvPNkKfy6h8w119_UHwaBZhk6kkxuFu_fPOLsgA&oe=65ADA0CD')
+(1, N'𝐓𝐄𝐓𝐕𝐎𝐕𝐄𝐍 𝐌𝐄𝐑𝐂𝐇 - Sự kết hợp chưa bao giờ có giữa $maker x Lonely Stonie!!!','https://smakerclothing.com/upload/hinhanh/cover-2393.jpg'),
+(2, N'$MAKER và LONELY Stonie chính thức ra mắt các sản phẩm thuộc BST vào ngày 04.12, bao gồm Money Island Tee in Cream, Money Island Short in Cream','https://smakerclothing.com/upload/hinhanh/cover-copy-7272.jpg'),
+(3, N'Toàn bộ các “SẢN PHẨM” đẹp nhất đã lên kệ tại website chính thức $maker, bạn có thể nhắn tin trực tiếp cho chúng mình để được tư vấn và trải nghiệm mua sắm Online.','https://smakerclothing.com/upload/hinhanh/cover-copy-8670.jpg')
 
---hahahahahahaha 
+

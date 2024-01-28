@@ -44,7 +44,7 @@
                     <c:forEach items="${listTopSlider}" var="c">
 
                         <div class="slide"> 
-                            <a href="#"><img src="${c.sliderImage}" alt="Slide 1" style="width: 50%; margin: 0 auto;"></a>
+                            <a href="#"><img src="${c.sliderImage}" alt="Slide 1" style="width: 100%; margin: 0 auto;"></a>
                             <div class="slide-caption">
                                 <p style="font-size: 20px; margin-top: 1%">${c.sliderTitle}</p>
                             </div>

@@ -217,6 +217,31 @@ public class DAO extends DBContext {
         return list;
     }
 
+    public List<Blog> getBlogByCid(int cid) {
+        List<Blog> list = new ArrayList<>();
+        String sql = "select * from Blog\n"
+                + "where blogID = ?\n"
+                + "";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setInt(1, cid);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Blog b = new Blog(rs.getInt("blogID"),
+                        rs.getString("blogTitle"),
+                        rs.getString("blogImage"),
+                        rs.getString("postDate"),
+                        rs.getString("content"),
+                        rs.getString("author"));
+                list.add(b);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
     public Blog getLatestBlog() {
         String sql = "select top 1 * from Blog\n"
                 + "order by blogID desc";
@@ -367,10 +392,10 @@ public class DAO extends DBContext {
         }
         return list;
     }
-    
+
     public ArrayList<Product> getAllProductSearch(String search) {
         ArrayList<Product> list = new ArrayList<>();
-        search = "%"+search+"%";
+        search = "%" + search + "%";
         String sql = "select * from product where name like N'%' + ? + '%'";
         try {
             PreparedStatement st;

@@ -19,7 +19,10 @@
                 <li class="${menu == null ? 'active' : ''}"><a href="home">Home</a></li>
                 <!--<li><a href="#">Hot Deals</a></li>-->
                 <li class="${menu eq 'blog' ? 'active' : ''}">
-                    <a href="blog?menu=blog">Blog</a>
+                    <a href="blog?menu=blog">Blogs</a>
+                </li>
+                <li class="${menu eq 'post' ? 'active' : ''}">
+                    <a href="post?menu=post">Posts</a>
                 </li>
                 <c:forEach items="${listC}" var="c">
                     <li><a href="categoryDetail?cid=${c.cid}">${c.cname}</a></li>
