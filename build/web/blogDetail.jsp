@@ -526,7 +526,7 @@
                             <div class="body widget">
                                 <ul class="list-unstyled categories-clouds m-b-0">
                                     <c:forEach items="${listBlogCategory}" var="c">
-                                        <li><a href="#">${c.name}</a></li>
+                                        <li><a href="blogCategory?id=${c.id}&&menu=blog">${c.name}</a></li>
                                         </c:forEach>
                                 </ul>
                             </div>

@@ -75,6 +75,7 @@ public class searchBlog extends HttpServlet {
             request.setAttribute("listC", listC);
             request.setAttribute("listBlogCategory", listBC);
             request.setAttribute("latestBlog", b);
+            request.setAttribute("menu", "blog");
             request.setAttribute("error", "Please input to search!!!");
         } else {
             DAO d = new DAO();
@@ -88,6 +89,7 @@ public class searchBlog extends HttpServlet {
                 request.setAttribute("listBlogCategory", listBC);
                 request.setAttribute("latestBlog", b);
                 request.setAttribute("searchValue", search);
+                request.setAttribute("menu", "blog");
                 request.setAttribute("error", "No found result!!!");
             } else {
                 List<Category> listC = d.getAllCategory();
@@ -98,6 +100,7 @@ public class searchBlog extends HttpServlet {
                 request.setAttribute("listC", listC);
                 request.setAttribute("listBlogCategory", listBC);
                 request.setAttribute("latestBlog", b);
+                request.setAttribute("menu", "blog");
                 request.setAttribute("searchValue", search);
             }
         }

@@ -63,7 +63,6 @@ public class SortBlog extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String sort = request.getParameter("sortSelect");
-        String active = request.getParameter("menu");
         if (sort.equals("postDateRecent")) {
             DAO d = new DAO();
             List<Blog> listB = d.getAllBlogRecent();
@@ -75,7 +74,7 @@ public class SortBlog extends HttpServlet {
             request.setAttribute("listC", listC);
             request.setAttribute("listBlogCategory", listBC);
             request.setAttribute("latestBlog", b);
-            request.setAttribute("menu", active);
+            request.setAttribute("menu", "blog");
             request.getRequestDispatcher("blog.jsp").forward(request, response);
         }
 

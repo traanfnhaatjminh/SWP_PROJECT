@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,6 +17,7 @@ import java.util.List;
 import model.Blog;
 import model.BlogCategory;
 import model.Category;
+import model.Product;
 
 /**
  *
@@ -68,8 +70,20 @@ public class BlogDetail extends HttpServlet {
             DAO d = new DAO();
             Blog b = d.getBlogDetailByID(id);
             String bcn = d.getBlogCategoryNameByID(id);
+            List<Product> list = d.getAllProduct();
+            Cookie[] c = request.getCookies();
+            String txt = "";
+            if (c != null) {
+                for (Cookie o : c) {
+                    if (o.getName().equals("cart")) {
+                        txt += o.getValue();
+                    }
+                }
+            }
+            model.Cart cart = new model.Cart(txt, list);
             List<Category> listC = d.getAllCategory();
             List<BlogCategory> listBC = d.getAllBlogCategory();
+            request.setAttribute("size", cart.getList().size());
             request.setAttribute("listC", listC);
             request.setAttribute("listBlogCategory", listBC);
             request.setAttribute("blogDetail", b);

@@ -118,12 +118,33 @@ on b.blogCategoryID = bc.blogCategoryID
 where b.blogID = ?
 
 select * from Blog
-where blogID = ?
+where blogCategoryID = ?
 
 delete from Blog
 
 insert into Blog(blogID, blogTitle, blogImage, postDate, content, author, blogCategoryID)
 values
+(7, N'[Xu hướng giới trẻ] Áo thun Unisex thời trang, bật tung cá tính', 'https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/419919437_18387773182069644_6439089956565625636_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=3635dc&_nc_ohc=6TuQ_7dU2ZQAX-Ajr9N&_nc_ht=scontent.fhan18-1.fna&oh=00_AfDJ0L2cPkf_UFmL7W1Sql2OrNhzghNRW7kKMEqwUepj7A&oe=65BE433C','2024/1/30', 
+N'Unisex là một tính từ dùng để chỉ sự những kiểu trang phục không phân biệt về giới tính, phù hợp với tất cả hai giới và khiến hai giới trông tương tự, giống nhau. Chúng được giới trẻ gọi là trang phục phi giới tính hoặc trung lập giới tính.
+Phong cách này xuất hiện từ những năm 1960 (cụ thể là vào năm 1968 trên một tờ báo có tên Life) ở Mỹ, thời kỳ  khi mà những nhu cầu bộc lộ cái tôi cá nhân, cái cá tính riêng trở nên mạnh mẽ, khi quan niệm xưa cũ về sự phân biệt giới tính bị phá vỡ và mọi người khao khát sự bình quyền nam nữ.
+Phong cách Unisex được biết đến là một nhánh nhỏ trong trào lưu thời trang Harajuku ở Nhật Bản.
+Ban đầu, phong cách này không được tất cả mọi người đón nhận vì họ nghĩ chúng đang gây nên sự lệch lạc về giới tính khi mà nam nữ đều có thể mặc một kiểu trang phục giống nhau, không có sự khác biệt, phân biệt. Chúng dường như trở thành một cuộc chiến, một cuộc tranh cãi thời trang rầm rộ lúc bấy giờ.
+Thế nhưng, sau này, khi mà quan điểm, nhận thức của xã hội về xu hướng thời trang này thay đổi, những chiếc áo thun Unisex trở nên cực kỳ phổ biến và được ưa thích bởi hầu hết giới trẻ trên toàn thế giới.
+','Tran Nhat Minh',1),
+(6, N'Màu sắc xu hướng của thời trang năm 2024', 'https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/423537155_18389719438069644_6398865327734838924_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=3635dc&_nc_ohc=60feUrw7x3kAX9qei5T&_nc_ht=scontent.fhan18-1.fna&oh=00_AfDAgfGxRrRw9vm-Kh4fyhS1OCp0CTsYRA1cWrhTOhJTug&oe=65BD587F','2024/1/30', 
+N'Năm 2024, màu hồng đào là gam màu chủ đạo. Hồng đào hướng tới sự lạc quan, ấm áp và gắn kết chặt chẽ giữa con người với nhau. Hồng đào truyền tải thông điệp tích cực và trở thành nguồn cảm hứng sáng tạo, mới mẻ.
+Hồng đào là sự kết hợp giữa màu cam nhạt mềm mại và màu hồng nhẹ nhàng, tạo cảm giác tươi mới và an lành, mang chất cổ điển nhưng không kém phần hiện đại.
+Đó là màu của những chiếc lông vũ mượt mà, của quả căng mọng hay những vải lụa satin thướt tha.
+Hồng đào mang đến sự trẻ trung, làm nổi bật vẻ đẹp, tạo sức hút, tạo sự tự tin cho người mặc.
+Hồng đào thường được liên kết với mùa xuân và mùa hè. Mang lại cảm giác mát mẻ và tươi mới, phù hợp với các xu hướng thời trang trong những thời điểm này.
+Trong trang điểm, hồng đào thể hiện vẻ ngoài tươi sáng và tự nhiên. Nó mang lại cảm giác nữ tính và ấm áp cho làn da.
+Màu hồng đào phù hợp với nhiều tông da khác nhau, từ da trắng cho đến da nâu, làm cho màu sắc trở thành một sự lựa chọn linh hoạt trong ngành làm đẹp.
+Dù ở trong thời trang hay trang điểm, màu hồng đào đều tôn da.
+','Tran Nhat Minh',1),
+(5, N'Nắm bắt xu hướng thời trang 2024', 'https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/423715477_18389883076069644_6053433954364242611_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=3635dc&_nc_ohc=FLgmqJxrUygAX_Y8tVn&_nc_ht=scontent.fhan18-1.fna&oh=00_AfBdiMuYAEvyijAobCyMvFPofuKyX-SvqD_uNYB9qNkxjQ&oe=65BEE3C1','2024/1/30', 
+N'Màu sắc và chất liệu: Trong năm 2024, dự kiến các tone màu pastel sẽ trở thành màu chủ đạo, tạo nên không khí nhẹ nhàng và tràn ngập sức sống trong thế giới thời trang. Một sự kết hợp tinh tế giữa hồng phấn, xanh và vàng nhạt có thể làm nổi bật vẻ đẹp tinh tế và thanh lịch.
+Kiểu dáng và thiết kế: 2024 chân váy và váy chắc chắn trở thành điểm nhấn nổi bật, với sự xuất hiện của kiểu oversize và dáng suông. Oversize mang lại sự thoải mái và phóng khoáng, trở thành sự lựa chọn ưa thích của nhiều chị em yêu thời trang. Ngoài ra, váy dáng suông với sự nhẹ nhàng và thoải mái, đặc biệt phổ biến trong bối cảnh tìm kiếm sự thoải mái trong trang phục hàng ngày.
+','Tran Nhat Minh',1),
 (4, N'Thời Trang: Nghệ Thuật Tự Chủ và Sự Phát Triển Vượt Bậc', 'https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/422899704_18389556349069644_2140229012135770377_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=3635dc&_nc_ohc=Wn3TOX2cxY4AX_-mr6K&_nc_ht=scontent.fhan18-1.fna&oh=00_AfBuR-NQ5u6tlvor5rASikpTK82Mj7Q_gYuFTcBJATzVAQ&oe=65BAEF39','2024/1/16', 
 N'Thời trang không chỉ là cách chúng ta ăn mặc mỗi ngày; nó là biểu tượng của cái đẹp, cái độc đáo và sự sáng tạo. Thời trang không chỉ thể hiện gu thẩm mỹ cá nhân mà còn là ngôn ngữ giao tiếp của chính bản thân chúng ta.
 Ngày nay, thời trang không chỉ được tạo ra từ thế giới của các nhà thiết kế nổi tiếng mà còn bắt nguồn từ đời sống hàng ngày, nghệ thuật đương đại và sự đa dạng văn hóa. Chúng ta sẽ cùng nhau khám phá những xu hướng đang thịnh hành và cách chúng ảnh hưởng đến cộng đồng thời trang.

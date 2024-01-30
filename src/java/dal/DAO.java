@@ -220,7 +220,7 @@ public class DAO extends DBContext {
     public List<Blog> getBlogByCid(int cid) {
         List<Blog> list = new ArrayList<>();
         String sql = "select * from Blog\n"
-                + "where blogID = ?\n"
+                + "where blogCategoryID = ?"
                 + "";
         try {
             PreparedStatement st;
