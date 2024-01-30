@@ -346,6 +346,33 @@ public class DAO extends DBContext {
         return list;
     }
 
+    public List<Blog> getAllBlogPage(int pageIndex) {
+        List<Blog> list = new ArrayList<>();
+        String sql = "SELECT *\n"
+                + "FROM Blog\n"
+                + "ORDER BY blogID\n"
+                + "OFFSET (? - 1) * 6 ROWS\n"
+                + "FETCH NEXT 6 ROWS ONLY;";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setInt(1, pageIndex);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Blog b = new Blog(rs.getInt("blogID"),
+                        rs.getString("blogTitle"),
+                        rs.getString("blogImage"),
+                        rs.getString("postDate"),
+                        rs.getString("content"),
+                        rs.getString("author"));
+                list.add(b);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
     public List<Blog> getAllBlogSearch(String searchValue) {
         List<Blog> list = new ArrayList<>();
         String sql = "select * from Blog\n"

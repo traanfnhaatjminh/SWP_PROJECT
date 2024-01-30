@@ -476,6 +476,7 @@
     </head>
     <body>
         <jsp:include page="menu.jsp"></jsp:include>
+        <jsp:include page="navigation.jsp"></jsp:include>
             <div id="main-content" class="blog-page">
                 <div class="container">
                     <div class="row clearfix">

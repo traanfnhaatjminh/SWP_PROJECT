@@ -23,8 +23,8 @@ import model.Product;
  *
  * @author minh1
  */
-@WebServlet(name = "BlogList", urlPatterns = {"/blog"})
-public class BlogList extends HttpServlet {
+@WebServlet(name = "BlogListPage", urlPatterns = {"/blogListPage"})
+public class BlogListPage extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +43,10 @@ public class BlogList extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet BlogList</title>");
+            out.println("<title>Servlet BlogListPage</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet BlogList at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet BlogListPage at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -65,37 +65,41 @@ public class BlogList extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String active = request.getParameter("menu");
-        int currentPage = 1;
-        DAO d = new DAO();
-        List<Category> listC = d.getAllCategory();
-        List<BlogCategory> listBC = d.getAllBlogCategory();
-        List<Blog> listB = d.getAllBlogPage(currentPage);
-        int endIndex = d.getAllBlog().size()/6;
-        if(d.getAllBlog().size()%6 != 0){
-            endIndex++;
-        }
-        Blog b = new Blog();
-        b = d.getLatestBlog();
-        List<Product> list = d.getAllProduct();
-        Cookie[] c = request.getCookies();
-        String txt = "";
-        if (c != null) {
-            for (Cookie o : c) {
-                if (o.getName().equals("cart")) {
-                    txt += o.getValue();
+        String index_raw = request.getParameter("index");
+        try {
+            int index = Integer.parseInt(index_raw);
+            DAO d = new DAO();
+            List<Category> listC = d.getAllCategory();
+            List<BlogCategory> listBC = d.getAllBlogCategory();
+            List<Blog> listB = d.getAllBlogPage(index);
+            int endIndex = d.getAllBlog().size() / 6;
+            if (d.getAllBlog().size() % 6 != 0) {
+                endIndex++;
+            }
+            Blog b = new Blog();
+            b = d.getLatestBlog();
+            List<Product> list = d.getAllProduct();
+            Cookie[] c = request.getCookies();
+            String txt = "";
+            if (c != null) {
+                for (Cookie o : c) {
+                    if (o.getName().equals("cart")) {
+                        txt += o.getValue();
+                    }
                 }
             }
+            model.Cart cart = new model.Cart(txt, list);
+            request.setAttribute("listC", listC);
+            request.setAttribute("listBlogCategory", listBC);
+            request.setAttribute("listBlog", listB);
+            request.setAttribute("latestBlog", b);
+            request.setAttribute("menu", "blog");
+            request.setAttribute("endIndex", endIndex);
+            request.setAttribute("currentPage", index);
+            request.setAttribute("size", cart.getList().size());
+        } catch (NumberFormatException e) {
+            System.out.println(e);
         }
-        model.Cart cart = new model.Cart(txt, list);
-        request.setAttribute("listC", listC);
-        request.setAttribute("listBlogCategory", listBC);
-        request.setAttribute("listBlog", listB);
-        request.setAttribute("latestBlog", b);
-        request.setAttribute("menu", active);
-        request.setAttribute("endIndex", endIndex);
-        request.setAttribute("currentPage", currentPage);
-        request.setAttribute("size", cart.getList().size());
         request.getRequestDispatcher("blog.jsp").forward(request, response);
     }
 

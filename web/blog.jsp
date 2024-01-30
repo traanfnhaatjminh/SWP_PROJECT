@@ -336,11 +336,10 @@
                         <c:if test="${error == null}">
                             <div class="store-filter clearfix col-md-12">
                                 <ul class="store-pagination">
-                                    <li class="active">1</li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                                    <c:forEach begin="1" end="${endIndex}" var="c">
+                                        <c:set var="isActive" value="${c eq currentPage ? 'active' : ''}" />
+                                        <li class="${isActive}"><a href="blogListPage?index=${c}">${c}</a></li>
+                                        </c:forEach>
                                 </ul>
                             </div>
                         </c:if>
@@ -382,7 +381,7 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="single_post">
-                                            <h3 class="product-name"><a href="blog-details.html">${latestBlog.blogTitle}</a></h3>
+                                            <h3 class="product-name"><a href="blogDetail?id=${latestBlog.blogID}">${latestBlog.blogTitle}</a></h3>
                                             <p class="product-name">${latestBlog.content}</p>
                                             <p>Date: ${latestBlog.postDate}</p>
                                             <p>Author: ${latestBlog.author}</p>

@@ -87,6 +87,7 @@ public class BlogDetail extends HttpServlet {
             request.setAttribute("listC", listC);
             request.setAttribute("listBlogCategory", listBC);
             request.setAttribute("blogDetail", b);
+            request.setAttribute("menu", "blog");
             request.setAttribute("blogCategoryName", bcn);
             request.getRequestDispatcher("blogDetail.jsp").forward(request, response);
         } catch (NumberFormatException e) {
