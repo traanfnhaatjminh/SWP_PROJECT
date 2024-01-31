@@ -337,7 +337,7 @@
                         <div class="row clearfix">
                             <div class="col-lg-9 col-md-12 left-box">
                                 <form action="addPost" style="margin: 2% 0">
-                                    <label for="addPost">ADD A NEW POST:</label>
+                                    <label for="addPost">ADD A NEW BLOG:</label>
                                     <button type="submit" class="btn btn-secondary">ADD</button>
                                 </form>
                                 <div class="store-filter clearfix">

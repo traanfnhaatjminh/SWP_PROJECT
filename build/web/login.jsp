@@ -115,6 +115,7 @@
                 </div>  
             </form>
             <div class="hint-text">Don't have an account? <a href="register.jsp" class="text-success">Register Now!</a></div>
+            <div class="text-center"><a href="loginMarketer.jsp" class="text-success">Login for marketer</a></div>
         </div>
     </body>
 </html>

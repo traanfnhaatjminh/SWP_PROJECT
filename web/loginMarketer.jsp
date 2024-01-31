@@ -24,7 +24,7 @@
             }
             .login-form form {
                 margin-bottom: 15px;
-                background: #f7f7f7;
+                background: lightgray;
                 box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
                 padding: 30px;
             }
@@ -76,11 +76,11 @@
     <body>
         <div class="login-form">
             <c:set var="cookie" value="${pageContext.request.cookies}" />
-            <form action="customer?action=checkLogin" method="post">
+            <form action="marketer?action=checkLogin" method="post">
                 <p style="color: red; text-align: center;">
                     ${requestScope.error}
                 </p>
-                <h2 class="text-center">Sign in</h2>		
+                <h2 class="text-center">Sign in (Marketer)</h2>		
                 <div class="form-group">
                     <div class="input-group">                
                         <div class="input-group-prepend">
@@ -102,7 +102,7 @@
                     </div>
                 </div>        
                 <div class="form-group">
-                    <button type="submit" class="btn btn-success btn-block login-btn">Sign in</button>
+                    <button type="submit" class="btn btn-secondary btn-block login-btn">Sign in</button>
                 </div>
                 <div class="clearfix">
                     <label class="float-left form-check-label" for="remember">
@@ -111,11 +111,9 @@
                     <label>
                         Remember
                     </label>
-                    <a href="forgotPassword.jsp" class="float-right text-success">Forgot Password?</a>
+                    <a href="forgotPassword.jsp" class="float-right text-dark">Forgot Password?</a>
                 </div>  
             </form>
-            <div class="hint-text">Don't have an account? <a href="register.jsp" class="text-success">Register Now!</a></div>
-            <div class="text-center"><a href="loginMarketer.jsp" class="text-success">Login for marketer</a></div>
         </div>
     </body>
 </html>

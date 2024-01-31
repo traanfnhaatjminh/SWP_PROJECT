@@ -15,21 +15,34 @@
         <!-- responsive-nav -->
         <div id="responsive-nav">
             <!-- NAV -->
-            <ul class="main-nav nav navbar-nav">
-                <li class="${menu == null ? 'active' : ''}"><a href="home">Home</a></li>
-                <!--<li><a href="#">Hot Deals</a></li>-->
-                <li class="${menu eq 'blog' ? 'active' : ''}">
-                    <a href="blog?menu=blog">Blogs</a>
-                </li>
-                <li class="${menu eq 'post' ? 'active' : ''}">
-                    <a href="post?menu=post">Posts</a>
-                </li>
-                <c:forEach items="${listC}" var="c">
-                    <li class="${cateID == c.cid ? 'active' : ''}">   
-                        <a href="categoryDetail?cid=${c.cid}&&menu=home">${c.cname}</a>
+            <c:if test="${sessionScope.marketer == null}">
+                <ul class="main-nav nav navbar-nav">
+                    <li class="${menu == null ? 'active' : ''}"><a href="home">Home</a></li>
+                    <!--<li><a href="#">Hot Deals</a></li>-->
+                    <li class="${menu eq 'blog' ? 'active' : ''}">
+                        <a href="blog?menu=blog">Blogs</a>
                     </li>
-                </c:forEach>
-            </ul>
+                    <li class="${menu eq 'post' ? 'active' : ''}">
+                        <a href="post?menu=post">Posts</a>
+                    </li>
+                    <c:forEach items="${listC}" var="c">
+                        <li class="${cateID == c.cid ? 'active' : ''}">   
+                            <a href="categoryDetail?cid=${c.cid}&&menu=home">${c.cname}</a>
+                        </li>
+                    </c:forEach>
+                </ul>
+            </c:if>
+            <c:if test="${sessionScope.marketer != null}">
+                <ul class="main-nav nav navbar-nav">
+                    <li class="${menu == null ? 'active' : ''} ${menu eq 'blog' ? 'active' : ''}">
+                        <a href="blog?menu=blog">Blogs</a>
+                    </li>
+                    <li class="${menu eq 'post' ? 'active' : ''}">
+                        <a href="post?menu=post">Manage Blogs</a>
+                    </li>
+                </ul>
+            </c:if>
+
             <!-- /NAV -->
         </div>
         <!-- /responsive-nav -->

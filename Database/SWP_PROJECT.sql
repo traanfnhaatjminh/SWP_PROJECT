@@ -26,6 +26,12 @@ sellerID int
 FOREIGN KEY (cid) REFERENCES Category(cid),
 )
 
+SELECT *
+FROM Blog
+ORDER BY blogID
+OFFSET (1 - 1) * 6 ROWS
+FETCH NEXT 6 ROWS ONLY;
+
 insert into product([name],[original_price],[sale_price],quantity,describe,[image],cid,sellerID)
 values 
  ('$MAKER THINGS TEE IN WHITE',600.000,500.00,20,N'Unisex,Oversize,100% Cotton,In nổi,Model wears size L','https://smakerclothing.com/upload/sanpham/dscf9477-1710.jpg',1,1),
@@ -69,7 +75,15 @@ userPoint float,
 FOREIGN KEY (roleID) REFERENCES Roles(roleID)
 )
 
-drop table Roles
+insert into Users(userName, gender, email, mobile, avatar, [address], pass, roleID, userPoint)
+values 
+('nhatminh','male', 'minhnhat@gmail.com','0969102003','null','tu son','123',3,0)
+
+select * from Users
+where email = 'minhnhat@gmail.com' and pass = '123' and roleID = 3
+
+update Users
+set email = ? and pass = ?
 
 create table Roles (
 roleID int primary key,
@@ -78,8 +92,11 @@ roleName nvarchar(20)
 
 insert into Roles (roleID, roleName)
 values 
+(3, 'Marketer'),
 (1, 'Seller'),
-(2, 'Admin')
+(2, 'Admin'),
+
+
 
 create table Blog (
 blogID int primary key,
