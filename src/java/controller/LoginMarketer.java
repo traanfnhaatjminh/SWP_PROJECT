@@ -68,7 +68,7 @@ public class LoginMarketer extends HttpServlet {
                 response.addCookie(email);
                 response.addCookie(pass);
                 response.addCookie(rem);
-                response.sendRedirect("home");
+                response.sendRedirect("blog");
 
             }
         }

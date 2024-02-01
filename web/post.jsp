@@ -303,7 +303,86 @@
         </style>
     </head>
     <body>
-        <jsp:include page="menu.jsp"></jsp:include>
+        <header>
+            <!-- TOP HEADER -->
+            <div id="top-header">
+                <div class="container">
+                    <ul class="header-links pull-left">
+                        <li><a href="#"><i class="fa fa-phone"></i>0773 648 867</a></li>
+                        <li><a href="#"><i class="fa fa-envelope-o"></i>smakerclothing@gmail.com</a></li>
+                        <li><a href="#"><i class="fa fa-map-marker"></i>Hanoi</a></li>
+                    </ul>
+                    <ul class="header-links pull-right">
+                        <!--<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>-->
+                        <c:if test="${sessionScope.customer == null && sessionScope.marketer == null}">
+                            <li><a href="register.jsp"><i class="fa fa-"></i> Register</a></li>
+                            <li><a href="login.jsp"><i class="fa fa-"></i> Login</a></li>
+
+                        </c:if>
+                        <c:if test="${sessionScope.customer != null}">
+                            <li><a href="profile.jsp"><i class="fa fa-user-o"></i> My Account</a></li>
+                            <li><a href="customer?action=logout"><i class="fa fa-"></i> Logout</a></li>
+
+                        </c:if>
+                        <c:if test="${sessionScope.marketer != null}">
+                            <li><a href="profile.jsp"><i class="fa fa-user-o"></i> My Account</a></li>
+                            <li><a href="marketer?action=logout"><i class="fa fa-"></i> Logout</a></li>
+
+                        </c:if>
+                    </ul>
+                </div>
+            </div>
+            <!-- /TOP HEADER -->
+
+            <!-- MAIN HEADER -->
+            <div id="header">
+                <!-- container -->
+                <div class="container">
+                    <!-- row -->
+                    <div class="row">
+                        <!-- LOGO -->
+                        <div class="col-md-3">
+                            <div class="header-logo ">
+                                <a href="post?menu=post" class="logo">
+                                    $MAKER
+                                </a>
+                            </div>
+                        </div>
+                        <!-- /LOGO -->
+
+                        <!-- ACCOUNT -->
+                        <div class="col-md-3 clearfix" style="float: right">
+                            <div class="header-ctn">
+                                <!-- Cart -->
+                                <div class="dropdown">
+                                    <a class="dropdown-toggle" href="cart">
+                                        <i class="fa fa-shopping-cart"></i>
+                                        <span>Shopping Cart</span>
+                                        <div class="qty">${size}</div>
+
+                                </div>
+                                <!-- /Cart -->
+
+                                <!-- Menu Toogle -->
+                                <div class="menu-toggle">
+                                    <a href="#">
+                                        <i class="fa fa-bars"></i>
+                                        <span>Menu</span>
+                                    </a>
+                                </div>
+                                <!-- /Menu Toogle -->
+                            </div>
+                        </div>
+                        <!-- /ACCOUNT -->
+                    </div>
+                    <!-- row -->
+                </div>
+                <!-- container -->
+            </div>
+            <!-- /MAIN HEADER -->
+
+
+        </header>
         <jsp:include page="navigation.jsp"></jsp:include>
             <div class="container-fluid">
                 <div class="row">
@@ -382,11 +461,10 @@
                                 <c:if test="${error == null}">
                                     <div class="store-filter clearfix col-md-12">
                                         <ul class="store-pagination">
-                                            <li class="active">1</li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">4</a></li>
-                                            <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                                            <c:forEach begin="1" end="${endIndex}" var="c">
+                                                <c:set var="isActive" value="${c eq currentPage ? 'active' : ''}" />
+                                                <li class="${isActive}"><a href="blogListPage?index=${c}">${c}</a></li>
+                                                </c:forEach>
                                         </ul>
                                     </div>
                                 </c:if>
