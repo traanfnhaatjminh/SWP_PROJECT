@@ -20,7 +20,7 @@
         <!-- Slick -->
         <link type="text/css" rel="stylesheet" href="css/slick.css"/>
         <link type="text/css" rel="stylesheet" href="css/slick-theme.css"/>
-
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!-- nouislider -->
         <link type="text/css" rel="stylesheet" href="css/nouislider.min.css"/>
 
@@ -33,6 +33,11 @@
         <link rel="stylesheet" href="./css/home.css"/>
 
         <style type="text/css">
+
+            .edit, .delete {
+                cursor: pointer;
+            }
+
             body {
                 background-color: #f4f7f6;
                 margin-top: 20px;
@@ -343,7 +348,7 @@
                         <!-- LOGO -->
                         <div class="col-md-3">
                             <div class="header-logo ">
-                                <a href="post?menu=post" class="logo">
+                                <a href="blog?menu=blog" class="logo">
                                     $MAKER
                                 </a>
                             </div>
@@ -380,8 +385,6 @@
                 <!-- container -->
             </div>
             <!-- /MAIN HEADER -->
-
-
         </header>
         <jsp:include page="navigation.jsp"></jsp:include>
             <div class="container-fluid">
@@ -403,7 +406,7 @@
                             <label><input name="status" type="checkbox" value="public" class="icheck">Public</label>
                             <label><input name="status" type="checkbox" value="private" class="icheck">Private</label>
                         </div>
-                        <button type="submit" class="btn btn-secondary">Submit</button>
+                        <button type="submit" class="btn btn-default">Submit</button>
                     </form>
 
                     <!-- END FILTER BY CATEGORY -->
@@ -415,10 +418,10 @@
                     <div class="container">
                         <div class="row clearfix">
                             <div class="col-lg-9 col-md-12 left-box">
-                                <form action="addPost" style="margin: 2% 0">
-                                    <label for="addPost">ADD A NEW BLOG:</label>
-                                    <button type="submit" class="btn btn-secondary">ADD</button>
-                                </form>
+                                <label style="margin-top: 2%" for="addPost">ADD A NEW BLOG:</label>
+                                <button type="button" class="btn btn-default">
+                                    <a href="addBlog.jsp" target="target">Add</a>
+                                </button>
                                 <div class="store-filter clearfix">
                                     <div class="store-sort">
                                         <form action="sortPost">
@@ -432,14 +435,14 @@
                                                 <option value="1">Status: Public</option>
                                                 <option value="1">Status: Private</option>
                                             </select>
-                                            <button type="submit" class="btn btn-secondary">Sort</button>
+                                            <button type="submit" class="btn btn-default">Sort</button>
                                         </form>
                                     </div>
                                 </div>
                                 <form action="searchPost">
                                     <div class="input-group">
                                         SEARCH: <input type="text" class="" placeholder="Search" />
-                                        <button type="submit" class="btn btn-secondary">Search</button>
+                                        <button type="submit" class="btn btn-default">Search</button>
                                     </div>
                                 </form>
 
@@ -454,6 +457,8 @@
                                                 <p class="product-name">${c.content}</p>
                                                 <p>Date: ${c.postDate}</p>
                                                 <p>Author: ${c.author}</p>
+                                                <a href="editBlog.jsp" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons"></i></a>
+                                                <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons"></i></a>                                          
                                             </div>
                                         </div>
                                     </div>

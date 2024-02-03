@@ -67,13 +67,12 @@ public class CategoryDetail extends HttpServlet {
         String menu = request.getParameter("menu");
         try {
             HttpSession session = request.getSession();
-
             String url = request.getRequestURI() + "?cid=" + cid_raw;
             System.out.println(url);
             session.setAttribute("prevUrl", url);
-
             DAO d = new DAO();
             List<Product> list = d.getAllProduct();
+            List<Product> listLast = d.getLatestProduct();
             Cookie[] c = request.getCookies();
             String txt = "";
             if (c != null) {
@@ -93,6 +92,7 @@ public class CategoryDetail extends HttpServlet {
             request.setAttribute("listP", listP);
             request.setAttribute("cateID", cid);
             request.setAttribute("menu", menu);
+            request.setAttribute("listLast", listLast);
             request.getRequestDispatcher("categoryDetail.jsp").forward(request, response);
         } catch (NumberFormatException e) {
             System.out.println(e);

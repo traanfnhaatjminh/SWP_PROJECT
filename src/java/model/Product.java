@@ -96,4 +96,9 @@ public class Product {
         this.cid = cid;
     }
 
+    @Override
+    public String toString() {
+        return "Product{" + "id=" + id + ", name=" + name + ", original_price=" + original_price + ", sale_price=" + sale_price + ", quantity=" + quantity + ", describe=" + describe + ", image=" + image + ", cid=" + cid + '}';
+    }
+
 }

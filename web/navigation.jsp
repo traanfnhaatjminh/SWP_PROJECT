@@ -22,9 +22,6 @@
                     <li class="${menu eq 'blog' ? 'active' : ''}">
                         <a href="blog?menu=blog">Blogs</a>
                     </li>
-                    <li class="${menu eq 'post' ? 'active' : ''}">
-                        <a href="post?menu=post">Posts</a>
-                    </li>
                     <c:forEach items="${listC}" var="c">
                         <li class="${cateID == c.cid ? 'active' : ''}">   
                             <a href="categoryDetail?cid=${c.cid}&&menu=home">${c.cname}</a>

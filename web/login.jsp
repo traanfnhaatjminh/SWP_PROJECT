@@ -10,7 +10,26 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title></title>
+        <title>Login</title>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+        <!-- Bootstrap -->
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
+
+        <!-- Slick -->
+        <link type="text/css" rel="stylesheet" href="css/slick.css"/>
+        <link type="text/css" rel="stylesheet" href="css/slick-theme.css"/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!-- nouislider -->
+        <link type="text/css" rel="stylesheet" href="css/nouislider.min.css"/>
+
+        <!-- Font Awesome Icon -->
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+
+        <!-- Custom stlylesheet -->
+        <link type="text/css" rel="stylesheet" href="css/style.css"/>
+
+        <link rel="stylesheet" href="./css/home.css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -74,6 +93,43 @@
         </style>
     </head>
     <body>
+        <header>
+            <!-- TOP HEADER -->
+            <div id="top-header">
+                <div class="container">
+                    <ul class="header-links pull-left">
+                        <li><a href="#"><i class="fa fa-phone"></i>0773 648 867</a></li>
+                        <li><a href="#"><i class="fa fa-envelope-o"></i>smakerclothing@gmail.com</a></li>
+                        <li><a href="#"><i class="fa fa-map-marker"></i>Hanoi</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /TOP HEADER -->
+
+            <!-- MAIN HEADER -->
+            <div id="header">
+                <!-- container -->
+                <div class="container">
+                    <!-- row -->
+                    <div class="row">
+                        <!-- LOGO -->
+                        <div class="col-md-3">
+                            <div class="header-logo ">
+                                <a href="home" class="logo">
+                                    $MAKER
+                                </a>
+                            </div>
+                        </div>
+                        <!-- /LOGO -->
+                    </div>
+                    <!-- row -->
+                </div>
+                <!-- container -->
+            </div>
+            <!-- /MAIN HEADER -->
+        </header>
+
+
         <div class="login-form">
             <c:set var="cookie" value="${pageContext.request.cookies}" />
             <form action="customer?action=checkLogin" method="post">
@@ -117,5 +173,6 @@
             <div class="hint-text">Don't have an account? <a href="register.jsp" class="text-success">Register Now!</a></div>
             <div class="text-center"><a href="loginMarketer.jsp" class="text-success">Login for marketer</a></div>
         </div>
+        <jsp:include page="footer.jsp"></jsp:include>
     </body>
 </html>

@@ -98,7 +98,7 @@
                                         <span>Shopping Cart</span>
                                         <div class="qty">${size}</div>
                                     </a>
-                                    
+
                                 </div>
                                 <!-- /Cart -->
 
@@ -133,70 +133,54 @@
                         <!-- ASIDE -->
                         <div id="aside" class="col-md-3">
                             <!-- aside Widget -->
+
+
                             <div class="aside">
-                                <h3 class="aside-title">Price</h3>
-                                <div class="price-filter">
-                                    <div id="price-slider"></div>
-                                    <div class="input-number price-min">
-                                        <input id="price-min" type="number">
-                                        <span class="qty-up">+</span>
-                                        <span class="qty-down">-</span>
+                                <h3 class="aside-title">Latest Product</h3>
+                            <c:forEach items="${listLast}" var="c">   
+                                <div class="product-widget">
+                                    <div class="product-img">
+                                        <img src="${c.image}" alt="">
                                     </div>
-                                    <span>-</span>
-                                    <div class="input-number price-max">
-                                        <input id="price-max" type="number">
-                                        <span class="qty-up">+</span>
-                                        <span class="qty-down">-</span>
+                                    <div class="product-body">
+                                        <h3 class="product-name"><a href="detail?pid=${c.id}">${c.name}</a></h3>
+                                        <h4 class="product-price">${c.sale_price} VND  <del class="product-old-price">${c.original_price}</del></h4>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- /aside Widget -->
-
-                            <!--                         aside Widget 
-                                                    <div class="aside">
-                                                        <h3 class="aside-title">Top selling</h3>
-                                                        <div class="product-widget">
-                                                            <div class="product-img">
-                                                                <img src="./img/product01.png" alt="">
-                                                            </div>
-                                                            <div class="product-body">
-                                                                <p class="product-category">Category</p>
-                                                                <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                                                <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                     /aside Widget -->
+                            </c:forEach>        
                         </div>
-                        <!-- /ASIDE -->
 
-                        <!-- STORE -->
-                        <div id="store" class="col-md-9">
-                            <!-- store top filter -->
-                            <div class="store-filter clearfix">
-                                <div class="store-sort">
-                                    <label>
-                                        Sort By:
-                                        <select class="input-select">
-                                            <option value="0">Popular</option>
-                                            <option value="1">Position</option>
-                                        </select>
-                                    </label>
 
-                                    <label>
-                                        Show:
-                                        <select class="input-select">
-                                            <option value="0">20</option>
-                                            <option value="1">50</option>
-                                        </select>
-                                    </label>
-                                </div>
+                    </div>
+                    <!-- /ASIDE -->
+
+                    <!-- STORE -->
+                    <div id="store" class="col-md-9">
+                        <!-- store top filter -->
+                        <div class="store-filter clearfix">
+                            <div class="store-sort">
+                                <label>
+                                    Sort By:
+                                    <select class="input-select">
+                                        <option value="0">Popular</option>
+                                        <option value="1">Position</option>
+                                    </select>
+                                </label>
+
+                                <label>
+                                    Price:
+                                    <select class="input-select">
+                                        <option value="0">20</option>
+                                        <option value="1">50</option>
+                                    </select>
+                                </label>
                             </div>
-                            <!-- /store top filter -->
+                        </div>
+                        <!-- /store top filter -->
 
-                            <!-- store products -->
-                            <div class="row">
-                                <!-- product -->
+                        <!-- store products -->
+                        <div class="row">
+                            <!-- product -->
                             <c:forEach items="${listP}" var="c">
                                 <div class="col-md-4 col-xs-6">
                                     <div class="product">

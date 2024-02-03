@@ -493,8 +493,16 @@
                                         <img src="https://bootdey.com/img/Content/avatar/avatar1.png" title="" alt="">
                                     </div>
                                     <div class="media-body">
-                                        <label>${blogDetail.author}</label>
-                                        <span>${blogDetail.postDate}</span>
+                                        <c:if test="${sessionScope.marketer == null}">
+                                            <label>${blogDetail.author}</label>
+                                            <span>${blogDetail.postDate}</span>  
+                                        </c:if>
+                                        <c:if test="${sessionScope.marketer != null}">
+                                            <label>${blogDetail.author}</label>
+                                            <span>${blogDetail.postDate}</span>  
+                                            <span>${blogDetail.status}</span>
+                                            <a href="editBlog?id=${blogDetail.blogID}" class="btn btn-success">Edit Blog</a>
+                                        </c:if>
                                     </div>
                                 </div>
                             </div>
@@ -507,16 +515,21 @@
                         <div class="card">
                             <div class="body search">
                                 <form action="searchBlog">
-                                    <div class="input-group m-b-0">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fa fa-search"></i></span>
-                                        </div>
-                                        <input type="text" class="form-control" name="searchBlog" value="${searchValue}" placeholder="Search...">
-                                        <button type="submit" class="btn btn-primary">Search</button>
-                                        <c:if test="${error != null}">
-                                            <h5 class="text-danger">${error}</h5>
-                                        </c:if>
-                                    </div>
+                                    <c:if test="${sessionScope.marketer == null}">
+                                        <div class="input-group m-b-0">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" name="searchBlog" value="${searchValue}" placeholder="Search...">
+                                            <button type="submit" class="btn btn-primary">Search</button>
+                                            <c:if test="${error != null}">
+                                                <h5 class="text-danger">${error}</h5>
+                                            </c:if>
+                                        </div>    
+                                    </c:if>
+                                    <c:if test="${sessionScope.marketer != null}">
+                                        
+                                    </c:if>
                                 </form>
                             </div>
                         </div>

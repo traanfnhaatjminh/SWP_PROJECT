@@ -233,7 +233,8 @@ public class DAO extends DBContext {
                         rs.getString("blogImage"),
                         rs.getString("postDate"),
                         rs.getString("content"),
-                        rs.getString("author"));
+                        rs.getString("author"),
+                        rs.getString("status"));
                 list.add(b);
             }
         } catch (SQLException e) {
@@ -254,7 +255,8 @@ public class DAO extends DBContext {
                         rs.getString("blogImage"),
                         rs.getString("postDate"),
                         rs.getString("content"),
-                        rs.getString("author"));
+                        rs.getString("author"),
+                        rs.getString("status"));
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -316,7 +318,8 @@ public class DAO extends DBContext {
                         rs.getString("blogImage"),
                         rs.getString("postDate"),
                         rs.getString("content"),
-                        rs.getString("author"));
+                        rs.getString("author"),
+                        rs.getString("status"));
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -337,7 +340,8 @@ public class DAO extends DBContext {
                         rs.getString("blogImage"),
                         rs.getString("postDate"),
                         rs.getString("content"),
-                        rs.getString("author"));
+                        rs.getString("author"),
+                        rs.getString("status"));
                 list.add(b);
             }
         } catch (SQLException e) {
@@ -364,7 +368,8 @@ public class DAO extends DBContext {
                         rs.getString("blogImage"),
                         rs.getString("postDate"),
                         rs.getString("content"),
-                        rs.getString("author"));
+                        rs.getString("author"),
+                        rs.getString("status"));
                 list.add(b);
             }
         } catch (SQLException e) {
@@ -388,7 +393,8 @@ public class DAO extends DBContext {
                         rs.getString("blogImage"),
                         rs.getString("postDate"),
                         rs.getString("content"),
-                        rs.getString("author"));
+                        rs.getString("author"),
+                        rs.getString("status"));
                 list.add(b);
             }
         } catch (SQLException e) {
@@ -411,7 +417,8 @@ public class DAO extends DBContext {
                         rs.getString("blogImage"),
                         rs.getString("postDate"),
                         rs.getString("content"),
-                        rs.getString("author"));
+                        rs.getString("author"),
+                        rs.getString("status"));
                 list.add(b);
             }
         } catch (SQLException e) {
@@ -450,7 +457,7 @@ public class DAO extends DBContext {
 
     public static void main(String[] args) {
         DAO d = new DAO();
-        List<Blog> listB = d.getAllBlogSearch("hướng dẫn");
+        List<Product> listB = d.getAllProduct();
         System.out.println(listB);
     }
 
