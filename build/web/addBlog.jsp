@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><script src="./lib/ckeditor/ckeditor.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="./ckeditor_4.23.0-lts_standard/ckeditor/ckeditor.js"></script>
     </head>
     <body>
@@ -26,7 +26,9 @@
 
                 <!-- Form Name -->
                 <legend style="text-align: center">Add a new blog</legend>
-
+                <c:if test="${error == null}">
+                    <p class="text-danger">${success}</p>
+                </c:if>
                 <!-- Text input-->
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="title">Title</label>  
@@ -48,8 +50,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="product_name_fr">Publish Date</label>  
                     <div class="col-md-4">
-                        <input name="date" placeholder="Publish Date" class="form-control input-md" required="" type="text">
-
+                        <input name="date" placeholder="Publish Date" class="form-control input-md" required="" readonly type="text" value="${currentDate}">
                     </div>
                 </div>
 
@@ -81,6 +82,9 @@
                     <label class="col-md-4 control-label" for="title">Blog Category ID</label>  
                     <div class="col-md-4">
                         <input name="blogCateID" placeholder="Blog Category ID" class="form-control input-md" required="" type="text">
+                        <c:if test="${error != null}">
+                            <p class="text-danger">${error}</p>
+                        </c:if>
                     </div>
                 </div>
 

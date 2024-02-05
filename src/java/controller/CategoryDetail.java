@@ -66,6 +66,7 @@ public class CategoryDetail extends HttpServlet {
         String cid_raw = request.getParameter("cid");
         String menu = request.getParameter("menu");
         try {
+            int cid = Integer.parseInt(cid_raw);
             HttpSession session = request.getSession();
             String url = request.getRequestURI() + "?cid=" + cid_raw;
             System.out.println(url);
@@ -85,8 +86,6 @@ public class CategoryDetail extends HttpServlet {
             model.Cart cart = new model.Cart(txt, list);
             List<Category> listC = d.getAllCategory();
             request.setAttribute("size", cart.getList().size());
-            int cid = Integer.parseInt(cid_raw);
-
             List<Product> listP = d.getProductByCid(cid);
             request.setAttribute("listC", listC);
             request.setAttribute("listP", listP);

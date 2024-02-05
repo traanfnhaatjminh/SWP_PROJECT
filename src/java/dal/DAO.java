@@ -350,6 +350,44 @@ public class DAO extends DBContext {
         return list;
     }
 
+    public void insertBlog(String title, String image, String date, String content, String author, String status, int blogCateID) {
+        String sql = "INSERT INTO [dbo].[Blog]\n"
+                + "           ([blogTitle]\n"
+                + "           ,[blogImage]\n"
+                + "           ,[postDate]\n"
+                + "           ,[content]\n"
+                + "           ,[author]\n"
+                + "           ,[status]\n"
+                + "           ,[blogCategoryID])\n"
+                + "     VALUES\n"
+                + "           (?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, title);
+            st.setString(2, image);
+            st.setString(3, date);
+            st.setString(4, content);
+            st.setString(5, author);
+            st.setString(6, status);
+            st.setInt(7, blogCateID);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public void deleteBlog(int blogID) {
+        String sql = "DELETE FROM [dbo].[Blog]\n"
+                + "      WHERE blogID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, blogID);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
     public List<Blog> getAllBlogPage(int pageIndex) {
         List<Blog> list = new ArrayList<>();
         String sql = "SELECT *\n"

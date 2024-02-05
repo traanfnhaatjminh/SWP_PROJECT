@@ -420,7 +420,7 @@
                             <div class="col-lg-9 col-md-12 left-box">
                                 <label style="margin-top: 2%" for="addPost">ADD A NEW BLOG:</label>
                                 <button type="button" class="btn btn-default">
-                                    <a href="addBlog.jsp" target="target">Add</a>
+                                    <a href="addBlog" target="target">Add</a>
                                 </button>
                                 <div class="store-filter clearfix">
                                     <div class="store-sort">
@@ -458,8 +458,7 @@
                                                 <p>Date: ${c.postDate}</p>
                                                 <p>Author: ${c.author}</p>
                                                 <a href="editBlog.jsp" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons"></i></a>
-                                                <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons"></i></a>                                          
-                                            </div>
+                                                <a href="javascript:void(0);" class="delete" title="Delete" data-toggle="tooltip" onclick="confirmDelete(${c.blogID}, ${currentPage});"><i class="material-icons"></i></a>                                            </div>
                                         </div>
                                     </div>
                                 </c:forEach>
@@ -468,47 +467,25 @@
                                         <ul class="store-pagination">
                                             <c:forEach begin="1" end="${endIndex}" var="c">
                                                 <c:set var="isActive" value="${c eq currentPage ? 'active' : ''}" />
-                                                <li class="${isActive}"><a href="blogListPage?index=${c}">${c}</a></li>
+                                                <li class="${isActive}"><a href="postListPage?index=${c}">${c}</a></li>
                                                 </c:forEach>
                                         </ul>
                                     </div>
                                 </c:if>
                             </div>
-                            <!--                            <div class="col-lg-3 col-md-12 right-box">
-                                                            <div class="card">
-                                                                <div class="body search">
-                                                                    <form action="searchBlog">
-                                                                        <div class="input-group m-b-0">
-                                                                            <div class="input-group-prepend">
-                                                                                <span class="input-group-text"><i class="fa fa-search"></i></span>
-                                                                            </div>
-                                                                            <input type="text" class="form-control" name="searchBlog" value="${searchValue}" placeholder="Search...">
-                                                                            <button type="submit" class="btn btn-primary">Search</button>
-                            <c:if test="${error != null}">
-                                <h5 class="text-danger">${error}</h5>
-                            </c:if>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="card">
-                <div class="header">
-                    <h2>Categories</h2>
-                </div>
-                <div class="body widget">
-                    <ul class="list-unstyled categories-clouds m-b-0">
-                            <c:forEach items="${listBlogCategory}" var="c">
-                                <li><a href="blogCategory?id=${c.id}">${c.name}</a></li>
-                            </c:forEach>
-                    </ul>
-                </div>
-            </div>
-        </div>-->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <script>
+            function confirmDelete(blogID, currentPage) {
+                var confirmDelete = confirm("Are you sure you want to delete this blog?");
+                if (confirmDelete) {
+                    window.location.href = "deleteBlog?id=" + blogID + "&&index=" + currentPage;
+                }
+            }
+        </script>
         <script>
             import { Ripple, initMDB } from "mdb-ui-kit";
 

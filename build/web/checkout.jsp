@@ -253,18 +253,54 @@
                         <label for="notes">Notes</label>
                         <textarea class="form-control" name="notes" id="notes" rows="3"></textarea>
                     </div>
+
+
+                    <!--Payment-->
+                    <div class="form-group pay" id="payment">
+                        <label for="pay"> Select a payment method</label>
+                        <div class="form-group">
+                            <input class="" type="radio" id="cash" name="payment" value="cash" checked>
+                            <label for="cash">Payment on delivery</label>
+                            <br>
+                            <input class="" type="radio" id="account" name="payment" value="account">
+                            <label for="account">Bank transfer</label>
+                        </div>
+                        <div class="d-none" id="qr">
+                            <img src="./img/qr2.jpg" alt="alt"/>
+                        </div>
+                    </div>
+
+
+                    <!--Payment-->
                     <button class="btn bg-success text-white">Submit</button>
                 </form>
             </div>   
             <!--information user-->
-
         </div>
         <!--END MY CART-->
-
 
         <jsp:include page="footer.jsp"></jsp:include>
         <!-- /FOOTER -->
 
+        <script>
+            const payment = document.getElementById("payment");
+            const transfer = payment.querySelector("input[value='account']");
+            const cash = payment.querySelector("input[value='cash']");
+            const qr = payment.querySelector("#qr");
+
+            transfer.addEventListener("change", function () {
+                if (this.checked) {
+                    qr.classList.add("d-block");
+                }
+            });
+
+            cash.addEventListener("change", function () {
+                if (this.checked) {
+                    qr.classList.remove("d-block");
+                }
+            });
+
+        </script>
 
     </body>
 </html>
