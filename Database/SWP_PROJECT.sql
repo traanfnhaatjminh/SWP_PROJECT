@@ -72,6 +72,7 @@ email varchar(45),
 avatar nvarchar(100),
 )
 
+select * from product
 
 create table [Users](
 [userID] int identity(1,1) primary key,
@@ -256,6 +257,8 @@ orderPhone nvarchar(20),
 FOREIGN KEY (customerID) REFERENCES Customer(customerID),
 FOREIGN KEY (orderStatusID) REFERENCES orderStatus(orderStatusID)
 )
+
+select * from [Order]
 
 
 create table orderDetail(

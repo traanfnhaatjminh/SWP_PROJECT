@@ -68,6 +68,7 @@ public class BlogList extends HttpServlet {
         String active = request.getParameter("menu");
         int currentPage = 1;
         DAO d = new DAO();
+        List<Category> listC = d.getAllCategory();
         List<BlogCategory> listBC = d.getAllBlogCategory();
         List<Blog> listB = d.getAllBlogPage(currentPage);
         int endIndex = d.getAllBlog().size()/6;
@@ -89,6 +90,7 @@ public class BlogList extends HttpServlet {
         model.Cart cart = new model.Cart(txt, list);
         request.setAttribute("listBlogCategory", listBC);
         request.setAttribute("listBlog", listB);
+        request.setAttribute("listC", listC);
         request.setAttribute("latestBlog", b);
         request.setAttribute("menu", active);
         request.setAttribute("endIndex", endIndex);

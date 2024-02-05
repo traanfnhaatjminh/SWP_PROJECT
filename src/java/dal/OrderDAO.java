@@ -37,7 +37,7 @@ public class OrderDAO extends DBContext {
             PreparedStatement stOrder = connection.prepareStatement(sql);
             stOrder.setInt(1, customer.getCustomerID());
             stOrder.setString(2, name);
-            stOrder.setInt(3, 1);
+            stOrder.setInt(3, 3);
             stOrder.setInt(4, 0);
             stOrder.setTimestamp(5, timestamp);
             stOrder.setString(6, notes);
