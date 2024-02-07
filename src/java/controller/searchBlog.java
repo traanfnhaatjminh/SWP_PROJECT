@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,6 +17,7 @@ import java.util.List;
 import model.Blog;
 import model.BlogCategory;
 import model.Category;
+import model.Product;
 
 /**
  *
@@ -64,8 +66,20 @@ public class searchBlog extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String search = request.getParameter("searchBlog");
+        int currentPage = 1;
+        DAO d = new DAO();
+        List<Product> list = d.getAllProduct();
+        Cookie[] c = request.getCookies();
+        String txt = "";
+        if (c != null) {
+            for (Cookie o : c) {
+                if (o.getName().equals("cart")) {
+                    txt += o.getValue();
+                }
+            }
+        }
+        model.Cart cart = new model.Cart(txt, list);
         if (search == null || search.equals("")) {
-            DAO d = new DAO();
             List<Blog> listB = d.getAllBlog();
             List<Category> listC = d.getAllCategory();
             List<BlogCategory> listBC = d.getAllBlogCategory();
@@ -77,9 +91,9 @@ public class searchBlog extends HttpServlet {
             request.setAttribute("latestBlog", b);
             request.setAttribute("menu", "blog");
             request.setAttribute("error", "Please input to search!!!");
+            request.setAttribute("size", cart.getList().size());
         } else {
-            DAO d = new DAO();
-            List<Blog> listB = d.getAllBlogSearch(search);
+            List<Blog> listB = d.getAllBlogSearch(search, currentPage);
             if (listB.isEmpty()) {
                 List<Category> listC = d.getAllCategory();
                 List<BlogCategory> listBC = d.getAllBlogCategory();
@@ -91,7 +105,12 @@ public class searchBlog extends HttpServlet {
                 request.setAttribute("searchValue", search);
                 request.setAttribute("menu", "blog");
                 request.setAttribute("error", "No found result!!!");
+                request.setAttribute("size", cart.getList().size());
             } else {
+                int endIndex = d.getAllBlogSearch(search, currentPage).size() / 6;
+                if (d.getAllBlog().size() % 6 != 0) {
+                    endIndex++;
+                }
                 List<Category> listC = d.getAllCategory();
                 List<BlogCategory> listBC = d.getAllBlogCategory();
                 Blog b = new Blog();
@@ -99,8 +118,11 @@ public class searchBlog extends HttpServlet {
                 request.setAttribute("listBlog", listB);
                 request.setAttribute("listC", listC);
                 request.setAttribute("listBlogCategory", listBC);
+                request.setAttribute("endIndex", endIndex);
+                request.setAttribute("currentPage", currentPage);
                 request.setAttribute("latestBlog", b);
                 request.setAttribute("menu", "blog");
+                request.setAttribute("size", cart.getList().size());
                 request.setAttribute("searchValue", search);
             }
         }

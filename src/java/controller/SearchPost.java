@@ -23,8 +23,8 @@ import model.Product;
  *
  * @author minh1
  */
-@WebServlet(name = "BlogDetail", urlPatterns = {"/blogDetail"})
-public class BlogDetail extends HttpServlet {
+@WebServlet(name = "SearchPost", urlPatterns = {"/searchPost"})
+public class SearchPost extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +43,10 @@ public class BlogDetail extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet BlogDetail</title>");
+            out.println("<title>Servlet SearchPost</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet BlogDetail at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SearchPost at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -64,36 +64,54 @@ public class BlogDetail extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id_raw = request.getParameter("id");
-        String active = request.getParameter("menu");
-        try {
-            int id = Integer.parseInt(id_raw);
-            DAO d = new DAO();
-            Blog b = d.getBlogDetailByID(id);
-            String bcn = d.getBlogCategoryNameByID(id);
-            List<Product> list = d.getAllProduct();
-            Cookie[] c = request.getCookies();
-            String txt = "";
-            if (c != null) {
-                for (Cookie o : c) {
-                    if (o.getName().equals("cart")) {
-                        txt += o.getValue();
-                    }
+        response.setContentType("text/html;charset=UTF-8");
+        String search = request.getParameter("searchBlog");
+        int currentPage = 1;
+        DAO d = new DAO();
+        List<Product> list = d.getAllProduct();
+        Cookie[] c = request.getCookies();
+        String txt = "";
+        if (c != null) {
+            for (Cookie o : c) {
+                if (o.getName().equals("cart")) {
+                    txt += o.getValue();
                 }
             }
-            model.Cart cart = new model.Cart(txt, list);
-            List<Category> listC = d.getAllCategory();
-            List<BlogCategory> listBC = d.getAllBlogCategory();
-            request.setAttribute("size", cart.getList().size());
-            request.setAttribute("listC", listC);
-            request.setAttribute("listBlogCategory", listBC);
-            request.setAttribute("blogDetail", b);
-            request.setAttribute("menu", active);
-            request.setAttribute("blogCategoryName", bcn);
-            request.getRequestDispatcher("blogDetail.jsp").forward(request, response);
-        } catch (NumberFormatException e) {
-            System.out.println(e);
         }
+        model.Cart cart = new model.Cart(txt, list);
+        if (search == null || search.equals("")) {
+            List<Blog> listB = d.getAllBlog();
+            List<BlogCategory> listBC = d.getAllBlogCategory();
+            request.setAttribute("listBlog", listB);
+            request.setAttribute("listBlogCategory", listBC);
+            request.setAttribute("menu", "post");
+            request.setAttribute("error", "Please input to search!!!");
+            request.setAttribute("size", cart.getList().size());
+        } else {
+            List<Blog> listB = d.getAllBlogSearch(search, currentPage);
+            if (listB.isEmpty()) {
+                List<BlogCategory> listBC = d.getAllBlogCategory();
+                request.setAttribute("listBlogCategory", listBC);
+                request.setAttribute("searchValue", search);
+                request.setAttribute("menu", "post");
+                request.setAttribute("error", "No found result!!!");
+                request.setAttribute("size", cart.getList().size());
+            } else {
+                int endIndex = d.getAllBlogSearch(search, currentPage).size() / 6;
+                if (d.getAllBlog().size() % 6 != 0) {
+                    endIndex++;
+                }
+                List<BlogCategory> listBC = d.getAllBlogCategory();
+                request.setAttribute("listBlog", listB);
+                request.setAttribute("listBlogCategory", listBC);
+                request.setAttribute("endIndex", endIndex);
+                request.setAttribute("currentPage", currentPage);
+                request.setAttribute("menu", "post");
+                request.setAttribute("size", cart.getList().size());
+                request.setAttribute("searchValue", search);
+            }
+        }
+        request.getRequestDispatcher("post.jsp").forward(request, response);
     }
 
     /**

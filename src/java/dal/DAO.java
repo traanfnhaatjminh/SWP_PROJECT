@@ -217,11 +217,43 @@ public class DAO extends DBContext {
         return list;
     }
 
+    public List<Blog> getBlogByCidPage(int cid, int pageIndex) {
+        List<Blog> list = new ArrayList<>();
+        String sql = "select * from Blog\n"
+                + "where blogCategoryID = ?\n"
+                + "ORDER BY blogID\n"
+                + "OFFSET (? - 1) * 6 ROWS\n"
+                + "FETCH NEXT 6 ROWS ONLY;";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setInt(1, cid);
+            st.setInt(2, pageIndex);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Blog b = new Blog(rs.getInt("blogID"),
+                        rs.getString("blogTitle"),
+                        rs.getString("blogImage"),
+                        rs.getString("postDate"),
+                        rs.getString("content"),
+                        rs.getString("author"),
+                        rs.getString("status"),
+                        rs.getInt("blogCategoryID"));
+                list.add(b);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
     public List<Blog> getBlogByCid(int cid) {
         List<Blog> list = new ArrayList<>();
         String sql = "select * from Blog\n"
-                + "where blogCategoryID = ?"
-                + "";
+                + "where blogCategoryID = ?\n"
+                + "ORDER BY blogID\n"
+                + "OFFSET (? - 1) * 6 ROWS\n"
+                + "FETCH NEXT 6 ROWS ONLY;";
         try {
             PreparedStatement st;
             st = connection.prepareStatement(sql);
@@ -234,7 +266,8 @@ public class DAO extends DBContext {
                         rs.getString("postDate"),
                         rs.getString("content"),
                         rs.getString("author"),
-                        rs.getString("status"));
+                        rs.getString("status"),
+                        rs.getInt("blogCategoryID"));
                 list.add(b);
             }
         } catch (SQLException e) {
@@ -256,7 +289,7 @@ public class DAO extends DBContext {
                         rs.getString("postDate"),
                         rs.getString("content"),
                         rs.getString("author"),
-                        rs.getString("status"));
+                        rs.getString("status"), rs.getInt("blogCategoryID"));
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -319,7 +352,7 @@ public class DAO extends DBContext {
                         rs.getString("postDate"),
                         rs.getString("content"),
                         rs.getString("author"),
-                        rs.getString("status"));
+                        rs.getString("status"), rs.getInt("blogCategoryID"));
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -341,7 +374,7 @@ public class DAO extends DBContext {
                         rs.getString("postDate"),
                         rs.getString("content"),
                         rs.getString("author"),
-                        rs.getString("status"));
+                        rs.getString("status"), rs.getInt("blogCategoryID"));
                 list.add(b);
             }
         } catch (SQLException e) {
@@ -370,6 +403,32 @@ public class DAO extends DBContext {
             st.setString(5, author);
             st.setString(6, status);
             st.setInt(7, blogCateID);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public void editBlog(String title, String image, String date, String content, String author, String status, int blogCateID, int blogID) {
+        String sql = "UPDATE [dbo].[Blog]\n"
+                + "   SET [blogTitle] = ?\n"
+                + "      ,[blogImage] = ?\n"
+                + "      ,[postDate] = ?\n"
+                + "      ,[content] = ?\n"
+                + "      ,[author] = ?\n"
+                + "      ,[status] = ?\n"
+                + "      ,[blogCategoryID] = ?\n"
+                + " WHERE blogID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, title);
+            st.setString(2, image);
+            st.setString(3, date);
+            st.setString(4, content);
+            st.setString(5, author);
+            st.setString(6, status);
+            st.setInt(7, blogCateID);
+            st.setInt(8, blogID);
             st.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
@@ -407,7 +466,7 @@ public class DAO extends DBContext {
                         rs.getString("postDate"),
                         rs.getString("content"),
                         rs.getString("author"),
-                        rs.getString("status"));
+                        rs.getString("status"), rs.getInt("blogCategoryID"));
                 list.add(b);
             }
         } catch (SQLException e) {
@@ -416,14 +475,17 @@ public class DAO extends DBContext {
         return list;
     }
 
-    public List<Blog> getAllBlogSearch(String searchValue) {
+    public List<Blog> getAllBlogSearch(String searchValue, int pageIndex) {
         List<Blog> list = new ArrayList<>();
         String sql = "select * from Blog\n"
-                + "where blogTitle like N'%' + ? + '%'";
+                + "where blogTitle like N'%' + ? + '%' ORDER BY blogID\n"
+                + "OFFSET (? - 1) * 6 ROWS\n"
+                + "FETCH NEXT 6 ROWS ONLY;";
         try {
             PreparedStatement st;
             st = connection.prepareStatement(sql);
             st.setString(1, searchValue);
+            st.setInt(2, pageIndex);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Blog b = new Blog(rs.getInt("blogID"),
@@ -432,7 +494,7 @@ public class DAO extends DBContext {
                         rs.getString("postDate"),
                         rs.getString("content"),
                         rs.getString("author"),
-                        rs.getString("status"));
+                        rs.getString("status"), rs.getInt("blogCategoryID"));
                 list.add(b);
             }
         } catch (SQLException e) {
@@ -456,7 +518,7 @@ public class DAO extends DBContext {
                         rs.getString("postDate"),
                         rs.getString("content"),
                         rs.getString("author"),
-                        rs.getString("status"));
+                        rs.getString("status"), rs.getInt("blogCategoryID"));
                 list.add(b);
             }
         } catch (SQLException e) {

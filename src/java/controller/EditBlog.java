@@ -9,22 +9,19 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import model.Blog;
-import model.BlogCategory;
-import model.Category;
-import model.Product;
 
 /**
  *
  * @author minh1
  */
-@WebServlet(name = "BlogDetail", urlPatterns = {"/blogDetail"})
-public class BlogDetail extends HttpServlet {
+@WebServlet(name = "EditBlog", urlPatterns = {"/editBlog"})
+public class EditBlog extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +40,10 @@ public class BlogDetail extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet BlogDetail</title>");
+            out.println("<title>Servlet EditBlog</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet BlogDetail at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet EditBlog at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -65,35 +62,16 @@ public class BlogDetail extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String id_raw = request.getParameter("id");
-        String active = request.getParameter("menu");
         try {
-            int id = Integer.parseInt(id_raw);
+            int blogID = Integer.parseInt(id_raw);
             DAO d = new DAO();
-            Blog b = d.getBlogDetailByID(id);
-            String bcn = d.getBlogCategoryNameByID(id);
-            List<Product> list = d.getAllProduct();
-            Cookie[] c = request.getCookies();
-            String txt = "";
-            if (c != null) {
-                for (Cookie o : c) {
-                    if (o.getName().equals("cart")) {
-                        txt += o.getValue();
-                    }
-                }
-            }
-            model.Cart cart = new model.Cart(txt, list);
-            List<Category> listC = d.getAllCategory();
-            List<BlogCategory> listBC = d.getAllBlogCategory();
-            request.setAttribute("size", cart.getList().size());
-            request.setAttribute("listC", listC);
-            request.setAttribute("listBlogCategory", listBC);
-            request.setAttribute("blogDetail", b);
-            request.setAttribute("menu", active);
-            request.setAttribute("blogCategoryName", bcn);
-            request.getRequestDispatcher("blogDetail.jsp").forward(request, response);
+            Blog blog = new Blog();
+            blog = d.getBlogDetailByID(blogID);
+            request.setAttribute("blog", blog);
         } catch (NumberFormatException e) {
             System.out.println(e);
         }
+        request.getRequestDispatcher("EditBlog.jsp").forward(request, response);
     }
 
     /**
@@ -107,7 +85,25 @@ public class BlogDetail extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String id_raw = request.getParameter("id");
+        String title = request.getParameter("title");
+        String image = request.getParameter("image");
+        String date1 = request.getParameter("date");
+        String content = request.getParameter("content");
+        String author = request.getParameter("author");
+        String status = request.getParameter("status");
+        String blogCateID_raw = request.getParameter("blogCateID");
+        try {
+            int blogCateID = Integer.parseInt(blogCateID_raw);
+            int id = Integer.parseInt(id_raw);
+            DAO d = new DAO();
+            d.editBlog(title, image, date1, content, author, status, blogCateID, id);
+            request.setAttribute("success", "Edit blog successfully");
+        } catch (NumberFormatException e) {
+            request.setAttribute("error", "Please enter number in blogCateID from 1 to 4!!!Enter again.");
+            System.out.println(e);
+        }
+        request.getRequestDispatcher("EditBlog.jsp").forward(request, response);
     }
 
     /**

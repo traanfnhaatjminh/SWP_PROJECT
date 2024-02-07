@@ -19,11 +19,12 @@ public class Blog {
     private String content;
     private String author;
     private String status;
+    private int blogCategoryID;
 
     public Blog() {
     }
 
-    public Blog(int blogID, String blogTitle, String blogImage, String postDate, String content, String author, String status) {
+    public Blog(int blogID, String blogTitle, String blogImage, String postDate, String content, String author, String status, int blogCategoryID) {
         this.blogID = blogID;
         this.blogTitle = blogTitle;
         this.blogImage = blogImage;
@@ -31,6 +32,7 @@ public class Blog {
         this.content = content;
         this.author = author;
         this.status = status;
+        this.blogCategoryID = blogCategoryID;
     }
 
     public int getBlogID() {
@@ -89,9 +91,17 @@ public class Blog {
         this.status = status;
     }
 
+    public int getBlogCategoryID() {
+        return blogCategoryID;
+    }
+
+    public void setBlogCategoryID(int blogCategoryID) {
+        this.blogCategoryID = blogCategoryID;
+    }
+
     @Override
     public String toString() {
-        return "Blog{" + "blogID=" + blogID + ", blogTitle=" + blogTitle + ", blogImage=" + blogImage + ", postDate=" + postDate + ", content=" + content + ", author=" + author + ", status=" + status + '}';
+        return "Blog{" + "blogID=" + blogID + ", blogTitle=" + blogTitle + ", blogImage=" + blogImage + ", postDate=" + postDate + ", content=" + content + ", author=" + author + ", status=" + status + ", blogCategoryID=" + blogCategoryID + '}';
     }
-    
+
 }

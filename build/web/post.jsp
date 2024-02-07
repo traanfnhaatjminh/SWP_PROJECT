@@ -322,18 +322,15 @@
                         <c:if test="${sessionScope.customer == null && sessionScope.marketer == null}">
                             <li><a href="register.jsp"><i class="fa fa-"></i> Register</a></li>
                             <li><a href="login.jsp"><i class="fa fa-"></i> Login</a></li>
-
-                        </c:if>
-                        <c:if test="${sessionScope.customer != null}">
+                            </c:if>
+                            <c:if test="${sessionScope.customer != null}">
                             <li><a href="profile.jsp"><i class="fa fa-user-o"></i> My Account</a></li>
                             <li><a href="customer?action=logout"><i class="fa fa-"></i> Logout</a></li>
-
-                        </c:if>
-                        <c:if test="${sessionScope.marketer != null}">
+                            </c:if>
+                            <c:if test="${sessionScope.marketer != null}">
                             <li><a href="profile.jsp"><i class="fa fa-user-o"></i> My Account</a></li>
                             <li><a href="marketer?action=logout"><i class="fa fa-"></i> Logout</a></li>
-
-                        </c:if>
+                            </c:if>
                     </ul>
                 </div>
             </div>
@@ -439,12 +436,22 @@
                                         </form>
                                     </div>
                                 </div>
-                                <form action="searchPost">
-                                    <div class="input-group">
-                                        SEARCH: <input type="text" class="" placeholder="Search" />
-                                        <button type="submit" class="btn btn-default">Search</button>
+                                <div class="card">
+                                    <div class="body search">
+                                        <form action="searchPost">
+                                            <div class="input-group m-b-0">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                                </div>
+                                                <input type="text" class="form-control" name="searchBlog" value="${searchValue}" placeholder="Search...">
+                                                <button type="submit" class="btn btn-primary">Search</button>
+                                                <c:if test="${error != null}">
+                                                    <h5 class="text-danger">${error}</h5>
+                                                </c:if>
+                                            </div>
+                                        </form>
                                     </div>
-                                </form>
+                                </div>
 
                                 <c:forEach items="${listBlog}" var="c">
                                     <div class="col-md-4">
@@ -453,11 +460,11 @@
                                                 <div class="img-post">
                                                     <img class="d-block img-fluid" src="${c.blogImage}" alt="First slide">
                                                 </div>
-                                                <h3 class="product-name"><a href="blogDetail?id=${c.blogID}">${c.blogTitle}</a></h3>
+                                                <h3 class="product-name"><a href="blogDetail?id=${c.blogID}&&menu=post">${c.blogTitle}</a></h3>
                                                 <p class="product-name">${c.content}</p>
                                                 <p>Date: ${c.postDate}</p>
                                                 <p>Author: ${c.author}</p>
-                                                <a href="editBlog.jsp" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons"></i></a>
+                                                <a href="editBlog?id=${c.blogID}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons"></i></a>
                                                 <a href="javascript:void(0);" class="delete" title="Delete" data-toggle="tooltip" onclick="confirmDelete(${c.blogID}, ${currentPage});"><i class="material-icons"></i></a>                                            </div>
                                         </div>
                                     </div>

@@ -142,7 +142,11 @@ select top 1 * from Blog
 order by blogID desc
 
 select * from Blog
-where blogTitle like N'%phối màu%'
+where blogTitle like N'%thời trang%'
+ORDER BY blogID
+OFFSET (? - 1) * 6 ROWS
+FETCH NEXT 6 ROWS ONLY;
+
 
 select bc.blogCategoryName from Blog b join Blog_Category bc
 on b.blogCategoryID = bc.blogCategoryID
@@ -150,6 +154,10 @@ where b.blogID = ?
 
 select * from Blog
 where blogCategoryID = ?
+ORDER BY blogID
+OFFSET (? - 1) * 6 ROWS
+FETCH NEXT 6 ROWS ONLY;
+
 
 delete from Blog
 

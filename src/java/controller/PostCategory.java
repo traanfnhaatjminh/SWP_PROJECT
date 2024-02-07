@@ -23,8 +23,8 @@ import model.Product;
  *
  * @author minh1
  */
-@WebServlet(name = "ListBlogByCategory", urlPatterns = {"/blogCategory"})
-public class ListBlogByCategory extends HttpServlet {
+@WebServlet(name = "PostCategory", urlPatterns = {"/postCategory"})
+public class PostCategory extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +43,10 @@ public class ListBlogByCategory extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ListBlogByCategory</title>");
+            out.println("<title>Servlet PostCategory</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ListBlogByCategory at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet PostCategory at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -67,14 +67,17 @@ public class ListBlogByCategory extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String active = request.getParameter("menu");
         String id_raw = request.getParameter("id");
+        int currentPage = 1;
+
         try {
             int id = Integer.parseInt(id_raw);
             DAO d = new DAO();
-            List<Category> listC = d.getAllCategory();
+            List<Blog> listB = d.getBlogByCidPage(id, currentPage);
+            int endIndex = d.getAllBlog().size() / 6;
+            if (d.getBlogByCid(id).size() % 6 != 0) {
+                endIndex++;
+            }
             List<BlogCategory> listBC = d.getAllBlogCategory();
-            List<Blog> listB = d.getBlogByCid(id);
-            Blog b = new Blog();
-            b = d.getLatestBlog();
             List<Product> list = d.getAllProduct();
             Cookie[] c = request.getCookies();
             String txt = "";
@@ -86,16 +89,16 @@ public class ListBlogByCategory extends HttpServlet {
                 }
             }
             model.Cart cart = new model.Cart(txt, list);
-            request.setAttribute("listC", listC);
             request.setAttribute("listBlogCategory", listBC);
             request.setAttribute("listBlog", listB);
-            request.setAttribute("latestBlog", b);
+            request.setAttribute("endIndex", endIndex);
+            request.setAttribute("currentPage", currentPage);
             request.setAttribute("menu", active);
             request.setAttribute("size", cart.getList().size());
         } catch (NumberFormatException e) {
             System.out.println(e);
         }
-        request.getRequestDispatcher("blog.jsp").forward(request, response);
+        request.getRequestDispatcher("post.jsp").forward(request, response);
     }
 
     /**
