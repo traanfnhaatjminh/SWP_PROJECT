@@ -529,6 +529,128 @@ public class DAO extends DBContext {
         return list;
     }
 
+    public List<Blog> getAllBlogPageByStatusFilter(String status1, String status2, int pageIndex) {
+        List<Blog> list = new ArrayList<>();
+        String sql = "SELECT * \n"
+                + "FROM Blog\n"
+                + "WHERE [status] IN (?, ?)\n"
+                + "ORDER BY blogID\n"
+                + "OFFSET (? - 1) * 6 ROWS\n"
+                + "FETCH NEXT 6 ROWS ONLY;";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setString(1, status1);
+            st.setString(2, status2);
+            st.setInt(3, pageIndex);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Blog b = new Blog(rs.getInt("blogID"),
+                        rs.getString("blogTitle"),
+                        rs.getString("blogImage"),
+                        rs.getString("postDate"),
+                        rs.getString("content"),
+                        rs.getString("author"),
+                        rs.getString("status"), rs.getInt("blogCategoryID"));
+                list.add(b);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Blog> getAllBlogByStatusFilter(String status1, String status2) {
+        List<Blog> list = new ArrayList<>();
+        String sql = "SELECT * \n"
+                + "FROM Blog\n"
+                + "WHERE [status] IN (?, ?)\n";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setString(1, status1);
+            st.setString(2, status2);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Blog b = new Blog(rs.getInt("blogID"),
+                        rs.getString("blogTitle"),
+                        rs.getString("blogImage"),
+                        rs.getString("postDate"),
+                        rs.getString("content"),
+                        rs.getString("author"),
+                        rs.getString("status"), rs.getInt("blogCategoryID"));
+                list.add(b);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Blog> getAllBlogPageByCategoryFilter(String cate1, String cate2,
+            String cate3, String cate4, int pageIndex) {
+        List<Blog> list = new ArrayList<>();
+        String sql = "SELECT * \n"
+                + "FROM Blog\n"
+                + "WHERE blogCategoryID IN (SELECT blogCategoryID FROM Blog_Category WHERE blogCategoryName IN (?, ?, ?,?))\n"
+                + "ORDER BY blogID\n"
+                + "OFFSET (? - 1) * 6 ROWS\n"
+                + "FETCH NEXT 6 ROWS ONLY;";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setString(1, cate1);
+            st.setString(2, cate2);
+            st.setString(3, cate3);
+            st.setString(4, cate4);
+            st.setInt(5, pageIndex);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Blog b = new Blog(rs.getInt("blogID"),
+                        rs.getString("blogTitle"),
+                        rs.getString("blogImage"),
+                        rs.getString("postDate"),
+                        rs.getString("content"),
+                        rs.getString("author"),
+                        rs.getString("status"), rs.getInt("blogCategoryID"));
+                list.add(b);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Blog> getAllBlogByCategoryFilter(String cate1, String cate2,
+            String cate3, String cate4) {
+        List<Blog> list = new ArrayList<>();
+        String sql = "SELECT * \n"
+                + "FROM Blog\n"
+                + "WHERE blogCategoryID IN (SELECT blogCategoryID FROM Blog_Category WHERE blogCategoryName IN (?, ?, ?,?))";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setString(1, cate1);
+            st.setString(2, cate2);
+            st.setString(3, cate3);
+            st.setString(4, cate4);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Blog b = new Blog(rs.getInt("blogID"),
+                        rs.getString("blogTitle"),
+                        rs.getString("blogImage"),
+                        rs.getString("postDate"),
+                        rs.getString("content"),
+                        rs.getString("author"),
+                        rs.getString("status"), rs.getInt("blogCategoryID"));
+                list.add(b);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
     public List<Blog> getAllBlogByStatus(String status) {
         List<Blog> list = new ArrayList<>();
         String sql = "select * from Blog\n"
@@ -738,7 +860,7 @@ public class DAO extends DBContext {
 
     public static void main(String[] args) {
         DAO d = new DAO();
-        List<Product> listB = d.getAllProduct();
+        List<Blog> listB = d.getAllBlogByStatusFilter("", "Private");
         System.out.println(listB);
     }
 

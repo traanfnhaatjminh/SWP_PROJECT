@@ -122,6 +122,20 @@ blogCategoryID int,
 FOREIGN KEY (blogCategoryID) REFERENCES Blog_Category(blogCategoryID),
 )
 
+SELECT * 
+FROM Blog
+WHERE [status] IN ('', 'Private')
+ORDER BY blogID
+OFFSET (1 - 1) * 6 ROWS
+FETCH NEXT 6 ROWS ONLY;
+
+SELECT * 
+FROM Blog
+WHERE blogCategoryID IN (SELECT blogCategoryID FROM Blog_Category WHERE blogCategoryName IN (?, ?, ?,?))
+ORDER BY blogID
+OFFSET (? - 1) * 6 ROWS
+FETCH NEXT 6 ROWS ONLY;
+
 
 select * from Blog
 where blogID = ?

@@ -390,18 +390,17 @@
                         <h2 style="margin-top: 7%" class="grid-title"><i class="fa fa-filter"></i> Filters</h2>
                         <hr>
 
-                        <form id="categoryFilterForm" action="FilterServlet">
+                        <form id="categoryFilterForm" action="filterPost">
                             <h4>By category:</h4>
                         <c:forEach items="${listBlogCategory}" var="c">
                             <div class="checkbox">
                                 <label><input name="categories" type="checkbox" value="${c.name}" class="icheck">${c.name}</label>
                             </div>
                         </c:forEach>
-
                         <h4>By status:</h4>
                         <div class="checkbox">
-                            <label><input name="status" type="checkbox" value="public" class="icheck">Public</label>
-                            <label><input name="status" type="checkbox" value="private" class="icheck">Private</label>
+                            <label><input name="status" type="checkbox" value="Public" class="icheck" ${'Public' eq selectedStatus ? 'checked' : ''} ${selectedStatusAll != null ? 'checked' : ''}>Public</label>
+                            <label><input name="status" type="checkbox" value="Private" class="icheck" ${'Private' eq selectedStatus ? 'checked' : ''} ${selectedStatusAll != null ? 'checked' : ''}>Private</label>
                         </div>
                         <button type="submit" class="btn btn-default">Submit</button>
                     </form>

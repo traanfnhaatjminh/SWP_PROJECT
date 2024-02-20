@@ -3,14 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/src/java/controller/SortPost.java</file>
             <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/src/java/dal/DAO.java</file>
-            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/src/java/controller/BlogList.java</file>
+            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/src/java/controller/FilterPost.java</file>
             <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/src/java/controller/PostList.java</file>
-            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/web/blog.jsp</file>
             <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/web/post.jsp</file>
-            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/src/java/controller/PostListPage.java</file>
-            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/web/navigation.jsp</file>
         </group>
     </open-files>
 </project-private>
