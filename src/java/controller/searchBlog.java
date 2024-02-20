@@ -80,7 +80,7 @@ public class searchBlog extends HttpServlet {
         }
         model.Cart cart = new model.Cart(txt, list);
         if (search == null || search.equals("")) {
-            List<Blog> listB = d.getAllBlog();
+            List<Blog> listB = d.getAllBlogByStatus("Public");
             List<Category> listC = d.getAllCategory();
             List<BlogCategory> listBC = d.getAllBlogCategory();
             Blog b = new Blog();
@@ -108,7 +108,7 @@ public class searchBlog extends HttpServlet {
                 request.setAttribute("size", cart.getList().size());
             } else {
                 int endIndex = d.getAllBlogSearch(search, currentPage).size() / 6;
-                if (d.getAllBlog().size() % 6 != 0) {
+                if (d.getAllBlogByStatus("Public").size() % 6 != 0) {
                     endIndex++;
                 }
                 List<Category> listC = d.getAllCategory();

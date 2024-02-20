@@ -87,11 +87,9 @@ public class HomePage extends HttpServlet {
         List<Product> listNewP = d.getTopProduct();
         List<Post> listP = d.getTopPost();
         List<Slider> listS = d.getTopSlider(1, 3);
-        List<Blog> listB = d.getAllBlog();
         request.setAttribute("size", cart.getList().size());
         request.setAttribute("listC", listC);
         request.setAttribute("listNewP", listNewP);
-        request.setAttribute("listB", listB);
         request.setAttribute("listTopPost", listP);
         request.setAttribute("listTopSlider", listS);
         request.getRequestDispatcher("home.jsp").forward(request, response);

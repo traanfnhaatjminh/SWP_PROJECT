@@ -70,9 +70,9 @@ public class PostListPage extends HttpServlet {
             int index = Integer.parseInt(index_raw);
             DAO d = new DAO();
             List<BlogCategory> listBC = d.getAllBlogCategory();
-            List<Blog> listB = d.getAllBlogPage(index);
-            int endIndex = d.getAllBlog().size() / 6;
-            if (d.getAllBlog().size() % 6 != 0) {
+            List<Blog> listB = d.getAllManageBlogPage(index);
+            int endIndex = d.getAllManageBlog().size() / 6;
+            if (d.getAllManageBlog().size() % 6 != 0) {
                 endIndex++;
             }
             List<Product> list = d.getAllProduct();

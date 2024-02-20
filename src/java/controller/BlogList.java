@@ -70,9 +70,9 @@ public class BlogList extends HttpServlet {
         DAO d = new DAO();
         List<Category> listC = d.getAllCategory();
         List<BlogCategory> listBC = d.getAllBlogCategory();
-        List<Blog> listB = d.getAllBlogPage(currentPage);
-        int endIndex = d.getAllBlog().size()/6;
-        if(d.getAllBlog().size()%6 != 0){
+        List<Blog> listB = d.getAllBlogPageByStatus(currentPage, "Public");
+        int endIndex = d.getAllBlogByStatus("Public").size() / 6;
+        if (d.getAllBlogByStatus("Public").size() % 6 != 0) {
             endIndex++;
         }
         Blog b = new Blog();

@@ -424,13 +424,13 @@
                                         <form action="sortPost">
                                             SORT BY:
                                             <select name="sortSelect">
-                                                <option value="0">Title from A to Z</option>
-                                                <option value="1">Title from Z to A</option>
+                                                <option value="atoz">Title from A to Z</option>
+                                                <option value="ztoa">Title from Z to A</option>
                                                 <c:forEach items="${listBlogCategory}" var="c">
-                                                    <option value="1">Category: ${c.name}</option>
+                                                    <option value="${c.id}">Category: ${c.name}</option>
                                                 </c:forEach>
-                                                <option value="1">Status: Public</option>
-                                                <option value="1">Status: Private</option>
+                                                <option value="Public">Status: Public</option>
+                                                <option value="Private">Status: Private</option>
                                             </select>
                                             <button type="submit" class="btn btn-default">Sort</button>
                                         </form>

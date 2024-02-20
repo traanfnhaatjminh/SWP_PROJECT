@@ -64,41 +64,41 @@ public class PostCategory extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        String active = request.getParameter("menu");
-        String id_raw = request.getParameter("id");
-        int currentPage = 1;
-
-        try {
-            int id = Integer.parseInt(id_raw);
-            DAO d = new DAO();
-            List<Blog> listB = d.getBlogByCidPage(id, currentPage);
-            int endIndex = d.getAllBlog().size() / 6;
-            if (d.getBlogByCid(id).size() % 6 != 0) {
-                endIndex++;
-            }
-            List<BlogCategory> listBC = d.getAllBlogCategory();
-            List<Product> list = d.getAllProduct();
-            Cookie[] c = request.getCookies();
-            String txt = "";
-            if (c != null) {
-                for (Cookie o : c) {
-                    if (o.getName().equals("cart")) {
-                        txt += o.getValue();
-                    }
-                }
-            }
-            model.Cart cart = new model.Cart(txt, list);
-            request.setAttribute("listBlogCategory", listBC);
-            request.setAttribute("listBlog", listB);
-            request.setAttribute("endIndex", endIndex);
-            request.setAttribute("currentPage", currentPage);
-            request.setAttribute("menu", active);
-            request.setAttribute("size", cart.getList().size());
-        } catch (NumberFormatException e) {
-            System.out.println(e);
-        }
-        request.getRequestDispatcher("post.jsp").forward(request, response);
+//        response.setContentType("text/html;charset=UTF-8");
+//        String active = request.getParameter("menu");
+//        String id_raw = request.getParameter("id");
+//        int currentPage = 1;
+//
+//        try {
+//            int id = Integer.parseInt(id_raw);
+//            DAO d = new DAO();
+//            List<Blog> listB = d.getBlogByCidPage(id, currentPage);
+//            int endIndex = d.getAllBlog().size() / 6;
+//            if (d.getBlogByCid(id).size() % 6 != 0) {
+//                endIndex++;
+//            }
+//            List<BlogCategory> listBC = d.getAllBlogCategory();
+//            List<Product> list = d.getAllProduct();
+//            Cookie[] c = request.getCookies();
+//            String txt = "";
+//            if (c != null) {
+//                for (Cookie o : c) {
+//                    if (o.getName().equals("cart")) {
+//                        txt += o.getValue();
+//                    }
+//                }
+//            }
+//            model.Cart cart = new model.Cart(txt, list);
+//            request.setAttribute("listBlogCategory", listBC);
+//            request.setAttribute("listBlog", listB);
+//            request.setAttribute("endIndex", endIndex);
+//            request.setAttribute("currentPage", currentPage);
+//            request.setAttribute("menu", active);
+//            request.setAttribute("size", cart.getList().size());
+//        } catch (NumberFormatException e) {
+//            System.out.println(e);
+//        }
+//        request.getRequestDispatcher("post.jsp").forward(request, response);
     }
 
     /**

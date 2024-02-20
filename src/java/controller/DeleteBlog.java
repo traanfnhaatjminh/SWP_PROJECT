@@ -71,9 +71,9 @@ public class DeleteBlog extends HttpServlet {
             DAO d = new DAO();
             d.deleteBlog(id);
             List<BlogCategory> listBC = d.getAllBlogCategory();
-            List<Blog> listB = d.getAllBlogPage(index);
-            int endIndex = d.getAllBlog().size() / 6;
-            if (d.getAllBlog().size() % 6 != 0) {
+            List<Blog> listB = d.getAllBlogPageByStatus(index, "Public");
+            int endIndex = d.getAllBlogByStatus("Public").size() / 6;
+            if (d.getAllBlogByStatus("Public").size() % 6 != 0) {
                 endIndex++;
             }
             List<Product> list = d.getAllProduct();

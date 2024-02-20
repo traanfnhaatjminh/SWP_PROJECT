@@ -360,12 +360,37 @@ public class DAO extends DBContext {
         return null;
     }
 
-    public List<Blog> getAllBlog() {
+    public List<Blog> getAllManageBlog() {
         List<Blog> list = new ArrayList<>();
-        String sql = "select * from Blog";
+        String sql = "select * from Blog\n";
         try {
             PreparedStatement st;
             st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Blog b = new Blog(rs.getInt("blogID"),
+                        rs.getString("blogTitle"),
+                        rs.getString("blogImage"),
+                        rs.getString("postDate"),
+                        rs.getString("content"),
+                        rs.getString("author"),
+                        rs.getString("status"), rs.getInt("blogCategoryID"));
+                list.add(b);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Blog> getAllBlogByCid(int cid) {
+        List<Blog> list = new ArrayList<>();
+        String sql = "select * from Blog\n"
+                + "where blogCategoryID = ?";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setInt(1, cid);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Blog b = new Blog(rs.getInt("blogID"),
@@ -447,7 +472,7 @@ public class DAO extends DBContext {
         }
     }
 
-    public List<Blog> getAllBlogPage(int pageIndex) {
+    public List<Blog> getAllManageBlogPage(int pageIndex) {
         List<Blog> list = new ArrayList<>();
         String sql = "SELECT *\n"
                 + "FROM Blog\n"
@@ -458,6 +483,162 @@ public class DAO extends DBContext {
             PreparedStatement st;
             st = connection.prepareStatement(sql);
             st.setInt(1, pageIndex);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Blog b = new Blog(rs.getInt("blogID"),
+                        rs.getString("blogTitle"),
+                        rs.getString("blogImage"),
+                        rs.getString("postDate"),
+                        rs.getString("content"),
+                        rs.getString("author"),
+                        rs.getString("status"), rs.getInt("blogCategoryID"));
+                list.add(b);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Blog> getAllBlogPageByStatus(int pageIndex, String status) {
+        List<Blog> list = new ArrayList<>();
+        String sql = "select * from Blog\n"
+                + "where [status] = ?\n"
+                + "ORDER BY blogID\n"
+                + "OFFSET (? - 1) * 6 ROWS\n"
+                + "FETCH NEXT 6 ROWS ONLY;";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setString(1, status);
+            st.setInt(2, pageIndex);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Blog b = new Blog(rs.getInt("blogID"),
+                        rs.getString("blogTitle"),
+                        rs.getString("blogImage"),
+                        rs.getString("postDate"),
+                        rs.getString("content"),
+                        rs.getString("author"),
+                        rs.getString("status"), rs.getInt("blogCategoryID"));
+                list.add(b);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Blog> getAllBlogByStatus(String status) {
+        List<Blog> list = new ArrayList<>();
+        String sql = "select * from Blog\n"
+                + "where [status] = ?\n";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setString(1, status);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Blog b = new Blog(rs.getInt("blogID"),
+                        rs.getString("blogTitle"),
+                        rs.getString("blogImage"),
+                        rs.getString("postDate"),
+                        rs.getString("content"),
+                        rs.getString("author"),
+                        rs.getString("status"), rs.getInt("blogCategoryID"));
+                list.add(b);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Blog> getAllBlogASCPage(int pageIndex) {
+        List<Blog> list = new ArrayList<>();
+        String sql = "select * from Blog\n"
+                + "order by blogTitle asc\n"
+                + "OFFSET (? - 1) * 6 ROWS\n"
+                + "FETCH NEXT 6 ROWS ONLY;";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setInt(1, pageIndex);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Blog b = new Blog(rs.getInt("blogID"),
+                        rs.getString("blogTitle"),
+                        rs.getString("blogImage"),
+                        rs.getString("postDate"),
+                        rs.getString("content"),
+                        rs.getString("author"),
+                        rs.getString("status"), rs.getInt("blogCategoryID"));
+                list.add(b);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Blog> getAllBlogASC() {
+        List<Blog> list = new ArrayList<>();
+        String sql = "select * from Blog\n"
+                + "order by blogTitle asc";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Blog b = new Blog(rs.getInt("blogID"),
+                        rs.getString("blogTitle"),
+                        rs.getString("blogImage"),
+                        rs.getString("postDate"),
+                        rs.getString("content"),
+                        rs.getString("author"),
+                        rs.getString("status"), rs.getInt("blogCategoryID"));
+                list.add(b);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Blog> getAllBlogDESCPage(int pageIndex) {
+        List<Blog> list = new ArrayList<>();
+        String sql = "select * from Blog\n"
+                + "order by blogTitle desc\n"
+                + "OFFSET (? - 1) * 6 ROWS\n"
+                + "FETCH NEXT 6 ROWS ONLY;";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setInt(1, pageIndex);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Blog b = new Blog(rs.getInt("blogID"),
+                        rs.getString("blogTitle"),
+                        rs.getString("blogImage"),
+                        rs.getString("postDate"),
+                        rs.getString("content"),
+                        rs.getString("author"),
+                        rs.getString("status"), rs.getInt("blogCategoryID"));
+                list.add(b);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Blog> getAllBlogDESC() {
+        List<Blog> list = new ArrayList<>();
+        String sql = "select * from Blog\n"
+                + "order by blogTitle desc";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Blog b = new Blog(rs.getInt("blogID"),
