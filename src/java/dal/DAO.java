@@ -727,6 +727,58 @@ public class DAO extends DBContext {
         return list;
     }
 
+    public List<Product> getAllProductASC(int cid) {
+        List<Product> list = new ArrayList<>();
+        String sql = "select * from Product\n"
+                + "where cid = ?\n"
+                + "order by [name] asc";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, cid);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getDouble("original_price"),
+                        rs.getDouble("sale_price"),
+                        rs.getInt("quantity"),
+                        rs.getString("describe"),
+                        rs.getString("image"),
+                        rs.getInt("cid")
+                );
+                list.add(p);
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public List<Product> getAllProductDESC(int cid) {
+        List<Product> list = new ArrayList<>();
+        String sql = "select * from Product\n"
+                + "where cid = ?\n"
+                + "order by [name] desc";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, cid);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getDouble("original_price"),
+                        rs.getDouble("sale_price"),
+                        rs.getInt("quantity"),
+                        rs.getString("describe"),
+                        rs.getString("image"),
+                        rs.getInt("cid")
+                );
+                list.add(p);
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
     public List<Blog> getAllBlogDESCPage(int pageIndex) {
         List<Blog> list = new ArrayList<>();
         String sql = "select * from Blog\n"

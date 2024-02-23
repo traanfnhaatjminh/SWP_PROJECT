@@ -72,8 +72,8 @@
                     <label class="col-md-4 control-label" for="status">Status</label>  
                     <div class="col-md-4">
                         <select name="status" class="form-control input-md" required="">
-                            <option value="public" ${blog.status eq 'public' ? 'selected':''}>Public</option>
-                            <option value="private" ${blog.status eq 'private' ? 'selected':''}>Private</option>
+                            <option value="Public" ${blog.status eq 'public' ? 'selected':''}>Public</option>
+                            <option value="Private" ${blog.status eq 'private' ? 'selected':''}>Private</option>
                         </select>
                     </div>
                 </div>

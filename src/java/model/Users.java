@@ -18,10 +18,66 @@ public class Users {
     private String avatar;
     private String address;
     private String password;
+    private String user_role_name;
     private int roleID;
     private double userPoint;
 
     public Users() {
+    }
+
+    public Users(int userID, String userName, String gender, String email, String mobile, String avatar, String address, String password, String user_role_name, int roleID, double userPoint) {
+        this.userID = userID;
+        this.userName = userName;
+        this.gender = gender;
+        this.email = email;
+        this.mobile = mobile;
+        this.avatar = avatar;
+        this.address = address;
+        this.password = password;
+        this.user_role_name = user_role_name;
+        this.roleID = roleID;
+        this.userPoint = userPoint;
+    }
+
+    public Users(int userID, String userName, String gender, String email, String mobile, String avatar, String address, String user_role_name) {
+        this.userID = userID;
+        this.userName = userName;
+        this.gender = gender;
+        this.email = email;
+        this.mobile = mobile;
+        this.avatar = avatar;
+        this.address = address;
+        this.user_role_name = user_role_name;
+    }
+    
+    
+    public Users(String userName, String gender, String email, String mobile, String avatar, String address, String password, int roleID) {
+        this.userName = userName;
+        this.gender = gender;
+        this.email = email;
+        this.mobile = mobile;
+        this.avatar = avatar;
+        this.address = address;
+        this.password = password;
+        this.roleID = roleID;
+    }
+
+    public Users(int userID, String userName, String gender, String email, String mobile, String address, String user_role_name) {
+        this.userID = userID;
+        this.userName = userName;
+        this.gender = gender;
+        this.email = email;
+        this.mobile = mobile;
+        this.address = address;
+        this.user_role_name = user_role_name;
+    }
+
+    public String getUser_role_name() {
+        return user_role_name;
+    }
+
+    public void setUser_role_name(String user_role_name) {
+        this.user_role_name = user_role_name;
     }
 
     public Users(int userID, String userName, String gender, String email, String mobile, String avatar, String address, String password, int roleID, double userPoint) {
@@ -37,6 +93,28 @@ public class Users {
         this.userPoint = userPoint;
     }
 
+    public Users(String userName, String gender, String email, String mobile, String avatar, String address, int roleID) {
+        this.userName = userName;
+        this.gender = gender;
+        this.email = email;
+        this.mobile = mobile;
+        this.avatar = avatar;
+        this.address = address;
+        this.roleID = roleID;
+    }
+
+    public Users(int userID, String userName, String gender, String email, String mobile, String avatar, String address, int roleID) {
+        this.userID = userID;
+        this.userName = userName;
+        this.gender = gender;
+        this.email = email;
+        this.mobile = mobile;
+        this.avatar = avatar;
+        this.address = address;
+        this.roleID = roleID;
+    }
+   
+    
     public int getUserID() {
         return userID;
     }

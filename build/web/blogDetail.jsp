@@ -620,7 +620,7 @@
                                         </c:if>
                                         <c:if test="${sessionScope.marketer != null}">
                                             <c:forEach items="${listBlogCategory}" var="c">
-                                            <li><a href="postCategory?id=${c.id}&&menu=post">${c.name}</a></li>
+                                            <li><a href="postCategory?id=${c.id}">${c.name}</a></li>
                                             </c:forEach>
                                         </c:if>
                                 </ul>

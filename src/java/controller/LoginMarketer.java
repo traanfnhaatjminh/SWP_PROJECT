@@ -4,10 +4,8 @@
  */
 package controller;
 
-import dal.CustomerDAO;
 import dal.UserDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
@@ -69,7 +67,6 @@ public class LoginMarketer extends HttpServlet {
                 response.addCookie(pass);
                 response.addCookie(rem);
                 response.sendRedirect("blog");
-
             }
         }
         if (action.equals("logout")) {
@@ -143,7 +140,8 @@ public class LoginMarketer extends HttpServlet {
                     request.setAttribute("mess", "change password success");
                     request.getRequestDispatcher("changepass.jsp").forward(request, response);
                 }
-            } catch (Exception e) {
+            } catch (IOException e) {
+                System.out.println(e);
             }
         }
     }

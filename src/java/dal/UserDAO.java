@@ -25,7 +25,8 @@ public class UserDAO extends DBContext {
             st.setString(2, pass);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                return new Users(rs.getInt(1),
+                return new Users(
+                        rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
                         rs.getString(4),
@@ -34,7 +35,8 @@ public class UserDAO extends DBContext {
                         rs.getString(7),
                         rs.getString(8),
                         rs.getInt(9),
-                        rs.getDouble(10));
+                        rs.getInt(10));
+
             }
         } catch (SQLException e) {
             System.out.println(e);

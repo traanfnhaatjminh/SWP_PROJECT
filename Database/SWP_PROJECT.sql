@@ -72,7 +72,7 @@ email varchar(45),
 avatar nvarchar(100),
 )
 
-select * from product
+drop table Users
 
 create table [Users](
 [userID] int identity(1,1) primary key,
@@ -108,7 +108,6 @@ values
 (3, 'Marketer'),
 (1, 'Seller'),
 (2, 'Admin')
-
 
 create table Blog (
 blogID int identity(1,1) primary key,

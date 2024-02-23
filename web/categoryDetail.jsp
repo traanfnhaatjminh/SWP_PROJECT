@@ -158,21 +158,17 @@
                         <!-- store top filter -->
                         <div class="store-filter clearfix">
                             <div class="store-sort">
-                                <label>
-                                    Sort By:
-                                    <select class="input-select">
-                                        <option value="0">Popular</option>
-                                        <option value="1">Position</option>
-                                    </select>
-                                </label>
-
-                                <label>
-                                    Price:
-                                    <select class="input-select">
-                                        <option value="0">20</option>
-                                        <option value="1">50</option>
-                                    </select>
-                                </label>
+                                <form action="sortProduct">
+                                    <label>
+                                        Sort By:
+                                        <input type="hidden" name="cid" value="${cateID}">
+                                        <select name="sortSelect" class="input-select">
+                                            <option value="atoz" ${atozSelected}>Name product from A to Z</option>
+                                            <option value="ztoa" ${ztoaSelected}>Name product from Z to A</option>
+                                        </select>
+                                        <button type="submit" class="btn btn-default">Sort</button>
+                                    </label>
+                                </form>
                             </div>
                         </div>
                         <!-- /store top filter -->
@@ -205,16 +201,16 @@
                         <!-- /store products -->
 
                         <!-- store bottom filter -->
-                        <div class="store-filter clearfix">
-                            <span class="store-qty">Showing 20-100 products</span>
-                            <ul class="store-pagination">
-                                <li class="active">1</li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                            </ul>
-                        </div>
+                        <!--                        <div class="store-filter clearfix">
+                                                    <span class="store-qty">Showing 20-100 products</span>
+                                                    <ul class="store-pagination">
+                                                        <li class="active">1</li>
+                                                        <li><a href="#">2</a></li>
+                                                        <li><a href="#">3</a></li>
+                                                        <li><a href="#">4</a></li>
+                                                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                                                    </ul>
+                                                </div>-->
                         <!-- /store bottom filter -->
                     </div>
                     <!-- /STORE -->
