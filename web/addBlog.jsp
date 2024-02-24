@@ -27,7 +27,7 @@
                 <!-- Form Name -->
                 <legend style="text-align: center">Add a new blog</legend>
                 <c:if test="${error == null}">
-                    <p class="text-danger">${success}</p>
+                    <p class="text-success">${success}</p>
                 </c:if>
                 <!-- Text input-->
                 <div class="form-group">

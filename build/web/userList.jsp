@@ -262,10 +262,10 @@
 
             <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
             <aside class="app-sidebar">
-                <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="${sessionScope.accS.avatar}" width="50px"
+                <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="${sessionScope.admin.avatar}" width="50px"
                                                 alt="User Image">
                 <div>
-                    <a href="Profile.jsp"><p class="app-sidebar__user-name"><b style="color: yellow"> ${sessionScope.accS.userName}</b></p></a>   
+                    <a href="Profile.jsp"><p class="app-sidebar__user-name"><b style="color: yellow"> ${sessionScope.admin.userName}</b></p></a>   
                     <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
                 </div>
             </div>
@@ -277,9 +277,9 @@
                     <li><a class="app-menu__item" href="userlist"><i
                                 class='app-menu__icon bx bx-user-circle'></i><span class="app-menu__label">User List</span></a>
                     </li>
-                    <li><a class="app-menu__item" href="settingList"><i
-                                class='app-menu__icon bx bx-wrench'></i><span class="app-menu__label">Setting List</span></a>
-                    </li>
+                    <!--                    <li><a class="app-menu__item" href="settingList"><i
+                                                    class='app-menu__icon bx bx-wrench'></i><span class="app-menu__label">Setting List</span></a>
+                                        </li>-->
                 </ul>
         </aside>
         <main class="app-content">
@@ -422,195 +422,252 @@
                                     </c:forEach>
                                 </tbody>
                             </table>
-                            </main>
+                            <div class="col-md-12" style="height: 30px; display: flex; align-items: center; justify-content: space-between;"">
+
+                                <div style="display: inline-block; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;" class="col-1-sm">
+<!--                                    <form action="userlist" id="my-form">
+                                        <label for="page_select">show</label>
+                                        <select name="userPerPage" onchange="submitForm()">
+                                            <option value="8" ${userPerPage == 8 ? 'selected':''}>8</option>
+                                            <option value="9" ${userPerPage == 9 ? 'selected':''}>9</option>
+                                            <option value="10" ${userPerPage == 10 ? 'selected':''}>10</option>
+                                        </select>
+                                        <input type="hidden" name="name">
+                                        <input type="hidden" name="userContent" value="${userContent}"></input>
+                                        <input type="hidden" name="filter" value="${filter}"></input>
+                                        <input type="hidden" name="sort" value="${sort}"></input>
+                                        <input type="hidden" name="currPage" value="${currPage}"></input>
+                                        <span>Users by page</span>
+                                    </form>-->
+                                </div>
+
+                                <!-- chon so thu tu trang -->
+                                <%int numOfPage = (int) request.getAttribute("numOfPage");%>
+                                <%int currPage = (int) request.getAttribute("currPage");%>
+                                <div style="display: inline-block" class="col-10-sm">
+                                    <ul style="list-style: none; display: flex; align-items: center; justify-content: space-between;" >
+                                        <!-- Trang cuoi -->
+                                        <li><a href="userlist?search=${search}&filter=${filter}&sort=${sort}&userPerPage=${userPerPage}&currPage=${numOfPage}"><span style="margin-right: 10px">Last Pages: ${numOfPage}</span></a></li>
+                                        <!--Quay lại trang trước-->
+                                        <% if (currPage > 1) { %>
+                                        <li><a href="userlist?search=${search}&filter=${filter}&sort=${sort}&userPerPage=${userPerPage}&currPage=<%= currPage - 1 %>" style="color: #08C7B2"><<</a></li>
+                                            <% } else { %>
+                                        <li><<</li>
+                                            <% } %>
+
+                                        <!-- Hiển thì lựa chọn số trang -->
+                                        <li>
+                                            <form action="userlist" style="margin-left: 20px; margin-right: 20px">
+                                                <input type="text" name="currPage" size="2" style="height: 35px" value="${currPage}"></input>
+                                                <input type="hidden" name="search" value="${search}"></input>
+                                                <input type="hidden" name="filter" value="${filter}"></input>
+                                                <input type="hidden" name="sort" value="${sort}"></input>
+                                                <input type="hidden" name="userPerPage" value="${userPerPage}"></input>                
+                                            </form>
+                                        </li>
+
+                                        <!-- Tiến đến trang sau -->
+                                        <% if (currPage < numOfPage) { %>
+                                        <li><a href="userlist?search=${search}&filter=${filter}&sort=${sort}&userPerPage=${userPerPage}&currPage=<%= currPage + 1 %>" style="color: #08C7B2">>></a></li>
+                                            <% } else { %>
+                                        <li>>></li>
+                                            <% } %>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    </main>
 
 
-                            <!--
-                            MODAL
-                            -->
-                            <div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-                                 data-keyboard="false">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
+                    <!--
+                    MODAL
+                    -->
+                    <div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+                         data-keyboard="false">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
 
-                                        <div class="modal-body">
+                                <div class="modal-body">
 
 
-                                            <BR>
-                                            <a href="#" style="    float: right;
-                                               font-weight: 600;
-                                               color: #ea0000;">Chỉnh sửa nâng cao</a>
-                                            <BR>
-                                            <BR>
-                                            <button class="btn btn-save" type="button">Lưu lại</button>
-                                            <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-                                            <BR>
-                                        </div>
-                                        <div class="modal-footer">
-                                        </div>
-                                    </div>
+                                    <BR>
+                                    <a href="#" style="    float: right;
+                                       font-weight: 600;
+                                       color: #ea0000;">Chỉnh sửa nâng cao</a>
+                                    <BR>
+                                    <BR>
+                                    <button class="btn btn-save" type="button">Lưu lại</button>
+                                    <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
+                                    <BR>
+                                </div>
+                                <div class="modal-footer">
                                 </div>
                             </div>
-                            <!--
-                            MODAL
-                            -->
-                            <script>
-                                document.addEventListener('DOMContentLoaded', function () {
-                                    const selectBox = document.getElementById('group');
-                                    const filterForm = document.getElementById('filterForm');
+                        </div>
+                    </div>
+                    <!--
+                    MODAL
+                    -->
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            const selectBox = document.getElementById('group');
+                            const filterForm = document.getElementById('filterForm');
 
-                                    selectBox.addEventListener('change', function () {
-                                        filterForm.submit();
-                                    });
+                            selectBox.addEventListener('change', function () {
+                                filterForm.submit();
+                            });
+                        });
+                    </script>
+                    <script>
+                        // Lắng nghe sự kiện khi bất kỳ nút "Giao hàng thành công" nào được nhấn
+                        document.addEventListener('DOMContentLoaded', function () {
+                            // Lấy danh sách tất cả các nút có cùng lớp "mark-delivered"
+                            const markDeliveredButtons = document.querySelectorAll('.mark-delivered');
+
+                            markDeliveredButtons.forEach(button => {
+                                button.addEventListener('click', function () {
+                                    // Tìm phần tử form liên quan đến nút được nhấn
+                                    const form = this.closest('form');
+
+                                    // Kiểm tra nếu form tồn tại
+                                    if (form) {
+                                        // Gửi form đi
+                                        form.submit();
+                                    }
                                 });
-                            </script>
-                            <script>
-                                // Lắng nghe sự kiện khi bất kỳ nút "Giao hàng thành công" nào được nhấn
-                                document.addEventListener('DOMContentLoaded', function () {
-                                    // Lấy danh sách tất cả các nút có cùng lớp "mark-delivered"
-                                    const markDeliveredButtons = document.querySelectorAll('.mark-delivered');
+                            });
+                        });
+                    </script>
+                    <!-- Essential javascripts for application to work-->
 
-                                    markDeliveredButtons.forEach(button => {
-                                        button.addEventListener('click', function () {
-                                            // Tìm phần tử form liên quan đến nút được nhấn
-                                            const form = this.closest('form');
 
-                                            // Kiểm tra nếu form tồn tại
-                                            if (form) {
-                                                // Gửi form đi
-                                                form.submit();
+
+                    <!-- The javascript plugin to display page loading on top-->
+                    <script src="./new_assetss/js/plugins/pace.min.js"></script>
+                    <!-- Page specific javascripts-->
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+                    <!-- Data table plugin-->
+                    <script type="text/javascript" src="js/plugins/jquery.dataTables.min.js"></script>
+                    <script type="text/javascript" src="js/plugins/dataTables.bootstrap.min.js"></script>
+                    <script type="text/javascript">$('#sampleTable').DataTable();</script>
+                    <script>
+                        function deleteRow(r) {
+                            var i = r.parentNode.parentNode.rowIndex;
+                            document.getElementById("myTable").deleteRow(i);
+                        }
+                        jQuery(function () {
+                            jQuery(".trash").click(function () {
+                                swal({
+                                    title: "Cảnh báo",
+
+                                    text: "Đã xóa thành công!!",
+                                    buttons: ["Hủy bỏ", "Đồng ý"],
+                                })
+                                        .then((willDelete) => {
+                                            if (willDelete) {
+                                                swal("Đã xóa thành công.!", {
+
+                                                });
                                             }
                                         });
-                                    });
-                                });
-                            </script>
-                            <!-- Essential javascripts for application to work-->
-                            
-                           
-                            
-                            <!-- The javascript plugin to display page loading on top-->
-                            <script src="./new_assetss/js/plugins/pace.min.js"></script>
-                            <!-- Page specific javascripts-->
-                            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
-                            <!-- Data table plugin-->
-                            <script type="text/javascript" src="js/plugins/jquery.dataTables.min.js"></script>
-                            <script type="text/javascript" src="js/plugins/dataTables.bootstrap.min.js"></script>
-                            <script type="text/javascript">$('#sampleTable').DataTable();</script>
-                            <script>
-                                function deleteRow(r) {
-                                    var i = r.parentNode.parentNode.rowIndex;
-                                    document.getElementById("myTable").deleteRow(i);
+                            });
+                        });
+                        oTable = $('#sampleTable').dataTable();
+                        $('#all').click(function (e) {
+                            $('#sampleTable tbody :checkbox').prop('checked', $(this).is(':checked'));
+                            e.stopImmediatePropagation();
+                        });
+
+                        //EXCEL
+                        // $(document).ready(function () {
+                        //   $('#').DataTable({
+
+                        //     dom: 'Bfrtip',
+                        //     "buttons": [
+                        //       'excel'
+                        //     ]
+                        //   });
+                        // });
+
+
+                        //Thời Gian
+                        function time() {
+                            var today = new Date();
+                            var weekday = new Array(7);
+                            weekday[0] = "Chủ Nhật";
+                            weekday[1] = "Thứ Hai";
+                            weekday[2] = "Thứ Ba";
+                            weekday[3] = "Thứ Tư";
+                            weekday[4] = "Thứ Năm";
+                            weekday[5] = "Thứ Sáu";
+                            weekday[6] = "Thứ Bảy";
+                            var day = weekday[today.getDay()];
+                            var dd = today.getDate();
+                            var mm = today.getMonth() + 1;
+                            var yyyy = today.getFullYear();
+                            var h = today.getHours();
+                            var m = today.getMinutes();
+                            var s = today.getSeconds();
+                            m = checkTime(m);
+                            s = checkTime(s);
+                            nowTime = h + " giờ " + m + " phút " + s + " giây";
+                            if (dd < 10) {
+                                dd = '0' + dd
+                            }
+                            if (mm < 10) {
+                                mm = '0' + mm
+                            }
+                            today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+                            tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+                                    '</span>';
+                            document.getElementById("clock").innerHTML = tmp;
+                            clocktime = setTimeout("time()", "1000", "Javascript");
+
+                            function checkTime(i) {
+                                if (i < 10) {
+                                    i = "0" + i;
                                 }
-                                jQuery(function () {
-                                    jQuery(".trash").click(function () {
-                                        swal({
-                                            title: "Cảnh báo",
+                                return i;
+                            }
+                        }
+                        //In dữ liệu
+                        var myApp = new function () {
+                            this.printTable = function () {
+                                var tab = document.getElementById('sampleTable');
+                                var win = window.open('', '', 'height=700,width=700');
+                                win.document.write(tab.outerHTML);
+                                win.document.close();
+                                win.print();
+                            }
+                        }
+                        //     //Sao chép dữ liệu
+                        //     var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
 
-                                            text: "Đã xóa thành công!!",
-                                            buttons: ["Hủy bỏ", "Đồng ý"],
-                                        })
-                                                .then((willDelete) => {
-                                                    if (willDelete) {
-                                                        swal("Đã xóa thành công.!", {
+                        // copyTextareaBtn.addEventListener('click', function(event) {
+                        //   var copyTextarea = document.querySelector('.js-copytextarea');
+                        //   copyTextarea.focus();
+                        //   copyTextarea.select();
 
-                                                        });
-                                                    }
-                                                });
-                                    });
-                                });
-                                oTable = $('#sampleTable').dataTable();
-                                $('#all').click(function (e) {
-                                    $('#sampleTable tbody :checkbox').prop('checked', $(this).is(':checked'));
-                                    e.stopImmediatePropagation();
-                                });
-
-                                //EXCEL
-                                // $(document).ready(function () {
-                                //   $('#').DataTable({
-
-                                //     dom: 'Bfrtip',
-                                //     "buttons": [
-                                //       'excel'
-                                //     ]
-                                //   });
-                                // });
+                        //   try {
+                        //     var successful = document.execCommand('copy');
+                        //     var msg = successful ? 'successful' : 'unsuccessful';
+                        //     console.log('Copying text command was ' + msg);
+                        //   } catch (err) {    
+                        //     console.log('Oops, unable to copy');
+                        //   }
+                        // });
 
 
-                                //Thời Gian
-                                function time() {
-                                    var today = new Date();
-                                    var weekday = new Array(7);
-                                    weekday[0] = "Chủ Nhật";
-                                    weekday[1] = "Thứ Hai";
-                                    weekday[2] = "Thứ Ba";
-                                    weekday[3] = "Thứ Tư";
-                                    weekday[4] = "Thứ Năm";
-                                    weekday[5] = "Thứ Sáu";
-                                    weekday[6] = "Thứ Bảy";
-                                    var day = weekday[today.getDay()];
-                                    var dd = today.getDate();
-                                    var mm = today.getMonth() + 1;
-                                    var yyyy = today.getFullYear();
-                                    var h = today.getHours();
-                                    var m = today.getMinutes();
-                                    var s = today.getSeconds();
-                                    m = checkTime(m);
-                                    s = checkTime(s);
-                                    nowTime = h + " giờ " + m + " phút " + s + " giây";
-                                    if (dd < 10) {
-                                        dd = '0' + dd
-                                    }
-                                    if (mm < 10) {
-                                        mm = '0' + mm
-                                    }
-                                    today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-                                    tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-                                            '</span>';
-                                    document.getElementById("clock").innerHTML = tmp;
-                                    clocktime = setTimeout("time()", "1000", "Javascript");
+                        //Modal
+                        $("#show-emp").on("click", function () {
+                            $("#ModalUP").modal({backdrop: false, keyboard: false})
+                        });
+                    </script>
 
-                                    function checkTime(i) {
-                                        if (i < 10) {
-                                            i = "0" + i;
-                                        }
-                                        return i;
-                                    }
-                                }
-                                //In dữ liệu
-                                var myApp = new function () {
-                                    this.printTable = function () {
-                                        var tab = document.getElementById('sampleTable');
-                                        var win = window.open('', '', 'height=700,width=700');
-                                        win.document.write(tab.outerHTML);
-                                        win.document.close();
-                                        win.print();
-                                    }
-                                }
-                                //     //Sao chép dữ liệu
-                                //     var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
+                    </body>
 
-                                // copyTextareaBtn.addEventListener('click', function(event) {
-                                //   var copyTextarea = document.querySelector('.js-copytextarea');
-                                //   copyTextarea.focus();
-                                //   copyTextarea.select();
-
-                                //   try {
-                                //     var successful = document.execCommand('copy');
-                                //     var msg = successful ? 'successful' : 'unsuccessful';
-                                //     console.log('Copying text command was ' + msg);
-                                //   } catch (err) {    
-                                //     console.log('Oops, unable to copy');
-                                //   }
-                                // });
-
-
-                                //Modal
-                                $("#show-emp").on("click", function () {
-                                    $("#ModalUP").modal({backdrop: false, keyboard: false})
-                                });
-                            </script>
-
-                            </body>
-
-                            </html>
+                    </html>
 

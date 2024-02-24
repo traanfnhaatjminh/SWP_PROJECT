@@ -131,11 +131,11 @@
 
         <div class="login-form">
             <c:set var="cookie" value="${pageContext.request.cookies}" />
-            <form action="marketer?action=checkLogin" method="post">
+            <form action="loginSystem?action=checkLogin" method="post">
                 <p style="color: red; text-align: center;">
                     ${requestScope.error}
                 </p>
-                <h2 class="text-center">Sign in (Marketer)</h2>		
+                <h2 class="text-center">Sign in</h2>		
                 <div class="form-group">
                     <div class="input-group">                
                         <div class="input-group-prepend">

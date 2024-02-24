@@ -16,9 +16,9 @@ import model.Users;
  */
 public class UserDAO extends DBContext {
 
-    public Users Login(String email, String pass) {
+    public Users login(String email, String pass) {
         String sql = "select * from Users\n"
-                + "where email = ? and pass = ? and roleID = 3";
+                + "where email = ? and pass = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, email);
@@ -43,6 +43,34 @@ public class UserDAO extends DBContext {
         }
         return null;
     }
+//
+//    public Users loginAdmin(String email, String pass) {
+//        String sql = "select * from Users\n"
+//                + "where email = ? and pass = ? and roleID = 2";
+//        try {
+//            PreparedStatement st = connection.prepareStatement(sql);
+//            st.setString(1, email);
+//            st.setString(2, pass);
+//            ResultSet rs = st.executeQuery();
+//            while (rs.next()) {
+//                return new Users(
+//                        rs.getInt(1),
+//                        rs.getString(2),
+//                        rs.getString(3),
+//                        rs.getString(4),
+//                        rs.getString(5),
+//                        rs.getString(6),
+//                        rs.getString(7),
+//                        rs.getString(8),
+//                        rs.getInt(9),
+//                        rs.getInt(10));
+//
+//            }
+//        } catch (SQLException e) {
+//            System.out.println(e);
+//        }
+//        return null;
+//    }
 
     public void changePass(String pass, String email) {
         String sql = "update Users\n"

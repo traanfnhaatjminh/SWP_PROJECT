@@ -19,8 +19,8 @@ import model.Users;
  *
  * @author minh1
  */
-@WebServlet(name = "LoginMarketer", urlPatterns = {"/marketer"})
-public class LoginMarketer extends HttpServlet {
+@WebServlet(name = "LoginSystem", urlPatterns = {"/loginSystem"})
+public class LoginSystem extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,42 +36,64 @@ public class LoginMarketer extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
         if (action.equals("login")) {
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("loginSystem.jsp").forward(request, response);
         }
         if (action.equals("checkLogin")) {
-            String marketer_email = request.getParameter("c_email");
-            String marketer_pass = request.getParameter("c_pass");
+            String user_email = request.getParameter("c_email");
+            String user_pass = request.getParameter("c_pass");
             String remember = request.getParameter("remember");
             UserDAO dao = new UserDAO();
-            Users user = dao.Login(marketer_email, marketer_pass);
+            Users user = dao.login(user_email, user_pass);
             if (user == null) {
                 request.setAttribute("error", "Account does not exist or wrong password!");
                 request.getRequestDispatcher("customer?action=login").forward(request, response);
             } else {
-                HttpSession session = request.getSession();
-                session.setAttribute("marketer", user);
-                Cookie email = new Cookie("email", marketer_email);
-                Cookie pass = new Cookie("pass", marketer_pass);
-                Cookie rem = new Cookie("rememeber", remember);
-                if (remember != null) {
-                    email.setMaxAge(60 * 60 * 24 * 30);
-                    pass.setMaxAge(60 * 60 * 24 * 30);
-                    rem.setMaxAge(60 * 60 * 24 * 30);
-                } else {
-                    email.setMaxAge(0);
-                    pass.setMaxAge(0);
-                    rem.setMaxAge(0);
-                }
+                if (user.getRoleID() == 3) {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("marketer", user);
+                    Cookie email = new Cookie("email", user_email);
+                    Cookie pass = new Cookie("pass", user_pass);
+                    Cookie rem = new Cookie("rememeber", remember);
+                    if (remember != null) {
+                        email.setMaxAge(60 * 60 * 24 * 30);
+                        pass.setMaxAge(60 * 60 * 24 * 30);
+                        rem.setMaxAge(60 * 60 * 24 * 30);
+                    } else {
+                        email.setMaxAge(0);
+                        pass.setMaxAge(0);
+                        rem.setMaxAge(0);
+                    }
 
-                response.addCookie(email);
-                response.addCookie(pass);
-                response.addCookie(rem);
-                response.sendRedirect("blog");
+                    response.addCookie(email);
+                    response.addCookie(pass);
+                    response.addCookie(rem);
+                    response.sendRedirect("blog");
+                } else if (user.getRoleID() == 2) {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("admin", user);
+                    Cookie email = new Cookie("email", user_email);
+                    Cookie pass = new Cookie("pass", user_pass);
+                    Cookie rem = new Cookie("rememeber", remember);
+                    if (remember != null) {
+                        email.setMaxAge(60 * 60 * 24 * 30);
+                        pass.setMaxAge(60 * 60 * 24 * 30);
+                        rem.setMaxAge(60 * 60 * 24 * 30);
+                    } else {
+                        email.setMaxAge(0);
+                        pass.setMaxAge(0);
+                        rem.setMaxAge(0);
+                    }
+                    response.addCookie(email);
+                    response.addCookie(pass);
+                    response.addCookie(rem);
+                    response.sendRedirect("userlist");
+                }
             }
         }
         if (action.equals("logout")) {
             HttpSession session = request.getSession();
             session.removeAttribute("marketer");
+            session.removeAttribute("admin");
             response.sendRedirect("home");
         }
 //        if (action.equals("updateinfor")) {
@@ -117,7 +139,7 @@ public class LoginMarketer extends HttpServlet {
                     return;
                 }
                 UserDAO dao = new UserDAO();
-                Users user = dao.Login(marketer_email, marketer_opass);
+                Users user = dao.login(marketer_email, marketer_opass);
                 if (user == null) {
                     String ms = "old password incorrect";
                     request.setAttribute("ms", ms);

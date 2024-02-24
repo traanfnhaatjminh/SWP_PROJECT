@@ -32,6 +32,10 @@ ORDER BY blogID
 OFFSET (1 - 1) * 6 ROWS
 FETCH NEXT 6 ROWS ONLY;
 
+select * from product
+where cid = 1
+order by [name] asc
+
 insert into product([name],[original_price],[sale_price],quantity,describe,[image],cid,sellerID)
 values 
  ('$MAKER THINGS TEE IN WHITE',600.000,500.00,20,N'Unisex,Oversize,100% Cotton,In nổi,Model wears size L','https://smakerclothing.com/upload/sanpham/dscf9477-1710.jpg',1,1),
@@ -60,7 +64,7 @@ values
   ('TENVOVEN MERCH MONEY ISLAND SHORTS IN CREAM',650.000,550.00,17,N'Unisex,100% Mesh,Model wears size L','https://smakerclothing.com/upload/sanpham/dsc02295-8157.jpg',3,1),
   ('TETVOVEN MERCH MONEY ISLAND TEE IN CREAM',650.000,550.00,17,N'Unisex,Oversize,100% Cotton,Model wears size L','https://smakerclothing.com/upload/sanpham/dsc02310-9140.jpg',1,1)
 
-
+  select * from [Order]
 create table Customer (
 customerID int identity(1,1) primary key,
 fullName varchar(45),
@@ -72,7 +76,7 @@ email varchar(45),
 avatar nvarchar(100),
 )
 
-drop table Users
+select * from Customer
 
 create table [Users](
 [userID] int identity(1,1) primary key,
@@ -90,6 +94,7 @@ FOREIGN KEY (roleID) REFERENCES Roles(roleID)
 
 insert into Users(userName, gender, email, mobile, avatar, [address], pass, roleID, userPoint)
 values 
+('tahoang','male', 'tahoang@gmail.com','0969112003','null','ha noi','123',2,0),
 ('nhatminh','male', 'minhnhat@gmail.com','0969102003','null','tu son','123',3,0)
 
 select * from Users

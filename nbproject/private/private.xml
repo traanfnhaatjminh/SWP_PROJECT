@@ -2,6 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/src/java/controller/EditBlog.java</file>
+            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/src/java/controller/PostCategory.java</file>
+            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/web/EditBlog.jsp</file>
+            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/web/post.jsp</file>
+            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/web/blogDetail.jsp</file>
+            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/src/java/controller/BlogDetail.java</file>
+        </group>
     </open-files>
 </project-private>

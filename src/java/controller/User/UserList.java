@@ -114,7 +114,7 @@ public class UserList extends HttpServlet {
                     break;
             }
 
-            int userPerPage = 8;
+            int userPerPage = 6;
             try {
                 userPerPage = Integer.parseInt(request.getParameter("userPerPage"));
             } catch (Exception e) {
