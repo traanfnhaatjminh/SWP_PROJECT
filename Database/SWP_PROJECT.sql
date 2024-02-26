@@ -251,15 +251,18 @@ Mỗi nhãn hiệu thường có bảng size riêng của mình. Hãy kiểm tra
 
 
 create table Feedback (
-feedbackID int primary key not null,
+feedbackID int IDENTITY(1,1) primary key not null,
 customerID int,
 content nvarchar(1000),
 productID int,
 postDate Date,
 rate_star float,
+[status] nvarchar(20),
 FOREIGN KEY (customerID) REFERENCES Customer(customerID),
 FOREIGN KEY (productID) REFERENCES [product](id)
 )
+
+drop table Feedback
 
 create table OrderStatus (
 orderStatusID int primary key,
