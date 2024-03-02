@@ -20,6 +20,7 @@ public class Order {
     private int orderPhone;
     private String orderStatus;
     private float totalCost;
+    private int sellerID;
 
     public Order() {
     }
@@ -104,5 +105,12 @@ public class Order {
         this.totalCost = totalCost;
     }
 
-    
+    public int getSellerID() {
+        return sellerID;
+    }
+
+    public void setSellerID(int sellerID) {
+        this.sellerID = sellerID;
+    }
+
 }

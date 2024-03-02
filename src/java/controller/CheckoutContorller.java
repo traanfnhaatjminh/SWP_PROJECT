@@ -26,7 +26,6 @@ import model.Order;
 import model.Product;
 import model.Users;
 
-
 @WebServlet(name = "CheckoutContorller", urlPatterns = {"/checkout"})
 public class CheckoutContorller extends HttpServlet {
 
@@ -73,6 +72,8 @@ public class CheckoutContorller extends HttpServlet {
         String gender = request.getParameter("gender");
         String notes = request.getParameter("notes");
         String methodPayment = request.getParameter("payment");
+        String totalCost_raw = request.getParameter("totalCost");
+        float totalCost = Float.parseFloat(totalCost_raw);
         System.out.println(gender);
         DAO d = new DAO();
         String txt = "";
@@ -93,7 +94,7 @@ public class CheckoutContorller extends HttpServlet {
         Customer customer = (Customer) session.getAttribute("customer");
         if (customer != null) {
             OrderDAO odb = new OrderDAO();
-            odb.addOrder(name, phone, address, email, gender, notes, cart, customer);
+            odb.addOrder(name, phone, address, email, gender, notes, cart, customer, "1", totalCost, 1);
             String textPayment = (methodPayment.equals("cash")) ? " <div class=\"form-group\">\n"
                     + " <label for=\"cash\">Payment on delivery</label> </div>"
                     : "<div  id=\"qr\">\n"

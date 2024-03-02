@@ -10,8 +10,7 @@ values
 (3, 'SHORT'),
 (4, 'PANTS')
 
-create database Swp_Project
-drop database Swp_Project
+drop table product
 
 create table product
 (
@@ -44,7 +43,7 @@ values
  ('$MAKER X SWE CARGO FLARE PANTS IN BROWN',750.000,650.000,11,'NUnisex,Straigh form,100% jean,Model wears size L','https://smakerclothing.com/upload/sanpham/1-(5)-1007.jpg',4),
  ('CUSTOMIZE FLARE SWEAT PANTS IN BLACK',1150.000,1050.000,20,N'Hand made custom (vẽ sơn bằng tay),Unisex,100% Cotton ( Nỉ ),Model wears size L','https://smakerclothing.com/upload/sanpham/img_6182-0014.jpg',4)
 
-insert into product([name],original_price,[sale_price],quantity,describe,[image],cid,sellerID)
+insert into product([name],original_price,[sale_price],quantity,describe,[image],cid)
 values 
  ('NONE OF THIS MATTERS ANYMORE TEE IN CREAM',550.000,450.00,17,N'Unisex,Oversize,100% Cotton,Model wears size L','https://smakerclothing.com/upload/sanpham/dsc00138-9101.jpg',1),
   ('CHAMPION TEE IN WHITE',550.000,450.00,17,N'Unisex,Oversize,100% Cotton,Model wears size L','https://smakerclothing.com/upload/sanpham/dsc00133-0775.jpg',1),
@@ -54,7 +53,7 @@ values
   ('TENVOVEN MERCH MONEY ISLAND SHORTS IN CREAM',650.000,550.00,17,N'Unisex,100% Mesh,Model wears size L','https://smakerclothing.com/upload/sanpham/dsc02295-8157.jpg',3),
   ('TETVOVEN MERCH MONEY ISLAND TEE IN CREAM',650.000,550.00,17,N'Unisex,Oversize,100% Cotton,Model wears size L','https://smakerclothing.com/upload/sanpham/dsc02310-9140.jpg',1)
 
-                                       
+                                     
 create table Customer (
 customerID int identity(1,1) primary key,
 fullName varchar(45),
@@ -65,7 +64,6 @@ email varchar(45),
 [address] nvarchar(100),
 avatar nvarchar(100),
 )
-
 
 create table [Users](
 [userID] int identity(1,1) primary key,
@@ -196,6 +194,7 @@ FOREIGN KEY (customerID) REFERENCES Customer(customerID),
 FOREIGN KEY (productID) REFERENCES [product](id)
 )
 
+select * from [Order]
 
 create table [Order](
 orderID int IDENTITY(1,1) primary key NOT NULL,

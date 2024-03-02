@@ -18,7 +18,7 @@ public class OrderDAO extends DBContext {
 
     public void addOrder(String name, String phone, String address, String email,
             String gender, String notes, Cart cart, Customer customer,
-            String orderStatus, float totalCost) {
+            String orderStatus, float totalCost, int sellerID) {
         System.out.println(phone);
         Date date = new Date();
         Timestamp timestamp = new Timestamp(date.getTime());
@@ -33,9 +33,10 @@ public class OrderDAO extends DBContext {
                     + "           ,[orderAddress]\n"
                     + "           ,[orderPhone]\n"
                     + "           ,[orderStatus]\n"
-                    + "           ,[totalCost])\n"
+                    + "           ,[totalCost]"
+                    + "           ,[sellerID])\n"
                     + "     VALUES\n"
-                    + "           (?,?,?,?,?,?,?,?,?)";
+                    + "           (?,?,?,?,?,?,?,?,?,?)";
 
             PreparedStatement stOrder = connection.prepareStatement(sql);
             stOrder.setInt(1, customer.getCustomerID());
@@ -47,6 +48,7 @@ public class OrderDAO extends DBContext {
             stOrder.setString(7, phone);
             stOrder.setString(8, orderStatus);
             stOrder.setFloat(9, totalCost);
+            stOrder.setInt(10, sellerID);
             stOrder.executeUpdate();
             // 
         } catch (SQLException e) {

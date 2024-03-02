@@ -46,11 +46,11 @@
                         <!--<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>-->
                         <c:if test="${sessionScope.customer == null}">
                             <li><a href="login.jsp"><i class="fa fa-"></i> Login</a></li>
-                        </c:if>
-                        <c:if test="${sessionScope.customer != null}">
+                            </c:if>
+                            <c:if test="${sessionScope.customer != null}">
                             <li><a href="profile.jsp"><i class="fa fa-user-o"></i> My Account</a></li>
                             <li><a href="customer?action=logout"><i class="fa fa-"></i> Logout</a></li>
-                        </c:if>
+                            </c:if>
                     </ul>
                 </div>
             </div>
@@ -66,7 +66,7 @@
                         <div class="col-md-3">
                             <div class="header-logo">
                                 <a href="home" class="logo">
-                                    CLOTHINGMAKER
+                                    <!--CLOTHINGMAKER-->
                                 </a>
                             </div>
                         </div>
@@ -209,7 +209,7 @@
                 <div class="d-flex flex-column justify-content-between align-items-end flex-wrap">
                     <div class="d-flex px-3 pr-md-5 subtotal col-12">
                         <div class="px-4">Subtotal:</div>
-                        <div class="h5 font-weight-bold px-md-2">$${cart.getTotalMoney()}</div>
+                        <div class="h5 font-weight-bold px-md-2">${cart.getTotalMoney()}</div>
                     </div>
                 </div>
             </div>
@@ -228,7 +228,7 @@
                             <input name="phone" type="text" id="phone" value="${customer.phone}" class="form-control mb-2" placeholder="Phone number" pattern="^0[2-9]{3}[0-9]{6}" required autofocus>
                         </div>
                     </div>
-
+                    <input type="hidden" name="totalCost" value="${cart.getTotalMoney()}">
                     <div class="form-group">
                         <label for="address">Address</label>
                         <input name="address" type="text" id="address" value="${customer.address}"  class="form-control mb-2" placeholder="Address" required autofocus>
@@ -251,7 +251,6 @@
                         <label for="notes">Notes</label>
                         <textarea class="form-control" name="notes" id="notes" rows="3"></textarea>
                     </div>
-
 
                     <!--Payment-->
                     <div class="form-group pay" id="payment">
