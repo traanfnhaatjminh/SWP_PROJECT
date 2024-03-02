@@ -21,8 +21,24 @@ public class Users {
     private String user_role_name;
     private int roleID;
     private double userPoint;
+    private int userStatus;
 
     public Users() {
+    }
+
+    public Users(int userID, String userName, String gender, String email, String mobile, String avatar, String address, String password, String user_role_name, int roleID, double userPoint, int userStatus) {
+        this.userID = userID;
+        this.userName = userName;
+        this.gender = gender;
+        this.email = email;
+        this.mobile = mobile;
+        this.avatar = avatar;
+        this.address = address;
+        this.password = password;
+        this.user_role_name = user_role_name;
+        this.roleID = roleID;
+        this.userPoint = userPoint;
+        this.userStatus = userStatus;
     }
 
     public Users(int userID, String userName, String gender, String email, String mobile, String avatar, String address, String password, String user_role_name, int roleID, double userPoint) {
@@ -194,5 +210,14 @@ public class Users {
     public void setUserPoint(double userPoint) {
         this.userPoint = userPoint;
     }
+
+    public int getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(int userStatus) {
+        this.userStatus = userStatus;
+    }
+    
 
 }

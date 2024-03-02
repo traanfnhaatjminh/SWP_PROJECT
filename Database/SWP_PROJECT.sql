@@ -11,6 +11,7 @@ values
 (4, 'PANTS')
 
 create database Swp_Project
+drop database Swp_Project
 
 create table product
 (
@@ -21,51 +22,39 @@ create table product
 quantity int,
 [describe] nvarchar(1000) NULL,
 [image] nvarchar(100) NULL,
-cid int,
-sellerID int
-FOREIGN KEY (cid) REFERENCES Category(cid),
+cid int
+FOREIGN KEY (cid) REFERENCES Category(cid)
 )
 
-SELECT *
-FROM Blog
-ORDER BY blogID
-OFFSET (1 - 1) * 6 ROWS
-FETCH NEXT 6 ROWS ONLY;
-
-select * from product
-where cid = 1
-order by [name] asc
-
-insert into product([name],[original_price],[sale_price],quantity,describe,[image],cid,sellerID)
+insert into product([name],[original_price],[sale_price],quantity,describe,[image],cid)
 values 
- ('$MAKER THINGS TEE IN WHITE',600.000,500.00,20,N'Unisex,Oversize,100% Cotton,In nổi,Model wears size L','https://smakerclothing.com/upload/sanpham/dscf9477-1710.jpg',1,1),
- ('I GOT HOMIES IN SAUDI TEE IN BLACK',500.000,400.00,14,N'Unisex,Oversize,100% Cotton,In nổi,Model wears size L','https://smakerclothing.com/upload/sanpham/dscf9495-2979.jpg',1,1),
- ('I GOT MONEY IN SAUDI TEE IN WHITE',500.000,400.00,11,N'Unisex,Oversize,100% Cotton,In nổi,Model wears size L','https://smakerclothing.com/upload/sanpham/dscf9491-3408.jpg',1,1),
- ('YACHT CLUB TANK TOP IN DARK PURPLE',600.000,500.00,10,N'Unisex,Oversize,100% Cotton,Model wears size L','https://smakerclothing.com/upload/sanpham/dscf9521-6368.jpg',1,1),
- ('YACHT CLUB TEE IN BROWN',600.000,500.00,12,N'Unisex,Oversize,100% Cotton,Model wears size L','https://smakerclothing.com/upload/sanpham/dscf9514-4152.jpg',1,1),
- ('MONEY ON MY MIND TEE IN BLACK',550.000,450.00,13,N'Unisex,Oversize,100% Cotton,Model wears size L','https://smakerclothing.com/upload/sanpham/dscf9444-8531.jpg',1,1),
- ('EMBOSSED LOGOS STRAIGHT JEANS',950.000,850.00,17,N'Unisex,Straigh form,Denim,Model wears size 32','https://smakerclothing.com/upload/sanpham/dsc02893-4369.jpg',2,1),
- ('BORN BROKE DIE RICH MESH SHORT IN CREAM',650.000,550.00,15,N'Unisex,100% Mesh,Model wears size L','https://smakerclothing.com/upload/sanpham/dscf9407-4077.jpg',3,3),
- ('STRIPES KHAKI PANTS IN BROWN',800.000,700.00,18,N'Unisex,Straight Fit,100% Cotton,Model wears size L','https://smakerclothing.com/upload/sanpham/dscf8299-9001.jpg',4,3),
- ('$MAKER STRAIGHT JEANS IN BLUE',800.000,700.000,12,N'Unisex,Straigh form,Denim,Model wears size 32','https://smakerclothing.com/upload/sanpham/dscf8683-0961.jpg',2,3),
- ('LOGO STRAIGHT JEANS IN LIGHT BLUE',850.000,750.000,14,N'Unisex,Straigh form,Denim,Model wears size 32','https://smakerclothing.com/upload/sanpham/dscf7049-7331.jpg',2,3),
- ('$MAKER SHORT ON FIRE IN BLACK',700.000,600.000,19,N'Unisex,Draper & Cotton,Model wears size L','https://smakerclothing.com/upload/sanpham/dsc00766-4281.jpg',3,3),
- ('$MAKER CORDUROY SHORT IN TAN',650.000,550.000,13,N'Unisex,100% Mesh,Model wears size L','https://smakerclothing.com/upload/sanpham/dsc00754-4189.jpg',3,3),
- ('$MAKER X SWE CARGO FLARE PANTS IN BROWN',750.000,650.000,11,'NUnisex,Straigh form,100% jean,Model wears size L','https://smakerclothing.com/upload/sanpham/1-(5)-1007.jpg',4,3),
- ('CUSTOMIZE FLARE SWEAT PANTS IN BLACK',1150.000,1050.000,20,N'Hand made custom (vẽ sơn bằng tay),Unisex,100% Cotton ( Nỉ ),Model wears size L','https://smakerclothing.com/upload/sanpham/img_6182-0014.jpg',4,3)
+ ('$MAKER THINGS TEE IN WHITE',600.000,500.00,20,N'Unisex,Oversize,100% Cotton,In nổi,Model wears size L','https://smakerclothing.com/upload/sanpham/dscf9477-1710.jpg',1),
+ ('I GOT HOMIES IN SAUDI TEE IN BLACK',500.000,400.00,14,N'Unisex,Oversize,100% Cotton,In nổi,Model wears size L','https://smakerclothing.com/upload/sanpham/dscf9495-2979.jpg',1),
+ ('I GOT MONEY IN SAUDI TEE IN WHITE',500.000,400.00,11,N'Unisex,Oversize,100% Cotton,In nổi,Model wears size L','https://smakerclothing.com/upload/sanpham/dscf9491-3408.jpg',1),
+ ('YACHT CLUB TANK TOP IN DARK PURPLE',600.000,500.00,10,N'Unisex,Oversize,100% Cotton,Model wears size L','https://smakerclothing.com/upload/sanpham/dscf9521-6368.jpg',1),
+ ('YACHT CLUB TEE IN BROWN',600.000,500.00,12,N'Unisex,Oversize,100% Cotton,Model wears size L','https://smakerclothing.com/upload/sanpham/dscf9514-4152.jpg',1),
+ ('MONEY ON MY MIND TEE IN BLACK',550.000,450.00,13,N'Unisex,Oversize,100% Cotton,Model wears size L','https://smakerclothing.com/upload/sanpham/dscf9444-8531.jpg',1),
+ ('EMBOSSED LOGOS STRAIGHT JEANS',950.000,850.00,17,N'Unisex,Straigh form,Denim,Model wears size 32','https://smakerclothing.com/upload/sanpham/dsc02893-4369.jpg',2),
+ ('BORN BROKE DIE RICH MESH SHORT IN CREAM',650.000,550.00,15,N'Unisex,100% Mesh,Model wears size L','https://smakerclothing.com/upload/sanpham/dscf9407-4077.jpg',3),
+ ('STRIPES KHAKI PANTS IN BROWN',800.000,700.00,18,N'Unisex,Straight Fit,100% Cotton,Model wears size L','https://smakerclothing.com/upload/sanpham/dscf8299-9001.jpg',4),
+ ('$MAKER STRAIGHT JEANS IN BLUE',800.000,700.000,12,N'Unisex,Straigh form,Denim,Model wears size 32','https://smakerclothing.com/upload/sanpham/dscf8683-0961.jpg',2),
+ ('LOGO STRAIGHT JEANS IN LIGHT BLUE',850.000,750.000,14,N'Unisex,Straigh form,Denim,Model wears size 32','https://smakerclothing.com/upload/sanpham/dscf7049-7331.jpg',2),
+ ('$MAKER SHORT ON FIRE IN BLACK',700.000,600.000,19,N'Unisex,Draper & Cotton,Model wears size L','https://smakerclothing.com/upload/sanpham/dsc00766-4281.jpg',3),
+ ('$MAKER CORDUROY SHORT IN TAN',650.000,550.000,13,N'Unisex,100% Mesh,Model wears size L','https://smakerclothing.com/upload/sanpham/dsc00754-4189.jpg',3),
+ ('$MAKER X SWE CARGO FLARE PANTS IN BROWN',750.000,650.000,11,'NUnisex,Straigh form,100% jean,Model wears size L','https://smakerclothing.com/upload/sanpham/1-(5)-1007.jpg',4),
+ ('CUSTOMIZE FLARE SWEAT PANTS IN BLACK',1150.000,1050.000,20,N'Hand made custom (vẽ sơn bằng tay),Unisex,100% Cotton ( Nỉ ),Model wears size L','https://smakerclothing.com/upload/sanpham/img_6182-0014.jpg',4)
 
 insert into product([name],original_price,[sale_price],quantity,describe,[image],cid,sellerID)
 values 
- ('NONE OF THIS MATTERS ANYMORE TEE IN CREAM',550.000,450.00,17,N'Unisex,Oversize,100% Cotton,Model wears size L','https://smakerclothing.com/upload/sanpham/dsc00138-9101.jpg',1,1),
-  ('CHAMPION TEE IN WHITE',550.000,450.00,17,N'Unisex,Oversize,100% Cotton,Model wears size L','https://smakerclothing.com/upload/sanpham/dsc00133-0775.jpg',1,1),
- ('420 PICNIC TEE IN BLACK',600.000,500.00,15,N'Unisex,Oversize,100% Cotton,Model wears size L','https://smakerclothing.com/upload/sanpham/dsc00747-2973.jpg',1,1),
- ('MONEY IS A BAD MASTER TEE IN BLACK',550.000,450.00,12,N'Unisex,Oversize,100% Cotton,Model wears size L','https://smakerclothing.com/upload/sanpham/dsc09817-1991.jpg',1,3),
- ('THE LOGOS TEE IN BLACK',600.000,500.00,16,N'Unisex,Oversize,100% Cotton,Model wears size L','https://smakerclothing.com/upload/sanpham/dsc09747-4373.jpg',1,3),
-  ('TENVOVEN MERCH MONEY ISLAND SHORTS IN CREAM',650.000,550.00,17,N'Unisex,100% Mesh,Model wears size L','https://smakerclothing.com/upload/sanpham/dsc02295-8157.jpg',3,1),
-  ('TETVOVEN MERCH MONEY ISLAND TEE IN CREAM',650.000,550.00,17,N'Unisex,Oversize,100% Cotton,Model wears size L','https://smakerclothing.com/upload/sanpham/dsc02310-9140.jpg',1,1)
+ ('NONE OF THIS MATTERS ANYMORE TEE IN CREAM',550.000,450.00,17,N'Unisex,Oversize,100% Cotton,Model wears size L','https://smakerclothing.com/upload/sanpham/dsc00138-9101.jpg',1),
+  ('CHAMPION TEE IN WHITE',550.000,450.00,17,N'Unisex,Oversize,100% Cotton,Model wears size L','https://smakerclothing.com/upload/sanpham/dsc00133-0775.jpg',1),
+ ('420 PICNIC TEE IN BLACK',600.000,500.00,15,N'Unisex,Oversize,100% Cotton,Model wears size L','https://smakerclothing.com/upload/sanpham/dsc00747-2973.jpg',1),
+ ('MONEY IS A BAD MASTER TEE IN BLACK',550.000,450.00,12,N'Unisex,Oversize,100% Cotton,Model wears size L','https://smakerclothing.com/upload/sanpham/dsc09817-1991.jpg',1),
+ ('THE LOGOS TEE IN BLACK',600.000,500.00,16,N'Unisex,Oversize,100% Cotton,Model wears size L','https://smakerclothing.com/upload/sanpham/dsc09747-4373.jpg',1),
+  ('TENVOVEN MERCH MONEY ISLAND SHORTS IN CREAM',650.000,550.00,17,N'Unisex,100% Mesh,Model wears size L','https://smakerclothing.com/upload/sanpham/dsc02295-8157.jpg',3),
+  ('TETVOVEN MERCH MONEY ISLAND TEE IN CREAM',650.000,550.00,17,N'Unisex,Oversize,100% Cotton,Model wears size L','https://smakerclothing.com/upload/sanpham/dsc02310-9140.jpg',1)
 
                                        
-select * from [Order]
 create table Customer (
 customerID int identity(1,1) primary key,
 fullName varchar(45),
@@ -77,7 +66,6 @@ email varchar(45),
 avatar nvarchar(100),
 )
 
-drop table [Users]
 
 create table [Users](
 [userID] int identity(1,1) primary key,
@@ -98,12 +86,6 @@ insert into Users(userName, gender, email, mobile, avatar, [address], pass, role
 values 
 ('tahoang','male', 'tahoang@gmail.com','0969112003','null','ha noi','123',2,0),
 ('nhatminh','male', 'minhnhat@gmail.com','0969102003','null','tu son','123',3,0)
-
-select * from Users
-where email = 'minhnhat@gmail.com' and pass = '123' and roleID = 3
-
-update Users
-set email = ? and pass = ?
 
 create table Roles (
 roleID int primary key,
@@ -128,24 +110,6 @@ blogCategoryID int,
 FOREIGN KEY (blogCategoryID) REFERENCES Blog_Category(blogCategoryID),
 )
 
-SELECT * 
-FROM Blog
-WHERE [status] IN ('', 'Private')
-ORDER BY blogID
-OFFSET (1 - 1) * 6 ROWS
-FETCH NEXT 6 ROWS ONLY;
-
-SELECT * 
-FROM Blog
-WHERE blogCategoryID IN (SELECT blogCategoryID FROM Blog_Category WHERE blogCategoryName IN (?, ?, ?,?))
-ORDER BY blogID
-OFFSET (? - 1) * 6 ROWS
-FETCH NEXT 6 ROWS ONLY;
-
-
-select * from Blog
-where blogID = ?
-
 create table Blog_Category(
 blogCategoryID int primary key,
 blogCategoryName varchar(70)
@@ -157,38 +121,6 @@ values
 (2, 'Mix-Match Guides'),
 (3, 'Size and style guides'),
 (4, 'Clothing Care')
-
-select top 1 * from Blog
-order by blogID desc
-
-select * from Blog
-where blogTitle like N'%thời trang%'
-ORDER BY blogID
-OFFSET (? - 1) * 6 ROWS
-FETCH NEXT 6 ROWS ONLY;
-
-
-select bc.blogCategoryName from Blog b join Blog_Category bc
-on b.blogCategoryID = bc.blogCategoryID
-where b.blogID = ?
-
-select * from Blog
-where blogCategoryID = ?
-ORDER BY blogID
-OFFSET (? - 1) * 6 ROWS
-FETCH NEXT 6 ROWS ONLY;
-
-select * from Blog
-order by blogTitle asc
-OFFSET (? - 1) * 6 ROWS
-FETCH NEXT 6 ROWS ONLY;
-
-
-delete from Blog
-
-update Blog
-set blogImage = 'https://scontent.fhan20-1.fna.fbcdn.net/v/t39.30808-6/424955160_18390507340069644_4939818498350141077_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=3635dc&_nc_ohc=jBn7z0_yEaIAX9Ro2m-&_nc_ht=scontent.fhan20-1.fna&oh=00_AfBppNOzB0HJS42jzCRnd9yEeuCNWLRxmo2pvJVDMb2c7w&oe=65C2E7A9'
-where blogID = 9
 
 insert into Blog(blogTitle, blogImage, postDate, content, author,[status], blogCategoryID)
 values
@@ -264,7 +196,6 @@ FOREIGN KEY (customerID) REFERENCES Customer(customerID),
 FOREIGN KEY (productID) REFERENCES [product](id)
 )
 
-drop table Feedback
 
 create table [Order](
 orderID int IDENTITY(1,1) primary key NOT NULL,
@@ -277,12 +208,9 @@ orderAddress nvarchar(100),
 orderPhone nvarchar(20),
 orderStatus nvarchar(50),
 totalCost float,
+sellerID int,
 FOREIGN KEY (customerID) REFERENCES Customer(customerID)
 )
-
-drop table [OrderStatus]
-select * from [orderDetail]
-
 
 create table orderDetail(
 detailID int IDENTITY(1,1) NOT NULL,
@@ -295,22 +223,12 @@ FOREIGN KEY (orderID) REFERENCES [Order](orderID),
 FOREIGN KEY (productID) REFERENCES product(id),
 )
 
-select * from [Order]
-select * from orderDetail
-select * from Customer
-drop table Customer
-select * from Category
-
 create table Post(
 postID int primary key,
 postTitle nvarchar(100),
 postImage varchar(500),
 postContent nvarchar(100)
 )
-
-select top 2 * from Post
-order by postID desc
-delete from Post
 
 insert into Post (postID, postTitle, postImage, postContent)
 values 
@@ -322,13 +240,6 @@ sliderID int primary key,
 sliderTitle nvarchar(300),
 sliderImage varchar(500),
 )
-
-select top 3 * from Slider
-where sliderID between ? and ?
-order by sliderID asc
-
-delete from Slider
-select * from slider
 
 insert into Slider(sliderID, sliderTitle, sliderImage)
 values 

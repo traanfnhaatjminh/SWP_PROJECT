@@ -16,7 +16,9 @@ import model.Users;
  */
 public class OrderDAO extends DBContext {
 
-    public void addOrder(String name, String phone, String address, String email, String gender, String notes, Cart cart, Customer customer) {
+    public void addOrder(String name, String phone, String address, String email,
+            String gender, String notes, Cart cart, Customer customer,
+            String orderStatus, float totalCost) {
         System.out.println(phone);
         Date date = new Date();
         Timestamp timestamp = new Timestamp(date.getTime());
@@ -25,24 +27,26 @@ public class OrderDAO extends DBContext {
             String sql = "INSERT INTO [dbo].[Order]\n"
                     + "           ([customerID]\n"
                     + "           ,[orderName]\n"
-                    + "           ,[orderStatusID]\n"
                     + "           ,[orderDiscount]\n"
                     + "           ,[orderDate]\n"
                     + "           ,[notes]\n"
                     + "           ,[orderAddress]\n"
-                    + "           ,[orderPhone])\n"
+                    + "           ,[orderPhone]\n"
+                    + "           ,[orderStatus]\n"
+                    + "           ,[totalCost])\n"
                     + "     VALUES\n"
-                    + "           (?,?,?,?,?,?,?,?)";
+                    + "           (?,?,?,?,?,?,?,?,?)";
 
             PreparedStatement stOrder = connection.prepareStatement(sql);
             stOrder.setInt(1, customer.getCustomerID());
             stOrder.setString(2, name);
-            stOrder.setInt(3, 3);
-            stOrder.setInt(4, 0);
-            stOrder.setTimestamp(5, timestamp);
-            stOrder.setString(6, notes);
-            stOrder.setString(7, address);
-            stOrder.setString(8, phone);
+            stOrder.setInt(3, 0);
+            stOrder.setTimestamp(4, timestamp);
+            stOrder.setString(5, notes);
+            stOrder.setString(6, address);
+            stOrder.setString(7, phone);
+            stOrder.setString(8, orderStatus);
+            stOrder.setFloat(9, totalCost);
             stOrder.executeUpdate();
             // 
         } catch (SQLException e) {

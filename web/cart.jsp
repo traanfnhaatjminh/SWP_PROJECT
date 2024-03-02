@@ -66,7 +66,7 @@
                         <div class="col-md-3">
                             <div class="header-logo">
                                 <a href="home" class="logo">
-                                    $MAKER
+                                    CLOTHINGMAKER
                                 </a>
                             </div>
                         </div>
@@ -150,7 +150,7 @@
                                     <td class="d-flex flex-column">${c.product.sale_price}$
                                     </td>
                                     <td class="font-weight-bold">
-                                        $${c.quantity*c.product.sale_price}
+                                        ${c.quantity*c.product.sale_price}
                                     </td>
                                     <td>
                                         <div class="text-center">
@@ -173,7 +173,7 @@
                 <div class="d-flex flex-column justify-content-between align-items-end flex-wrap">
                     <div class="d-flex px-3 pr-md-5 subtotal col-12">
                         <div class="px-4">Subtotal:</div>
-                        <div class="h5 font-weight-bold px-md-2">$${cart.getTotalMoney()}</div>
+                        <div class="h5 font-weight-bold px-md-2">${cart.getTotalMoney()}</div>
                     </div>
                 </div>
                 <div class="px-4">

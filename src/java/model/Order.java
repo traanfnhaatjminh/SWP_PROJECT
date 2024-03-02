@@ -9,41 +9,19 @@ package model;
  * @author minh1
  */
 public class Order {
-//    orderID int IDENTITY(1,1) primary key NOT NULL,
-//userID int,
-//orderName nvarchar(60),
-//orderStatusID int,
-//orderDiscount int,
-//orderDate Date,
-//notes nvarchar(1000),
-//orderAddress nvarchar(100),
-//orderPhone nvarchar(20),
-//FOREIGN KEY (userID) REFERENCES [Users](userID),
-//FOREIGN KEY (orderStatusID) REFERENCES orderStatus(orderStatusID)
 
     private int orderID;
     private int customerID;
     private String orderName;
-    private int orderStatusID;
     private int orderDiscount;
     private String orderDate;
     private String notes;
     private String orderAddress;
     private int orderPhone;
+    private String orderStatus;
+    private float totalCost;
 
     public Order() {
-    }
-
-    public Order(int orderID, int customerID, String orderName, int orderStatusID, int orderDiscount, String orderDate, String notes, String orderAddress, int orderPhone) {
-        this.orderID = orderID;
-        this.customerID = customerID;
-        this.orderName = orderName;
-        this.orderStatusID = orderStatusID;
-        this.orderDiscount = orderDiscount;
-        this.orderDate = orderDate;
-        this.notes = notes;
-        this.orderAddress = orderAddress;
-        this.orderPhone = orderPhone;
     }
 
     public int getOrderID() {
@@ -68,14 +46,6 @@ public class Order {
 
     public void setOrderName(String orderName) {
         this.orderName = orderName;
-    }
-
-    public int getOrderStatusID() {
-        return orderStatusID;
-    }
-
-    public void setOrderStatusID(int orderStatusID) {
-        this.orderStatusID = orderStatusID;
     }
 
     public int getOrderDiscount() {
@@ -118,4 +88,21 @@ public class Order {
         this.orderPhone = orderPhone;
     }
 
+    public String getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public float getTotalCost() {
+        return totalCost;
+    }
+
+    public void setTotalCost(float totalCost) {
+        this.totalCost = totalCost;
+    }
+
+    
 }
