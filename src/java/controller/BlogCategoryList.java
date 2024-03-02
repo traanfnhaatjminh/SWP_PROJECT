@@ -67,12 +67,17 @@ public class BlogCategoryList extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String active = request.getParameter("menu");
         String id_raw = request.getParameter("id");
+        int currentPage = 1;
         try {
             int id = Integer.parseInt(id_raw);
             DAO d = new DAO();
             List<Category> listC = d.getAllCategory();
             List<BlogCategory> listBC = d.getAllBlogCategory();
-            List<Blog> listB = d.getBlogByCid(id);
+            List<Blog> listB = d.getBlogByCidPage(id, currentPage);
+            int endIndex = d.getBlogByCid(id).size() / 6;
+            if (d.getBlogByCid(id).size() % 6 != 0) {
+                endIndex++;
+            }
             Blog b = new Blog();
             b = d.getLatestBlog();
             List<Product> list = d.getAllProduct();
@@ -91,6 +96,8 @@ public class BlogCategoryList extends HttpServlet {
             request.setAttribute("listBlog", listB);
             request.setAttribute("latestBlog", b);
             request.setAttribute("menu", active);
+            request.setAttribute("endIndex", endIndex);
+            request.setAttribute("currentPage", currentPage);
             request.setAttribute("size", cart.getList().size());
         } catch (NumberFormatException e) {
             System.out.println(e);

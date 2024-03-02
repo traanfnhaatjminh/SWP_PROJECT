@@ -329,7 +329,7 @@
                             </c:if>
                             <c:if test="${sessionScope.marketer != null}">
                             <li><a href="profile.jsp"><i class="fa fa-user-o"></i> My Account</a></li>
-                            <li><a href="marketer?action=logout"><i class="fa fa-"></i> Logout</a></li>
+                            <li><a href="loginSystem?action=logout"><i class="fa fa-"></i> Logout</a></li>
                             </c:if>
                     </ul>
                 </div>
@@ -464,10 +464,12 @@
                                                 <p>Date: ${c.postDate}</p>
                                                 <p>Author: ${c.author}</p>
                                                 <a href="editBlog?id=${c.blogID}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons"></i></a>
-                                                <a href="javascript:void(0);" class="delete" title="Delete" data-toggle="tooltip" onclick="confirmDelete(${c.blogID}, ${currentPage});"><i class="material-icons"></i></a>                                            </div>
+                                                <a href="javascript:void(0);" class="delete" title="Delete" data-toggle="tooltip" onclick="confirmDelete(${c.blogID}, ${currentPage});"><i class="material-icons"></i></a>                                            
+                                            </div>
                                         </div>
                                     </div>
                                 </c:forEach>
+                                                
                                 <c:if test="${error == null}">
                                     <div class="store-filter clearfix col-md-12">
                                         <ul class="store-pagination">

@@ -31,7 +31,7 @@
                 </c:if>
                 <c:if test="${sessionScope.marketer != null}">
                     <li><a href="profile.jsp"><i class="fa fa-user-o"></i> My Account</a></li>
-                    <li><a href="marketer?action=logout"><i class="fa fa-"></i> Logout</a></li>
+                    <li><a href="loginSystem?action=logout"><i class="fa fa-"></i> Logout</a></li>
 
                 </c:if>
             </ul>
@@ -49,7 +49,7 @@
                 <div class="col-md-3">
                     <div class="header-logo ">
                         <a href="home" class="logo">
-                            $MAKER
+                            CLOTHINGMAKER
                         </a>
                     </div>
                 </div>

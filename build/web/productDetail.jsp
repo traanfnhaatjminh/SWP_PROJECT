@@ -140,16 +140,16 @@
                 <div class="col-md-5">
                     <div class="product-details">
                         <h2 class="product-name">${detail.name}</h2>
-                        <!--                            <div>
-                                                        <div class="product-rating">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star-o"></i>
-                                                        </div>
-                                                        <a class="review-link" href="#">(*) Review(s) | Add your review</a>
-                                                    </div>-->
+                        <div>
+                            <div class="product-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+                            </div>
+                            <a class="review-link" href="#">(*) Review(s) | Add your review</a>
+                        </div>
                         <div>
                             <h3 class="product-price">${detail.sale_price} VND</h3>
                             <span class="product-available">In Stock</span>
@@ -177,14 +177,14 @@
                                 <li><a href="categoryDetail?cid=${c.cid}">${c.cname}</a></li>
                                 </c:forEach>
                         </ul>
-
+<!--
                         <ul class="product-links">
                             <li>Share:</li>
                             <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                             <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                             <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
                             <li><a href="#"><i class="fa fa-envelope"></i></a></li>
-                        </ul>
+                        </ul>-->
 
                     </div>
                 </div>
@@ -226,7 +226,7 @@
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-o"></i>
+                                                    <i class="fa fa-star-half-empty"></i>
                                                 </div>
                                             </div>
                                             <ul class="rating">
@@ -307,7 +307,9 @@
                                                 <li>
                                                     <div class="review-heading">
                                                         <h5 class="name">John</h5>
-                                                        <p class="date">27 DEC 2018, 8:0 PM</p>
+                                                        <p class="date">Gender</p>
+                                                        <p class="date">Email</p>
+                                                        <p class="date">Mobile</p>
                                                         <div class="review-rating">
                                                             <i class="fa fa-star"></i>
                                                             <i class="fa fa-star"></i>

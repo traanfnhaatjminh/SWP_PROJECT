@@ -250,10 +250,7 @@ public class DAO extends DBContext {
     public List<Blog> getBlogByCid(int cid) {
         List<Blog> list = new ArrayList<>();
         String sql = "select * from Blog\n"
-                + "where blogCategoryID = ?\n"
-                + "ORDER BY blogID\n"
-                + "OFFSET (? - 1) * 6 ROWS\n"
-                + "FETCH NEXT 6 ROWS ONLY;";
+                + "where blogCategoryID = ?\n";
         try {
             PreparedStatement st;
             st = connection.prepareStatement(sql);
