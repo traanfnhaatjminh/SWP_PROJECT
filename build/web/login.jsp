@@ -116,7 +116,7 @@
                         <div class="col-md-3">
                             <div class="header-logo ">
                                 <a href="home" class="logo">
-                                    $MAKER
+                                    CLOTHINGMAKER
                                 </a>
                             </div>
                         </div>

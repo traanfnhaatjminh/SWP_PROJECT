@@ -255,7 +255,9 @@
                aria-label="Hide Sidebar"></a>
 
             <ul class="app-nav">
-                <c:if test="${sessionScope.accS != null }">    <li><a class="app-nav__item" href=""><i class='bx bx-log-out bx-rotate-180'></i> </a>
+                <c:if test="${sessionScope.accS != null }">    
+                    <li>
+                        <a class="app-nav__item" href=""><i class='bx bx-log-out bx-rotate-180'></i> </a>
                     </li></c:if>
                 </ul>
             </header>
@@ -266,7 +268,7 @@
                                                 alt="User Image">
                 <div>
                     <a href="Profile.jsp"><p class="app-sidebar__user-name"><b style="color: yellow"> ${sessionScope.admin.userName}</b></p></a>   
-                    <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
+                    <p class="app-sidebar__user-designation">Welcome back</p>
                 </div>
             </div>
             <hr>
@@ -425,20 +427,20 @@
                             <div class="col-md-12" style="height: 30px; display: flex; align-items: center; justify-content: space-between;"">
 
                                 <div style="display: inline-block; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;" class="col-1-sm">
-<!--                                    <form action="userlist" id="my-form">
-                                        <label for="page_select">show</label>
-                                        <select name="userPerPage" onchange="submitForm()">
-                                            <option value="8" ${userPerPage == 8 ? 'selected':''}>8</option>
-                                            <option value="9" ${userPerPage == 9 ? 'selected':''}>9</option>
-                                            <option value="10" ${userPerPage == 10 ? 'selected':''}>10</option>
-                                        </select>
-                                        <input type="hidden" name="name">
-                                        <input type="hidden" name="userContent" value="${userContent}"></input>
-                                        <input type="hidden" name="filter" value="${filter}"></input>
-                                        <input type="hidden" name="sort" value="${sort}"></input>
-                                        <input type="hidden" name="currPage" value="${currPage}"></input>
-                                        <span>Users by page</span>
-                                    </form>-->
+                                    <!--                                    <form action="userlist" id="my-form">
+                                                                            <label for="page_select">show</label>
+                                                                            <select name="userPerPage" onchange="submitForm()">
+                                                                                <option value="8" ${userPerPage == 8 ? 'selected':''}>8</option>
+                                                                                <option value="9" ${userPerPage == 9 ? 'selected':''}>9</option>
+                                                                                <option value="10" ${userPerPage == 10 ? 'selected':''}>10</option>
+                                                                            </select>
+                                                                            <input type="hidden" name="name">
+                                                                            <input type="hidden" name="userContent" value="${userContent}"></input>
+                                                                            <input type="hidden" name="filter" value="${filter}"></input>
+                                                                            <input type="hidden" name="sort" value="${sort}"></input>
+                                                                            <input type="hidden" name="currPage" value="${currPage}"></input>
+                                                                            <span>Users by page</span>
+                                                                        </form>-->
                                 </div>
 
                                 <!-- chon so thu tu trang -->

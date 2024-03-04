@@ -25,22 +25,29 @@
         <link type="text/css" rel="stylesheet" href="css/nouislider.min.css"/>
 
         <!-- Font Awesome Icon -->
-        <link rel="stylesheet" href="css/font-awesome.min.css">
 
+        <link rel="stylesheet" href="css/font-awesome.min.css">
         <!-- Custom stlylesheet -->
         <link type="text/css" rel="stylesheet" href="css/style.css"/>
 
         <link rel="stylesheet" href="./css/home.css"/>
 
         <style type="text/css">
-
-            .edit, .delete {
-                cursor: pointer;
+            body{
+                background:#f3f3f3;
+                margin-top:20px;
+                color: #616f80;
+            }
+            .card {
+                border: none;
+                margin-bottom: 24px;
+                -webkit-box-shadow: 0 0 13px 0 rgba(236,236,241,.44);
+                box-shadow: 0 0 13px 0 rgba(236,236,241,.44);
             }
 
-            body {
-                background-color: #f4f7f6;
-                margin-top: 20px;
+            .avatar-xs {
+                height: 2.3rem;
+                width: 2.3rem;
             }
 
             .card {
@@ -53,257 +60,18 @@
                 width: 100%;
                 box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
             }
-
             .card .body {
                 color: #444;
                 padding: 20px;
                 font-weight: 400;
             }
 
-            .card .header {
-                color: #444;
-                padding: 20px;
-                position: relative;
-                box-shadow: none;
+            .container .addnewblog{
+                margin-top: 45px;
             }
 
-            .single_post {
-                -webkit-transition: all .4s ease;
-                transition: all .4s ease
-            }
-
-            .single_post .body {
-                padding: 30px
-            }
-
-            .single_post .img-post {
-                position: relative;
-                overflow: hidden;
-                max-height: 500px;
-                margin-bottom: 30px
-            }
-
-            .single_post .img-post>img {
-                -webkit-transform: scale(1);
-                -ms-transform: scale(1);
-                transform: scale(1);
-                opacity: 1;
-                -webkit-transition: -webkit-transform .4s ease, opacity .4s ease;
-                transition: transform .4s ease, opacity .4s ease;
-                max-width: 100%;
-                filter: none;
-                -webkit-filter: grayscale(0);
-                -webkit-transform: scale(1.01)
-            }
-
-            .single_post .img-post:hover img {
-                -webkit-transform: scale(1.02);
-                -ms-transform: scale(1.02);
-                transform: scale(1.02);
-                opacity: .7;
-                filter: gray;
-                -webkit-filter: grayscale(1);
-                -webkit-transition: all .8s ease-in-out
-            }
-
-            .single_post .img-post:hover .social_share {
-                display: block
-            }
-
-            .single_post .footer {
-                padding: 0 30px 30px 30px
-            }
-
-            .single_post .footer .actions {
-                display: inline-block
-            }
-
-            .single_post .footer .stats {
-                cursor: default;
-                list-style: none;
-                padding: 0;
-                display: inline-block;
-                float: right;
-                margin: 0;
-                line-height: 35px
-            }
-
-            .single_post .footer .stats li {
-                border-left: solid 1px rgba(160, 160, 160, 0.3);
-                display: inline-block;
-                font-weight: 400;
-                letter-spacing: 0.25em;
-                line-height: 1;
-                margin: 0 0 0 2em;
-                padding: 0 0 0 2em;
-                text-transform: uppercase;
-                font-size: 13px
-            }
-
-            .single_post .footer .stats li a {
-                color: #777
-            }
-
-            .single_post .footer .stats li:first-child {
-                border-left: 0;
-                margin-left: 0;
-                padding-left: 0
-            }
-
-            .single_post h3 {
-                font-size: 20px;
-                text-transform: uppercase
-            }
-
-            .single_post h3 a {
-                color: #242424;
-                text-decoration: none
-            }
-
-            .single_post p {
-                font-size: 16px;
-                line-height: 26px;
-                font-weight: 300;
-                margin: 0
-            }
-
-            .single_post .blockquote p {
-                margin-top: 0 !important
-            }
-
-            .single_post .meta {
-                list-style: none;
-                padding: 0;
-                margin: 0
-            }
-
-            .single_post .meta li {
-                display: inline-block;
-                margin-right: 15px
-            }
-
-            .single_post .meta li a {
-                font-style: italic;
-                color: #959595;
-                text-decoration: none;
-                font-size: 12px
-            }
-
-            .single_post .meta li a i {
-                margin-right: 6px;
-                font-size: 12px
-            }
-
-            .single_post2 {
-                overflow: hidden
-            }
-
-            .single_post2 .content {
-                margin-top: 15px;
-                margin-bottom: 15px;
-                padding-left: 80px;
-                position: relative
-            }
-
-            .single_post2 .content .actions_sidebar {
-                position: absolute;
-                top: 0px;
-                left: 0px;
-                width: 60px
-            }
-
-            .single_post2 .content .actions_sidebar a {
-                display: inline-block;
-                width: 100%;
-                height: 60px;
-                line-height: 60px;
-                margin-right: 0;
-                text-align: center;
-                border-right: 1px solid #e4eaec
-            }
-
-            .single_post2 .content .title {
-                font-weight: 100
-            }
-
-            .single_post2 .content .text {
-                font-size: 15px
-            }
-
-            .right-box .categories-clouds li {
-                display: inline-block;
-                margin-bottom: 5px
-            }
-
-            .right-box .categories-clouds li a {
-                display: block;
-                border: 1px solid;
-                padding: 6px 10px;
-                border-radius: 3px
-            }
-
-            .right-box .instagram-plugin {
-                overflow: hidden
-            }
-
-            .right-box .instagram-plugin li {
-                float: left;
-                overflow: hidden;
-                border: 1px solid #fff
-            }
-
-            .comment-reply li {
-                margin-bottom: 15px
-            }
-
-            .comment-reply li:last-child {
-                margin-bottom: none
-            }
-
-            .comment-reply li h5 {
-                font-size: 18px
-            }
-
-            .comment-reply li p {
-                margin-bottom: 0px;
-                font-size: 15px;
-                color: #777
-            }
-
-            .comment-reply .list-inline li {
-                display: inline-block;
-                margin: 0;
-                padding-right: 20px
-            }
-
-            .comment-reply .list-inline li a {
-                font-size: 13px
-            }
-
-            @media (max-width: 640px) {
-                .blog-page .left-box .single-comment-box>ul>li {
-                    padding: 25px 0
-                }
-
-                .blog-page .left-box .single-comment-box ul li .icon-box {
-                    display: inline-block
-                }
-
-                .blog-page .left-box .single-comment-box ul li .text-box {
-                    display: block;
-                    padding-left: 0;
-                    margin-top: 10px
-                }
-
-                .blog-page .single_post .footer .stats {
-                    float: none;
-                    margin-top: 10px
-                }
-
-                .blog-page .single_post .body,
-                .blog-page .single_post .footer {
-                    padding: 30px
-                }
+            .container .searchblog{
+                width: 0;
             }
         </style>
     </head>
@@ -346,7 +114,7 @@
                         <div class="col-md-3">
                             <div class="header-logo ">
                                 <a href="blog?menu=blog" class="logo">
-                                    $MAKER
+                                    CLOTHINGMAKER
                                 </a>
                             </div>
                         </div>
@@ -355,15 +123,6 @@
                         <!-- ACCOUNT -->
                         <div class="col-md-3 clearfix" style="float: right">
                             <div class="header-ctn">
-                                <!-- Cart -->
-                                <div class="dropdown">
-                                    <a class="dropdown-toggle" href="cart">
-                                        <i class="fa fa-shopping-cart"></i>
-                                        <span>Shopping Cart</span>
-                                        <div class="qty">${size}</div>
-
-                                </div>
-                                <!-- /Cart -->
 
                                 <!-- Menu Toogle -->
                                 <div class="menu-toggle">
@@ -383,109 +142,275 @@
             </div>
             <!-- /MAIN HEADER -->
         </header>
-        <jsp:include page="navigation.jsp"></jsp:include>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-3">
-                        <h2 style="margin-top: 7%" class="grid-title"><i class="fa fa-filter"></i> Filters</h2>
-                        <hr>
+        <nav id="navigation">
+            <!-- container -->
+            <div class="container">
+                <!-- responsive-nav -->
+                <div id="responsive-nav">
+                    <!-- NAV -->
+                    <c:if test="${sessionScope.marketer == null}">
+                        <ul class="main-nav nav navbar-nav">
+                            <li class="${menu == null ? 'active' : ''}"><a href="home">Home</a></li>
+                            <!--<li><a href="#">Hot Deals</a></li>-->
+                            <li class="${menu eq 'blog' ? 'active' : ''}">
+                                <a href="blog?menu=blog">Blogs</a>
+                            </li>
+                            <c:forEach items="${listC}" var="c">
+                                <li class="${cateID == c.cid ? 'active' : ''}">   
+                                    <a href="categoryDetail?cid=${c.cid}&&menu=home">${c.cname}</a>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </c:if>
+                    <c:if test="${sessionScope.marketer != null}">
+                        <ul class="main-nav nav navbar-nav">
+                            <li class="${menu == null ? 'active' : ''} ${menu eq 'blog' ? 'active' : ''}">
+                                <a href="blog?menu=blog">Blogs</a>
+                            </li>
+                            <li class="${menu eq 'post' ? 'active' : ''}">
+                                <a href="post?menu=post">Manage Blogs</a>
+                            </li>
+                        </ul>
+                    </c:if>
 
-                        <form id="categoryFilterForm" action="filterPost">
-                            <h4>By category:</h4>
-                        <c:forEach items="${listBlogCategory}" var="c">
-                            <div class="checkbox">
-                                <label><input name="categories" type="checkbox" value="${c.name}" class="icheck">${c.name}</label>
-                            </div>
-                        </c:forEach>
-                        <h4>By status:</h4>
-                        <div class="checkbox">
-                            <label><input name="status" type="checkbox" value="Public" class="icheck" ${'Public' eq selectedStatus ? 'checked' : ''} ${selectedStatusAll != null ? 'checked' : ''}>Public</label>
-                            <label><input name="status" type="checkbox" value="Private" class="icheck" ${'Private' eq selectedStatus ? 'checked' : ''} ${selectedStatusAll != null ? 'checked' : ''}>Private</label>
-                        </div>
-                        <button type="submit" class="btn btn-default">Submit</button>
-                    </form>
-
-                    <!-- END FILTER BY CATEGORY -->
-
-                    <div class="padding"></div>
+                    <!-- /NAV -->
                 </div>
-                <!-- END FILTERS -->
-                <div id="main-content" class="blog-page col-md-9">
-                    <div class="container">
-                        <div class="row clearfix">
-                            <div class="col-lg-9 col-md-12 left-box">
-                                <label style="margin-top: 2%" for="addPost">ADD A NEW BLOG:</label>
-                                <button type="button" class="btn btn-default">
-                                    <a href="addBlog" target="target">Add</a>
-                                </button>
-                                <div class="store-filter clearfix">
-                                    <div class="store-sort">
-                                        <form action="sortPost">
-                                            SORT BY:
-                                            <select name="sortSelect">
-                                                <option value="atoz">Title from A to Z</option>
-                                                <option value="ztoa">Title from Z to A</option>
-                                                <c:forEach items="${listBlogCategory}" var="c">
-                                                    <option value="${c.id}">Category: ${c.name}</option>
-                                                </c:forEach>
-                                                <option value="Public">Status: Public</option>
-                                                <option value="Private">Status: Private</option>
-                                            </select>
-                                            <button type="submit" class="btn btn-default">Sort</button>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="body search">
-                                        <form action="searchPost">
-                                            <div class="input-group m-b-0">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="fa fa-search"></i></span>
-                                                </div>
-                                                <input type="text" class="form-control" name="searchBlog" value="${searchValue}" placeholder="Search...">
-                                                <button type="submit" class="btn btn-primary">Search</button>
-                                                <c:if test="${error != null}">
-                                                    <h5 class="text-danger">${error}</h5>
-                                                </c:if>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
+                <!-- /responsive-nav -->
+            </div>
+            <!-- /container -->
+        </nav>
+        <!--            <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h2 style="margin-top: 7%" class="grid-title"><i class="fa fa-filter"></i> Filters</h2>
+                                <hr>
+        
+                                <form id="categoryFilterForm" action="filterPost">
+                                    <h4>By category:</h4>
+        <c:forEach items="${listBlogCategory}" var="c">
+            <div class="checkbox">
+                <label><input name="categories" type="checkbox" value="${c.name}" class="icheck">${c.name}</label>
+            </div>
+        </c:forEach>
+        <h4>By status:</h4>
+        <div class="checkbox">
+            <label><input name="status" type="checkbox" value="Public" class="icheck" ${'Public' eq selectedStatus ? 'checked' : ''} ${selectedStatusAll != null ? 'checked' : ''}>Public</label>
+            <label><input name="status" type="checkbox" value="Private" class="icheck" ${'Private' eq selectedStatus ? 'checked' : ''} ${selectedStatusAll != null ? 'checked' : ''}>Private</label>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
 
-                                <c:forEach items="${listBlog}" var="c">
-                                    <div class="col-md-4">
-                                        <div class="card single_post">
-                                            <div class="body">
-                                                <div class="img-post">
-                                                    <img class="d-block img-fluid" src="${c.blogImage}" alt="First slide">
-                                                </div>
-                                                <h3 class="product-name"><a href="blogDetail?id=${c.blogID}&&menu=post">${c.blogTitle}</a></h3>
-                                                <p class="product-name">${c.content}</p>
-                                                <p>Date: ${c.postDate}</p>
-                                                <p>Author: ${c.author}</p>
-                                                <a href="editBlog?id=${c.blogID}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons"></i></a>
-                                                <a href="javascript:void(0);" class="delete" title="Delete" data-toggle="tooltip" onclick="confirmDelete(${c.blogID}, ${currentPage});"><i class="material-icons"></i></a>                                            
-                                            </div>
+     END FILTER BY CATEGORY 
+
+    <div class="padding"></div>
+</div>
+ END FILTERS 
+<div id="main-content" class="blog-page col-md-9">
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-lg-9 col-md-12 left-box">
+                <label style="margin-top: 2%" for="addPost">ADD A NEW BLOG:</label>
+                <button type="button" class="btn btn-default">
+                    <a href="addBlog" target="target">Add</a>
+                </button>
+                <div class="store-filter clearfix">
+                    <div class="store-sort">
+                        <form action="sortPost">
+                            SORT BY:
+                            <select name="sortSelect">
+                                <option value="atoz">Title from A to Z</option>
+                                <option value="ztoa">Title from Z to A</option>
+        <c:forEach items="${listBlogCategory}" var="c">
+            <option value="${c.id}">Category: ${c.name}</option>
+        </c:forEach>
+        <option value="Public">Status: Public</option>
+        <option value="Private">Status: Private</option>
+    </select>
+    <button type="submit" class="btn btn-default">Sort</button>
+</form>
+</div>
+</div>
+<div class="card">
+<div class="body search">
+<form action="searchPost">
+    <div class="input-group m-b-0">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fa fa-search"></i></span>
+        </div>
+        <input type="text" class="form-control" name="searchBlog" value="${searchValue}" placeholder="Search...">
+        <button type="submit" class="btn btn-primary">Search</button>
+        <c:if test="${error != null}">
+            <h5 class="text-danger">${error}</h5>
+        </c:if>
+    </div>
+</form>
+</div>
+</div>
+
+        <c:forEach items="${listBlog}" var="c">
+            <div class="col-md-4">
+                <div class="card single_post">
+                    <div class="body">
+                        <div class="img-post">
+                            <img class="d-block img-fluid" src="${c.blogImage}" alt="First slide">
+                        </div>
+                        <h3 class="product-name"><a href="blogDetail?id=${c.blogID}&&menu=post">${c.blogTitle}</a></h3>
+                        <p class="product-name">${c.content}</p>
+                        <p>Date: ${c.postDate}</p>
+                        <p>Author: ${c.author}</p>
+                        <a href="editBlog?id=${c.blogID}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons"></i></a>
+                        <a href="javascript:void(0);" class="delete" title="Delete" data-toggle="tooltip" onclick="confirmDelete(${c.blogID}, ${currentPage});"><i class="material-icons"></i></a>                                            
+                    </div>
+                </div>
+            </div>
+        </c:forEach>
+                        
+        <c:if test="${error == null}">
+            <div class="store-filter clearfix col-md-12">
+                <ul class="store-pagination">
+            <c:forEach begin="1" end="${endIndex}" var="c">
+                <c:set var="isActive" value="${c eq currentPage ? 'active' : ''}" />
+                <li class="${isActive}"><a href="postListPage?index=${c}">${c}</a></li>
+            </c:forEach>
+    </ul>
+</div>
+        </c:if>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>-->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-3 col-md-4">
+                    <div class="card bg-pattern">
+                        <div class="card-body addnewblog">
+                            <label style="margin-top: 2%" for="addPost">ADD A NEW BLOG:</label>
+                            <button type="button" class="btn btn-default">
+                                <a href="addBlog" target="target">Add</a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-4">
+                    <div class="card bg-pattern">
+                        <div class="card-body addnewblog">
+                            <form action="sortPost">
+                                <label>SORT BY:</label>
+                                <select name="sortSelect">
+                                    <option value="atoz">Title from A to Z</option>
+                                    <option value="ztoa">Title from Z to A</option>
+                                    <c:forEach items="${listBlogCategory}" var="c">
+                                        <option value="${c.id}">Category: ${c.name}</option>
+                                    </c:forEach>
+                                    <option value="Public">Status: Public</option>
+                                    <option value="Private">Status: Private</option>
+                                </select>
+                                <button type="submit" class="btn btn-default">Sort</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-4">
+                    <div class="card">
+                        <div class="card-body addnewblog">
+                            <form action="searchPost">
+                                <div class="form-group mb-0">
+                                    <div class="input-group mb-0">
+                                        <input style="width: 360px" type="text" name="searchBlog" class="form-control" value="${searchValue}" placeholder="Search..." aria-describedby="project-search-addon" />
+                                        <div class="input-group-append searchblog">
+                                            <button class="btn btn-danger" type="submit" id="project-search-addon"><i class="fa fa-search search-icon font-12"></i></button>
+                                                <c:if test="${error != null}">
+                                                <h5 class="text-danger">${error}</h5>
+                                            </c:if>
                                         </div>
                                     </div>
-                                </c:forEach>
-                                                
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive project-list">
+                                <table class="table project-table table-centered table-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Image</th>
+                                            <th scope="col">Title</th>
+                                            <th scope="col">Category</th>
+                                            <th scope="col">Author</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach items="${listBlog}" var="c">
+                                            <tr>
+                                                <th scope="row">${c.blogID}</th>
+                                                <td style="width: 20%">
+                                                    <img style="width: 20%" class="d-block img-fluid" src="${c.blogImage}" alt="First slide">
+                                                </td>
+                                                <td>${c.blogTitle}</td>
+                                                <c:if test="${c.blogCategoryID == 1}">
+                                                    <td>Fashion Trends</td>
+                                                </c:if>
+                                                <c:if test="${c.blogCategoryID == 2}">
+                                                    <td>Mix-Match Guides</td>
+                                                </c:if>
+                                                <c:if test="${c.blogCategoryID == 3}">
+                                                    <td>Size and style guides</td>
+                                                </c:if>
+                                                <c:if test="${c.blogCategoryID == 4}">
+                                                    <td>Clothing Care</td>
+                                                </c:if>
+                                                <td>${c.author}</td>
+                                                <td>${c.status}</td>
+                                                <td>
+                                                    <div class="action">
+                                                        <a href="editBlog?id=${c.blogID}" class="text-success mr-4" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"> <i class="fa fa-pencil h5 m-0"></i></a>
+                                                        <a href="javascript:void(0);" class="text-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close" onclick="confirmDelete(${c.blogID}, ${currentPage});"> <i class="fa fa-remove h5 m-0"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>    
+                                        </c:forEach>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- end project-list -->
+
+                            <div class="pt-3">
                                 <c:if test="${error == null}">
-                                    <div class="store-filter clearfix col-md-12">
-                                        <ul class="store-pagination">
-                                            <c:forEach begin="1" end="${endIndex}" var="c">
-                                                <c:set var="isActive" value="${c eq currentPage ? 'active' : ''}" />
-                                                <li class="${isActive}"><a href="postListPage?index=${c}">${c}</a></li>
-                                                </c:forEach>
-                                        </ul>
-                                    </div>
+                                    <ul class="pagination justify-content-end mb-0">
+                                        <!--                                        <li class="page-item disabled">
+                                                                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                                                                </li>-->
+                                        <c:forEach begin="1" end="${endIndex}" var="c">
+                                            <c:set var="isActive" value="${c eq currentPage ? 'active' : ''}" />
+                                            <li class="${isActive}"><a class="page-link" href="postListPage?index=${c}">${c}</a></li>
+                                            </c:forEach>
+                                        <!--                                        <li class="page-item">
+                                                                                    <a class="page-link" href="#">Next</a>
+                                                                                </li>-->
+                                    </ul>
                                 </c:if>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- end row -->
         </div>
+
         <script>
             function confirmDelete(blogID, currentPage) {
                 var confirmDelete = confirm("Are you sure you want to delete this blog?");

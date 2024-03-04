@@ -73,23 +73,11 @@ public class PostList extends HttpServlet {
         if (d.getAllManageBlog().size() % 6 != 0) {
             endIndex++;
         }
-        List<Product> list = d.getAllProduct();
-        Cookie[] c = request.getCookies();
-        String txt = "";
-        if (c != null) {
-            for (Cookie o : c) {
-                if (o.getName().equals("cart")) {
-                    txt += o.getValue();
-                }
-            }
-        }
-        model.Cart cart = new model.Cart(txt, list);
         request.setAttribute("listBlogCategory", listBC);
         request.setAttribute("listBlog", listB);
         request.setAttribute("endIndex", endIndex);
         request.setAttribute("currentPage", currentPage);
         request.setAttribute("menu", "post");
-        request.setAttribute("size", cart.getList().size());
         request.getRequestDispatcher("post.jsp").forward(request, response);
     }
 

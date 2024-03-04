@@ -344,7 +344,7 @@
                         <div class="col-md-3">
                             <div class="header-logo ">
                                 <a href="blog?menu=blog" class="logo">
-                                    $MAKER
+                                    CLOTHINGMAKER
                                 </a>
                             </div>
                         </div>
@@ -353,15 +353,6 @@
                         <!-- ACCOUNT -->
                         <div class="col-md-3 clearfix" style="float: right">
                             <div class="header-ctn">
-                                <!-- Cart -->
-                                <div class="dropdown">
-                                    <a class="dropdown-toggle" href="cart">
-                                        <i class="fa fa-shopping-cart"></i>
-                                        <span>Shopping Cart</span>
-                                        <div class="qty">${size}</div>
-
-                                </div>
-                                <!-- /Cart -->
 
                                 <!-- Menu Toogle -->
                                 <div class="menu-toggle">

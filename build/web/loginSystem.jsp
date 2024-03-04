@@ -115,9 +115,9 @@
                         <!-- LOGO -->
                         <div class="col-md-3">
                             <div class="header-logo ">
-                                <a href="home" class="logo">
-                                    $MAKER
-                                </a>
+                                <h1 style="color: white">
+                                    CLOTHINGMAKER 
+                                </h1>
                             </div>
                         </div>
                         <!-- /LOGO -->
