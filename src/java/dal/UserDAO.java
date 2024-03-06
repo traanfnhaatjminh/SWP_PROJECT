@@ -84,4 +84,22 @@ public class UserDAO extends DBContext {
         }
     }
 
+    public int getSid(String email, String password) {
+        int sid = -1;
+        String sql = "select * from Users where email = ? and pass = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, email);
+            st.setString(2, password);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                sid = rs.getInt(1);
+                System.out.println("sid " + sid);
+            }
+        } catch (Exception e) {
+            System.out.println("Error in getSid: " + e.getMessage());
+        }
+        return sid;
+    }
+
 }

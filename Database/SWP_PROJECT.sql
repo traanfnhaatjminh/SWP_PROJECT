@@ -97,7 +97,7 @@ values
 (3, 'Marketer'),
 (1, 'Seller'),
 (2, 'Admin')
-
+select * from users
 create table Blog (
 blogID int identity(1,1) primary key,
 blogTitle nvarchar(100),

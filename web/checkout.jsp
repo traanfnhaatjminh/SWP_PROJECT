@@ -8,7 +8,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Cart Contact Page</title>
 
-
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
         <!-- Bootstrap -->
@@ -66,7 +65,7 @@
                         <div class="col-md-3">
                             <div class="header-logo">
                                 <a href="home" class="logo">
-                                    <!--CLOTHINGMAKER-->
+                                    $MAKER
                                 </a>
                             </div>
                         </div>
@@ -209,7 +208,7 @@
                 <div class="d-flex flex-column justify-content-between align-items-end flex-wrap">
                     <div class="d-flex px-3 pr-md-5 subtotal col-12">
                         <div class="px-4">Subtotal:</div>
-                        <div class="h5 font-weight-bold px-md-2">${cart.getTotalMoney()}</div>
+                        <div class="h5 font-weight-bold px-md-2">$${cart.getTotalMoney()}</div>
                     </div>
                 </div>
             </div>
@@ -228,7 +227,7 @@
                             <input name="phone" type="text" id="phone" value="${customer.phone}" class="form-control mb-2" placeholder="Phone number" pattern="^0[2-9]{3}[0-9]{6}" required autofocus>
                         </div>
                     </div>
-                    <input type="hidden" name="totalCost" value="${cart.getTotalMoney()}">
+
                     <div class="form-group">
                         <label for="address">Address</label>
                         <input name="address" type="text" id="address" value="${customer.address}"  class="form-control mb-2" placeholder="Address" required autofocus>
@@ -251,6 +250,7 @@
                         <label for="notes">Notes</label>
                         <textarea class="form-control" name="notes" id="notes" rows="3"></textarea>
                     </div>
+
 
                     <!--Payment-->
                     <div class="form-group pay" id="payment">
@@ -277,25 +277,24 @@
         <!--END MY CART-->
 
         <jsp:include page="footer.jsp"></jsp:include>
-        <!-- /FOOTER -->
+            <!-- /FOOTER -->
 
-        <script>
-            const payment = document.getElementById("payment");
-            const transfer = payment.querySelector("input[value='account']");
-            const cash = payment.querySelector("input[value='cash']");
-            const qr = payment.querySelector("#qr");
-
-            transfer.addEventListener("change", function () {
-                if (this.checked) {
-                    qr.classList.add("d-block");
-                }
-            });
-
-            cash.addEventListener("change", function () {
-                if (this.checked) {
-                    qr.classList.remove("d-block");
-                }
-            });
+            <script>
+                const payment = document.getElementById("payment");
+                const transfer = payment.querySelector("input[value='account']");
+                const cash = payment.querySelector("input[value='cash']");
+                const qr = payment.querySelector("#qr");
+                transfer.addEventListener("change", function () {
+                    if (this.checked) {
+                        qr.innerHTML = '<div class="text-center"><img src="https://api.vietqr.io/image/970418-4271013180-rZ9LU6u.jpg?accountName=NGUYEN%20QUANG%20TOAN&amount=${cart.getTotalMoney()}&addInfo=$Bank to"alt="QR thanh toán VietQR" /></div>'
+                        qr.classList.add("d-block");
+                    }
+                });
+                cash.addEventListener("change", function () {
+                    if (this.checked) {
+                        qr.classList.remove("d-block");
+                    }
+                });
 
         </script>
 

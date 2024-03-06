@@ -70,7 +70,7 @@
                         <div class="col-md-3">
                             <div class="header-logo">
                                 <a href="home" class="logo">
-                                    $MAKER
+                                    
                                 </a>
                             </div>
                         </div>
@@ -79,8 +79,8 @@
                         <!-- SEARCH BAR -->
                         <div class="col-md-6">
                             <div class="header-search text-center">
-                                <form>
-                                    <input type="text" class="input" placeholder="Search here">
+                                <form action="searchProduct">
+                                    <input name="keyword" type="text" class="input" placeholder="Search here">
                                     <button type="submit" class="search-btn">Search</button>
                                 </form>
                             </div>
@@ -148,7 +148,6 @@
                                 </div>
                             </c:forEach>        
                         </div>
-
 
                     </div>
                     <!-- /ASIDE -->

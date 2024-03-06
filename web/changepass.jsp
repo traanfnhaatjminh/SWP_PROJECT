@@ -39,7 +39,7 @@
                     <p style="color:red">${requestScope.mess}</p>
                     <p style="color:red">${requestScope.mss}</p>
                     <label class="form-label">Email</label>
-                    <input type="text" class="form-control mb-1" name="email" value="${sessionScope.customer.email}">
+                    <input type="text" class="form-control mb-1" name="email" value="${sessionScope.accC.email}">
                     <label class="form-label">Old PassWord</label>
                     <input type="password" class="form-control mb-1" name="oldpass" value="">
                     <label class="form-label">New PassWord</label>

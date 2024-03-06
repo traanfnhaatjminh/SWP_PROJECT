@@ -42,14 +42,12 @@
                 <div class="container">
                     <div class="slick-slider" style="text-align: center; background-color: whitesmoke">
                     <c:forEach items="${listTopSlider}" var="c">
-
                         <div class="slide"> 
                             <a href="#"><img src="${c.sliderImage}" alt="Slide 1" style="width: 100%; margin: 0 auto;"></a>
                             <div class="slide-caption">
                                 <p style="font-size: 20px; margin-top: 1%">${c.sliderTitle}</p>
                             </div>
                         </div>
-
                     </c:forEach>
                 </div>
             </div>
@@ -111,10 +109,10 @@
                                                     </h4>
                                                 </div>
                                                 <div class="add-to-cart">
-                                                    <c:if test="${sessionScope.customer == null}">
+                                                    <c:if test="${sessionScope.accC == null}">
                                                         <a href="login.jsp" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</a>
                                                     </c:if>
-                                                    <c:if test="${sessionScope.customer != null}">
+                                                    <c:if test="${sessionScope.accC != null}">
                                                         <a href="buyProduct?productId=${c.id}&num=1" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</a>
                                                     </c:if>  
                                                 </div>

@@ -87,16 +87,15 @@
                     </ul>
                     <ul class="header-links pull-right">
                         <!--<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>-->
-                        <c:if test="${sessionScope.customer == null && sessionScope.marketer == null}">
+                        <c:if test="${sessionScope.accC == null && sessionScope.accS == null}">
                             <li><a href="register.jsp"><i class="fa fa-"></i> Register</a></li>
                             <li><a href="login.jsp"><i class="fa fa-"></i> Login</a></li>
                             </c:if>
-                            <c:if test="${sessionScope.customer != null}">
+                            <c:if test="${sessionScope.accC != null}">
                             <li><a href="profile.jsp"><i class="fa fa-user-o"></i> My Account</a></li>
                             <li><a href="customer?action=logout"><i class="fa fa-"></i> Logout</a></li>
                             </c:if>
-                            <c:if test="${sessionScope.marketer != null}">
-                            <li><a href="profile.jsp"><i class="fa fa-user-o"></i> My Account</a></li>
+                            <c:if test="${sessionScope.accS != null}">
                             <li><a href="loginSystem?action=logout"><i class="fa fa-"></i> Logout</a></li>
                             </c:if>
                     </ul>
@@ -148,7 +147,7 @@
                 <!-- responsive-nav -->
                 <div id="responsive-nav">
                     <!-- NAV -->
-                    <c:if test="${sessionScope.marketer == null}">
+                    <c:if test="${sessionScope.accS == null}">
                         <ul class="main-nav nav navbar-nav">
                             <li class="${menu == null ? 'active' : ''}"><a href="home">Home</a></li>
                             <!--<li><a href="#">Hot Deals</a></li>-->
@@ -162,7 +161,7 @@
                             </c:forEach>
                         </ul>
                     </c:if>
-                    <c:if test="${sessionScope.marketer != null}">
+                    <c:if test="${sessionScope.accS != null}">
                         <ul class="main-nav nav navbar-nav">
                             <li class="${menu == null ? 'active' : ''} ${menu eq 'blog' ? 'active' : ''}">
                                 <a href="blog?menu=blog">Blogs</a>
@@ -373,7 +372,14 @@
                                                     <td>Clothing Care</td>
                                                 </c:if>
                                                 <td>${c.author}</td>
-                                                <td>${c.status}</td>
+                                                <td>
+                                                    <c:if test="${c.status eq 'Public'}">
+                                                        <button type="button" class="btn btn-success">${c.status}</button>
+                                                    </c:if>
+                                                    <c:if test="${c.status eq 'Private'}">
+                                                        <button type="button" class="btn btn-danger">${c.status}</button>
+                                                    </c:if>
+                                                </td>
                                                 <td>
                                                     <div class="action">
                                                         <a href="editBlog?id=${c.blogID}" class="text-success mr-4" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"> <i class="fa fa-pencil h5 m-0"></i></a>

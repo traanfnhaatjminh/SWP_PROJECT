@@ -257,17 +257,17 @@
             <ul class="app-nav">
                 <c:if test="${sessionScope.accS != null }">    
                     <li>
-                        <a class="app-nav__item" href=""><i class='bx bx-log-out bx-rotate-180'></i> </a>
+                        <a class="app-nav__item" href="loginSystem?action=logout"><i class='bx bx-log-out bx-rotate-180'></i> </a>
                     </li></c:if>
                 </ul>
             </header>
 
             <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
             <aside class="app-sidebar">
-                <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="${sessionScope.admin.avatar}" width="50px"
+                <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="${sessionScope.accS.avatar}" width="50px"
                                                 alt="User Image">
                 <div>
-                    <a href="Profile.jsp"><p class="app-sidebar__user-name"><b style="color: yellow"> ${sessionScope.admin.userName}</b></p></a>   
+                    <a href="Profile.jsp"><p class="app-sidebar__user-name"><b style="color: yellow"> ${sessionScope.accS.userName}</b></p></a>   
                     <p class="app-sidebar__user-designation">Welcome back</p>
                 </div>
             </div>

@@ -23,10 +23,35 @@ public class OrderDetail {
     private double productPrice;
     private int quantity;
     private double totalCost;
+    private String product_img;
+    private String product_name;
+    private String product_cate;
+    
+    
 
     public OrderDetail() {
     }
 
+    public OrderDetail(int orderID, int productID, double productPrice, int quantity, double totalCost, String product_img, String product_name, String product_cate) {
+        this.orderID = orderID;
+        this.productID = productID;
+        this.productPrice = productPrice;
+        this.quantity = quantity;
+        this.totalCost = totalCost;
+        this.product_img = product_img;
+        this.product_name = product_name;
+        this.product_cate = product_cate;
+        
+    }
+    
+    public OrderDetail(int orderID, int productID, double productPrice, int quantity, double totalCost) {
+        this.orderID = orderID;
+        this.productID = productID;
+        this.productPrice = productPrice;
+        this.quantity = quantity;
+        this.totalCost = totalCost;
+    }
+    
     public int getOrderID() {
         return orderID;
     }
@@ -67,4 +92,31 @@ public class OrderDetail {
         this.quantity = quantity;
     }
 
+    public String getProduct_img() {
+        return product_img;
+    }
+
+    public void setProduct_img(String product_img) {
+        this.product_img = product_img;
+    }
+
+    public String getProduct_name() {
+        return product_name;
+    }
+
+    public void setProduct_name(String product_name) {
+        this.product_name = product_name;
+    }
+
+    public String getProduct_cate() {
+        return product_cate;
+    }
+
+    public void setProduct_cate(String product_cate) {
+        this.product_cate = product_cate;
+    }
+
+    
+    
+    
 }

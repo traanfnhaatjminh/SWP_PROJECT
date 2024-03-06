@@ -72,8 +72,6 @@ public class CheckoutContorller extends HttpServlet {
         String gender = request.getParameter("gender");
         String notes = request.getParameter("notes");
         String methodPayment = request.getParameter("payment");
-        String totalCost_raw = request.getParameter("totalCost");
-        float totalCost = Float.parseFloat(totalCost_raw);
         System.out.println(gender);
         DAO d = new DAO();
         String txt = "";
@@ -94,7 +92,7 @@ public class CheckoutContorller extends HttpServlet {
         Customer customer = (Customer) session.getAttribute("customer");
         if (customer != null) {
             OrderDAO odb = new OrderDAO();
-            odb.addOrder(name, phone, address, email, gender, notes, cart, customer, "1", totalCost, 1);
+            odb.addOrder(name, phone, address, email, gender, notes, cart, customer, "1", cart.getTotalMoney(), 1);
             String textPayment = (methodPayment.equals("cash")) ? " <div class=\"form-group\">\n"
                     + " <label for=\"cash\">Payment on delivery</label> </div>"
                     : "<div  id=\"qr\">\n"
@@ -104,7 +102,7 @@ public class CheckoutContorller extends HttpServlet {
                     + "            </div>\n";
             String productCart = "";
             for (Item i : cart.getList()) {
-                productCart += "<tr>"
+                productCart += "<tr style='width=500px'>"
                         + "            <td>" + i.getProduct().getId() + "</td>"
                         + "            <td style='display: flex;'>"
                         + "               <div style='display: flex; align-items: center;'>"
@@ -125,7 +123,8 @@ public class CheckoutContorller extends HttpServlet {
                         + "            </td>"
                         + "         </tr>";
             }
-            String to = email;// change accordingly
+            String to = customer.getEmail();// change accordingly
+            String toOne = email;
             // Get the session object
             Properties props = new Properties();
             props.put("mail.smtp.host", "smtp.gmail.com");
@@ -135,7 +134,7 @@ public class CheckoutContorller extends HttpServlet {
             props.put("mail.smtp.port", "465");
             Session sessionEmail = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication("nguyentahoang15012003@gmail.com", "mghv pppx pilc yujr");// Put your email
+                    return new PasswordAuthentication("phanhuynh681@gmail.com", "gxia rwqw jbys ladi");// Put your email
                     // id and
                     // password here
                 }
@@ -144,6 +143,7 @@ public class CheckoutContorller extends HttpServlet {
                 MimeMessage message = new MimeMessage(sessionEmail);
                 message.setFrom(new InternetAddress(email));// change accordingly
                 message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+                message.addRecipient(Message.RecipientType.TO, new InternetAddress(toOne));
                 message.setSubject("Order placed successfully");
                 String text = "<!DOCTYPE html>\n"
                         + "<html lang=\"en\">\n"
@@ -264,9 +264,10 @@ public class CheckoutContorller extends HttpServlet {
                         + "   </table>"
                         + "<h1> Subtotal: "
                         + cart.getTotalMoney()
-                        + "$</h1>"
+                        + "VND</h1>"
                         + "</body>"
                         + "</html>";
+
                 message.setContent(text, "text/html;charset = UTF-8");
                 // send message
                 Transport.send(message);

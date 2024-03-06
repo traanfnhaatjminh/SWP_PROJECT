@@ -222,19 +222,10 @@
             }
         </style>
         <!-- Navbar-->
-        <header class="app-header">
-            <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
-                                            aria-label="Hide Sidebar"></a>
-            <!-- Navbar Right Menu-->
-            <ul class="app-nav">
-                <!-- User Menu-->
-                <li><a class="app-nav__item" href="logoutS"><i class='bx bx-log-out bx-rotate-180'></i> </a> </li>
-            </ul>
-        </header>
         <!-- Sidebar menu-->
 
         <!-- Sidebar menu end-->
-        <main class="app-content">
+        <main class="">
             <div class="app-title">
                 <ul class="app-breadcrumb breadcrumb">
                     <li class="breadcrumb-item"><a href="userlist">User List</a></li>
@@ -253,7 +244,7 @@
                                     <div class="col-sm-2">
 
                                         <a class="btn btn-add btn-sm" href="addUser" title="Thêm"><i class="fas fa-plus"></i>
-                                            Tạo Tài Khoản Mới</a>
+                                            Create a new account</a>
                                     </div>
                                     <div class="col-sm-2">
 
@@ -279,9 +270,9 @@
                                         <br>
                                         <div class="container-content col-md-12" style="background-color: white; padding-top: 13px; padding-bottom: 11px; border-radius: 10px; filter: drop-shadow(0 0 -3px grey); display: flex">
                                             <form action="userEdit" method="post">
-                                                <h3 style="margin-right: 4px; padding-bottom: 10px">Họ Và Tên: ${user.userName}</h3>
+                                                <h3 style="margin-right: 4px; padding-bottom: 10px">Full Name: ${user.userName}</h3>
                                                 <input style="color: #226e20; width: 420px; height: 37px; " class="form-control" type="text" name="userFullname" value="${user.userName}">
-                                                <h6>Giới tính:  ${user.gender}</h6>
+                                                <h6>Gender:  ${user.gender}</h6>
                                                 <select class="form-control-input first-input" id="gender" name="userGender">
                                                     <option value="male" ${user.gender == 'male' ? 'selected' : ''}>Male</option>
                                                     <option value="female" ${user.gender == 'female' ? 'selected' : ''}>Female</option>
@@ -292,10 +283,10 @@
                                                 <h6>Email:  ${user.email}</h6>
                                                 <input class="form-control-input " type="email" name="userEmail" value="${user.email}">
                                                 <br>
-                                                <h6>SĐT: ${user.mobile}</h6>
+                                                <h6>Phone: ${user.mobile}</h6>
                                                 <input class="form-control-input " type="tel" pattern="[0-9]{10}" name="userMobile" value="${user.mobile}">
                                                 <br>
-                                                <h6>Vai Trò:
+                                                <h6>Role:
                                                     <select class="form-control-input" id="role" name="userRole" required>
                                                         <c:forEach items="${listUserRole}" var="r">
                                                             <option ${r.roleID==user.roleID?'selected':''} value="${r.roleID}">${r.roleName}</option>
@@ -303,7 +294,7 @@
                                                     </select>
                                                 </h6>
                                                 <br>
-                                                <h6>Địa Chỉ: ${user.address}</h6>
+                                                <h6>Address: ${user.address}</h6>
                                                 <input class="form-control-input" name="userAddress" type="text" value="${user.address}">
                                                 <br>                                              
 
@@ -322,6 +313,8 @@
                             </div>                                
                         </div>
                     </div>
+                </div>
+                </div>
                     <p style="color: blue ; background-color: white ; width: auto ; margin: auto ;padding: auto ; text-align: center ; border-radius: 50px;">${message}
                     </p>
                     </main>

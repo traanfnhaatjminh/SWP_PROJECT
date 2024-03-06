@@ -18,7 +18,7 @@ import model.Users;
 
 /**
  *
- * @author 
+ * @author
  */
 @WebServlet(name = "Cart", urlPatterns = {"/cart"})
 public class Cart extends HttpServlet {
@@ -42,7 +42,26 @@ public class Cart extends HttpServlet {
             }
         }
         model.Cart cart = new model.Cart(txt, list);
-        List<Product> listNewP = d.getTopProduct();
+        String listCategory = "";
+        List<Product> listNewP;
+        if (cart.getList().size() > 0) {
+            listCategory = "(";
+            for (int i = 0; i < cart.getList().size(); i++) {
+                if (i == cart.getList().size() - 1) {
+                    listCategory += cart.getList().get(i).getProduct().getCid();
+                } else {
+                    listCategory += cart.getList().get(i).getProduct().getCid() + ",";
+                }
+
+            }
+            listCategory += ")";
+        }
+        if (listCategory.equals("")) {
+            listNewP = d.getTopProduct();
+        } else {
+            listNewP = d.getProductSameCategoryID(listCategory);
+        }
+
         List<Category> listC = d.getAllCategory();
         request.setAttribute("listNewP", listNewP);
         request.setAttribute("cart", cart);

@@ -15,10 +15,9 @@
         <!-- responsive-nav -->
         <div id="responsive-nav">
             <!-- NAV -->
-            <c:if test="${sessionScope.marketer == null}">
+            <c:if test="${sessionScope.accS == null}">
                 <ul class="main-nav nav navbar-nav">
                     <li class="${menu == null ? 'active' : ''}"><a href="home">Home</a></li>
-                    <!--<li><a href="#">Hot Deals</a></li>-->
                     <li class="${menu eq 'blog' ? 'active' : ''}">
                         <a href="blog?menu=blog">Blogs</a>
                     </li>
@@ -29,7 +28,7 @@
                     </c:forEach>
                 </ul>
             </c:if>
-            <c:if test="${sessionScope.marketer != null}">
+            <c:if test="${sessionScope.accS != null}">
                 <ul class="main-nav nav navbar-nav">
                     <li class="${menu == null ? 'active' : ''} ${menu eq 'blog' ? 'active' : ''}">
                         <a href="blog?menu=blog">Blogs</a>

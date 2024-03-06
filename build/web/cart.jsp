@@ -1,3 +1,5 @@
+
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -5,7 +7,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Cart Page</title>
-
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.min.css">
 
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
@@ -66,7 +68,7 @@
                         <div class="col-md-3">
                             <div class="header-logo">
                                 <a href="home" class="logo">
-                                    
+                                    CLOTHINGMAKER
                                 </a>
                             </div>
                         </div>
@@ -144,9 +146,9 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <input type="number" product-id ="${c.product.id}" id="quantity" class="form-control form-control-lg text-center" name="num" value="${c.quantity}" 
+                                        <input max="${c.product.quantity}" min="1"type="number" product-id ="${c.product.id}" id="quantity" class="form-control form-control-lg text-center" name="num" value="${c.quantity}" 
                                                />
-                                    </td>
+                                    </td>   
                                     <td class="d-flex flex-column">${c.product.sale_price}$
                                     </td>
                                     <td class="font-weight-bold">
@@ -232,17 +234,43 @@
                             <!-- /tab -->
                         </div>
                     </div>
-
                 </div>
-
             </div>
 
 
 
             <jsp:include page="footer.jsp"></jsp:include>
             <!-- /FOOTER -->
-
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script type="text/javascript">
+                const elementQuantity = document.getElementById("quantity");
+                const max = elementQuantity.max;
+                console.log(max);
+
+
+
+                elementQuantity.addEventListener("change", (e) => {
+
+                    if (e.target.value > max) {
+                        e.target.value = max;
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: "You can just buy " + max
+
+                        });
+                    }
+                    if (e.target.value <= 0) {
+                        e.target.value = 1;
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: "You must be buy more than 0"
+
+                        });
+                    }
+
+                });
                 const quantity = document.querySelectorAll("input[name='num']");
                 quantity.forEach((item) => {
                     item.addEventListener("change", (e) => {
@@ -252,6 +280,7 @@
                         window.location.href = "process?num=" + num + "&id=" + id;
                     });
                 });
+
 
             </script>
     </body>

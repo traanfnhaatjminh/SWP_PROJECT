@@ -49,7 +49,7 @@ public class Customer extends HttpServlet {
                 request.getRequestDispatcher("customer?action=login").forward(request, response);
             } else {
                 HttpSession session = request.getSession();
-                session.setAttribute("customer", customer);
+                session.setAttribute("accC", customer);
                 Cookie email = new Cookie("email", customer_email);
                 Cookie pass = new Cookie("pass", customer_pass);
                 Cookie rem = new Cookie("rememeber", remember);
@@ -73,13 +73,13 @@ public class Customer extends HttpServlet {
         }
         if (action.equals("logout")) {
             HttpSession session = request.getSession();
-            session.removeAttribute("customer");
+            session.removeAttribute("accC");
             response.sendRedirect("home");
         }
         if (action.equals("updateinfor")) {
             try {
                 HttpSession session = request.getSession();
-                model.Customer customer = (model.Customer) session.getAttribute("customer");
+                model.Customer customer = (model.Customer) session.getAttribute("accC");
                 if (customer != null) {
                     String customer_name = request.getParameter("fullName");
                     String customer_gender = request.getParameter("gender");
@@ -98,7 +98,7 @@ public class Customer extends HttpServlet {
                             customer.getPassword(),
                             customer_address,
                             customer_avatar);
-                    session.setAttribute("customer", customer1);
+                    session.setAttribute("accC", customer1);
                     request.setAttribute("messageinfor", "update success");
                     request.getRequestDispatcher("editprofile.jsp").forward(request, response);
                 } else {
@@ -137,7 +137,7 @@ public class Customer extends HttpServlet {
                             customer.getAvatar());
 
                     HttpSession session = request.getSession();
-                    session.setAttribute("customer", customer1);
+                    session.setAttribute("accC", customer1);
                     request.setAttribute("mess", "change password success");
                     request.getRequestDispatcher("changepass.jsp").forward(request, response);
                 }

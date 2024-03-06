@@ -50,7 +50,7 @@ public class LoginSystem extends HttpServlet {
             } else {
                 if (user.getRoleID() == 3) {
                     HttpSession session = request.getSession();
-                    session.setAttribute("marketer", user);
+                    session.setAttribute("accS", user);
                     Cookie email = new Cookie("email", user_email);
                     Cookie pass = new Cookie("pass", user_pass);
                     Cookie rem = new Cookie("rememeber", remember);
@@ -70,7 +70,7 @@ public class LoginSystem extends HttpServlet {
                     response.sendRedirect("blog");
                 } else if (user.getRoleID() == 2) {
                     HttpSession session = request.getSession();
-                    session.setAttribute("admin", user);
+                    session.setAttribute("accS", user);
                     Cookie email = new Cookie("email", user_email);
                     Cookie pass = new Cookie("pass", user_pass);
                     Cookie rem = new Cookie("rememeber", remember);
@@ -87,13 +87,33 @@ public class LoginSystem extends HttpServlet {
                     response.addCookie(pass);
                     response.addCookie(rem);
                     response.sendRedirect("userlist");
+                } else if (user.getRoleID() == 1) {
+                    HttpSession session = request.getSession();
+                    int sId = dao.getSid(user_email, user_pass);
+                    session.setAttribute("sId", sId);
+                    session.setAttribute("accS", user);
+                    Cookie email = new Cookie("email", user_email);
+                    Cookie pass = new Cookie("pass", user_pass);
+                    Cookie rem = new Cookie("rememeber", remember);
+                    if (remember != null) {
+                        email.setMaxAge(60 * 60 * 24 * 30);
+                        pass.setMaxAge(60 * 60 * 24 * 30);
+                        rem.setMaxAge(60 * 60 * 24 * 30);
+                    } else {
+                        email.setMaxAge(0);
+                        pass.setMaxAge(0);
+                        rem.setMaxAge(0);
+                    }
+                    response.addCookie(email);
+                    response.addCookie(pass);
+                    response.addCookie(rem);
+                    response.sendRedirect("pageOrdersServletBySale");
                 }
             }
         }
         if (action.equals("logout")) {
             HttpSession session = request.getSession();
-            session.removeAttribute("marketer");
-            session.removeAttribute("admin");
+            session.removeAttribute("accS");
             response.sendRedirect("home");
         }
 //        if (action.equals("updateinfor")) {

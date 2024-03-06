@@ -87,7 +87,7 @@ public class userDAO_1 extends DBContext {
                         rs.getString(7),
                         rs.getString(8),
                         rs.getInt(9),
-                        rs.getDouble(10)
+                        rs.getFloat(10)
                 );
                 list.add(u);
             }

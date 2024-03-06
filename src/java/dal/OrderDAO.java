@@ -33,7 +33,7 @@ public class OrderDAO extends DBContext {
                     + "           ,[orderAddress]\n"
                     + "           ,[orderPhone]\n"
                     + "           ,[orderStatus]\n"
-                    + "           ,[totalCost]"
+                    + "           ,[totalCost]\n"
                     + "           ,[sellerID])\n"
                     + "     VALUES\n"
                     + "           (?,?,?,?,?,?,?,?,?,?)";

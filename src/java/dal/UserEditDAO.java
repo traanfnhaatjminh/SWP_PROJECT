@@ -16,10 +16,8 @@ import model.Users;
 public class UserEditDAO extends DBContext {
 
     public void addNewUser(Users u) throws SQLException {
-        String sql = "INSERT INTO Users(userName, gender, email, mobile,\n"
-                + "                avatar, [address], pass, roleID) \n"
-                + "VALUES (?, ?, ?, ?,\n"
-                + "        ?, ?, ?, ?);";
+        String sql = "INSERT INTO Users(userName, gender, email, mobile, avatar, [address], pass, roleID,userStatus) \n"
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
         try {
             PreparedStatement st;
             st = connection.prepareStatement(sql);
@@ -31,6 +29,7 @@ public class UserEditDAO extends DBContext {
             st.setString(6, u.getAddress());
             st.setString(7, u.getPassword());
             st.setInt(8, u.getRoleID());
+            st.setInt(9, u.getUser_status());
             st.executeUpdate();
         } catch (SQLException e) {
             System.out.println("error add user" + e.getMessage());
@@ -41,7 +40,18 @@ public class UserEditDAO extends DBContext {
 
         try {
             if (connection != null) {
-                String sql = "UPDATE Users SET userName = ?, gender = ?, email = ?, mobile = ?, avatar = ?, [address] = ?, roleID = ? WHERE userID = ?";
+                String sql = "UPDATE Users \n"
+                        + "SET \n"
+                        + "    userName = ?,\n"
+                        + "    gender = ?,\n"
+                        + "    email = ?,\n"
+                        + "    mobile = ?,\n"
+                        + "    avatar = ?,\n"
+                        + "    [address] = ?,\n"
+                        + "    roleID = ?,\n"
+                        + "	userStatus = ?\n"
+                        + "WHERE \n"
+                        + "    userID = ?;";
                 PreparedStatement st;
                 st = connection.prepareStatement(sql);
                 st.setString(1, u.getUserName());
@@ -52,30 +62,31 @@ public class UserEditDAO extends DBContext {
                 st.setString(6, u.getAddress());
                 st.setInt(7, u.getRoleID());
                 st.setInt(8, u.getUserID());
+                st.setInt(9, u.getUser_status());
                 st.executeUpdate();
             }
         } catch (Exception e) {
             System.out.println("loi" + e.getMessage());
         }
     }
-    
+
     public static void main(String[] args) {
-    try {
-        // Tạo một đối tượng Users mới với thông tin cần cập nhật
-        Users usersToUpdate = new Users(2,"ngu", "lon", "ngu@gmail.com", "0333201787", "a", "hanoi", 2);
-        
-        // Tạo một đối tượng UserEditDAO để thực hiện cập nhật
-        UserEditDAO userEditDAO = new UserEditDAO();
-        
-        // Gọi phương thức updateUserAdmin để cập nhật thông tin của người dùng
-        userEditDAO.updateUserAdmin(usersToUpdate);
-        
-        // Thông báo cập nhật thành công
-        System.out.println("Cập nhật thông tin người dùng thành công!");
-    } catch (SQLException e) {
-        // Xử lý ngoại lệ nếu có lỗi xảy ra
-        System.out.println("Lỗi khi cập nhật thông tin người dùng: " + e.getMessage());
+        try {
+            // Tạo một đối tượng Users mới với thông tin cần cập nhật
+            Users usersToUpdate = new Users(1, "nguyen ta hoang", "male", "tahoang@gmail.com", "0333201780", "", "HaNoi", "12", 1, 0, 1);
+
+            // Tạo một đối tượng UserEditDAO để thực hiện cập nhật
+            UserEditDAO userEditDAO = new UserEditDAO();
+
+            // Gọi phương thức updateUserAdmin để cập nhật thông tin của người dùng
+            userEditDAO.updateUserAdmin(usersToUpdate);
+
+            // Thông báo cập nhật thành công
+            System.out.println("Cập nhật thông tin người dùng thành công!");
+        } catch (SQLException e) {
+            // Xử lý ngoại lệ nếu có lỗi xảy ra
+            System.out.println("Lỗi khi cập nhật thông tin người dùng: " + e.getMessage());
+        }
     }
-}
 
 }

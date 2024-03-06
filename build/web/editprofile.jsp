@@ -39,20 +39,20 @@
                         ${requestScope.messageinfor}
                     </p>
                     <label class="form-label">FullName</label>
-                    <input type="text" class="form-control mb-1" name="fullName" value="${sessionScope.customer.fullName}">
+                    <input type="text" class="form-control mb-1" name="fullName" value="${sessionScope.accC.fullName}">
                     <label class="form-label">Phone</label>
-                    <input type="tel" pattern="[0-9]{10}" class="form-control mb-1" name="phone" value="${sessionScope.customer.phone}">
+                    <input type="tel" pattern="[0-9]{10}" class="form-control mb-1" name="phone" value="${sessionScope.accC.phone}">
                     <label class="form-label">Email</label>
-                    <input type="text" class="form-control mb-1" readonly name="user_name" value="${sessionScope.customer.email}">
+                    <input type="text" class="form-control mb-1" readonly name="user_name" value="${sessionScope.accC.email}">
                     <label class="form-label">Adress</label>
-                    <input type="text" class="form-control mb-1" name="address" value="${sessionScope.customer.address}">
+                    <input type="text" class="form-control mb-1" name="address" value="${sessionScope.accC.address}">
                     <label class="form-label">Gender</label>
                     <select class="form-control mb-1" name="gender">
-                        <option value="male" ${sessionScope.customer.gender == 'male' ? 'selected' : ''}>Male</option>
-                        <option value="female" ${sessionScope.customer.gender == 'female' ? 'selected' : ''}>Female</option>
+                        <option value="male" ${sessionScope.accC.gender == 'male' ? 'selected' : ''}>Male</option>
+                        <option value="female" ${sessionScope.accC.gender == 'female' ? 'selected' : ''}>Female</option>
                     </select>
                     <label class="form-label">Avatar</label>
-                    <input type="text" class="form-control mb-1" name="avatar" value="${sessionScope.customer.avatar}">
+                    <input type="text" class="form-control mb-1" name="avatar" value="${sessionScope.accC.avatar}">
                     <button type="submit">Save Changes</button>
                 </form>
 

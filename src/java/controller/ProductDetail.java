@@ -37,25 +37,12 @@ public class ProductDetail extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-//        try (PrintWriter out = response.getWriter()) {
-//            /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet ProductDetail</title>");  
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Servlet ProductDetail at " + request.getContextPath () + "</h1>");
-//            out.println("</body>");
-//            out.println("</html>");
-//        }
 
         HttpSession session = request.getSession();
         String id = request.getParameter("pid");
         String url = request.getRequestURI() + "?pid=" + id;
         System.out.println(url);
         session.setAttribute("prevUrl", url);
-
         DAO d = new DAO();
         List<Product> list = d.getAllProduct();
         List<Product> listLast = d.getLatestProduct();
@@ -75,6 +62,8 @@ public class ProductDetail extends HttpServlet {
         request.setAttribute("detail", p);
         request.setAttribute("listC", listC);
         request.setAttribute("listLast", listLast);
+        request.setAttribute("cateID", d.getCidByPid(id));
+        request.setAttribute("menu", "");
         request.getRequestDispatcher("productDetail.jsp").forward(request, response);
     }
 

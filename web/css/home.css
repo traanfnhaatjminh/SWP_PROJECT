@@ -7,9 +7,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Author     : minh1
 */
 
-.logo{
+.header-logo a{
     font-size: 40px;
-    color: black;
+    color: whitesmoke;
 }
 
 .product-name{

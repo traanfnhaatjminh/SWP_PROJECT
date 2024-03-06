@@ -20,13 +20,25 @@ public class Users {
     private String password;
     private String user_role_name;
     private int roleID;
-    private double userPoint;
-    private int userStatus;
-
+    private float userPoint;
+    private int user_status;
+    
     public Users() {
     }
-
-    public Users(int userID, String userName, String gender, String email, String mobile, String avatar, String address, String password, String user_role_name, int roleID, double userPoint, int userStatus) {
+    
+    public Users(int userID, String userName, String gender, String email, String mobile, String avatar, String address, String user_role_name, int user_status) {
+        this.userID = userID;
+        this.userName = userName;
+        this.gender = gender;
+        this.email = email;
+        this.mobile = mobile;
+        this.avatar = avatar;
+        this.address = address;
+        this.user_role_name = user_role_name;
+        this.user_status = user_status;
+    }
+    
+    public Users(int userID, String userName, String gender, String email, String mobile, String avatar, String address, String password, int roleID, float userPoint, int user_status) {
         this.userID = userID;
         this.userName = userName;
         this.gender = gender;
@@ -35,13 +47,12 @@ public class Users {
         this.avatar = avatar;
         this.address = address;
         this.password = password;
-        this.user_role_name = user_role_name;
         this.roleID = roleID;
         this.userPoint = userPoint;
-        this.userStatus = userStatus;
+        this.user_status = user_status;
     }
-
-    public Users(int userID, String userName, String gender, String email, String mobile, String avatar, String address, String password, String user_role_name, int roleID, double userPoint) {
+    
+    public Users(int userID, String userName, String gender, String email, String mobile, String avatar, String address, String password, String user_role_name, int roleID, float userPoint) {
         this.userID = userID;
         this.userName = userName;
         this.gender = gender;
@@ -96,7 +107,7 @@ public class Users {
         this.user_role_name = user_role_name;
     }
 
-    public Users(int userID, String userName, String gender, String email, String mobile, String avatar, String address, String password, int roleID, double userPoint) {
+    public Users(int userID, String userName, String gender, String email, String mobile, String avatar, String address, String password, int roleID, float userPoint) {
         this.userID = userID;
         this.userName = userName;
         this.gender = gender;
@@ -203,21 +214,20 @@ public class Users {
         this.roleID = roleID;
     }
 
-    public double getUserPoint() {
+    public float getUserPoint() {
         return userPoint;
     }
 
-    public void setUserPoint(double userPoint) {
+    public void setUserPoint(float userPoint) {
         this.userPoint = userPoint;
     }
 
-    public int getUserStatus() {
-        return userStatus;
+    public int getUser_status() {
+        return user_status;
     }
 
-    public void setUserStatus(int userStatus) {
-        this.userStatus = userStatus;
+    public void setUser_status(int user_status) {
+        this.user_status = user_status;
     }
     
-
 }

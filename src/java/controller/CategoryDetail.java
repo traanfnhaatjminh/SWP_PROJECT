@@ -83,6 +83,7 @@ public class CategoryDetail extends HttpServlet {
                     }
                 }
             }
+
             model.Cart cart = new model.Cart(txt, list);
             List<Category> listC = d.getAllCategory();
             request.setAttribute("size", cart.getList().size());
@@ -96,7 +97,6 @@ public class CategoryDetail extends HttpServlet {
         } catch (NumberFormatException e) {
             System.out.println(e);
         }
-
     }
 
     /**

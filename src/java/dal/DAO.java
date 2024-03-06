@@ -49,6 +49,24 @@ public class DAO extends DBContext {
         return list;
     }
 
+    public String getCidByPid(String pid) {
+        String sql = "select cid from product\n"
+                + "where id = ?\n"
+                + "";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setString(1, pid);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                return rs.getString("cid");
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
     public List<Category> getAllCategory() {
         List<Category> list = new ArrayList<>();
         String sql = "select * from Category";
@@ -887,6 +905,36 @@ public class DAO extends DBContext {
             PreparedStatement st;
             st = connection.prepareStatement(sql);
             st.setString(1, search);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Product c = new Product(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getDouble("original_price"),
+                        rs.getDouble("sale_price"),
+                        rs.getInt("quantity"),
+                        rs.getString("describe"),
+                        rs.getString("image"),
+                        rs.getInt("cid")
+                );
+                list.add(c);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Product> getProductSameCategoryID(String listCategory) {
+        List<Product> list = new ArrayList<>();
+        String sql = "SELECT TOP 8 *\n"
+                + "FROM product where cid in ";
+        sql += listCategory;
+        System.out.println(sql);
+
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Product c = new Product(

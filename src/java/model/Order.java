@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.util.List;
+
 /**
  *
  * @author minh1
@@ -17,12 +19,72 @@ public class Order {
     private String orderDate;
     private String notes;
     private String orderAddress;
-    private int orderPhone;
+    private String orderPhone;
     private String orderStatus;
     private float totalCost;
     private int sellerID;
+    private List<String> productName;
 
     public Order() {
+    }
+
+    public Order(int orderID, int customerID, String orderName, int orderDiscount, String orderDate, String notes, String orderAddress, String orderPhone, String orderStatus, float totalCost, int sellerID) {
+        this.orderID = orderID;
+        this.customerID = customerID;
+        this.orderName = orderName;
+        this.orderDiscount = orderDiscount;
+        this.orderDate = orderDate;
+        this.notes = notes;
+        this.orderAddress = orderAddress;
+        this.orderPhone = orderPhone;
+        this.orderStatus = orderStatus;
+        this.totalCost = totalCost;
+        this.sellerID = sellerID;
+    }
+    
+    public Order(int orderID, int customerID, String orderName, int orderDiscount, String orderDate, String notes, String orderAddress, String orderPhone, String orderStatus, float totalCost, int sellerID, List<String> productName) {
+        this.orderID = orderID;
+        this.customerID = customerID;
+        this.orderName = orderName;
+        this.orderDiscount = orderDiscount;
+        this.orderDate = orderDate;
+        this.notes = notes;
+        this.orderAddress = orderAddress;
+        this.orderPhone = orderPhone;
+        this.orderStatus = orderStatus;
+        this.totalCost = totalCost;
+        this.sellerID = sellerID;
+        this.productName = productName;
+    }
+    
+    
+    public Order(int orderID, int customerID, int sellerID, String orderName, int orderDiscount, String orderDate, String notes, String orderAddress, String orderPhone, String orderStatus, float totalCost) {
+        this.orderID = orderID;
+        this.customerID = customerID;
+        this.sellerID = sellerID;
+        this.orderName = orderName;
+        this.orderDiscount = orderDiscount;
+        this.orderDate = orderDate;
+        this.notes = notes;
+        this.orderAddress = orderAddress;
+        this.orderPhone = orderPhone;
+        this.orderStatus = orderStatus;
+        this.totalCost = totalCost;
+    }
+
+    public Order(int orderID, int customerID, int sellerID, String orderName, int orderDiscount, String orderDate, String notes, String orderAddress, String orderPhone, String orderStatus, float totalCost, List<String> productName) {
+        this.orderID = orderID;
+        this.customerID = customerID;
+        this.sellerID = sellerID;
+        this.orderName = orderName;
+        this.orderDiscount = orderDiscount;
+        this.orderDate = orderDate;
+        this.notes = notes;
+        this.orderAddress = orderAddress;
+        this.orderPhone = orderPhone;
+        this.orderStatus = orderStatus;
+        this.totalCost = totalCost;
+        this.productName = productName;
     }
 
     public int getOrderID() {
@@ -39,6 +101,14 @@ public class Order {
 
     public void setCustomerID(int customerID) {
         this.customerID = customerID;
+    }
+
+    public int getSellerID() {
+        return sellerID;
+    }
+
+    public void setSellerID(int sellerID) {
+        this.sellerID = sellerID;
     }
 
     public String getOrderName() {
@@ -81,13 +151,15 @@ public class Order {
         this.orderAddress = orderAddress;
     }
 
-    public int getOrderPhone() {
+    public String getOrderPhone() {
         return orderPhone;
     }
 
-    public void setOrderPhone(int orderPhone) {
+    public void setOrderPhone(String orderPhone) {
         this.orderPhone = orderPhone;
     }
+
+   
 
     public String getOrderStatus() {
         return orderStatus;
@@ -105,12 +177,12 @@ public class Order {
         this.totalCost = totalCost;
     }
 
-    public int getSellerID() {
-        return sellerID;
+    public List<String> getProductName() {
+        return productName;
     }
 
-    public void setSellerID(int sellerID) {
-        this.sellerID = sellerID;
+    public void setProductName(List<String> productName) {
+        this.productName = productName;
     }
 
 }
