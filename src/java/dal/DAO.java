@@ -12,6 +12,8 @@ import java.util.List;
 import model.Blog;
 import model.BlogCategory;
 import model.Category;
+import model.Customer;
+import model.Feedback;
 import model.Post;
 import model.Product;
 import model.Slider;
@@ -947,6 +949,57 @@ public class DAO extends DBContext {
                         rs.getString("image"),
                         rs.getInt("cid")
                 );
+                list.add(c);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public void addFeedback(String cid, String content, String pid, String posDate, String rate) {
+        String sql = "INSERT INTO [dbo].[Feedback]\n"
+                + "           ([customerID]\n"
+                + "           ,[content]\n"
+                + "           ,[productID]\n"
+                + "           ,[postDate]\n"
+                + "           ,[rate_star]\n"
+                + "           ,[status])\n"
+                + "     VALUES\n"
+                + "           (?,?,?,?,?,?)";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, cid);
+            st.setString(2, content);
+            st.setString(3, pid);
+            st.setString(4, posDate);
+            st.setString(5, rate);
+            st.setString(6, "1");
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public List<Feedback> getAllFeedback() {
+        List<Feedback> list = new ArrayList<>();
+        String sql = "select fb.*,c.fullName,p.[name] from [Feedback] fb join product p on fb.productID = p.id \n"
+                + "join Customer c on fb.customerID = c.customerID";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Feedback c = new Feedback(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getFloat(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9));
                 list.add(c);
             }
         } catch (SQLException e) {

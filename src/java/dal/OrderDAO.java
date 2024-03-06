@@ -5,9 +5,12 @@ import java.sql.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import model.Cart;
 import model.Customer;
 import model.Item;
+import model.Order;
+import model.OrderDetail;
 import model.Users;
 
 /**
@@ -33,7 +36,7 @@ public class OrderDAO extends DBContext {
                     + "           ,[orderAddress]\n"
                     + "           ,[orderPhone]\n"
                     + "           ,[orderStatus]\n"
-                    + "           ,[totalCost]\n"
+                    + "           ,[totalCost]"
                     + "           ,[sellerID])\n"
                     + "     VALUES\n"
                     + "           (?,?,?,?,?,?,?,?,?,?)";
@@ -78,7 +81,7 @@ public class OrderDAO extends DBContext {
                     st2.setInt(2, i.getProduct().getId());
                     st2.setDouble(3, i.getProduct().getSale_price());
                     st2.setInt(4, i.getQuantity());
-                    st2.setDouble(5, i.getPrice());
+                    st2.setDouble(5, i.getPrice() * i.getQuantity());
                     st2.executeUpdate();
                 }
             }
@@ -102,4 +105,133 @@ public class OrderDAO extends DBContext {
         }
     }
 
+    public ArrayList<Order> getOrdersByCustomerId(int customerId) {
+        ArrayList<Order> list = new ArrayList<>();
+        String sql = "SELECT  [orderID]\n"
+                + "      ,[customerID]\n"
+                + "      ,[orderName]\n"
+                + "      ,[orderDiscount]\n"
+                + "      ,[orderDate]\n"
+                + "      ,[notes]\n"
+                + "      ,[orderAddress]\n"
+                + "      ,[orderPhone]\n"
+                + "      ,[orderStatus]\n"
+                + "      ,[totalCost]\n"
+                + "      ,[sellerID]\n"
+                + "  FROM [Swp_Project].[dbo].[Order]\n"
+                + "  WHERE customerID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, customerId);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Order o = new Order(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getInt(4), rs.getString(5),
+                        rs.getString(6), rs.getString(7), rs.getInt(8), rs.getString(9), rs.getFloat(10), rs.getInt(11));
+                list.add(o);
+            }
+            return list;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public Order getOrdersByOrderId(String orderId) {
+        ArrayList<Order> list = new ArrayList<>();
+        String sql = "SELECT  [orderID]\n"
+                + "      ,[customerID]\n"
+                + "      ,[orderName]\n"
+                + "      ,[orderDiscount]\n"
+                + "      ,[orderDate]\n"
+                + "      ,[notes]\n"
+                + "      ,[orderAddress]\n"
+                + "      ,[orderPhone]\n"
+                + "      ,[orderStatus]\n"
+                + "      ,[totalCost]\n"
+                + "      ,[sellerID]\n"
+                + "  FROM [Swp_Project].[dbo].[Order]\n"
+                + "  WHERE orderID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, orderId);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                Order o = new Order(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getInt(4), rs.getString(5),
+                        rs.getString(6), rs.getString(7), rs.getInt(8), rs.getString(9), rs.getFloat(10), rs.getInt(11));
+                return o;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public ArrayList<OrderDetail> getOrderDetailByCustomerID(int customerId) {
+        ArrayList<OrderDetail> list = new ArrayList<>();
+        String sql = "SELECT od.orderID\n"
+                + "      ,[productID]\n"
+                + "      ,[productPrice]\n"
+                + "      ,[quantity]\n"
+                + "      ,od.totalCost\n"
+                + "  FROM [Swp_Project].[dbo].[orderDetail] od\n"
+                + "  JOIN [Order] o ON o.orderID = od.orderID\n"
+                + "  WHERE o.customerID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, customerId);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                OrderDetail od = new OrderDetail(rs.getInt(1), rs.getInt(2), rs.getDouble(3), rs.getInt(4), rs.getDouble(5));
+                list.add(od);
+            }
+            return list;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+
+    }
+
+    public ArrayList<OrderDetail> getOrderDetailByOrderID(String orderId) {
+        ArrayList<OrderDetail> list = new ArrayList<>();
+        try {
+            if (connection != null) {
+                String sql = "SELECT od.orderID\n"
+                        + "      ,[productID]\n"
+                        + "      ,[productPrice]\n"
+                        + "      ,[quantity]\n"
+                        + "      ,od.totalCost\n"
+                        + "  FROM [Swp_Project].[dbo].[orderDetail] od\n"
+                        + "  JOIN [Order] o ON o.orderID = od.orderID\n"
+                        + "  WHERE od.orderID = ?";
+                PreparedStatement st = connection.prepareStatement(sql);
+                st.setString(1, orderId);
+                ResultSet rs = st.executeQuery();
+                while (rs.next()) {
+                    OrderDetail od = new OrderDetail(rs.getInt(1), rs.getInt(2), rs.getDouble(3), rs.getInt(4), rs.getDouble(5));
+                    list.add(od);
+                }
+                return list;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+
+    }
+
+    public static void main(String[] args) {
+        // Tạo một đối tượng của lớp có phương thức getOrderDetailByOrderID
+        OrderDAO main = new OrderDAO();
+
+        // Gọi phương thức getOrderDetailByOrderID và in kết quả
+        ArrayList<OrderDetail> orderDetails = main.getOrderDetailByOrderID("3");
+        if (orderDetails != null) {
+            for (OrderDetail orderDetail : orderDetails) {
+                System.out.println("ten san pham " + orderDetail.getTotalCost());
+            }
+        } else {
+            System.out.println("Không có chi tiết đơn hàng được trả về.");
+        }
+    }
 }

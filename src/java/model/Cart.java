@@ -16,6 +16,9 @@ public class Cart {
     }
 
     public List<Item> getList() {
+        if (list == null) {
+            list = new ArrayList<>();
+        }
         return list;
     }
 
@@ -34,6 +37,9 @@ public class Cart {
     }
 
     public Item getItemByID(int id) {
+        if (list == null) {
+            list = new ArrayList<>();
+        }
         for (Item i : list) {
             if (i.getProduct().getId() == id) {
                 return i;

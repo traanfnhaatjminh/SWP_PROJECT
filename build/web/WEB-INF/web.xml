@@ -23,12 +23,9 @@
     </filter>
     <filter-mapping>
         <filter-name>CustomerFilter</filter-name>
-        <url-pattern>/myOrderServlet</url-pattern>
-        <url-pattern>/orderInforServlet</url-pattern>
         <url-pattern>/changepass.jsp</url-pattern>
-        <url-pattern>/changePassCServlet</url-pattern>
         <url-pattern>/editprofile.jsp</url-pattern>
-        <url-pattern>/updateProfileCustomerServlet</url-pattern>
+        <url-pattern>/profile.jsp</url-pattern>
     </filter-mapping>
     
     <servlet>

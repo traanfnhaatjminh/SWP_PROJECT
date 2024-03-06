@@ -33,7 +33,7 @@ public class CheckoutContorller extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(true);
-        Customer customer = (Customer) session.getAttribute("customer");
+        Customer customer = (Customer) session.getAttribute("accC");
         if (customer != null) {
             DAO d = new DAO();
             List<Product> list = d.getAllProduct();
@@ -51,7 +51,7 @@ public class CheckoutContorller extends HttpServlet {
             List<Category> listC = d.getAllCategory();
             request.setAttribute("listNewP", listNewP);
             request.setAttribute("cart", cart);
-            request.setAttribute("customer", customer);
+            request.setAttribute("accC", customer);
             request.setAttribute("listC", listC);
             request.setAttribute("size", cart.getList().size());
             request.getRequestDispatcher("checkout.jsp").forward(request, response);
@@ -89,7 +89,7 @@ public class CheckoutContorller extends HttpServlet {
         model.Cart cart = new model.Cart(txt, list);
         // Your existing email sending code...
 
-        Customer customer = (Customer) session.getAttribute("customer");
+        Customer customer = (Customer) session.getAttribute("accC");
         if (customer != null) {
             OrderDAO odb = new OrderDAO();
             odb.addOrder(name, phone, address, email, gender, notes, cart, customer, "1", cart.getTotalMoney(), 1);

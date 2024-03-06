@@ -19,7 +19,7 @@ public class Order {
     private String orderDate;
     private String notes;
     private String orderAddress;
-    private String orderPhone;
+    private int orderPhone;
     private String orderStatus;
     private float totalCost;
     private int sellerID;
@@ -28,7 +28,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(int orderID, int customerID, String orderName, int orderDiscount, String orderDate, String notes, String orderAddress, String orderPhone, String orderStatus, float totalCost, int sellerID) {
+    public Order(int orderID, int customerID, String orderName, int orderDiscount, String orderDate, String notes, String orderAddress, int orderPhone, String orderStatus, float totalCost, int sellerID) {
         this.orderID = orderID;
         this.customerID = customerID;
         this.orderName = orderName;
@@ -41,8 +41,8 @@ public class Order {
         this.totalCost = totalCost;
         this.sellerID = sellerID;
     }
-    
-    public Order(int orderID, int customerID, String orderName, int orderDiscount, String orderDate, String notes, String orderAddress, String orderPhone, String orderStatus, float totalCost, int sellerID, List<String> productName) {
+
+    public Order(int orderID, int customerID, String orderName, int orderDiscount, String orderDate, String notes, String orderAddress, int orderPhone, String orderStatus, float totalCost, int sellerID, List<String> productName) {
         this.orderID = orderID;
         this.customerID = customerID;
         this.orderName = orderName;
@@ -56,9 +56,8 @@ public class Order {
         this.sellerID = sellerID;
         this.productName = productName;
     }
-    
-    
-    public Order(int orderID, int customerID, int sellerID, String orderName, int orderDiscount, String orderDate, String notes, String orderAddress, String orderPhone, String orderStatus, float totalCost) {
+
+    public Order(int orderID, int customerID, int sellerID, String orderName, int orderDiscount, String orderDate, String notes, String orderAddress, int orderPhone, String orderStatus, float totalCost) {
         this.orderID = orderID;
         this.customerID = customerID;
         this.sellerID = sellerID;
@@ -72,7 +71,7 @@ public class Order {
         this.totalCost = totalCost;
     }
 
-    public Order(int orderID, int customerID, int sellerID, String orderName, int orderDiscount, String orderDate, String notes, String orderAddress, String orderPhone, String orderStatus, float totalCost, List<String> productName) {
+    public Order(int orderID, int customerID, int sellerID, String orderName, int orderDiscount, String orderDate, String notes, String orderAddress, int orderPhone, String orderStatus, float totalCost, List<String> productName) {
         this.orderID = orderID;
         this.customerID = customerID;
         this.sellerID = sellerID;
@@ -151,15 +150,13 @@ public class Order {
         this.orderAddress = orderAddress;
     }
 
-    public String getOrderPhone() {
+    public int getOrderPhone() {
         return orderPhone;
     }
 
-    public void setOrderPhone(String orderPhone) {
+    public void setOrderPhone(int orderPhone) {
         this.orderPhone = orderPhone;
     }
-
-   
 
     public String getOrderStatus() {
         return orderStatus;

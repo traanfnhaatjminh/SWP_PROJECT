@@ -36,7 +36,7 @@ public class orderDAO1 extends DBContext {
                 String order_date = rs.getString("orderDate");
                 String order_note = rs.getString("notes");
                 String order_address = rs.getString("orderAddress");
-                String order_phone = rs.getString("orderPhone");
+                int order_phone = rs.getInt("orderPhone");
                 String order_status = rs.getString("orderStatus");
                 float total_cost = rs.getFloat("totalCost");
                 int idS = rs.getInt(11);
@@ -220,7 +220,7 @@ public class orderDAO1 extends DBContext {
                     String order_date = rs.getString("orderDate");
                     String order_note = rs.getString("notes");
                     String order_address = rs.getString("orderAddress");
-                    String order_phone = rs.getString("orderPhone");
+                    int order_phone = rs.getInt("orderPhone");
                     String order_status = rs.getString("orderStatus");
                     float total_cost = rs.getFloat("totalCost");
                     int idS = rs.getInt(11);
@@ -305,7 +305,7 @@ public class orderDAO1 extends DBContext {
                     String order_date = rs.getString("orderDate");
                     String order_note = rs.getString("notes");
                     String order_address = rs.getString("orderAddress");
-                    String order_phone = rs.getString("orderPhone");
+                    int order_phone = rs.getInt("orderPhone");
                     String order_status = rs.getString("orderStatus");
                     float total_cost = rs.getFloat("totalCost");
                     int idS = rs.getInt(11);
@@ -337,7 +337,7 @@ public class orderDAO1 extends DBContext {
                     String order_date = rs.getString("orderDate");
                     String order_note = rs.getString("notes");
                     String order_address = rs.getString("orderAddress");
-                    String order_phone = rs.getString("orderPhone");
+                    int order_phone = rs.getInt("orderPhone");
                     String order_status = rs.getString("orderStatus");
                     float total_cost = rs.getFloat("totalCost");
                     int idS = rs.getInt(11);
@@ -370,7 +370,7 @@ public class orderDAO1 extends DBContext {
                     String order_date = rs.getString("orderDate");
                     String order_note = rs.getString("notes");
                     String order_address = rs.getString("orderAddress");
-                    String order_phone = rs.getString("orderPhone");
+                    int order_phone = rs.getInt("orderPhone");
                     String order_status = rs.getString("orderStatus");
                     float total_cost = rs.getFloat("totalCost");
                     int idS = rs.getInt(11);
@@ -404,7 +404,7 @@ public class orderDAO1 extends DBContext {
                     String order_date = rs.getString("orderDate");
                     String order_note = rs.getString("notes");
                     String order_address = rs.getString("orderAddress");
-                    String order_phone = rs.getString("orderPhone");
+                    int order_phone = rs.getInt("orderPhone");
                     String order_status = rs.getString("orderStatus");
                     float total_cost = rs.getFloat("totalCost");
                     int idS = rs.getInt(11);
@@ -488,7 +488,7 @@ public class orderDAO1 extends DBContext {
                             rs.getString(5),
                             rs.getString(6),
                             rs.getString(7),
-                            rs.getString(8),
+                            rs.getInt(8),
                             rs.getString(9),
                             rs.getFloat(10),
                             rs.getInt(11));

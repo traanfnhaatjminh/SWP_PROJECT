@@ -1,6 +1,6 @@
 <%-- 
-    Document   : blog
-    Created on : Jan 18, 2024, 11:36:21 AM
+    Document   : FeedbackList
+    Created on : Mar 6, 2024, 7:38:17 PM
     Author     : minh1
 --%>
 
@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Blog Page</title>
+        <title>Feedback List Page</title>
 
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
@@ -95,16 +95,7 @@
                         <li><a href="#"><i class="fa fa-map-marker"></i>Hanoi</a></li>
                     </ul>
                     <ul class="header-links pull-right">
-                        <!--<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>-->
-                        <c:if test="${sessionScope.accC == null && sessionScope.accS == null}">
-                            <li><a href="register.jsp"><i class="fa fa-"></i> Register</a></li>
-                            <li><a href="login.jsp"><i class="fa fa-"></i> Login</a></li>
-                            </c:if>
-                            <c:if test="${sessionScope.accC != null}">
-                            <li><a href="profile.jsp"><i class="fa fa-user-o"></i> My Account</a></li>
-                            <li><a href="customer?action=logout"><i class="fa fa-"></i> Logout</a></li>
-                            </c:if>
-                            <c:if test="${sessionScope.accS != null}">
+                        <c:if test="${sessionScope.accS != null}">
                             <li><a href="loginSystem?action=logout"><i class="fa fa-"></i> Logout</a></li>
                             </c:if>
                     </ul>
@@ -121,7 +112,7 @@
                         <!-- LOGO -->
                         <div class="col-md-3">
                             <div class="header-logo ">
-                                <a href="blog?menu=blog" class="logo">
+                                <a href="home" class="logo">
                                     CLOTHINGMAKER
                                 </a>
                             </div>
@@ -155,21 +146,6 @@
             <div class="container">
                 <!-- responsive-nav -->
                 <div id="responsive-nav">
-                    <!-- NAV -->
-                    <c:if test="${sessionScope.accS == null}">
-                        <ul class="main-nav nav navbar-nav">
-                            <li class="${menu == null ? 'active' : ''}"><a href="home">Home</a></li>
-                            <!--<li><a href="#">Hot Deals</a></li>-->
-                            <li class="${menu eq 'blog' ? 'active' : ''}">
-                                <a href="blog?menu=blog">Blogs</a>
-                            </li>
-                            <c:forEach items="${listC}" var="c">
-                                <li class="${cateID == c.cid ? 'active' : ''}">   
-                                    <a href="categoryDetail?cid=${c.cid}&&menu=home">${c.cname}</a>
-                                </li>
-                            </c:forEach>
-                        </ul>
-                    </c:if>
                     <c:if test="${sessionScope.accS != null}">
                         <ul class="main-nav nav navbar-nav">
                             <li class="${menu eq 'post' ? 'active' : ''}">
@@ -190,42 +166,29 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-xl-3 col-md-3">
-                    <div class="card bg-pattern">
-                        <div class="card-body addnewblog">
-                            <label style="margin-top: 2%" for="addPost">ADD A NEW BLOG:</label>
-                            <button type="button" class="btn btn-default">
-                                <a href="addBlog" target="target">Add</a>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-5">
+                <div class="col-xl-3 col-md-6">
                     <div class="card bg-pattern">
                         <div class="card-body addnewblog">
                             <form action="sortPost">
                                 <label>SORT BY:</label>
                                 <select name="sortSelect">
-                                    <option value="atoz">Title from A to Z</option>
-                                    <option value="ztoa">Title from Z to A</option>
-                                    <c:forEach items="${listBlogCategory}" var="c">
-                                        <option value="${c.id}">Category: ${c.name}</option>
-                                    </c:forEach>
-                                    <option value="Public">Status: Public</option>
-                                    <option value="Private">Status: Private</option>
+                                    <option value="atoz">Full Name from A to Z</option>
+                                    <option value="ztoa">Full Name from Z to A</option>
+                                    <option value="atozP">Product Name from A to Z</option>
+                                    <option value="ztoaP">Product Name from Z to A</option>
                                 </select>
                                 <button type="submit" class="btn btn-default">Sort</button>
                             </form>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-md-4">
+                <div class="col-xl-3 col-md-6">
                     <div class="card">
                         <div class="card-body addnewblog">
                             <form action="searchPost">
                                 <div class="form-group mb-0">
                                     <div class="input-group mb-0">
-                                        <input style="width: 360px" type="text" name="searchBlog" class="form-control" value="${searchValue}" placeholder="Search..." aria-describedby="project-search-addon" />
+                                        <input style="width: 520px" type="text" name="searchBlog" class="form-control" value="${searchValue}" placeholder="Search..." aria-describedby="project-search-addon" />
                                         <div class="input-group-append searchblog">
                                             <button class="btn btn-danger" type="submit" id="project-search-addon"><i class="fa fa-search search-icon font-12"></i></button>
                                                 <c:if test="${error != null}">
@@ -249,23 +212,51 @@
                 <div class="col-md-8" style="margin-bottom: 10px;">
                     <form id="categoryFilterForm" action="filterPost">
                         <div style="display: flex">
-                            <h4>By category:</h4>
-                            <div class="checkbox-group" style="margin-left: 2px;">
-                                <c:forEach items="${listBlogCategory}" var="c">
-                                    <div class="checkbox-post">
-                                        <label><input name="categories" type="checkbox" value="${c.name}" class="icheck">${c.name}</label>
-                                    </div>
-                                </c:forEach>
+                            <h4>By rated star:</h4>
+                            <div class="checkbox-group" style="margin-left: 10px;">
+                                <div class="checkbox-post">
+                                    <label><input name="ratedstar" type="checkbox" value="1" class="icheck">
+                                        <i class="fa fa-star"></i>
+                                    </label>
+                                    <label><input name="ratedstar" type="checkbox" value="2" class="icheck">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </label>
+                                    <label><input name="ratedstar" type="checkbox" value="3" class="icheck">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </label>
+                                    <label><input name="ratedstar" type="checkbox" value="4" class="icheck">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </label>
+                                    <label><input name="ratedstar" type="checkbox" value="4" class="icheck">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                         <div style="display: flex">
                             <h4>By status:</h4>
                             <div class="checkbox-group" style="margin-left: 10px;">
                                 <div class="checkbox-post">
-                                    <label><input name="status" type="checkbox" value="Public" class="icheck" ${'Public' eq selectedStatus ? 'checked' : ''} ${selectedStatusAll != null ? 'checked' : ''}>Public</label>
+                                    <label><input name="status" type="checkbox" value="Pending" class="icheck" ${'Pending' eq selectedStatus ? 'checked' : ''} ${selectedStatusAll != null ? 'checked' : ''}>Pending</label>
                                 </div>
                                 <div class="checkbox-post">
-                                    <label><input name="status" type="checkbox" value="Private" class="icheck" ${'Private' eq selectedStatus ? 'checked' : ''} ${selectedStatusAll != null ? 'checked' : ''}>Private</label>
+                                    <label><input name="status" type="checkbox" value="In Progress" class="icheck" ${'In Progress' eq selectedStatus ? 'checked' : ''} ${selectedStatusAll != null ? 'checked' : ''}>In Progress</label>
+                                </div>
+                                <div class="checkbox-post">
+                                    <label><input name="status" type="checkbox" value="Resolved" class="icheck" ${'Resolved' eq selectedStatus ? 'checked' : ''} ${selectedStatusAll != null ? 'checked' : ''}>Resolved</label>
+                                </div>
+                                <div class="checkbox-post">
+                                    <label><input name="status" type="checkbox" value="Rejected" class="icheck" ${'Rejected' eq selectedStatus ? 'checked' : ''} ${selectedStatusAll != null ? 'checked' : ''}>Rejected</label>
                                 </div>
                             </div>
                         </div>
@@ -285,49 +276,41 @@
                                 <table class="table project-table table-centered table-nowrap">
                                     <thead>
                                         <tr>
-                                            <th scope="col">ID</th>
-                                            <th scope="col">Image</th>
-                                            <th scope="col">Title</th>
-                                            <th scope="col">Category</th>
-                                            <th scope="col">Author</th>
+                                            <th scope="col">Full Name</th>
+                                            <th scope="col">Product Name</th>
+                                            <th scope="col">Content</th>
+                                            <th scope="col">Rated star</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach items="${listBlog}" var="c">
+                                        <c:forEach items="${listFeedback}" var="c">
                                             <tr>
-                                                <th scope="row">${c.blogID}</th>
-                                                <td style="width: 20%">
-                                                    <img style="width: 20%" class="d-block img-fluid" src="${c.blogImage}" alt="First slide">
-                                                </td>
-                                                <td>${c.blogTitle}</td>
-                                                <c:if test="${c.blogCategoryID == 1}">
-                                                    <td>Fashion Trends</td>
-                                                </c:if>
-                                                <c:if test="${c.blogCategoryID == 2}">
-                                                    <td>Mix-Match Guides</td>
-                                                </c:if>
-                                                <c:if test="${c.blogCategoryID == 3}">
-                                                    <td>Size and style guides</td>
-                                                </c:if>
-                                                <c:if test="${c.blogCategoryID == 4}">
-                                                    <td>Clothing Care</td>
-                                                </c:if>
-                                                <td>${c.author}</td>
+                                                <th scope="row">${c.customerName}</th>
+                                                <td>${c.productName}</td>
+                                                <td>${c.content}</td>
                                                 <td>
-                                                    <c:if test="${c.status eq 'Public'}">
-                                                        <button type="button" class="btn btn-success">${c.status}</button>
+                                                    <c:forEach begin="1" end="${c.ratedStar}">
+                                                        <i class="fa fa-star"></i>
+                                                    </c:forEach>
+                                                </td>
+                                                <td>
+                                                    <c:if test="${c.status eq '1'}">
+                                                        <button type="button" class="btn btn-default">Pending</button>
                                                     </c:if>
-                                                    <c:if test="${c.status eq 'Private'}">
-                                                        <button type="button" class="btn btn-danger">${c.status}</button>
+                                                    <c:if test="${c.status eq '2'}">
+                                                        <button type="button" class="btn btn-default">In Progress</button>
+                                                    </c:if>
+                                                    <c:if test="${c.status eq '3'}">
+                                                        <button type="button" class="btn btn-success">Resolved</button>
+                                                    </c:if>
+                                                    <c:if test="${c.status eq '4'}">
+                                                        <button type="button" class="btn btn-danger">Rejected</button>
                                                     </c:if>
                                                 </td>
                                                 <td>
-                                                    <div class="action">
-                                                        <a href="editBlog?id=${c.blogID}" class="text-success mr-4" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"> <i class="fa fa-pencil h5 m-0"></i></a>
-                                                        <a href="javascript:void(0);" class="text-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close" onclick="confirmDelete(${c.blogID}, ${currentPage});"> <i class="fa fa-remove h5 m-0"></i></a>
-                                                    </div>
+
                                                 </td>
                                             </tr>    
                                         </c:forEach>
@@ -360,20 +343,6 @@
             <!-- end row -->
         </div>
 
-        <script>
-            function confirmDelete(blogID, currentPage) {
-                var confirmDelete = confirm("Are you sure you want to delete this blog?");
-                if (confirmDelete) {
-                    window.location.href = "deleteBlog?id=" + blogID + "&&index=" + currentPage;
-                }
-            }
-        </script>
-        <script>
-            import { Ripple, initMDB } from "mdb-ui-kit";
-
-            initMDB({Ripple});
-        </script>
         <jsp:include page="footer.jsp"></jsp:include>
     </body>
 </html>
-

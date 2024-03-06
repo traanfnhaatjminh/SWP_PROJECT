@@ -88,6 +88,28 @@ public class CustomerDAO extends DBContext {
         }
     }
 
+    public Customer getCustomerbyId(String cid) {
+        String sql = "  select * from Customer where [customerID] = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, cid);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                return new Customer(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8));
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
     public Customer checkAccount(String email) {
         String sql = "select * from Customer\n"
                 + "where [email] = ?";

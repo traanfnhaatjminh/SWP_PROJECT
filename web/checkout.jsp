@@ -43,10 +43,11 @@
                     </ul>
                     <ul class="header-links pull-right">
                         <!--<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>-->
-                        <c:if test="${sessionScope.customer == null}">
+                        <c:if test="${sessionScope.accC == null}">
+                            <li><a href="register.jsp"><i class="fa fa-"></i> Register</a></li>
                             <li><a href="login.jsp"><i class="fa fa-"></i> Login</a></li>
                             </c:if>
-                            <c:if test="${sessionScope.customer != null}">
+                            <c:if test="${sessionScope.accC != null}">
                             <li><a href="profile.jsp"><i class="fa fa-user-o"></i> My Account</a></li>
                             <li><a href="customer?action=logout"><i class="fa fa-"></i> Logout</a></li>
                             </c:if>
@@ -220,28 +221,28 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="name">Full name</label>
-                            <input name="name" id="name" type="text" value="${customer.fullName}" class="form-control" placeholder="Full name" required="" autofocus>
+                            <input name="name" id="name" type="text" value="${accC.fullName}" class="form-control" placeholder="Full name" required="" autofocus>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="name">Phone number</label>
-                            <input name="phone" type="text" id="phone" value="${customer.phone}" class="form-control mb-2" placeholder="Phone number" pattern="^0[2-9]{3}[0-9]{6}" required autofocus>
+                            <input name="phone" type="text" id="phone" value="${accC.phone}" class="form-control mb-2" placeholder="Phone number" pattern="^0[2-9]{3}[0-9]{6}" required autofocus>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="address">Address</label>
-                        <input name="address" type="text" id="address" value="${customer.address}"  class="form-control mb-2" placeholder="Address" required autofocus>
+                        <input name="address" type="text" id="address" value="${accC.address}"  class="form-control mb-2" placeholder="Address" required autofocus>
                     </div>
                     <div class="form-group">
                         <label for="address">Email</label>
-                        <input name="email" type="email" id="email" value="${customer.email}"  class="form-control mb-2" placeholder="Email" required autofocus>
+                        <input name="email" type="email" id="email" value="${accC.email}"  class="form-control mb-2" placeholder="Email" required autofocus>
                     </div>
 
                     <div class="form-group">
                         <label for="address">Gender</label>
                         <select id="id" class="form-control mb-2" name="gender">
-                            <option value="female" ${customer.gender== 'female' ?  'selected' :'' }  >Female</option>
-                            <option value="male" ${customer.gender== 'male' ?  'selected' :'' } >Male</option>
+                            <option value="female" ${accC.gender== 'female' ?  'selected' :'' }  >Female</option>
+                            <option value="male" ${accC.gender== 'male' ?  'selected' :'' } >Male</option>
                             <option value="other">Others</option>
                         </select>
 

@@ -73,6 +73,15 @@
             .container .searchblog{
                 width: 0;
             }
+
+            .checkbox-group {
+                display: flex;
+                flex-direction: row;
+            }
+
+            .checkbox-post {
+                margin-right: 10px; /* Điều chỉnh khoảng cách giữa các checkbox nếu cần thiết */
+            }
         </style>
     </head>
     <body>
@@ -163,11 +172,11 @@
                     </c:if>
                     <c:if test="${sessionScope.accS != null}">
                         <ul class="main-nav nav navbar-nav">
-                            <li class="${menu == null ? 'active' : ''} ${menu eq 'blog' ? 'active' : ''}">
-                                <a href="blog?menu=blog">Blogs</a>
-                            </li>
                             <li class="${menu eq 'post' ? 'active' : ''}">
-                                <a href="post?menu=post">Manage Blogs</a>
+                                <a href="post">Manage Blogs</a>
+                            </li>
+                            <li class="${menu eq 'feedbackList' ? 'active' : ''}">
+                                <a href="feedbackList">Manage Feedback</a>
                             </li>
                         </ul>
                     </c:if>
@@ -178,112 +187,10 @@
             </div>
             <!-- /container -->
         </nav>
-        <!--            <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <h2 style="margin-top: 7%" class="grid-title"><i class="fa fa-filter"></i> Filters</h2>
-                                <hr>
-        
-                                <form id="categoryFilterForm" action="filterPost">
-                                    <h4>By category:</h4>
-        <c:forEach items="${listBlogCategory}" var="c">
-            <div class="checkbox">
-                <label><input name="categories" type="checkbox" value="${c.name}" class="icheck">${c.name}</label>
-            </div>
-        </c:forEach>
-        <h4>By status:</h4>
-        <div class="checkbox">
-            <label><input name="status" type="checkbox" value="Public" class="icheck" ${'Public' eq selectedStatus ? 'checked' : ''} ${selectedStatusAll != null ? 'checked' : ''}>Public</label>
-            <label><input name="status" type="checkbox" value="Private" class="icheck" ${'Private' eq selectedStatus ? 'checked' : ''} ${selectedStatusAll != null ? 'checked' : ''}>Private</label>
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-    </form>
-
-     END FILTER BY CATEGORY 
-
-    <div class="padding"></div>
-</div>
- END FILTERS 
-<div id="main-content" class="blog-page col-md-9">
-    <div class="container">
-        <div class="row clearfix">
-            <div class="col-lg-9 col-md-12 left-box">
-                <label style="margin-top: 2%" for="addPost">ADD A NEW BLOG:</label>
-                <button type="button" class="btn btn-default">
-                    <a href="addBlog" target="target">Add</a>
-                </button>
-                <div class="store-filter clearfix">
-                    <div class="store-sort">
-                        <form action="sortPost">
-                            SORT BY:
-                            <select name="sortSelect">
-                                <option value="atoz">Title from A to Z</option>
-                                <option value="ztoa">Title from Z to A</option>
-        <c:forEach items="${listBlogCategory}" var="c">
-            <option value="${c.id}">Category: ${c.name}</option>
-        </c:forEach>
-        <option value="Public">Status: Public</option>
-        <option value="Private">Status: Private</option>
-    </select>
-    <button type="submit" class="btn btn-default">Sort</button>
-</form>
-</div>
-</div>
-<div class="card">
-<div class="body search">
-<form action="searchPost">
-    <div class="input-group m-b-0">
-        <div class="input-group-prepend">
-            <span class="input-group-text"><i class="fa fa-search"></i></span>
-        </div>
-        <input type="text" class="form-control" name="searchBlog" value="${searchValue}" placeholder="Search...">
-        <button type="submit" class="btn btn-primary">Search</button>
-        <c:if test="${error != null}">
-            <h5 class="text-danger">${error}</h5>
-        </c:if>
-    </div>
-</form>
-</div>
-</div>
-
-        <c:forEach items="${listBlog}" var="c">
-            <div class="col-md-4">
-                <div class="card single_post">
-                    <div class="body">
-                        <div class="img-post">
-                            <img class="d-block img-fluid" src="${c.blogImage}" alt="First slide">
-                        </div>
-                        <h3 class="product-name"><a href="blogDetail?id=${c.blogID}&&menu=post">${c.blogTitle}</a></h3>
-                        <p class="product-name">${c.content}</p>
-                        <p>Date: ${c.postDate}</p>
-                        <p>Author: ${c.author}</p>
-                        <a href="editBlog?id=${c.blogID}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons"></i></a>
-                        <a href="javascript:void(0);" class="delete" title="Delete" data-toggle="tooltip" onclick="confirmDelete(${c.blogID}, ${currentPage});"><i class="material-icons"></i></a>                                            
-                    </div>
-                </div>
-            </div>
-        </c:forEach>
-                        
-        <c:if test="${error == null}">
-            <div class="store-filter clearfix col-md-12">
-                <ul class="store-pagination">
-            <c:forEach begin="1" end="${endIndex}" var="c">
-                <c:set var="isActive" value="${c eq currentPage ? 'active' : ''}" />
-                <li class="${isActive}"><a href="postListPage?index=${c}">${c}</a></li>
-            </c:forEach>
-    </ul>
-</div>
-        </c:if>
-    </div>
-</div>
-</div>
-</div>
-</div>
-</div>-->
 
         <div class="container">
             <div class="row">
-                <div class="col-xl-3 col-md-4">
+                <div class="col-xl-3 col-md-3">
                     <div class="card bg-pattern">
                         <div class="card-body addnewblog">
                             <label style="margin-top: 2%" for="addPost">ADD A NEW BLOG:</label>
@@ -293,7 +200,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-md-4">
+                <div class="col-xl-3 col-md-5">
                     <div class="card bg-pattern">
                         <div class="card-body addnewblog">
                             <form action="sortPost">
@@ -333,6 +240,42 @@
                 </div>
             </div>
             <!-- end row -->
+            <div class="col-md-12">
+                <div class="col-md-4">
+                    <h2 style="margin-top: 40px" class="grid-title"><i class="fa fa-filter"></i> Filters</h2> 
+                </div>
+
+                <hr>
+                <div class="col-md-8" style="margin-bottom: 10px;">
+                    <form id="categoryFilterForm" action="filterPost">
+                        <div style="display: flex">
+                            <h4>By category:</h4>
+                            <div class="checkbox-group" style="margin-left: 2px;">
+                                <c:forEach items="${listBlogCategory}" var="c">
+                                    <div class="checkbox-post">
+                                        <label><input name="categories" type="checkbox" value="${c.name}" class="icheck">${c.name}</label>
+                                    </div>
+                                </c:forEach>
+                            </div>
+                        </div>
+                        <div style="display: flex">
+                            <h4>By status:</h4>
+                            <div class="checkbox-group" style="margin-left: 10px;">
+                                <div class="checkbox-post">
+                                    <label><input name="status" type="checkbox" value="Public" class="icheck" ${'Public' eq selectedStatus ? 'checked' : ''} ${selectedStatusAll != null ? 'checked' : ''}>Public</label>
+                                </div>
+                                <div class="checkbox-post">
+                                    <label><input name="status" type="checkbox" value="Private" class="icheck" ${'Private' eq selectedStatus ? 'checked' : ''} ${selectedStatusAll != null ? 'checked' : ''}>Private</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form> 
+                </div>
+
+                <div class="padding"></div>
+            </div>
 
             <div class="row">
                 <div class="col-lg-12">

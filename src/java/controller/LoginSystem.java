@@ -67,7 +67,7 @@ public class LoginSystem extends HttpServlet {
                     response.addCookie(email);
                     response.addCookie(pass);
                     response.addCookie(rem);
-                    response.sendRedirect("blog");
+                    response.sendRedirect("post");
                 } else if (user.getRoleID() == 2) {
                     HttpSession session = request.getSession();
                     session.setAttribute("accS", user);
@@ -114,7 +114,7 @@ public class LoginSystem extends HttpServlet {
         if (action.equals("logout")) {
             HttpSession session = request.getSession();
             session.removeAttribute("accS");
-            response.sendRedirect("home");
+            response.sendRedirect("loginSystem.jsp");
         }
 //        if (action.equals("updateinfor")) {
 //            try {

@@ -61,9 +61,9 @@
     <body onload="time()" class="app sidebar-mini rtl">
         <!-- Navbar-->
 
-            <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-            <aside class="app-sidebar" style="background-color: black" >
-                <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="${sessionScope.accS.avatar}" width="50px"
+        <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+        <aside class="app-sidebar" style="background-color: black" >
+            <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="${sessionScope.accS.avatar}" width="50px"
                                                 alt="User Image">
                 <div>
                     <a href=""><p class="app-sidebar__user-name"><b style="color: yellow"> ${sessionScope.accS.userName}</b></p></a>   
@@ -104,7 +104,6 @@
                                             <c:if test="${sessionScope.orderDetail.orderStatus == '3'}">Order Successfully Delivered</c:if>
                                             <c:if test="${sessionScope.orderDetail.orderStatus == null || sessionScope.orderDetail.orderStatus != '1' && sessionScope.orderDetail.orderStatus != '2'&&sessionScope.orderDetail.orderStatus != '3'}">Đã Hủy</c:if></span>
                                         </div>
-
 
                                     </div>
                                     <table class="table table-borderless">

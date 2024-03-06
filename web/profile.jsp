@@ -14,6 +14,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        
         <!-- Main CSS-->
         <link rel="stylesheet" href="./new_assetss/css/main.css"/>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
@@ -250,19 +251,13 @@
 
     <body onload="time()" class="app sidebar-mini rtl">
         <!-- Navbar-->
-        <header class="app-header">
-            <a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
-               aria-label="Hide Sidebar"></a>
+        <header >          
+            
+        </header>
 
-            <ul class="app-nav">
-                <c:if test="${sessionScope.accC != null }">    <li><a class="app-nav__item" href="home"><i class='bx bx-log-out bx-rotate-180'></i> </a>
-                    </li></c:if>
-                </ul>
-            </header>
-
-            <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-            <aside class="app-sidebar">
-                <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="${sessionScope.accC.avatar}" width="50px"
+        <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+        <aside class="app-sidebar">
+            <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="${sessionScope.accC.avatar}" width="50px"
                                                 alt="User Image">
                 <div>
                     <a href="Profile.jsp"><p class="app-sidebar__user-name"><b style="color: yellow"> ${sessionScope.accC.fullName}</b></p></a>   
@@ -279,8 +274,10 @@
                 <li><a class="app-menu__item" href="editprofile.jsp"><i
                             class='app-menu__icon bx bx-wrench'></i><span class="app-menu__label">Edit Profile</span></a>
                 </li>
+                <li><a class="app-menu__item" href="order"><i
+                            class='app-menu__icon bx bx-cart'></i><span class="app-menu__label">My Order</span></a>
+                </li>
             </ul>
-
 
         </aside>
         <main class="app-content">
@@ -310,13 +307,13 @@
                                     </div>
                                     <br>
                                     <div class="container-content col-md-12" style="background-color: white; padding-top: 13px; padding-bottom: 11px; border-radius: 10px; filter: drop-shadow(0 0 -3px grey)">
-                                        <h6>Giới tính: ${sessionScope.accC.gender}</h6>
+                                        <h6>Gender: ${sessionScope.accC.gender}</h6>
                                         <br>
                                         <h6>Email: ${sessionScope.accC.email}</h6>
                                         <br>
                                         <h6>Phone: ${sessionScope.accC.phone}</h6>
                                         <br>                                                                            
-                                        <h6>Adress: ${sessionScope.accC.address}</h6>
+                                        <h6>Address: ${sessionScope.accC.address}</h6>
                                         <br>
                                         <h6>Gender: ${sessionScope.accC.gender}</h6>
                                         <br>        

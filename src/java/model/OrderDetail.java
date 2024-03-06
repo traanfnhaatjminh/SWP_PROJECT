@@ -9,14 +9,6 @@ package model;
  * @author minh1
  */
 public class OrderDetail {
-//    create table orderDetail(
-//detailID int IDENTITY(1,1) NOT NULL,
-//orderID int NOT NULL,
-//productID int,
-//orderPrice money,
-//quantity int,
-//FOREIGN KEY (orderID) REFERENCES [Order](orderID),
-//FOREIGN KEY (productID) REFERENCES product(id),
 
     private int orderID;
     private int productID;
@@ -26,8 +18,7 @@ public class OrderDetail {
     private String product_img;
     private String product_name;
     private String product_cate;
-    
-    
+    private Product product;
 
     public OrderDetail() {
     }
@@ -41,9 +32,9 @@ public class OrderDetail {
         this.product_img = product_img;
         this.product_name = product_name;
         this.product_cate = product_cate;
-        
+
     }
-    
+
     public OrderDetail(int orderID, int productID, double productPrice, int quantity, double totalCost) {
         this.orderID = orderID;
         this.productID = productID;
@@ -51,7 +42,7 @@ public class OrderDetail {
         this.quantity = quantity;
         this.totalCost = totalCost;
     }
-    
+
     public int getOrderID() {
         return orderID;
     }
@@ -62,6 +53,14 @@ public class OrderDetail {
 
     public int getProductID() {
         return productID;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public void setProductID(int productID) {
@@ -116,7 +115,4 @@ public class OrderDetail {
         this.product_cate = product_cate;
     }
 
-    
-    
-    
 }
