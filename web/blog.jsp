@@ -370,7 +370,6 @@
             </div>
             <!-- /MAIN HEADER -->
 
-
         </header>
         <jsp:include page="navigation.jsp"></jsp:include>
             <div id="main-content" class="blog-page">

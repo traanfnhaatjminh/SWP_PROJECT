@@ -25,6 +25,20 @@ public class Users {
     
     public Users() {
     }
+
+    public Users(int userID, String userName, String gender, String email, String mobile, String avatar, String address, int roleID, int user_status) {
+        this.userID = userID;
+        this.userName = userName;
+        this.gender = gender;
+        this.email = email;
+        this.mobile = mobile;
+        this.avatar = avatar;
+        this.address = address;
+        this.roleID = roleID;
+        this.user_status = user_status;
+    }
+
+    
     
     public Users(int userID, String userName, String gender, String email, String mobile, String avatar, String address, String user_role_name, int user_status) {
         this.userID = userID;

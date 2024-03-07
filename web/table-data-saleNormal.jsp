@@ -279,7 +279,7 @@
                     <li><a class="app-menu__item" href=""><i class='app-menu__icon bx bx-cog'></i><span class="app-menu__label">Change Password</span></a></li>
                 </ul>
         </aside>
-        <main class="app-content">
+                    <main class="app-content" style="margin-left: 250px;">
             <div class="app-title">
                 <ul class="app-breadcrumb breadcrumb side">
                     <li class="breadcrumb-item active"><a href="#"><b>List Orders</b></a></li>

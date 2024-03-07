@@ -98,13 +98,13 @@ public class userEdit extends HttpServlet {
             String userAvatar = request.getParameter("userAvatar");
             String userAddress = request.getParameter("userAddress");
             int userRole= Integer.parseInt(request.getParameter("userRole"));
-            
+            int userStatus = Integer.parseInt(request.getParameter("userStatus"));
             
         
            
 
             // Work with Database
-            Users user = new Users(userId, userEmail, userGender, userEmail, userMobile, userAvatar, userAddress, userRole);
+            Users user = new Users(userId, userFullname, userGender, userEmail, userMobile, userAvatar, userAddress, userRole, userStatus);
             UserEditDAO userEditDAO = new UserEditDAO();
             userEditDAO.updateUserAdmin(user);
             List<Roles> listUserRole = new ArrayList<>();

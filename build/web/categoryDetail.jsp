@@ -70,7 +70,7 @@
                         <div class="col-md-3">
                             <div class="header-logo">
                                 <a href="home" class="logo">
-                                    
+
                                 </a>
                             </div>
                         </div>
@@ -194,23 +194,18 @@
                                     </div>
                                 </div>
                             </c:forEach>
-
+                            <div class="store-filter clearfix col-md-12">
+                                <ul class="store-pagination">
+                                    <c:forEach begin="1" end="${endIndex}" var="c">
+                                        <c:set var="isActive" value="${c eq currentPage ? 'active' : ''}" />
+                                        <li class="${isActive}"><a href="blogListPage?index=${c}">${c}</a></li>
+                                        </c:forEach>
+                                </ul>
+                            </div>
                             <!-- /product -->
                         </div>
                         <!-- /store products -->
 
-                        <!-- store bottom filter -->
-                        <!--                        <div class="store-filter clearfix">
-                                                    <span class="store-qty">Showing 20-100 products</span>
-                                                    <ul class="store-pagination">
-                                                        <li class="active">1</li>
-                                                        <li><a href="#">2</a></li>
-                                                        <li><a href="#">3</a></li>
-                                                        <li><a href="#">4</a></li>
-                                                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                                                    </ul>
-                                                </div>-->
-                        <!-- /store bottom filter -->
                     </div>
                     <!-- /STORE -->
                 </div>

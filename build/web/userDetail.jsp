@@ -156,6 +156,14 @@
                                         <h6>Địa Chỉ: ${user.address}</h6>
                                         <br>
                                         <h6>Status: 
+                                            <c:choose>
+                                                <c:when test="${user.user_status == 1}">
+                                                    Present
+                                                </c:when>
+                                                <c:otherwise>
+                                                    Hidden
+                                                </c:otherwise>
+                                            </c:choose>
                                             
                                         </h6>                                      
                                     </div>

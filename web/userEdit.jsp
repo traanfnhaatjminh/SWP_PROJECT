@@ -271,7 +271,7 @@
                                         <div class="container-content col-md-12" style="background-color: white; padding-top: 13px; padding-bottom: 11px; border-radius: 10px; filter: drop-shadow(0 0 -3px grey); display: flex">
                                             <form action="userEdit" method="post">
                                                 <h3 style="margin-right: 4px; padding-bottom: 10px">Full Name: ${user.userName}</h3>
-                                                <input style="color: #226e20; width: 420px; height: 37px; " class="form-control" type="text" name="userFullname" value="${user.userName}">
+                                                <input style="color: #226e20; width: 420px; height: 37px; " class="form-control" type="hidden" name="userFullname" value="${user.userName}">
                                                 <h6>Gender:  ${user.gender}</h6>
                                                 <select class="form-control-input first-input" id="gender" name="userGender">
                                                     <option value="male" ${user.gender == 'male' ? 'selected' : ''}>Male</option>
@@ -281,10 +281,10 @@
 
                                                 <br>
                                                 <h6>Email:  ${user.email}</h6>
-                                                <input class="form-control-input " type="email" name="userEmail" value="${user.email}">
+                                                <input class="form-control-input " type="hidden" name="userEmail" value="${user.email}">
                                                 <br>
                                                 <h6>Phone: ${user.mobile}</h6>
-                                                <input class="form-control-input " type="tel" pattern="[0-9]{10}" name="userMobile" value="${user.mobile}">
+                                                <input class="form-control-input " type="hidden" pattern="[0-9]{10}" name="userMobile" value="${user.mobile}">
                                                 <br>
                                                 <h6>Role:
                                                     <select class="form-control-input" id="role" name="userRole" required>
@@ -295,10 +295,23 @@
                                                 </h6>
                                                 <br>
                                                 <h6>Address: ${user.address}</h6>
-                                                <input class="form-control-input" name="userAddress" type="text" value="${user.address}">
+                                                <input class="form-control-input" name="userAddress" type="hidden" value="${user.address}">
                                                 <br>                                              
-
-                                                <input class="form-control-input" type="text" name="userAvatar" value="${user.avatar}">                                             
+                                                <h6>Status: 
+                                                    <!--<c:choose>
+                                                        <c:when test="${user.user_status == 1}">
+                                                            Present
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            Hidden
+                                                        </c:otherwise>
+                                                    </c:choose>-->
+                                                    <select class="form-control-input" id="status" name="userStatus" required>
+                                                        <option ${user.user_status=="1"?'selected':''} value="1">Present</option>
+                                                        <option ${user.user_status=="0"?'selected':''} value="0">Hidden</option>
+                                                    </select>
+                                                </h6>
+                                                <input class="form-control-input" type="hidden" name="userAvatar" value="${user.avatar}">                                             
 
                                                 <input type="hidden" name="userId" value="${user.userID}">
                                                 <div style="margin-right: auto; margin-top: 40px">
@@ -314,132 +327,132 @@
                         </div>
                     </div>
                 </div>
-                </div>
-                    <p style="color: blue ; background-color: white ; width: auto ; margin: auto ;padding: auto ; text-align: center ; border-radius: 50px;">${message}
-                    </p>
-                    </main>
+            </div>
+            <p style="color: blue ; background-color: white ; width: auto ; margin: auto ;padding: auto ; text-align: center ; border-radius: 50px;">${message}
+            </p>
+        </main>
 
-                    <script src="new_assetss/js/jquery-3.2.1.min.js"></script>
-                    <script src="new_assetss/js/popper.min.js"></script>
-                    <script src="new_assetss/js/bootstrap.min.js"></script>
-                    <script src="new_assetss/js/main.js"></script>
-                    <script src="new_assetss/js/plugins/pace.min.js"></script>
-                    <script>
-            const inpFile = document.getElementById("inpFile");
-            const loadFile = document.getElementById("loadFile");
-            const previewContainer = document.getElementById("imagePreview");
-            const previewContainer = document.getElementById("imagePreview");
-            const previewImage = previewContainer.querySelector(".image-preview__image");
-            const previewDefaultText = previewContainer.querySelector(".image-preview__default-text");
-            inpFile.addEventListener("change", function () {
-                const file = this.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    previewDefaultText.style.display = "none";
-                    previewImage.style.display = "block";
-                    reader.addEventListener("load", function () {
-                        previewImage.setAttribute("src", this.result);
-                    });
-                    reader.readAsDataURL(file);
+        <script src="new_assetss/js/jquery-3.2.1.min.js"></script>
+        <script src="new_assetss/js/popper.min.js"></script>
+        <script src="new_assetss/js/bootstrap.min.js"></script>
+        <script src="new_assetss/js/main.js"></script>
+        <script src="new_assetss/js/plugins/pace.min.js"></script>
+        <script>
+const inpFile = document.getElementById("inpFile");
+const loadFile = document.getElementById("loadFile");
+const previewContainer = document.getElementById("imagePreview");
+const previewContainer = document.getElementById("imagePreview");
+const previewImage = previewContainer.querySelector(".image-preview__image");
+const previewDefaultText = previewContainer.querySelector(".image-preview__default-text");
+inpFile.addEventListener("change", function () {
+    const file = this.files[0];
+    if (file) {
+        const reader = new FileReader();
+        previewDefaultText.style.display = "none";
+        previewImage.style.display = "block";
+        reader.addEventListener("load", function () {
+            previewImage.setAttribute("src", this.result);
+        });
+        reader.readAsDataURL(file);
+    }
+});
+
+        </script>
+        <script>
+            // Lấy tất cả các phần tử input có name là "status"
+            const checkboxes = document.querySelectorAll('input[name="status"]');
+
+            // Lặp qua từng checkbox
+            checkboxes.forEach(checkbox => {
+                // Lắng nghe sự kiện "change" của checkbox
+                checkbox.addEventListener('change', function () {
+                    // Tìm biểu mẫu (form) chứa checkbox hiện tại
+                    const form = this.closest('form');
+
+                    // Kiểm tra xem biểu mẫu có tồn tại không
+                    if (form) {
+                        // Gửi biểu mẫu đi khi checkbox thay đổi
+                        form.submit();
+                    }
+                });
+            });
+        </script>
+        <script>
+            // Function to perform the validation for Stock Price
+            function validateStockPrice() {
+                var inputValue = parseFloat(document.getElementById("floatValue1").value);
+                var maxFloatValue = 3.402823466E+38;
+
+                if (inputValue > maxFloatValue) {
+                    alert("Value of 'Stock Price' exceeds the maximum allowed value. Please enter a lower value.");
+                    document.getElementById("floatValue1").value = ""; // Clear the input field
+                    return false; // Prevent the form from submitting
+                }
+                return true; // Allow the form to submit if validation passes
+            }
+
+            // Function to perform the validation for Sale Price
+            function validateSalePrice() {
+                var inputValue = parseFloat(document.getElementById("floatValue2").value);
+                var maxFloatValue = 3.402823466E+38;
+
+                if (inputValue > maxFloatValue) {
+                    alert("Value of 'Sale Price' exceeds the maximum allowed value. Please enter a lower value.");
+                    document.getElementById("floatValue2").value = ""; // Clear the input field
+                    return false; // Prevent the form from submitting
+                }
+                return true; // Allow the form to submit if validation passes
+            }
+
+            // Function to perform the validation for Quantity
+            function validateQuantity() {
+                var inputValue = parseInt(document.getElementById("intValue").value);
+                var maxIntValue = 4294967295;
+
+                if (inputValue > maxIntValue) {
+                    alert("Value of 'Quantity' exceeds the maximum allowed value. Please enter a lower value.");
+                    document.getElementById("intValue").value = ""; // Clear the input field
+                    return false; // Prevent the form from submitting
+                }
+                return true; // Allow the form to submit if validation passes
+            }
+
+            // Add a submit event listener to the form
+            document.querySelector('form').addEventListener('submit', function (e) {
+                // Call the validation functions and prevent form submission if validation fails
+                if (!validateStockPrice() || !validateSalePrice() || !validateQuantity()) {
+                    e.preventDefault(); // Prevent the form from submitting if validation fails
                 }
             });
+        </script>
 
-                    </script>
-                    <script>
-                        // Lấy tất cả các phần tử input có name là "status"
-                        const checkboxes = document.querySelectorAll('input[name="status"]');
-
-                        // Lặp qua từng checkbox
-                        checkboxes.forEach(checkbox => {
-                            // Lắng nghe sự kiện "change" của checkbox
-                            checkbox.addEventListener('change', function () {
-                                // Tìm biểu mẫu (form) chứa checkbox hiện tại
-                                const form = this.closest('form');
-
-                                // Kiểm tra xem biểu mẫu có tồn tại không
-                                if (form) {
-                                    // Gửi biểu mẫu đi khi checkbox thay đổi
-                                    form.submit();
-                                }
-                            });
-                        });
-                    </script>
-                    <script>
-                        // Function to perform the validation for Stock Price
-                        function validateStockPrice() {
-                            var inputValue = parseFloat(document.getElementById("floatValue1").value);
-                            var maxFloatValue = 3.402823466E+38;
-
-                            if (inputValue > maxFloatValue) {
-                                alert("Value of 'Stock Price' exceeds the maximum allowed value. Please enter a lower value.");
-                                document.getElementById("floatValue1").value = ""; // Clear the input field
-                                return false; // Prevent the form from submitting
-                            }
-                            return true; // Allow the form to submit if validation passes
+        <script>
+            //hiển thị mặc định detail của sản phẩm chỉnh sửa
+            document.addEventListener("DOMContentLoaded", function () {
+                CKEDITOR.replace('productDetail', {
+                    on: {
+                        instanceReady: function (ev) {
+                            // Set the default content from the product object
+                            console.log("hello Thanhtung")
+                            ev.editor.setData("${product.productDetail}");
                         }
-
-                        // Function to perform the validation for Sale Price
-                        function validateSalePrice() {
-                            var inputValue = parseFloat(document.getElementById("floatValue2").value);
-                            var maxFloatValue = 3.402823466E+38;
-
-                            if (inputValue > maxFloatValue) {
-                                alert("Value of 'Sale Price' exceeds the maximum allowed value. Please enter a lower value.");
-                                document.getElementById("floatValue2").value = ""; // Clear the input field
-                                return false; // Prevent the form from submitting
-                            }
-                            return true; // Allow the form to submit if validation passes
+                    }
+                });
+            });
+        </script>
+        <script>
+            // hiển thị mặc định summary sản phẩm chỉnh sửa
+            document.addEventListener("DOMContentLoaded", function () {
+                CKEDITOR.replace('summary', {
+                    on: {
+                        instanceReady: function (ev) {
+                            // Set the default content from the product object
+                            ev.editor.setData("$");
                         }
+                    }
+                });
+            });
+        </script>
+    </body>
 
-                        // Function to perform the validation for Quantity
-                        function validateQuantity() {
-                            var inputValue = parseInt(document.getElementById("intValue").value);
-                            var maxIntValue = 4294967295;
-
-                            if (inputValue > maxIntValue) {
-                                alert("Value of 'Quantity' exceeds the maximum allowed value. Please enter a lower value.");
-                                document.getElementById("intValue").value = ""; // Clear the input field
-                                return false; // Prevent the form from submitting
-                            }
-                            return true; // Allow the form to submit if validation passes
-                        }
-
-                        // Add a submit event listener to the form
-                        document.querySelector('form').addEventListener('submit', function (e) {
-                            // Call the validation functions and prevent form submission if validation fails
-                            if (!validateStockPrice() || !validateSalePrice() || !validateQuantity()) {
-                                e.preventDefault(); // Prevent the form from submitting if validation fails
-                            }
-                        });
-                    </script>
-
-                    <script>
-                        //hiển thị mặc định detail của sản phẩm chỉnh sửa
-                        document.addEventListener("DOMContentLoaded", function () {
-                            CKEDITOR.replace('productDetail', {
-                                on: {
-                                    instanceReady: function (ev) {
-                                        // Set the default content from the product object
-                                        console.log("hello Thanhtung")
-                                        ev.editor.setData("${product.productDetail}");
-                                    }
-                                }
-                            });
-                        });
-                    </script>
-                    <script>
-                        // hiển thị mặc định summary sản phẩm chỉnh sửa
-                        document.addEventListener("DOMContentLoaded", function () {
-                            CKEDITOR.replace('summary', {
-                                on: {
-                                    instanceReady: function (ev) {
-                                        // Set the default content from the product object
-                                        ev.editor.setData("$");
-                                    }
-                                }
-                            });
-                        });
-                    </script>
-                    </body>
-
-                    </html>
+</html>

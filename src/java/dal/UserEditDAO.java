@@ -54,14 +54,14 @@ public class UserEditDAO extends DBContext {
                         + "    userID = ?;";
                 PreparedStatement st;
                 st = connection.prepareStatement(sql);
-                st.setString(1, u.getUserName());
-                st.setString(2, u.getGender());
-                st.setString(3, u.getEmail());
-                st.setString(4, u.getMobile());
-                st.setString(5, u.getAvatar());
-                st.setString(6, u.getAddress());
-                st.setInt(7, u.getRoleID());
-                st.setInt(8, u.getUserID());
+                st.setInt(1, u.getUserID());
+                st.setString(2, u.getUserName());
+                st.setString(3, u.getGender());
+                st.setString(4, u.getEmail());
+                st.setString(5, u.getMobile());
+                st.setString(6, u.getAvatar());
+                st.setString(7, u.getAddress());
+                st.setInt(8, u.getRoleID());
                 st.setInt(9, u.getUser_status());
                 st.executeUpdate();
             }
@@ -73,7 +73,7 @@ public class UserEditDAO extends DBContext {
     public static void main(String[] args) {
         try {
             // Tạo một đối tượng Users mới với thông tin cần cập nhật
-            Users usersToUpdate = new Users(1, "nguyen ta hoang", "male", "tahoang@gmail.com", "0333201780", "", "HaNoi", "12", 1, 0, 1);
+            Users usersToUpdate = new Users(1, "nguyen ta hoang", "female", "tahoang2003@gmail.com", "0988889999", "null", "HaNoi", 1, 0);
 
             // Tạo một đối tượng UserEditDAO để thực hiện cập nhật
             UserEditDAO userEditDAO = new UserEditDAO();

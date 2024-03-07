@@ -64,14 +64,14 @@ public class CategoryDetail extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String cid_raw = request.getParameter("cid");
-        String menu = request.getParameter("menu");
+        DAO d = new DAO();
+        int index = 1;
         try {
             int cid = Integer.parseInt(cid_raw);
             HttpSession session = request.getSession();
             String url = request.getRequestURI() + "?cid=" + cid_raw;
             System.out.println(url);
             session.setAttribute("prevUrl", url);
-            DAO d = new DAO();
             List<Product> list = d.getAllProduct();
             List<Product> listLast = d.getLatestProduct();
             Cookie[] c = request.getCookies();
@@ -83,15 +83,20 @@ public class CategoryDetail extends HttpServlet {
                     }
                 }
             }
-
             model.Cart cart = new model.Cart(txt, list);
+            List<Product> listP = d.getProductByCidPage(cid, index);
+            int endIndex = d.getProductByCid(cid).size() / 6;
+            if (d.getProductByCid(cid).size() % 6 != 0) {
+                endIndex++;
+            }
             List<Category> listC = d.getAllCategory();
             request.setAttribute("size", cart.getList().size());
-            List<Product> listP = d.getProductByCid(cid);
             request.setAttribute("listC", listC);
             request.setAttribute("listP", listP);
             request.setAttribute("cateID", cid);
-            request.setAttribute("menu", menu);
+            request.setAttribute("endIndex", endIndex);
+            request.setAttribute("currentPage", index);
+            request.setAttribute("menu", "categoryDetail");
             request.setAttribute("listLast", listLast);
             request.getRequestDispatcher("categoryDetail.jsp").forward(request, response);
         } catch (NumberFormatException e) {

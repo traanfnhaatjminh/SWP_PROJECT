@@ -246,7 +246,7 @@
                 </div>
 
                 <hr>
-                <div class="col-md-8" style="margin-bottom: 10px;">
+                <div class="col-md-8" style="margin-left: -108px; margin-top: -50px; margin-bottom: 10px;">
                     <form id="categoryFilterForm" action="filterPost">
                         <div style="display: flex">
                             <h4>By category:</h4>

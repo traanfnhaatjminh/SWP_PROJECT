@@ -80,7 +80,7 @@
                     <li><a class="app-menu__item" href=""><i class='app-menu__icon bx bx-cog'></i><span class="app-menu__label">Change Password</span></a></li>
                 </ul>
         </aside>
-        <main class="app-content">
+                    <main class="app-content" style="margin-left: 250px">
             <div class="container">
 
                 <div class="d-flex justify-content-between align-items-center py-3">
@@ -173,10 +173,6 @@
                                 <hr>
 
                                 Full name :<strong>${sessionScope.orderDetail.orderName}</strong>
-                                <br>
-
-                                <br>
-
                                 <br>
                                 Mobile :<strong>${sessionScope.orderDetail.orderPhone}</strong>
                                 <br>

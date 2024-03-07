@@ -64,12 +64,19 @@ public class FeedbackList extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        Users user = (Users)session.getAttribute("accS");
+        Users user = (Users) session.getAttribute("accS");
+        DAO d = new DAO();
+        int currentPage = 1;
         if (user != null) {
-            DAO dao = new DAO();
-            List<Feedback> listF = dao.getAllFeedback();
+            List<Feedback> listF = d.getAllFeedbackPage(currentPage);
+            int endIndex = d.getAllFeedback().size() / 6;
+            if (d.getAllFeedback().size() % 6 != 0) {
+                endIndex++;
+            }
             request.setAttribute("menu", "feedbackList");
             request.setAttribute("listFeedback", listF);
+            request.setAttribute("endIndex", endIndex);
+            request.setAttribute("currentPage", currentPage);
             request.getRequestDispatcher("FeedbackList.jsp").forward(request, response);
         } else {
             request.getRequestDispatcher("loginSystem.jsp").forward(request, response);

@@ -3,6 +3,7 @@ cid int primary key,
 cname nvarchar(30)
 )
 
+
 insert into Category(cid, cname)
 values 
 (1, 'T-SHIRT'),
@@ -11,6 +12,12 @@ values
 (4, 'PANTS')
 
 drop table product
+
+select fb.*,c.fullName,p.[name] from [Feedback] fb join product p on fb.productID = p.id
+join Customer c on fb.customerID = c.customerID
+order by c.fullName desc 
+OFFSET (1 - 1) * 6 ROWS
+FETCH NEXT 6 ROWS ONLY;
 
 create table product
 (
@@ -80,7 +87,12 @@ userStatus int,
 FOREIGN KEY (roleID) REFERENCES Roles(roleID)
 )
 
-select * from Users
+select * from product 
+where cid = ?
+order by id 
+OFFSET (? - 1) * 6 ROWS
+FETCH NEXT 6 ROWS ONLY;
+
 
 insert into Users(userName, gender, email, mobile, avatar, [address], pass, roleID, userPoint)
 values 
@@ -97,7 +109,7 @@ values
 (3, 'Marketer'),
 (1, 'Seller'),
 (2, 'Admin')
-select * from users
+
 create table Blog (
 blogID int identity(1,1) primary key,
 blogTitle nvarchar(100),
@@ -198,8 +210,6 @@ rate_star float,
 FOREIGN KEY (customerID) REFERENCES Customer(customerID),
 FOREIGN KEY (productID) REFERENCES [product](id)
 )
-
-select * from [Order]
 
 create table [Order](
 orderID int IDENTITY(1,1) primary key NOT NULL,

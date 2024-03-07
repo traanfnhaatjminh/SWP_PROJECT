@@ -237,6 +237,38 @@ public class DAO extends DBContext {
         return list;
     }
 
+    public List<Product> getProductByCidPage(int cid, int index) {
+        List<Product> list = new ArrayList<>();
+        String sql = "select * from product \n"
+                + "where cid = ?\n"
+                + "order by id \n"
+                + "OFFSET (? - 1) * 6 ROWS\n"
+                + "FETCH NEXT 6 ROWS ONLY;";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setInt(1, cid);
+            st.setInt(2, index);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Product c = new Product(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getDouble("original_price"),
+                        rs.getDouble("sale_price"),
+                        rs.getInt("quantity"),
+                        rs.getString("describe"),
+                        rs.getString("image"),
+                        rs.getInt("cid")
+                );
+                list.add(c);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
     public List<Blog> getBlogByCidPage(int cid, int pageIndex) {
         List<Blog> list = new ArrayList<>();
         String sql = "select * from Blog\n"
@@ -369,7 +401,8 @@ public class DAO extends DBContext {
                         rs.getString("postDate"),
                         rs.getString("content"),
                         rs.getString("author"),
-                        rs.getString("status"), rs.getInt("blogCategoryID"));
+                        rs.getString("status"), 
+                        rs.getInt("blogCategoryID"));
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -985,6 +1018,155 @@ public class DAO extends DBContext {
         List<Feedback> list = new ArrayList<>();
         String sql = "select fb.*,c.fullName,p.[name] from [Feedback] fb join product p on fb.productID = p.id \n"
                 + "join Customer c on fb.customerID = c.customerID";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Feedback c = new Feedback(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getFloat(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9));
+                list.add(c);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Feedback> getAllFeedbackPage(int index) {
+        List<Feedback> list = new ArrayList<>();
+        String sql = "select fb.*,c.fullName,p.[name] from [Feedback] fb join product p on fb.productID = p.id\n"
+                + "join Customer c on fb.customerID = c.customerID\n"
+                + "order by fb.feedbackID\n"
+                + "OFFSET (? - 1) * 6 ROWS\n"
+                + "FETCH NEXT 6 ROWS ONLY;";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setInt(1, index);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Feedback c = new Feedback(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getFloat(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9));
+                list.add(c);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Feedback> getCustomerNameAscPage(int index) {
+        List<Feedback> list = new ArrayList<>();
+        String sql = "select fb.*,c.fullName,p.[name] from [Feedback] fb join product p on fb.productID = p.id\n"
+                + "join Customer c on fb.customerID = c.customerID\n"
+                + "order by c.fullName asc\n"
+                + "OFFSET (? - 1) * 6 ROWS\n"
+                + "FETCH NEXT 6 ROWS ONLY;";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setInt(1, index);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Feedback c = new Feedback(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getFloat(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9));
+                list.add(c);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Feedback> getAllCustomerNameAsc() {
+        List<Feedback> list = new ArrayList<>();
+        String sql = "select fb.*,c.fullName,p.[name] from [Feedback] fb join product p on fb.productID = p.id\n"
+                + "join Customer c on fb.customerID = c.customerID\n"
+                + "order by c.fullName asc";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Feedback c = new Feedback(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getFloat(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9));
+                list.add(c);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Feedback> getCustomerNameDescPage(int index) {
+        List<Feedback> list = new ArrayList<>();
+        String sql = "select fb.*,c.fullName,p.[name] from [Feedback] fb join product p on fb.productID = p.id\n"
+                + "join Customer c on fb.customerID = c.customerID\n"
+                + "order by c.fullName desc\n"
+                + "OFFSET (? - 1) * 6 ROWS\n"
+                + "FETCH NEXT 6 ROWS ONLY;";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setInt(1, index);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Feedback c = new Feedback(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getFloat(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9));
+                list.add(c);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Feedback> getAllCustomerNameDesc() {
+        List<Feedback> list = new ArrayList<>();
+        String sql = "select fb.*,c.fullName,p.[name] from [Feedback] fb join product p on fb.productID = p.id\n"
+                + "join Customer c on fb.customerID = c.customerID\n"
+                + "order by c.fullName desc";
         try {
             PreparedStatement st;
             st = connection.prepareStatement(sql);

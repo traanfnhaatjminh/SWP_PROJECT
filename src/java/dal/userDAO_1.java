@@ -32,20 +32,19 @@ public class userDAO_1 extends DBContext {
 
         try {
             if (connection != null) {
-                String sql = "  SELECT \n"
-                        + "u.userID, \n"
-                        + "u.userName, \n"
-                        + "u.gender,\n"
-                        + "u.email, \n"
-                        + "u.mobile,\n"
-                        + "u.[address],\n"
-                        + "r.roleName\n"
-                        + "FROM \n"
-                        + "Users AS u\n"
-                        + "JOIN \n"
-                        + "Roles AS r \n"
-                        + "ON \n"
-                        + "u.roleID = r.roleID";
+                String sql = "SELECT\n"
+                        + "    u.userID,\n"
+                        + "    u.userName,\n"
+                        + "    u.gender,\n"
+                        + "    u.email,\n"
+                        + "    u.mobile,\n"
+                        + "    u.[address],\n"
+                        + "    r.roleName,\n"
+                        + "    u.userStatus\n"
+                        + "FROM\n"
+                        + "    Users AS u\n"
+                        + "JOIN\n"
+                        + "    Roles AS r ON u.roleID = r.roleID;";
 
                 PreparedStatement st;
                 st = connection.prepareStatement(sql);
@@ -60,6 +59,7 @@ public class userDAO_1 extends DBContext {
                     user.setMobile(rs.getString(5));
                     user.setAddress(rs.getString(6));
                     user.setUser_role_name(rs.getString(7));
+                    user.setUser_status(rs.getInt(8));
                     list.add(user);
                 }
             }
@@ -97,17 +97,18 @@ public class userDAO_1 extends DBContext {
     }
 
     public Users getUserDetailByID(String user_id) throws SQLException {
-        String sql = " SELECT u.userID, \n"
-                + "       u.userName, \n"
-                + "       u.gender, \n"
-                + "       u.email, \n"
-                + "       u.mobile, \n"
-                + "       u.avatar, \n"
+        String sql = "SELECT u.userID,\n"
+                + "       u.userName,\n"
+                + "       u.gender,\n"
+                + "       u.email,\n"
+                + "       u.mobile,\n"
+                + "       u.avatar,\n"
                 + "       u.[address],\n"
-                + "	   r.roleName\n"
-                + "FROM Users AS u \n"
+                + "       r.roleName,\n"
+                + "	   u.userStatus\n"
+                + "FROM Users AS u\n"
                 + "JOIN Roles AS r ON u.roleID = r.roleID\n"
-                + "WHERE u.userID = ?";
+                + "WHERE u.userID = ?;";
 
         try {
             PreparedStatement st;
@@ -123,7 +124,8 @@ public class userDAO_1 extends DBContext {
                         rs.getString(5),
                         rs.getString(6),
                         rs.getString(7),
-                        rs.getString(8));
+                        rs.getString(8),
+                        rs.getInt(9));
             }
 
         } catch (SQLException e) {
@@ -331,10 +333,17 @@ public class userDAO_1 extends DBContext {
         try {
             if (connection != null) {
 
-                String sql = "SELECT u.userID, u.userName, u.gender, u.email, u.mobile,u.[address], r.roleName\n"
-                        + "					FROM Users AS u \n"
-                        + "					JOIN Roles AS r ON u.roleID = r.roleID \n"
-                        + "					WHERE u.gender = ?";
+                String sql = "SELECT u.userID,\n"
+                        + "u.userName,\n"
+                        + "u.gender,\n"
+                        + "u.email,\n"
+                        + "u.mobile,\n"
+                        + "u.[address],\n"
+                        + "r.roleName,\n"
+                        + "u.userStatus\n"
+                        + "FROM Users AS u \n"
+                        + "JOIN Roles AS r ON u.roleID = r.roleID \n"
+                        + "WHERE u.gender = ?;";
                 PreparedStatement st;
                 st = connection.prepareStatement(sql);
                 st.setString(1, gender);
@@ -348,6 +357,7 @@ public class userDAO_1 extends DBContext {
                     user.setMobile(rs.getString(5));
                     user.setAddress(rs.getString(6));
                     user.setUser_role_name(rs.getString(7));
+                    user.setUser_status(rs.getInt(8));
                     list.add(user);
                 }
             }
@@ -363,10 +373,10 @@ public class userDAO_1 extends DBContext {
         try {
             if (connection != null) {
 
-                String sql = "SELECT u.userID, u.userName, u.gender, u.email, u.mobile,u.[address], r.roleName\n"
-                        + "					FROM Users AS u \n"
-                        + "					JOIN Roles AS r ON u.roleID = r.roleID \n"
-                        + "					WHERE r.roleID = ?";
+                String sql = "SELECT u.userID, u.userName, u.gender, u.email, u.mobile, u.[address], r.roleName, u.userStatus\n"
+                        + "FROM Users u \n"
+                        + "JOIN Roles r ON u.roleID = r.roleID \n"
+                        + "WHERE r.roleID = ?;";
                 PreparedStatement st;
                 st = connection.prepareStatement(sql);
                 st.setString(1, roleId);
@@ -380,6 +390,7 @@ public class userDAO_1 extends DBContext {
                     user.setMobile(rs.getString(5));
                     user.setAddress(rs.getString(6));
                     user.setUser_role_name(rs.getString(7));
+                    user.setUser_status(rs.getInt(8));
                     list.add(user);
                 }
             }
@@ -399,33 +410,33 @@ public class userDAO_1 extends DBContext {
 //        for (Users users : listD) {
 //            System.out.println(users);
 //        }
-     try {
-    String searchContent = "hoang"; // Thay bằng nội dung tìm kiếm mong muốn
+        try {
+            String searchContent = "hoang"; // Thay bằng nội dung tìm kiếm mong muốn
 
-        // Tạo một đối tượng UserDAO để thực hiện tìm kiếm
-        userDAO_1 userDAO = new userDAO_1();
+            // Tạo một đối tượng UserDAO để thực hiện tìm kiếm
+            userDAO_1 userDAO = new userDAO_1();
 
-        // Gọi phương thức getAllUserBySearch để lấy danh sách người dùng dựa trên nội dung tìm kiếm
-        List<Users> userList = userDAO.getAllUserBySearch(searchContent);
+            // Gọi phương thức getAllUserBySearch để lấy danh sách người dùng dựa trên nội dung tìm kiếm
+            List<Users> userList = userDAO.getAllUserBySearch(searchContent);
 
-        // Hiển thị thông tin của các người dùng được trả về
-        if (userList.isEmpty()) {
-            System.out.println("Không tìm thấy người dùng nào.");
-        } else {
-            System.out.println("Danh sách người dùng:");
-            for (Users user : userList) {
-                System.out.println("ID: " + user.getUserID());
-                System.out.println("Tên: " + user.getUserName());
-                System.out.println("Giới tính: " + user.getGender());
-                System.out.println("Email: " + user.getEmail());
-                System.out.println("Mobile: " + user.getMobile());
-                System.out.println("Địa chỉ: " + user.getAddress());
-                System.out.println("Vai trò: " + user.getUser_role_name());
-                System.out.println("---------------------------");
+            // Hiển thị thông tin của các người dùng được trả về
+            if (userList.isEmpty()) {
+                System.out.println("Không tìm thấy người dùng nào.");
+            } else {
+                System.out.println("Danh sách người dùng:");
+                for (Users user : userList) {
+                    System.out.println("ID: " + user.getUserID());
+                    System.out.println("Tên: " + user.getUserName());
+                    System.out.println("Giới tính: " + user.getGender());
+                    System.out.println("Email: " + user.getEmail());
+                    System.out.println("Mobile: " + user.getMobile());
+                    System.out.println("Địa chỉ: " + user.getAddress());
+                    System.out.println("Vai trò: " + user.getUser_role_name());
+                    System.out.println("---------------------------");
+                }
             }
+        } catch (SQLException e) {
+            System.out.println("Lỗi khi thực hiện tìm kiếm: " + e.getMessage());
         }
-    } catch (SQLException e) {
-        System.out.println("Lỗi khi thực hiện tìm kiếm: " + e.getMessage());
     }
-}
 }

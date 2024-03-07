@@ -11,11 +11,15 @@
     </filter>
     <filter-mapping>
         <filter-name>AdminFilter</filter-name>
-        <url-pattern>/userlist/*</url-pattern>
+        <url-pattern>/userlist</url-pattern>
+        <url-pattern>/addUser</url-pattern>
+        <url-pattern>/userDetail</url-pattern>
+        <url-pattern>/userEdit</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>SaleFilter</filter-name>
         <url-pattern>/pageOrdersServletBySale/*</url-pattern>
+        <url-pattern>/detailOrderForSaleServlet/*</url-pattern>
     </filter-mapping>
     <filter>
         <filter-name>CustomerFilter</filter-name>
@@ -26,7 +30,21 @@
         <url-pattern>/changepass.jsp</url-pattern>
         <url-pattern>/editprofile.jsp</url-pattern>
         <url-pattern>/profile.jsp</url-pattern>
+        <url-pattern>/OrderDetail_1.jsp</url-pattern>
+        <url-pattern>/checkout.jsp</url-pattern>
+        <url-pattern>/order</url-pattern>
+        <url-pattern>/orderDetail</url-pattern>
     </filter-mapping>
+    <filter>
+        <filter-name>MarketingFilter</filter-name>
+        <filter-class>Authorization.MarketingFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>MarketingFilter</filter-name>
+        <url-pattern>/post.jsp</url-pattern>
+        <url-pattern>/post</url-pattern>
+    </filter-mapping>
+    
     
     <servlet>
         <servlet-name>pageOrdersServletBySale</servlet-name>

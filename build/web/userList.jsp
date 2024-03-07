@@ -284,7 +284,7 @@
                                         </li>-->
                 </ul>
         </aside>
-        <main class="app-content">
+                    <main class="app-content" style="margin-left: 250px;">
             <div class="app-title">
                 <ul class="app-breadcrumb breadcrumb side">
                     <li class="breadcrumb-item active"><a href="#"><b>User List</b></a></li>
@@ -397,10 +397,11 @@
                                                 <form id="statusForm" action="changeuserstatus" method="post">
                                                     <input type="hidden" name="uid" value="${u.getUserID()}">
                                                     <label class="switch">
-                                                        <input type="checkbox" id="statusCheckbox" name="status">
+                                                        <input type="checkbox" id="statusCheckbox" name="status" ${u.user_status == 1 ? 'checked' : ''}>
                                                         <span class="slider round"></span>
                                                     </label>  
-                                                </form> </td>
+                                                </form> 
+                                            </td>
                                             <td width="60">
                                                 <ul style="list-style-type: none; display: flex;">
                                                     <li style="margin: 3px 5px">

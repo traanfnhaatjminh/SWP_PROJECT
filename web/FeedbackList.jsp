@@ -169,7 +169,7 @@
                 <div class="col-xl-3 col-md-6">
                     <div class="card bg-pattern">
                         <div class="card-body addnewblog">
-                            <form action="sortPost">
+                            <form action="sortCustomerName">
                                 <label>SORT BY:</label>
                                 <select name="sortSelect">
                                     <option value="atoz">Full Name from A to Z</option>
@@ -209,7 +209,7 @@
                 </div>
 
                 <hr>
-                <div class="col-md-8" style="margin-bottom: 10px;">
+                <div class="col-md-8" style="margin-left: -108px; margin-top: -50px; margin-bottom: 10px;">
                     <form id="categoryFilterForm" action="filterPost">
                         <div style="display: flex">
                             <h4>By rated star:</h4>
@@ -328,7 +328,7 @@
                                                                                 </li>-->
                                         <c:forEach begin="1" end="${endIndex}" var="c">
                                             <c:set var="isActive" value="${c eq currentPage ? 'active' : ''}" />
-                                            <li class="${isActive}"><a class="page-link" href="postListPage?index=${c}">${c}</a></li>
+                                            <li class="${isActive}"><a class="page-link" href="feedbackListPage?index=${c}">${c}</a></li>
                                             </c:forEach>
                                         <!--                                        <li class="page-item">
                                                                                     <a class="page-link" href="#">Next</a>

@@ -13,11 +13,13 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Blog;
 import model.BlogCategory;
 import model.Category;
 import model.Product;
+import model.Users;
 
 /**
  *
@@ -65,20 +67,27 @@ public class PostList extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
+        Users user = (Users) session.getAttribute("accS");
         int currentPage = 1;
         DAO d = new DAO();
-        List<BlogCategory> listBC = d.getAllBlogCategory();
-        List<Blog> listB = d.getAllManageBlogPage(currentPage);
-        int endIndex = d.getAllManageBlog().size() / 6;
-        if (d.getAllManageBlog().size() % 6 != 0) {
-            endIndex++;
+        if (user != null) {
+            List<BlogCategory> listBC = d.getAllBlogCategory();
+            List<Blog> listB = d.getAllManageBlogPage(currentPage);
+            int endIndex = d.getAllManageBlog().size() / 6;
+            if (d.getAllManageBlog().size() % 6 != 0) {
+                endIndex++;
+            }
+            request.setAttribute("listBlogCategory", listBC);
+            request.setAttribute("listBlog", listB);
+            request.setAttribute("endIndex", endIndex);
+            request.setAttribute("currentPage", currentPage);
+            request.setAttribute("menu", "post");
+            request.getRequestDispatcher("post.jsp").forward(request, response);
+        } else {
+            request.getRequestDispatcher("loginSystem.jsp").forward(request, response);
         }
-        request.setAttribute("listBlogCategory", listBC);
-        request.setAttribute("listBlog", listB);
-        request.setAttribute("endIndex", endIndex);
-        request.setAttribute("currentPage", currentPage);
-        request.setAttribute("menu", "post");
-        request.getRequestDispatcher("post.jsp").forward(request, response);
+
     }
 
     /**
