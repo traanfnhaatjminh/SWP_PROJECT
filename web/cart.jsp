@@ -90,12 +90,20 @@
                             <div class="header-ctn">
                                 <!-- Cart -->
                                 <div class="dropdown">
-                                    <a href="cart" class="">
-                                        <i class="fa fa-shopping-cart"></i>
-                                        <span>Shopping Cart</span>
-                                        <div class="qty">${size}</div>
-                                    </a>
-
+                                    <c:if test="${sessionScope.accC == null}">
+                                        <a href="login.jsp" class="">
+                                            <i class="fa fa-shopping-cart"></i>
+                                            <span>Shopping Cart</span>
+                                            <div class="qty">${size}</div>
+                                        </a>
+                                    </c:if>
+                                    <c:if test="${sessionScope.accC != null}">
+                                        <a href="cart" class="">
+                                            <i class="fa fa-shopping-cart"></i>
+                                            <span>Shopping Cart</span>
+                                            <div class="qty">${size}</div>
+                                        </a>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>
@@ -133,7 +141,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items="${cart.list}" var="c">
+                            <c:forEach items="${cart.list}" var="c" varStatus="loop">
                                 <tr>
                                     <td>${c.product.id}</td>
                                     <td class="item">
@@ -146,7 +154,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <input max="${c.product.quantity}" min="1"type="number" product-id ="${c.product.id}" id="quantity" class="form-control form-control-lg text-center" name="num" value="${c.quantity}" 
+                                        <input max="${c.product.quantity}" min="1" type="number" product-id ="${c.product.id}" id="quantity${loop.index}" class="form-control form-control-lg text-center" name="num" value="${c.quantity}" 
                                                />
                                     </td>   
                                     <td class="d-flex flex-column">${c.product.sale_price}$
@@ -243,44 +251,33 @@
             <!-- /FOOTER -->
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script type="text/javascript">
-                const elementQuantity = document.getElementById("quantity");
-                const max = elementQuantity.max;
-                console.log(max);
+                document.addEventListener("DOMContentLoaded", function () {
+                    const quantityInputs = document.querySelectorAll("input[name='num']");
 
+                    quantityInputs.forEach((input) => {
+                        input.addEventListener("change", (e) => {
+                            const num = e.target.value;
+                            const max = e.target.getAttribute("max");
+                            const id = e.target.getAttribute("product-id");
 
+                            if (num > max) {
+                                e.target.value = max;
+                            }
+                            
+                            if (1 < num < max){
+                                e.target.value = num;
+                            }
 
-                elementQuantity.addEventListener("change", (e) => {
+                            if (num <= 0) {
+                                e.target.value = 1;
+                                alert("You must buy more than 0");
+                            }
 
-                    if (e.target.value > max) {
-                        e.target.value = max;
-                        Swal.fire({
-                            icon: "error",
-                            title: "Oops...",
-                            text: "You can just buy " + max
-
+                            // Your other logic here
+                            window.location.href = "process?num=" + e.target.value + "&id=" + id;
                         });
-                    }
-                    if (e.target.value <= 0) {
-                        e.target.value = 1;
-                        Swal.fire({
-                            icon: "error",
-                            title: "Oops...",
-                            text: "You must be buy more than 0"
-
-                        });
-                    }
-
-                });
-                const quantity = document.querySelectorAll("input[name='num']");
-                quantity.forEach((item) => {
-                    item.addEventListener("change", (e) => {
-                        const num = e.target.value;
-                        const id = item.getAttribute("product-id");
-                        console.log(id);
-                        window.location.href = "process?num=" + num + "&id=" + id;
                     });
                 });
-
 
             </script>
     </body>

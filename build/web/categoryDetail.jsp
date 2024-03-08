@@ -189,7 +189,12 @@
                                             </h4>
                                         </div>
                                         <div class="add-to-cart">
-                                            <a href="buyProduct?productId=${c.id}&num=1" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</a>
+                                            <c:if test="${sessionScope.accC == null}">
+                                                <a href="login.jsp" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</a>
+                                            </c:if>
+                                            <c:if test="${sessionScope.accC != null}">
+                                                <a href="buyProduct?productId=${c.id}&num=1" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</a>
+                                            </c:if>                                         
                                         </div>
                                     </div>
                                 </div>
