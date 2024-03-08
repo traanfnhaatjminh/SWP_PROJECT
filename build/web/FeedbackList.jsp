@@ -82,6 +82,21 @@
             .checkbox-post {
                 margin-right: 10px; /* Điều chỉnh khoảng cách giữa các checkbox nếu cần thiết */
             }
+
+            td .fa-star {
+                display: inline-block;
+                font-size: 16px; /* Điều chỉnh kích thước sao theo mong muốn */
+                color: gold; /* Màu của sao */
+            }
+
+            td {
+                white-space: nowrap;
+            }
+
+            .checkbox-group .fa-star {
+                color: gold; /* Màu của sao */
+            }
+
         </style>
     </head>
     <body>
@@ -112,7 +127,7 @@
                         <!-- LOGO -->
                         <div class="col-md-3">
                             <div class="header-logo ">
-                                <a href="home" class="logo">
+                                <a href="post" class="logo">
                                     CLOTHINGMAKER
                                 </a>
                             </div>
@@ -151,6 +166,9 @@
                             <li class="${menu eq 'post' ? 'active' : ''}">
                                 <a href="post">Manage Blogs</a>
                             </li>
+                            <li class="${menu eq 'productList' ? 'active' : ''}">
+                                <a href="productList">Manage Product</a>
+                            </li>
                             <li class="${menu eq 'feedbackList' ? 'active' : ''}">
                                 <a href="feedbackList">Manage Feedback</a>
                             </li>
@@ -185,10 +203,10 @@
                 <div class="col-xl-3 col-md-6">
                     <div class="card">
                         <div class="card-body addnewblog">
-                            <form action="searchPost">
+                            <form action="searchFeedback">
                                 <div class="form-group mb-0">
                                     <div class="input-group mb-0">
-                                        <input style="width: 520px" type="text" name="searchBlog" class="form-control" value="${searchValue}" placeholder="Search..." aria-describedby="project-search-addon" />
+                                        <input style="width: 520px" type="text" name="searchFeedback" class="form-control" value="${searchValue}" placeholder="Search..." aria-describedby="project-search-addon" />
                                         <div class="input-group-append searchblog">
                                             <button class="btn btn-danger" type="submit" id="project-search-addon"><i class="fa fa-search search-icon font-12"></i></button>
                                                 <c:if test="${error != null}">
@@ -210,7 +228,7 @@
 
                 <hr>
                 <div class="col-md-8" style="margin-left: -108px; margin-top: -50px; margin-bottom: 10px;">
-                    <form id="categoryFilterForm" action="filterPost">
+                    <form id="categoryFilterForm" action="filterFeedback">
                         <div style="display: flex">
                             <h4>By rated star:</h4>
                             <div class="checkbox-group" style="margin-left: 10px;">
@@ -233,7 +251,7 @@
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                     </label>
-                                    <label><input name="ratedstar" type="checkbox" value="4" class="icheck">
+                                    <label><input name="ratedstar" type="checkbox" value="5" class="icheck">
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
@@ -247,16 +265,16 @@
                             <h4>By status:</h4>
                             <div class="checkbox-group" style="margin-left: 10px;">
                                 <div class="checkbox-post">
-                                    <label><input name="status" type="checkbox" value="Pending" class="icheck" ${'Pending' eq selectedStatus ? 'checked' : ''} ${selectedStatusAll != null ? 'checked' : ''}>Pending</label>
+                                    <label><input name="status" type="checkbox" value="1" class="icheck" ${'1' eq selectedStatus ? 'checked' : ''} ${selectedStatusAll != null ? 'checked' : ''}>Pending</label>
                                 </div>
                                 <div class="checkbox-post">
-                                    <label><input name="status" type="checkbox" value="In Progress" class="icheck" ${'In Progress' eq selectedStatus ? 'checked' : ''} ${selectedStatusAll != null ? 'checked' : ''}>In Progress</label>
+                                    <label><input name="status" type="checkbox" value="2" class="icheck" ${'2' eq selectedStatus ? 'checked' : ''} ${selectedStatusAll != null ? 'checked' : ''}>In Progress</label>
                                 </div>
                                 <div class="checkbox-post">
-                                    <label><input name="status" type="checkbox" value="Resolved" class="icheck" ${'Resolved' eq selectedStatus ? 'checked' : ''} ${selectedStatusAll != null ? 'checked' : ''}>Resolved</label>
+                                    <label><input name="status" type="checkbox" value="3" class="icheck" ${'3' eq selectedStatus ? 'checked' : ''} ${selectedStatusAll != null ? 'checked' : ''}>Resolved</label>
                                 </div>
                                 <div class="checkbox-post">
-                                    <label><input name="status" type="checkbox" value="Rejected" class="icheck" ${'Rejected' eq selectedStatus ? 'checked' : ''} ${selectedStatusAll != null ? 'checked' : ''}>Rejected</label>
+                                    <label><input name="status" type="checkbox" value="4" class="icheck" ${'4' eq selectedStatus ? 'checked' : ''} ${selectedStatusAll != null ? 'checked' : ''}>Rejected</label>
                                 </div>
                             </div>
                         </div>
@@ -281,7 +299,6 @@
                                             <th scope="col">Content</th>
                                             <th scope="col">Rated star</th>
                                             <th scope="col">Status</th>
-                                            <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -296,24 +313,24 @@
                                                     </c:forEach>
                                                 </td>
                                                 <td>
-                                                    <c:if test="${c.status eq '1'}">
-                                                        <button type="button" class="btn btn-default">Pending</button>
-                                                    </c:if>
-                                                    <c:if test="${c.status eq '2'}">
-                                                        <button type="button" class="btn btn-default">In Progress</button>
-                                                    </c:if>
-                                                    <c:if test="${c.status eq '3'}">
-                                                        <button type="button" class="btn btn-success">Resolved</button>
-                                                    </c:if>
-                                                    <c:if test="${c.status eq '4'}">
-                                                        <button type="button" class="btn btn-danger">Rejected</button>
-                                                    </c:if>
-                                                </td>
-                                                <td>
+                                                    <form action="changeStatusF" id="statusForm">
+                                                        <input type="hidden" name="fid" value="${c.feedbackID}"/>
+                                                        <select name="statusF" onchange="submitForm()">
+                                                            <option value="1" ${c.status eq '1'?'selected':''}>Pending</option>
+                                                            <option value="2" ${c.status eq '2'?'selected':''}>In Progress</option>
+                                                            <option value="3" ${c.status eq '3'?'selected':''}>Resolved</option>
+                                                            <option value="4" ${c.status eq '4'?'selected':''}>Rejected</option>
+                                                        </select>
+                                                    </form>
 
                                                 </td>
-                                            </tr>    
-                                        </c:forEach>
+                                            </tr>
+                                        <script>
+                                            function submitForm() {
+                                                document.getElementById("statusForm").submit();
+                                            }
+                                        </script>
+                                    </c:forEach>
 
                                     </tbody>
                                 </table>
@@ -342,6 +359,7 @@
             </div>
             <!-- end row -->
         </div>
+
 
         <jsp:include page="footer.jsp"></jsp:include>
     </body>

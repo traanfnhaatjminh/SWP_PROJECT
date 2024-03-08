@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package controller.manageProduct;
 
 import dal.DAO;
 import java.io.IOException;
@@ -13,14 +13,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
-import model.Feedback;
+import model.Category;
 
 /**
  *
- * @author minh1
+ * @author DUONG VIET DUY
  */
-@WebServlet(name = "SortCustomerName", urlPatterns = {"/sortCustomerName"})
-public class SortCustomerName extends HttpServlet {
+@WebServlet(name = "AddProduct", urlPatterns = {"/addProduct"})
+public class AddProduct extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +39,10 @@ public class SortCustomerName extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SortCustomerName</title>");
+            out.println("<title>Servlet AddProduct</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SortCustomerName at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AddProduct at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,52 +60,10 @@ public class SortCustomerName extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String sort = request.getParameter("sortSelect");
         DAO d = new DAO();
-        int currentPage = 1;
-        request.setAttribute("menu", "feedbackList");
-        request.setAttribute("currentPage", currentPage);
-        if (sort.equals("atoz")) {
-            List<Feedback> listF = d.getCustomerNameAscPage(currentPage);
-            int endIndex = d.getAllCustomerNameAsc().size() / 6;
-            if (d.getAllCustomerNameAsc().size() % 6 != 0) {
-                endIndex++;
-            }
-            request.setAttribute("listFeedback", listF);
-            request.setAttribute("endIndex", endIndex);
-        }
-
-        if (sort.equals("ztoa")) {
-            List<Feedback> listF = d.getCustomerNameDescPage(currentPage);
-            int endIndex = d.getAllCustomerNameDesc().size() / 6;
-            if (d.getAllCustomerNameDesc().size() % 6 != 0) {
-                endIndex++;
-            }
-            request.setAttribute("listFeedback", listF);
-            request.setAttribute("endIndex", endIndex);
-        }
-
-        if (sort.equals("atozP")) {
-            List<Feedback> listF = d.getProductNameAscPage(currentPage);
-            int endIndex = d.getAllProductNameAsc().size() / 6;
-            if (d.getAllProductNameAsc().size() % 6 != 0) {
-                endIndex++;
-            }
-            request.setAttribute("listFeedback", listF);
-            request.setAttribute("endIndex", endIndex);
-        }
-
-        if (sort.equals("ztoaP")) {
-            List<Feedback> listF = d.getProductNameDescPage(currentPage);
-            int endIndex = d.getAllProductNameDesc().size() / 6;
-            if (d.getAllProductNameDesc().size() % 6 != 0) {
-                endIndex++;
-            }
-            request.setAttribute("listFeedback", listF);
-            request.setAttribute("endIndex", endIndex);
-        }
-
-        request.getRequestDispatcher("FeedbackList.jsp").forward(request, response);
+        List<Category> listC = d.getAllCategory();
+        request.setAttribute("listCategory", listC);
+        request.getRequestDispatcher("addProduct.jsp").forward(request, response);
     }
 
     /**
@@ -119,7 +77,22 @@ public class SortCustomerName extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String name = request.getParameter("name");
+        String image = request.getParameter("image");
+        String o_price_raw = request.getParameter("original_price");
+        String s_price_raw = request.getParameter("sale_price");
+        String quantity_raw = request.getParameter("quantity");
+        String describe = request.getParameter("describe");
+        String category_raw = request.getParameter("category");
+        DAO d = new DAO();
+        int original_price = Integer.parseInt(o_price_raw);
+        int sale_price = Integer.parseInt(s_price_raw);
+        int quantity = Integer.parseInt(quantity_raw);
+        int category = Integer.parseInt(category_raw);
+        d.addProduct(name, original_price, sale_price, quantity, describe, image, category);
+        
+        request.setAttribute("success", "Add product successfully");
+        request.getRequestDispatcher("addProduct.jsp").forward(request, response);
     }
 
     /**

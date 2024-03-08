@@ -114,7 +114,7 @@
                         <!-- LOGO -->
                         <div class="col-md-3">
                             <div class="header-logo ">
-                                <a href="blog?menu=blog" class="logo">
+                                <a href="home" class="logo">
                                     CLOTHINGMAKER
                                 </a>
                             </div>

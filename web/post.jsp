@@ -175,6 +175,9 @@
                             <li class="${menu eq 'post' ? 'active' : ''}">
                                 <a href="post">Manage Blogs</a>
                             </li>
+                            <li class="${menu eq 'productList' ? 'active' : ''}">
+                                <a href="productList">Manage Product</a>
+                            </li>
                             <li class="${menu eq 'feedbackList' ? 'active' : ''}">
                                 <a href="feedbackList">Manage Feedback</a>
                             </li>

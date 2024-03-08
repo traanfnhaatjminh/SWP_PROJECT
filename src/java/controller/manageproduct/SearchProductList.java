@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package controller.manageProduct;
 
 import dal.DAO;
 import java.io.IOException;
@@ -13,14 +13,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
-import model.Feedback;
+import model.Category;
+import model.Product;
 
 /**
  *
- * @author minh1
+ * @author DUONG VIET DUY
  */
-@WebServlet(name = "SortCustomerName", urlPatterns = {"/sortCustomerName"})
-public class SortCustomerName extends HttpServlet {
+@WebServlet(name = "SearchProductList", urlPatterns = {"/searchProductList"})
+public class SearchProductList extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +40,10 @@ public class SortCustomerName extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SortCustomerName</title>");
+            out.println("<title>Servlet SearchProductList</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SortCustomerName at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SearchProductList at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,52 +61,46 @@ public class SortCustomerName extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String sort = request.getParameter("sortSelect");
-        DAO d = new DAO();
+        String search = request.getParameter("searchProduct");
         int currentPage = 1;
-        request.setAttribute("menu", "feedbackList");
-        request.setAttribute("currentPage", currentPage);
-        if (sort.equals("atoz")) {
-            List<Feedback> listF = d.getCustomerNameAscPage(currentPage);
-            int endIndex = d.getAllCustomerNameAsc().size() / 6;
-            if (d.getAllCustomerNameAsc().size() % 6 != 0) {
+        DAO d = new DAO();
+        if (search == null || search.equals("")) {
+            List<Product> listP = d.getAllManageProduct();
+            List<Category> listC = d.getAllCategory();
+
+            int endIndex = d.getAllManageProduct().size() / 8;
+            if (d.getAllManageProduct().size() % 8 != 0) {
                 endIndex++;
             }
-            request.setAttribute("listFeedback", listF);
+            request.setAttribute("listProduct", listP);
+            request.setAttribute("listCategory", listC);
             request.setAttribute("endIndex", endIndex);
-        }
-
-        if (sort.equals("ztoa")) {
-            List<Feedback> listF = d.getCustomerNameDescPage(currentPage);
-            int endIndex = d.getAllCustomerNameDesc().size() / 6;
-            if (d.getAllCustomerNameDesc().size() % 6 != 0) {
-                endIndex++;
+            request.setAttribute("currentPage", currentPage);
+            request.setAttribute("menu", "productList");
+            request.setAttribute("error", "Please input to search!!!");
+        } else {
+            List<Product> listP = d.searchProductList(search, currentPage);
+            if (listP.isEmpty()) {
+                List<Category> listC = d.getAllCategory();
+                request.setAttribute("listCategory", listC);
+                request.setAttribute("searchValue", search);
+                request.setAttribute("menu", "productList");
+                request.setAttribute("error", "No found result!!!");
+            } else {
+                int endIndex = d.getAllManageProduct().size() / 8;
+                if (d.getAllManageProduct().size() % 8 != 0) {
+                    endIndex++;
+                }
+                List<Category> listC = d.getAllCategory();
+                request.setAttribute("listProduct", listP);
+                request.setAttribute("listCategory", listC);
+                request.setAttribute("endIndex", endIndex);
+                request.setAttribute("currentPage", currentPage);
+                request.setAttribute("menu", "productList");
+                request.setAttribute("searchValue", search);
             }
-            request.setAttribute("listFeedback", listF);
-            request.setAttribute("endIndex", endIndex);
         }
-
-        if (sort.equals("atozP")) {
-            List<Feedback> listF = d.getProductNameAscPage(currentPage);
-            int endIndex = d.getAllProductNameAsc().size() / 6;
-            if (d.getAllProductNameAsc().size() % 6 != 0) {
-                endIndex++;
-            }
-            request.setAttribute("listFeedback", listF);
-            request.setAttribute("endIndex", endIndex);
-        }
-
-        if (sort.equals("ztoaP")) {
-            List<Feedback> listF = d.getProductNameDescPage(currentPage);
-            int endIndex = d.getAllProductNameDesc().size() / 6;
-            if (d.getAllProductNameDesc().size() % 6 != 0) {
-                endIndex++;
-            }
-            request.setAttribute("listFeedback", listF);
-            request.setAttribute("endIndex", endIndex);
-        }
-
-        request.getRequestDispatcher("FeedbackList.jsp").forward(request, response);
+        request.getRequestDispatcher("manageProduct.jsp").forward(request, response);
     }
 
     /**

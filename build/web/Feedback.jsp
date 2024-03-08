@@ -122,17 +122,17 @@
                 <input type="text" id="id" name="customerId" value="${accC.customerID}" hidden="">
                 <div class="col-md-4">
                     <label for="FullName" class="form-label">Full Name</label>
-                    <input type="text" class="form-control" id="FullName" name="FullName" value="${accC.fullName}" required="">
+                    <input type="text" class="form-control" id="FullName" name="FullName" value="${accC.fullName}" readonly="">
 
                 </div>
                 <div class="col-md-4">
                     <label for="Phone" class="form-label">Phone</label>
-                    <input type="text" class="form-control" id="Phone" name="phone" value="${accC.phone}" required="">
+                    <input type="text" class="form-control" id="Phone" name="phone" value="${accC.phone}" readonly="">
 
                 </div>
                 <div class="col-md-4">
                     <label for="Email" class="form-label">Email</label>
-                    <input type="text" class="form-control" id="Email" name="email" value="${accC.email}" required="">
+                    <input type="text" class="form-control" id="Email" name="email" value="${accC.email}" readonly="">
 
                 </div>
                 <div class="col-md-12">

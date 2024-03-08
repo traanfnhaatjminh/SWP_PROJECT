@@ -401,7 +401,7 @@ public class DAO extends DBContext {
                         rs.getString("postDate"),
                         rs.getString("content"),
                         rs.getString("author"),
-                        rs.getString("status"), 
+                        rs.getString("status"),
                         rs.getInt("blogCategoryID"));
             }
         } catch (SQLException e) {
@@ -1190,10 +1190,591 @@ public class DAO extends DBContext {
         return list;
     }
 
+    public void editFeedbackStatus(String status, int fid) {
+        String sql = "update Feedback \n"
+                + "set [status] = ?\n"
+                + "where feedbackID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, status);
+            st.setInt(2, fid);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public List<Feedback> getProductNameAscPage(int index) {
+        List<Feedback> list = new ArrayList<>();
+        String sql = "select fb.*,c.fullName,p.[name] from [Feedback] fb join product p on fb.productID = p.id\n"
+                + "join Customer c on fb.customerID = c.customerID\n"
+                + "order by p.[name] asc\n"
+                + "OFFSET (? - 1) * 6 ROWS\n"
+                + "FETCH NEXT 6 ROWS ONLY;";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setInt(1, index);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Feedback c = new Feedback(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getFloat(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9));
+                list.add(c);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Feedback> getAllProductNameAsc() {
+        List<Feedback> list = new ArrayList<>();
+        String sql = "select fb.*,c.fullName,p.[name] from [Feedback] fb join product p on fb.productID = p.id\n"
+                + "join Customer c on fb.customerID = c.customerID\n"
+                + "order by p.[name] asc";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Feedback c = new Feedback(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getFloat(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9));
+                list.add(c);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Feedback> getProductNameDescPage(int index) {
+        List<Feedback> list = new ArrayList<>();
+        String sql = "select fb.*,c.fullName,p.[name] from [Feedback] fb join product p on fb.productID = p.id\n"
+                + "join Customer c on fb.customerID = c.customerID\n"
+                + "order by p.[name] desc\n"
+                + "OFFSET (? - 1) * 6 ROWS\n"
+                + "FETCH NEXT 6 ROWS ONLY;";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setInt(1, index);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Feedback c = new Feedback(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getFloat(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9));
+                list.add(c);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Feedback> getAllProductNameDesc() {
+        List<Feedback> list = new ArrayList<>();
+        String sql = "select fb.*,c.fullName,p.[name] from [Feedback] fb join product p on fb.productID = p.id\n"
+                + "join Customer c on fb.customerID = c.customerID\n"
+                + "order by p.[name] desc";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Feedback c = new Feedback(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getFloat(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9));
+                list.add(c);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Feedback> getAllFeedbackSearch(String search) {
+        List<Feedback> list = new ArrayList<>();
+        String sql = "SELECT fb.*, c.fullName, p.[name]\n"
+                + "FROM [Feedback] fb\n"
+                + "JOIN Product p ON fb.productID = p.id\n"
+                + "JOIN Customer c ON fb.customerID = c.customerID\n"
+                + "WHERE TRIM(c.fullName) LIKE N'%' + REPLACE(?,' ','') + '%'\n"
+                + "   OR TRIM(fb.content) LIKE N'%' + REPLACE(?,' ','') + '%'";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setString(1, search);
+            st.setString(2, search);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Feedback c = new Feedback(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getFloat(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9));
+                list.add(c);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Feedback> getAllFeedbackSearchPage(String search, int index) {
+        List<Feedback> list = new ArrayList<>();
+        String sql = "SELECT fb.*, c.fullName, p.[name]\n"
+                + "FROM [Feedback] fb\n"
+                + "JOIN Product p ON fb.productID = p.id\n"
+                + "JOIN Customer c ON fb.customerID = c.customerID\n"
+                + "WHERE TRIM(c.fullName) LIKE N'%' + REPLACE(?,' ','') + '%'\n"
+                + "   OR TRIM(fb.content) LIKE N'%' + REPLACE(?,' ','') + '%'\n"
+                + "ORDER BY c.fullName\n"
+                + "OFFSET (? - 1) * 6 ROWS\n"
+                + "FETCH NEXT 6 ROWS ONLY;\n";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setString(1, search);
+            st.setString(2, search);
+            st.setInt(3, index);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Feedback c = new Feedback(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getFloat(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9));
+                list.add(c);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Feedback> getAllFeedbackByStatusFilter(String status1,
+            String status2, String status3, String status4) {
+        List<Feedback> list = new ArrayList<>();
+        String sql = "SELECT fb.*, c.fullName, p.[name]\n"
+                + "FROM [Feedback] fb\n"
+                + "JOIN Product p ON fb.productID = p.id\n"
+                + "JOIN Customer c ON fb.customerID = c.customerID\n"
+                + "where [status] in (?,?,?,?)";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setString(1, status1);
+            st.setString(2, status2);
+            st.setString(3, status3);
+            st.setString(4, status4);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Feedback c = new Feedback(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getFloat(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9));
+                list.add(c);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Feedback> getAllFeedbackByStatusFilterPage(String status1,
+            String status2, String status3, String status4, int index) {
+        List<Feedback> list = new ArrayList<>();
+        String sql = "SELECT fb.*, c.fullName, p.[name]\n"
+                + "FROM [Feedback] fb\n"
+                + "JOIN Product p ON fb.productID = p.id\n"
+                + "JOIN Customer c ON fb.customerID = c.customerID\n"
+                + "where [status] in (?,?,?,?)\n"
+                + "ORDER BY feedbackID\n"
+                + "OFFSET (? - 1) * 6 ROWS\n"
+                + "FETCH NEXT 6 ROWS ONLY;";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setString(1, status1);
+            st.setString(2, status2);
+            st.setString(3, status3);
+            st.setString(4, status4);
+            st.setInt(5, index);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Feedback c = new Feedback(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getFloat(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9));
+                list.add(c);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Product> getAllManageProduct() {
+        List<Product> list = new ArrayList<>();
+        String sql = "select * from product";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getDouble("original_price"),
+                        rs.getDouble("sale_price"),
+                        rs.getInt("quantity"),
+                        rs.getString("describe"),
+                        rs.getString("image"),
+                        rs.getInt("cid")
+                );
+                list.add(p);
+            }
+        } catch (SQLException e) {
+        }
+        return list;
+    }
+
+    public List<Product> getAllManageProductPage(int pageIndex) {
+        List<Product> list = new ArrayList<>();
+        String sql = "SELECT * FROM product\n"
+                + "ORDER BY id\n"
+                + "OFFSET (? - 1) * 8 ROWS\n"
+                + "FETCH NEXT 8 ROWS ONLY;";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setInt(1, pageIndex);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getDouble(3),
+                        rs.getDouble(4),
+                        rs.getInt(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8));
+                list.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public void addProduct(String name, double original_price, double sale_price, int quantity, String describe, String image, int cid) {
+        String sql = "INSERT INTO [dbo].[product]\n"
+                + "           ([name]\n"
+                + "           ,[original_price]\n"
+                + "           ,[sale_price]\n"
+                + "           ,[quantity]\n"
+                + "           ,[describe]\n"
+                + "           ,[image]\n"
+                + "           ,[cid])\n"
+                + "     VALUES\n"
+                + "           (?,?,?,?,?,?,?)";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, name);
+            st.setDouble(2, original_price);
+            st.setDouble(3, sale_price);
+            st.setInt(4, quantity);
+            st.setString(5, describe);
+            st.setString(6, image);
+            st.setInt(7, cid);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public void editProduct(String name, double original_price, double sale_price, int quantity, String describe, String image, int cid, int id) {
+        String sql = "UPDATE [dbo].[product]\n"
+                + "   SET [name] = ?\n"
+                + "      ,[original_price] = ?\n"
+                + "      ,[sale_price] = ?\n"
+                + "      ,[quantity] = ?\n"
+                + "      ,[describe] = ?\n"
+                + "      ,[image] = ?\n"
+                + "      ,[cid] = ?\n"
+                + " WHERE id = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, name);
+            st.setDouble(2, original_price);
+            st.setDouble(3, sale_price);
+            st.setInt(4, quantity);
+            st.setString(5, describe);
+            st.setString(6, image);
+            st.setInt(7, cid);
+            st.setInt(8, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public void deleteProduct(int id) {
+        String sql = "DELETE FROM [dbo].[product]\n"
+                + "      WHERE id = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+public List<Product> searchProductList(String searchValue, int pageIndex) {
+        List<Product> list = new ArrayList<>();
+        String sql = "select * from product\n"
+                + "where name like N'%' + ? + '%' ORDER BY id\n"
+                + "OFFSET (? - 1) * 8 ROWS\n"
+                + "FETCH NEXT 8 ROWS ONLY;";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setString(1, searchValue);
+            st.setInt(2, pageIndex);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getDouble("original_price"),
+                        rs.getDouble("sale_price"),
+                        rs.getInt("quantity"),
+                        rs.getString("describe"),
+                        rs.getString("image"),
+                        rs.getInt("cid"));
+                list.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Product> getAllProductASCPage(int pageIndex) {
+        List<Product> list = new ArrayList<>();
+        String sql = "select * from product\n"
+                + "order by name asc\n"
+                + "OFFSET (? - 1) * 8 ROWS\n"
+                + "FETCH NEXT 8 ROWS ONLY;";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setInt(1, pageIndex);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getDouble("original_price"),
+                        rs.getDouble("sale_price"),
+                        rs.getInt("quantity"),
+                        rs.getString("describe"),
+                        rs.getString("image"),
+                        rs.getInt("cid"));
+                list.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Product> getAllManageProductASC() {
+        List<Product> list = new ArrayList<>();
+        String sql = "select * from product\n"
+                + "order by name asc";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getDouble("original_price"),
+                        rs.getDouble("sale_price"),
+                        rs.getInt("quantity"),
+                        rs.getString("describe"),
+                        rs.getString("image"),
+                        rs.getInt("cid"));
+                list.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Product> getAllProductDESCPage(int pageIndex) {
+        List<Product> list = new ArrayList<>();
+        String sql = "select * from product\n"
+                + "order by name desc\n"
+                + "OFFSET (? - 1) * 8 ROWS\n"
+                + "FETCH NEXT 8 ROWS ONLY;";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setInt(1, pageIndex);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getDouble("original_price"),
+                        rs.getDouble("sale_price"),
+                        rs.getInt("quantity"),
+                        rs.getString("describe"),
+                        rs.getString("image"),
+                        rs.getInt("cid"));
+                list.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Product> getAllManageProductDESC() {
+        List<Product> list = new ArrayList<>();
+        String sql = "select * from product\n"
+                + "order by name desc";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getDouble("original_price"),
+                        rs.getDouble("sale_price"),
+                        rs.getInt("quantity"),
+                        rs.getString("describe"),
+                        rs.getString("image"),
+                        rs.getInt("cid"));
+                list.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Product> getAllProductByCid(int cid) {
+        List<Product> list = new ArrayList<>();
+        String sql = "select * from product\n"
+                + "where cid = ?";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setInt(1, cid);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getDouble("original_price"),
+                        rs.getDouble("sale_price"),
+                        rs.getInt("quantity"),
+                        rs.getString("describe"),
+                        rs.getString("image"),
+                        rs.getInt("cid"));
+                list.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    
+    public List<Product> getManageProductByCidPage(int cid, int pageIndex) {
+        List<Product> list = new ArrayList<>();
+        String sql = "select * from product\n"
+                + "where cid = ?\n"
+                + "ORDER BY id\n"
+                + "OFFSET (? - 1) * 8 ROWS\n"
+                + "FETCH NEXT 8 ROWS ONLY;";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setInt(1, cid);
+            st.setInt(2, pageIndex);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getDouble("original_price"),
+                        rs.getDouble("sale_price"),
+                        rs.getInt("quantity"),
+                        rs.getString("describe"),
+                        rs.getString("image"),
+                        rs.getInt("cid"));
+                list.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
     public static void main(String[] args) {
-        DAO d = new DAO();
-        List<Blog> listB = d.getAllBlogByStatusFilter("", "Private");
-        System.out.println(listB);
+//        DAO d = new DAO();
+//        d.editFeedbackStatus("In Progress", 1);
+//        System.out.println("Hu");
     }
 
 }

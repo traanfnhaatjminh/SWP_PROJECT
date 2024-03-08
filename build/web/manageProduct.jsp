@@ -1,6 +1,6 @@
 <%-- 
-    Document   : FeedbackList
-    Created on : Mar 6, 2024, 7:38:17 PM
+    Document   : blog
+    Created on : Jan 18, 2024, 11:36:21 AM
     Author     : minh1
 --%>
 
@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Feedback List Page</title>
+        <title>Product List Page</title>
 
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
@@ -82,21 +82,6 @@
             .checkbox-post {
                 margin-right: 10px; /* Điều chỉnh khoảng cách giữa các checkbox nếu cần thiết */
             }
-
-            td .fa-star {
-                display: inline-block;
-                font-size: 16px; /* Điều chỉnh kích thước sao theo mong muốn */
-                color: gold; /* Màu của sao */
-            }
-
-            td {
-                white-space: nowrap;
-            }
-
-            .checkbox-group .fa-star {
-                color: gold; /* Màu của sao */
-            }
-
         </style>
     </head>
     <body>
@@ -110,7 +95,16 @@
                         <li><a href="#"><i class="fa fa-map-marker"></i>Hanoi</a></li>
                     </ul>
                     <ul class="header-links pull-right">
-                        <c:if test="${sessionScope.accS != null}">
+                        <!--<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>-->
+                        <c:if test="${sessionScope.accC == null && sessionScope.accS == null}">
+                            <li><a href="register.jsp"><i class="fa fa-"></i> Register</a></li>
+                            <li><a href="login.jsp"><i class="fa fa-"></i> Login</a></li>
+                            </c:if>
+                            <c:if test="${sessionScope.accC != null}">
+                            <li><a href="profile.jsp"><i class="fa fa-user-o"></i> My Account</a></li>
+                            <li><a href="customer?action=logout"><i class="fa fa-"></i> Logout</a></li>
+                            </c:if>
+                            <c:if test="${sessionScope.accS != null}">
                             <li><a href="loginSystem?action=logout"><i class="fa fa-"></i> Logout</a></li>
                             </c:if>
                     </ul>
@@ -161,6 +155,21 @@
             <div class="container">
                 <!-- responsive-nav -->
                 <div id="responsive-nav">
+                    <!-- NAV -->
+                    <c:if test="${sessionScope.accS == null}">
+                        <ul class="main-nav nav navbar-nav">
+                            <li class="${menu == null ? 'active' : ''}"><a href="home">Home</a></li>
+                            <!--<li><a href="#">Hot Deals</a></li>-->
+                            <li class="${menu eq 'blog' ? 'active' : ''}">
+                                <a href="blog?menu=blog">Blogs</a>
+                            </li>
+                            <c:forEach items="${listC}" var="c">
+                                <li class="${cateID == c.cid ? 'active' : ''}">   
+                                    <a href="categoryDetail?cid=${c.cid}&&menu=home">${c.cname}</a>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </c:if>
                     <c:if test="${sessionScope.accS != null}">
                         <ul class="main-nav nav navbar-nav">
                             <li class="${menu eq 'post' ? 'active' : ''}">
@@ -184,29 +193,40 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-xl-3 col-md-6">
+                <div class="col-xl-3 col-md-3">
                     <div class="card bg-pattern">
                         <div class="card-body addnewblog">
-                            <form action="sortCustomerName">
+                            <label style="margin-top: 2%" for="addProduct">ADD A NEW PRODUCT:</label>
+                            <button type="button" class="btn btn-default">
+                                <a href="addProduct" target="target">Add</a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-5">
+                    <div class="card bg-pattern">
+                        <div class="card-body addnewblog">
+                            <form action="sortManageProduct">
                                 <label>SORT BY:</label>
                                 <select name="sortSelect">
-                                    <option value="atoz">Full Name from A to Z</option>
-                                    <option value="ztoa">Full Name from Z to A</option>
-                                    <option value="atozP">Product Name from A to Z</option>
-                                    <option value="ztoaP">Product Name from Z to A</option>
+                                    <option value="atoz">Product name from A to Z</option>
+                                    <option value="ztoa">Product name from Z to A</option>
+                                    <c:forEach items="${listCategory}" var="c">
+                                        <option value="${c.cid}">Category: ${c.cname}</option>
+                                    </c:forEach>
                                 </select>
                                 <button type="submit" class="btn btn-default">Sort</button>
                             </form>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-md-6">
+                <div class="col-xl-3 col-md-4">
                     <div class="card">
                         <div class="card-body addnewblog">
-                            <form action="searchFeedback">
+                            <form action="searchProductList">
                                 <div class="form-group mb-0">
                                     <div class="input-group mb-0">
-                                        <input style="width: 520px" type="text" name="searchFeedback" class="form-control" value="${searchValue}" placeholder="Search..." aria-describedby="project-search-addon" />
+                                        <input style="width: 320px" type="text" name="searchProduct" class="form-control" value="${searchValue}" placeholder="Search..." aria-describedby="project-search-addon" />
                                         <div class="input-group-append searchblog">
                                             <button class="btn btn-danger" type="submit" id="project-search-addon"><i class="fa fa-search search-icon font-12"></i></button>
                                                 <c:if test="${error != null}">
@@ -223,63 +243,24 @@
             <!-- end row -->
             <div class="col-md-12">
                 <div class="col-md-4">
-                    <h2 style="margin-top: 40px" class="grid-title"><i class="fa fa-filter"></i> Filters</h2> 
+                    <h2 class="grid-title"><i class="fa fa-filter"></i> Filters</h2> 
                 </div>
 
                 <hr>
-                <div class="col-md-8" style="margin-left: -108px; margin-top: -50px; margin-bottom: 10px;">
-                    <form id="categoryFilterForm" action="filterFeedback">
+                <div class="col-md-8" style="    margin-left: -108px; margin-top: -50px; margin-bottom: 10px;">
+                    <form id="categoryFilterForm" action="filterPost">
                         <div style="display: flex">
-                            <h4>By rated star:</h4>
-                            <div class="checkbox-group" style="margin-left: 10px;">
-                                <div class="checkbox-post">
-                                    <label><input name="ratedstar" type="checkbox" value="1" class="icheck">
-                                        <i class="fa fa-star"></i>
-                                    </label>
-                                    <label><input name="ratedstar" type="checkbox" value="2" class="icheck">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </label>
-                                    <label><input name="ratedstar" type="checkbox" value="3" class="icheck">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </label>
-                                    <label><input name="ratedstar" type="checkbox" value="4" class="icheck">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </label>
-                                    <label><input name="ratedstar" type="checkbox" value="5" class="icheck">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </label>
-                                </div>
+                            <h4>CATEGORY:</h4>
+                            <div class="checkbox-group" style="margin-left: 2px;">
+                                <c:forEach items="${listCategory}" var="c">
+                                    <div class="checkbox-post">
+                                        <label><input name="categories" type="checkbox" value="${c.cname}" class="icheck">${c.cname}</label>
+                                    </div>
+                                </c:forEach>
                             </div>
                         </div>
-                        <div style="display: flex">
-                            <h4>By status:</h4>
-                            <div class="checkbox-group" style="margin-left: 10px;">
-                                <div class="checkbox-post">
-                                    <label><input name="status" type="checkbox" value="1" class="icheck" ${'1' eq selectedStatus ? 'checked' : ''} ${selectedStatusAll != null ? 'checked' : ''}>Pending</label>
-                                </div>
-                                <div class="checkbox-post">
-                                    <label><input name="status" type="checkbox" value="2" class="icheck" ${'2' eq selectedStatus ? 'checked' : ''} ${selectedStatusAll != null ? 'checked' : ''}>In Progress</label>
-                                </div>
-                                <div class="checkbox-post">
-                                    <label><input name="status" type="checkbox" value="3" class="icheck" ${'3' eq selectedStatus ? 'checked' : ''} ${selectedStatusAll != null ? 'checked' : ''}>Resolved</label>
-                                </div>
-                                <div class="checkbox-post">
-                                    <label><input name="status" type="checkbox" value="4" class="icheck" ${'4' eq selectedStatus ? 'checked' : ''} ${selectedStatusAll != null ? 'checked' : ''}>Rejected</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="btn btn-default">Submit</button>
+                        <button style="    padding-left: 26px;
+                                padding-right: 26px;" type="submit" class="btn btn-default">Submit</button>
                     </form> 
                 </div>
 
@@ -294,58 +275,64 @@
                                 <table class="table project-table table-centered table-nowrap">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Full Name</th>
-                                            <th scope="col">Product Name</th>
-                                            <th scope="col">Content</th>
-                                            <th scope="col">Rated star</th>
-                                            <th scope="col">Status</th>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Image</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Category</th>
+                                            <th scope="col">Original Price</th>
+                                            <th scope="col">Sale Price</th>
+                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Describe</th>
+                                            <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach items="${listFeedback}" var="c">
+                                        <c:forEach items="${listProduct}" var="c">
                                             <tr>
-                                                <th scope="row">${c.customerName}</th>
-                                                <td>${c.productName}</td>
-                                                <td>${c.content}</td>
-                                                <td>
-                                                    <c:forEach begin="1" end="${c.ratedStar}">
-                                                        <i class="fa fa-star"></i>
-                                                    </c:forEach>
+                                                <th scope="row">${c.id}</th>
+                                                <td style="width: 25%">
+                                                    <img style="width: 50%" class="mx-auto d-block img-fluid" src="${c.image}" alt="First slide">
                                                 </td>
-                                                <td>
-                                                    <form action="changeStatusF" id="statusForm">
-                                                        <input type="hidden" name="fid" value="${c.feedbackID}"/>
-                                                        <select name="statusF" onchange="submitForm()">
-                                                            <option value="1" ${c.status eq '1'?'selected':''}>Pending</option>
-                                                            <option value="2" ${c.status eq '2'?'selected':''}>In Progress</option>
-                                                            <option value="3" ${c.status eq '3'?'selected':''}>Resolved</option>
-                                                            <option value="4" ${c.status eq '4'?'selected':''}>Rejected</option>
-                                                        </select>
-                                                    </form>
-
+                                                <td>${c.name}</td>
+                                                <c:if test="${c.cid == 1}">
+                                                    <td>T-SHIRT</td>
+                                                </c:if>
+                                                <c:if test="${c.cid == 2}">
+                                                    <td>JEANS</td>
+                                                </c:if>
+                                                <c:if test="${c.cid == 3}">
+                                                    <td>SHORT</td>
+                                                </c:if>
+                                                <c:if test="${c.cid == 4}">
+                                                    <td>PANTS</td>
+                                                </c:if>
+                                                <td>${c.original_price}</td>
+                                                <td>${c.sale_price}</td>
+                                                <td style="text-align: center">${c.quantity}</td>
+                                                <td>${c.describe}</td>
+                                                <td style="text-align: center">
+                                                    <div class="action">
+                                                        <a href="editProduct?id=${c.id}" class="text-success mr-4" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"> <i class="fa fa-pencil h5 m-0"></i></a>
+                                                        <a href="javascript:void(0);" class="text-danger" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close" onclick="confirmDelete(${c.id}, ${currentPage});"> <i class="fa fa-remove h5 m-0"></i></a>
+                                                    </div>
                                                 </td>
-                                            </tr>
-                                        <script>
-                                            function submitForm() {
-                                                document.getElementById("statusForm").submit();
-                                            }
-                                        </script>
-                                    </c:forEach>
+                                            </tr>    
+                                        </c:forEach>
 
                                     </tbody>
                                 </table>
                             </div>
                             <!-- end project-list -->
 
-                            <div class="pt-3">
+                            <div class="store-filter clearfix col-md-12">
                                 <c:if test="${error == null}">
-                                    <ul class="pagination justify-content-end mb-0">
+                                    <ul class="store-pagination justify-content-end mb-0">
                                         <!--                                        <li class="page-item disabled">
                                                                                     <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
                                                                                 </li>-->
                                         <c:forEach begin="1" end="${endIndex}" var="c">
                                             <c:set var="isActive" value="${c eq currentPage ? 'active' : ''}" />
-                                            <li class="${isActive}"><a class="page-link" href="feedbackListPage?index=${c}">${c}</a></li>
+                                            <li class="${isActive}"><a class="page-link" href="productListPage?index=${c}">${c}</a></li>
                                             </c:forEach>
                                         <!--                                        <li class="page-item">
                                                                                     <a class="page-link" href="#">Next</a>
@@ -360,7 +347,20 @@
             <!-- end row -->
         </div>
 
+        <script>
+            function confirmDelete(id, currentPage) {
+                var confirmDelete = confirm("Are you sure you want to delete this product?");
+                if (confirmDelete) {
+                    window.location.href = "deleteProduct?id=" + id + "&&index=" + currentPage;
+                }
+            }
+        </script>
+        <script>
+            import { Ripple, initMDB } from "mdb-ui-kit";
 
+            initMDB({Ripple});
+        </script>
         <jsp:include page="footer.jsp"></jsp:include>
     </body>
 </html>
+

@@ -13,11 +13,30 @@ values
 
 drop table product
 
-select fb.*,c.fullName,p.[name] from [Feedback] fb join product p on fb.productID = p.id
-join Customer c on fb.customerID = c.customerID
-order by c.fullName desc 
-OFFSET (1 - 1) * 6 ROWS
+SELECT fb.*, c.fullName, p.[name]
+FROM [Feedback] fb
+JOIN Product p ON fb.productID = p.id
+JOIN Customer c ON fb.customerID = c.customerID
+WHERE TRIM(c.fullName) LIKE N'%' + REPLACE(?,' ','') + '%'
+   OR TRIM(fb.content) LIKE N'%' + REPLACE(?,' ','') + '%'
+ORDER BY c.fullName
+OFFSET (? - 1) * 6 ROWS
 FETCH NEXT 6 ROWS ONLY;
+
+SELECT fb.*, c.fullName, p.[name]
+FROM [Feedback] fb
+JOIN Product p ON fb.productID = p.id
+JOIN Customer c ON fb.customerID = c.customerID
+where [status] in (?,?,?,?)
+ORDER BY feedbackID
+OFFSET (? - 1) * 6 ROWS
+FETCH NEXT 6 ROWS ONLY;
+
+
+update Feedback 
+set [status] = '1'
+where feedbackID = 1
+
 
 create table product
 (
@@ -31,7 +50,7 @@ quantity int,
 cid int
 FOREIGN KEY (cid) REFERENCES Category(cid)
 )
-
+select * from Users
 insert into product([name],[original_price],[sale_price],quantity,describe,[image],cid)
 values 
  ('$MAKER THINGS TEE IN WHITE',600.000,500.00,20,N'Unisex,Oversize,100% Cotton,In nổi,Model wears size L','https://smakerclothing.com/upload/sanpham/dscf9477-1710.jpg',1),

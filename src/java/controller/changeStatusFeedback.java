@@ -19,8 +19,8 @@ import model.Feedback;
  *
  * @author minh1
  */
-@WebServlet(name = "SortCustomerName", urlPatterns = {"/sortCustomerName"})
-public class SortCustomerName extends HttpServlet {
+@WebServlet(name = "changeStatusFeedback", urlPatterns = {"/changeStatusF"})
+public class changeStatusFeedback extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +39,10 @@ public class SortCustomerName extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SortCustomerName</title>");
+            out.println("<title>Servlet changeStatusFeedback</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SortCustomerName at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet changeStatusFeedback at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,45 +60,51 @@ public class SortCustomerName extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String sort = request.getParameter("sortSelect");
+        String sort = request.getParameter("statusF");
+        String fid_raw = request.getParameter("fid");
+        int fid = Integer.parseInt(fid_raw);
         DAO d = new DAO();
         int currentPage = 1;
         request.setAttribute("menu", "feedbackList");
         request.setAttribute("currentPage", currentPage);
-        if (sort.equals("atoz")) {
-            List<Feedback> listF = d.getCustomerNameAscPage(currentPage);
-            int endIndex = d.getAllCustomerNameAsc().size() / 6;
-            if (d.getAllCustomerNameAsc().size() % 6 != 0) {
+        if (sort.equals("1")) {
+            d.editFeedbackStatus("1", fid);
+            List<Feedback> listF = d.getAllFeedbackPage(currentPage);
+            int endIndex = d.getAllFeedback().size() / 6;
+            if (d.getAllFeedback().size() % 6 != 0) {
                 endIndex++;
             }
             request.setAttribute("listFeedback", listF);
             request.setAttribute("endIndex", endIndex);
         }
 
-        if (sort.equals("ztoa")) {
-            List<Feedback> listF = d.getCustomerNameDescPage(currentPage);
-            int endIndex = d.getAllCustomerNameDesc().size() / 6;
-            if (d.getAllCustomerNameDesc().size() % 6 != 0) {
+        if (sort.equals("2")) {
+            d.editFeedbackStatus("2", fid);
+            List<Feedback> listF = d.getAllFeedbackPage(currentPage);
+            int endIndex = d.getAllFeedback().size() / 6;
+            if (d.getAllFeedback().size() % 6 != 0) {
                 endIndex++;
             }
             request.setAttribute("listFeedback", listF);
             request.setAttribute("endIndex", endIndex);
         }
 
-        if (sort.equals("atozP")) {
-            List<Feedback> listF = d.getProductNameAscPage(currentPage);
-            int endIndex = d.getAllProductNameAsc().size() / 6;
-            if (d.getAllProductNameAsc().size() % 6 != 0) {
+        if (sort.equals("3")) {
+            d.editFeedbackStatus("3", fid);
+            List<Feedback> listF = d.getAllFeedbackPage(currentPage);
+            int endIndex = d.getAllFeedback().size() / 6;
+            if (d.getAllFeedback().size() % 6 != 0) {
                 endIndex++;
             }
             request.setAttribute("listFeedback", listF);
             request.setAttribute("endIndex", endIndex);
         }
 
-        if (sort.equals("ztoaP")) {
-            List<Feedback> listF = d.getProductNameDescPage(currentPage);
-            int endIndex = d.getAllProductNameDesc().size() / 6;
-            if (d.getAllProductNameDesc().size() % 6 != 0) {
+        if (sort.equals("4")) {
+            d.editFeedbackStatus("4", fid);
+            List<Feedback> listF = d.getAllFeedbackPage(currentPage);
+            int endIndex = d.getAllFeedback().size() / 6;
+            if (d.getAllFeedback().size() % 6 != 0) {
                 endIndex++;
             }
             request.setAttribute("listFeedback", listF);

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package controller.manageProduct;
 
 import dal.DAO;
 import java.io.IOException;
@@ -13,14 +13,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
-import model.Feedback;
+import model.Blog;
+import model.Category;
+import model.Product;
 
 /**
  *
- * @author minh1
+ * @author DUONG VIET DUY
  */
-@WebServlet(name = "SortCustomerName", urlPatterns = {"/sortCustomerName"})
-public class SortCustomerName extends HttpServlet {
+@WebServlet(name = "SortManageProduct", urlPatterns = {"/sortManageProduct"})
+public class SortManageProduct extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +41,10 @@ public class SortCustomerName extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SortCustomerName</title>");
+            out.println("<title>Servlet SortManageProduct</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SortCustomerName at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SortManageProduct at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,49 +65,69 @@ public class SortCustomerName extends HttpServlet {
         String sort = request.getParameter("sortSelect");
         DAO d = new DAO();
         int currentPage = 1;
-        request.setAttribute("menu", "feedbackList");
+        List<Category> listC = d.getAllCategory();
+        request.setAttribute("listCategory", listC);
+        request.setAttribute("menu", "productList");
         request.setAttribute("currentPage", currentPage);
-        if (sort.equals("atoz")) {
-            List<Feedback> listF = d.getCustomerNameAscPage(currentPage);
-            int endIndex = d.getAllCustomerNameAsc().size() / 6;
-            if (d.getAllCustomerNameAsc().size() % 6 != 0) {
+        if(sort.equals("atoz")) {
+            List<Product> listP = d.getAllProductASCPage(currentPage);
+            int endIndex = d.getAllManageProductASC().size() / 8;
+            if(d.getAllManageProductASC().size() % 8 != 0) {
                 endIndex++;
             }
-            request.setAttribute("listFeedback", listF);
+            request.setAttribute("listProduct", listP);
             request.setAttribute("endIndex", endIndex);
         }
-
-        if (sort.equals("ztoa")) {
-            List<Feedback> listF = d.getCustomerNameDescPage(currentPage);
-            int endIndex = d.getAllCustomerNameDesc().size() / 6;
-            if (d.getAllCustomerNameDesc().size() % 6 != 0) {
+        if(sort.equals("ztoa")) {
+            List<Product> listP = d.getAllProductDESCPage(currentPage);
+            int endIndex = d.getAllManageProductDESC().size() / 8;
+            if(d.getAllManageProductDESC().size() % 8 != 0) {
                 endIndex++;
             }
-            request.setAttribute("listFeedback", listF);
+            request.setAttribute("listProduct", listP);
             request.setAttribute("endIndex", endIndex);
         }
-
-        if (sort.equals("atozP")) {
-            List<Feedback> listF = d.getProductNameAscPage(currentPage);
-            int endIndex = d.getAllProductNameAsc().size() / 6;
-            if (d.getAllProductNameAsc().size() % 6 != 0) {
+        if (sort.equals("1")) {
+            int cid = Integer.parseInt(sort);
+            List<Product> listP = d.getManageProductByCidPage(cid, currentPage);
+            int endIndex = d.getAllProductByCid(cid).size() / 8;
+            if (d.getAllProductByCid(cid).size() % 8 != 0) {
                 endIndex++;
             }
-            request.setAttribute("listFeedback", listF);
+            request.setAttribute("listProduct", listP);
             request.setAttribute("endIndex", endIndex);
         }
-
-        if (sort.equals("ztoaP")) {
-            List<Feedback> listF = d.getProductNameDescPage(currentPage);
-            int endIndex = d.getAllProductNameDesc().size() / 6;
-            if (d.getAllProductNameDesc().size() % 6 != 0) {
+        if (sort.equals("2")) {
+            int cid = Integer.parseInt(sort);
+            List<Product> listP = d.getManageProductByCidPage(cid, currentPage);
+            int endIndex = d.getAllProductByCid(cid).size() / 8;
+            if (d.getAllProductByCid(cid).size() % 8 != 0) {
                 endIndex++;
             }
-            request.setAttribute("listFeedback", listF);
+            request.setAttribute("listProduct", listP);
             request.setAttribute("endIndex", endIndex);
         }
-
-        request.getRequestDispatcher("FeedbackList.jsp").forward(request, response);
+        if (sort.equals("3")) {
+            int cid = Integer.parseInt(sort);
+            List<Product> listP = d.getManageProductByCidPage(cid, currentPage);
+            int endIndex = d.getAllProductByCid(cid).size() / 8;
+            if (d.getAllProductByCid(cid).size() % 8 != 0) {
+                endIndex++;
+            }
+            request.setAttribute("listProduct", listP);
+            request.setAttribute("endIndex", endIndex);
+        }
+        if (sort.equals("4")) {
+            int cid = Integer.parseInt(sort);
+            List<Product> listP = d.getManageProductByCidPage(cid, currentPage);
+            int endIndex = d.getAllProductByCid(cid).size() / 8;
+            if (d.getAllProductByCid(cid).size() % 8 != 0) {
+                endIndex++;
+            }
+            request.setAttribute("listProduct", listP);
+            request.setAttribute("endIndex", endIndex);
+        }
+        request.getRequestDispatcher("manageProduct.jsp").forward(request, response);
     }
 
     /**

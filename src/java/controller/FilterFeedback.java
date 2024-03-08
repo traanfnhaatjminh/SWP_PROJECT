@@ -19,8 +19,8 @@ import model.Feedback;
  *
  * @author minh1
  */
-@WebServlet(name = "SortCustomerName", urlPatterns = {"/sortCustomerName"})
-public class SortCustomerName extends HttpServlet {
+@WebServlet(name = "FilterFeedback", urlPatterns = {"/filterFeedback"})
+public class FilterFeedback extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +39,10 @@ public class SortCustomerName extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SortCustomerName</title>");
+            out.println("<title>Servlet FilterFeedback</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SortCustomerName at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet FilterFeedback at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,51 +60,49 @@ public class SortCustomerName extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String sort = request.getParameter("sortSelect");
+        response.setContentType("text/html;charset=UTF-8");
+        String[] selectedStar = request.getParameterValues("ratedstar");
+        String[] selectedStatus = request.getParameterValues("status");
         DAO d = new DAO();
         int currentPage = 1;
-        request.setAttribute("menu", "feedbackList");
+        List<Feedback> filteredFeedback = null;
+        if (selectedStatus != null && selectedStatus.length == 1) {
+            int endIndex = d.getAllFeedbackByStatusFilter(selectedStatus[0], "", "", "").size() / 6;
+            if (d.getAllFeedbackByStatusFilter(selectedStatus[0], "", "", "").size() % 6 != 0) {
+                endIndex++;
+            }
+            filteredFeedback = d.getAllFeedbackByStatusFilterPage(selectedStatus[0], "", "", "", currentPage);
+            request.setAttribute("endIndex", endIndex);
+            request.setAttribute("selectedStatus", selectedStatus[0]);
+        } else if (selectedStatus != null && selectedStatus.length > 1) {
+            if (selectedStatus.length == 2) {
+                int endIndex = d.getAllFeedbackByStatusFilter(selectedStatus[0], selectedStatus[1], "", "").size() / 6;
+                if (d.getAllFeedbackByStatusFilter(selectedStatus[0], selectedStatus[1], "", "").size() % 6 != 0) {
+                    endIndex++;
+                }
+                filteredFeedback = d.getAllFeedbackByStatusFilterPage(selectedStatus[0], selectedStatus[1], "", "", currentPage);
+                request.setAttribute("endIndex", endIndex);
+            } else if (selectedStatus.length == 3) {
+                int endIndex = d.getAllFeedbackByStatusFilter(selectedStatus[0], selectedStatus[1], selectedStatus[2], "").size() / 6;
+                if (d.getAllFeedbackByStatusFilter(selectedStatus[0], selectedStatus[1], selectedStatus[2], "").size() % 6 != 0) {
+                    endIndex++;
+                }
+                filteredFeedback = d.getAllFeedbackByStatusFilterPage(selectedStatus[0], selectedStatus[1], selectedStatus[2], "", currentPage);
+                request.setAttribute("endIndex", endIndex);
+            } else if (selectedStatus.length == 4) {
+                int endIndex = d.getAllFeedbackByStatusFilter(selectedStatus[0], selectedStatus[1], selectedStatus[2], selectedStatus[3]).size() / 6;
+                if (d.getAllFeedbackByStatusFilter(selectedStatus[0], selectedStatus[1], selectedStatus[2], selectedStatus[3]).size() % 6 != 0) {
+                    endIndex++;
+                }
+                filteredFeedback = d.getAllFeedbackByStatusFilterPage(selectedStatus[0], selectedStatus[1], selectedStatus[2], selectedStatus[3], currentPage);
+                request.setAttribute("selectedStatusAll", "selectedStatusAll");
+                request.setAttribute("endIndex", endIndex);
+            }
+
+        }
+        request.setAttribute("listFeedback", filteredFeedback);
         request.setAttribute("currentPage", currentPage);
-        if (sort.equals("atoz")) {
-            List<Feedback> listF = d.getCustomerNameAscPage(currentPage);
-            int endIndex = d.getAllCustomerNameAsc().size() / 6;
-            if (d.getAllCustomerNameAsc().size() % 6 != 0) {
-                endIndex++;
-            }
-            request.setAttribute("listFeedback", listF);
-            request.setAttribute("endIndex", endIndex);
-        }
-
-        if (sort.equals("ztoa")) {
-            List<Feedback> listF = d.getCustomerNameDescPage(currentPage);
-            int endIndex = d.getAllCustomerNameDesc().size() / 6;
-            if (d.getAllCustomerNameDesc().size() % 6 != 0) {
-                endIndex++;
-            }
-            request.setAttribute("listFeedback", listF);
-            request.setAttribute("endIndex", endIndex);
-        }
-
-        if (sort.equals("atozP")) {
-            List<Feedback> listF = d.getProductNameAscPage(currentPage);
-            int endIndex = d.getAllProductNameAsc().size() / 6;
-            if (d.getAllProductNameAsc().size() % 6 != 0) {
-                endIndex++;
-            }
-            request.setAttribute("listFeedback", listF);
-            request.setAttribute("endIndex", endIndex);
-        }
-
-        if (sort.equals("ztoaP")) {
-            List<Feedback> listF = d.getProductNameDescPage(currentPage);
-            int endIndex = d.getAllProductNameDesc().size() / 6;
-            if (d.getAllProductNameDesc().size() % 6 != 0) {
-                endIndex++;
-            }
-            request.setAttribute("listFeedback", listF);
-            request.setAttribute("endIndex", endIndex);
-        }
-
+        request.setAttribute("menu", "feedbackList");
         request.getRequestDispatcher("FeedbackList.jsp").forward(request, response);
     }
 

@@ -19,8 +19,8 @@ import model.Feedback;
  *
  * @author minh1
  */
-@WebServlet(name = "SortCustomerName", urlPatterns = {"/sortCustomerName"})
-public class SortCustomerName extends HttpServlet {
+@WebServlet(name = "SearchFeedback", urlPatterns = {"/searchFeedback"})
+public class SearchFeedback extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +39,10 @@ public class SortCustomerName extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SortCustomerName</title>");
+            out.println("<title>Servlet SearchFeedback</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SortCustomerName at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SearchFeedback at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,51 +60,39 @@ public class SortCustomerName extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String sort = request.getParameter("sortSelect");
-        DAO d = new DAO();
+        response.setContentType("text/html;charset=UTF-8");
+        String search = request.getParameter("searchFeedback");
         int currentPage = 1;
-        request.setAttribute("menu", "feedbackList");
-        request.setAttribute("currentPage", currentPage);
-        if (sort.equals("atoz")) {
-            List<Feedback> listF = d.getCustomerNameAscPage(currentPage);
-            int endIndex = d.getAllCustomerNameAsc().size() / 6;
-            if (d.getAllCustomerNameAsc().size() % 6 != 0) {
+        DAO d = new DAO();
+        if (search == null || search.equals("")) {
+            List<Feedback> listF = d.getAllFeedbackPage(currentPage);
+            int endIndex = d.getAllFeedback().size() / 6;
+            if (d.getAllFeedback().size() % 6 != 0) {
                 endIndex++;
             }
+            request.setAttribute("menu", "feedbackList");
             request.setAttribute("listFeedback", listF);
             request.setAttribute("endIndex", endIndex);
-        }
-
-        if (sort.equals("ztoa")) {
-            List<Feedback> listF = d.getCustomerNameDescPage(currentPage);
-            int endIndex = d.getAllCustomerNameDesc().size() / 6;
-            if (d.getAllCustomerNameDesc().size() % 6 != 0) {
-                endIndex++;
+            request.setAttribute("currentPage", currentPage);
+            request.setAttribute("error", "Please input to search!!!");
+        } else {
+            List<Feedback> listF = d.getAllFeedbackSearchPage(search, currentPage);
+            if (listF.isEmpty()) {
+                request.setAttribute("searchValue", search);
+                request.setAttribute("menu", "feedbackList");
+                request.setAttribute("error", "No found result!!!");
+            } else {
+                int endIndex = d.getAllFeedbackSearch(search).size() / 6;
+                if (d.getAllFeedbackSearch(search).size() % 6 != 0) {
+                    endIndex++;
+                }
+                request.setAttribute("listFeedback", listF);
+                request.setAttribute("endIndex", endIndex);
+                request.setAttribute("currentPage", currentPage);
+                request.setAttribute("menu", "feedbackList");
+                request.setAttribute("searchValue", search);
             }
-            request.setAttribute("listFeedback", listF);
-            request.setAttribute("endIndex", endIndex);
         }
-
-        if (sort.equals("atozP")) {
-            List<Feedback> listF = d.getProductNameAscPage(currentPage);
-            int endIndex = d.getAllProductNameAsc().size() / 6;
-            if (d.getAllProductNameAsc().size() % 6 != 0) {
-                endIndex++;
-            }
-            request.setAttribute("listFeedback", listF);
-            request.setAttribute("endIndex", endIndex);
-        }
-
-        if (sort.equals("ztoaP")) {
-            List<Feedback> listF = d.getProductNameDescPage(currentPage);
-            int endIndex = d.getAllProductNameDesc().size() / 6;
-            if (d.getAllProductNameDesc().size() % 6 != 0) {
-                endIndex++;
-            }
-            request.setAttribute("listFeedback", listF);
-            request.setAttribute("endIndex", endIndex);
-        }
-
         request.getRequestDispatcher("FeedbackList.jsp").forward(request, response);
     }
 
