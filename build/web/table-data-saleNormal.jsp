@@ -245,23 +245,36 @@
             .slider.round:before {
                 border-radius: 50%;
             }
+            .pagination .page-item.active .page-link {
+                background-color: #007bff;
+                border-color: #007bff;
+                color: #fff; /* Màu chữ trắng */
+            }
+            .pagination .page-item.active .page-link {
+                background-color: #007bff;
+                border-color: #007bff;
+                color: #fff; /* Màu chữ trắng */
+            }
+
+
         </style>
+        <jsp:useBean id="a" class="dal.orderDAO1" scope = "request"></jsp:useBean>
+        </head>
 
-    </head>
-    <body onload="time()" class="app sidebar-mini rtl">
-        <!-- Navbar-->
-        <header class="app-header" style="background-color: back">
-            <a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
-               aria-label="Hide Sidebar"></a>
+        <body onload="time()" class="app sidebar-mini rtl">
+            <!-- Navbar-->
+            <header class="app-header">
+                <a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
+                   aria-label="Hide Sidebar"></a>
 
-            <ul style="background-color:black" class="app-nav">
-                <c:if test="${sessionScope.accS != null }">    <li><a class="app-nav__item" href=""><i class='bx bx-log-out bx-rotate-180'></i> </a>
+                <ul class="app-nav">
+                <c:if test="${sessionScope.accS != null }">    <li><a class="app-nav__item" href="loginSystem?action=logout"><i class='bx bx-log-out bx-rotate-180'></i> </a>
                     </li></c:if>
                 </ul>
             </header>
 
             <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-            <aside class="app-sidebar" style="background-color: black" >
+            <aside class="app-sidebar">
                 <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="${sessionScope.accS.avatar}" width="50px"
                                                 alt="User Image">
                 <div>
@@ -279,7 +292,7 @@
                     <li><a class="app-menu__item" href=""><i class='app-menu__icon bx bx-cog'></i><span class="app-menu__label">Change Password</span></a></li>
                 </ul>
         </aside>
-                    <main class="app-content" style="margin-left: 250px;">
+        <main class="app-content" style="margin-left: 250px;">
             <div class="app-title">
                 <ul class="app-breadcrumb breadcrumb side">
                     <li class="breadcrumb-item active"><a href="#"><b>List Orders</b></a></li>
@@ -291,10 +304,10 @@
                     <select name="groupby" id="group">
                         <option selected="" value="1">All</option>
                         <optgroup label="Status">
-                            <option value="2">Đã đặt hàng</option>
-                            <option value="3" >Đã gửi</option>
-                            <option value="4">Thành công</option>
-                            <option value="5">Hủy</option>
+                            <option value="2">Orders Pending Processing</option>
+                            <option value="3" >Orders On Delivery</option>
+                            <option value="4">Order Successfully Delivered</option>
+                            <option value="5">Cancel</option>
                         </optgroup>
                         <optgroup label="Product Name">
                             <c:forEach items="${listProductName}" var="listProductName">
@@ -426,9 +439,12 @@
                             </p>
                             <nav aria-label="...">
                                 <ul class="pagination pagination-sm">
-                                    <c:forEach begin="1" end="${a.getNumberPageOrderBySale(sessionScope.sale.sId)}" var="i"> 
-                                        <li class="page-item"><a class="page-link" href="pageOrdersServletBySale?index=${i}">${i}</a></li>
-                                        </c:forEach>
+                                    <c:forEach begin="1" end="${a.getNumberPage()}" var="i">
+                                        <li class="page-item ${i == param.index ? 'active' : ''}">
+                                            <a class="page-link" href="pageOrdersServletBySale?index=${i}">${i}</a>
+                                        </li>
+                                    </c:forEach>
+
                                 </ul>
                             </nav>
                         </div>
@@ -436,7 +452,6 @@
                 </div>
             </div>      
         </main>
-
 
         <!--
         MODAL

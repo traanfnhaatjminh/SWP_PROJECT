@@ -34,6 +34,7 @@ public class CheckoutContorller extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         Customer customer = (Customer) session.getAttribute("accC");
+        String mess = "";
         if (customer != null) {
             DAO d = new DAO();
             List<Product> list = d.getAllProduct();
@@ -49,10 +50,33 @@ public class CheckoutContorller extends HttpServlet {
             model.Cart cart = new model.Cart(txt, list);
             List<Product> listNewP = d.getTopProduct();
             List<Category> listC = d.getAllCategory();
+            boolean check = false;
+            for (Item i : cart.getList()) {
+                if (i.getQuantity() > i.getProduct().getQuantity() && check == false) {
+                    mess += "Product have ID : " + i.getProduct().getId() + " greater stock in data";
+                    check = true;
+                    i.setQuantity(i.getProduct().getQuantity());
+                } else if (i.getQuantity() > i.getProduct().getQuantity() && check == true) {
+                    mess += ", " + i.getProduct().getId();
+                    i.setQuantity(i.getProduct().getQuantity());
+                }
+            }
+
+            String txt_1 = "";
+
+            if (cart.getList().size() > 0) {
+                txt_1 = cart.getList().get(0).getProduct().getId() + ":"
+                        + cart.getList().get(0).getQuantity();
+                for (int i = 1; i < cart.getList().size(); i++) {
+                    txt_1 += "/" + cart.getList().get(i).getProduct().getId() + ":"
+                            + cart.getList().get(i).getQuantity();
+                }
+            }
             request.setAttribute("listNewP", listNewP);
             request.setAttribute("cart", cart);
             request.setAttribute("accC", customer);
             request.setAttribute("listC", listC);
+            request.setAttribute("mess", mess);
             request.setAttribute("size", cart.getList().size());
             request.getRequestDispatcher("checkout.jsp").forward(request, response);
         } else {
@@ -72,6 +96,8 @@ public class CheckoutContorller extends HttpServlet {
         String gender = request.getParameter("gender");
         String notes = request.getParameter("notes");
         String methodPayment = request.getParameter("payment");
+        System.out.println(methodPayment);
+        String total = request.getParameter("total");
         System.out.println(gender);
         DAO d = new DAO();
         String txt = "";
@@ -93,9 +119,7 @@ public class CheckoutContorller extends HttpServlet {
         if (customer != null) {
             OrderDAO odb = new OrderDAO();
             odb.addOrder(name, phone, address, email, gender, notes, cart, customer, "1", cart.getTotalMoney(), 1);
-            String textPayment = (methodPayment.equals("cash")) ? " <div class=\"form-group\">\n"
-                    + " <label for=\"cash\">Payment on delivery</label> </div>"
-                    : "<div  id=\"qr\">\n"
+            String textPayment = "<div  id=\"qr\">\n"
                     + "               <img\n"
                     + "                  src=\"https://firebasestorage.googleapis.com/v0/b/shop-f6d2b.appspot.com/o/qr.png?alt=media&token=08c1bfcb-7290-4a4a-8a99-2af6032df2bf\"\n"
                     + "                  alt=\"alt\" />\n"
@@ -281,6 +305,8 @@ public class CheckoutContorller extends HttpServlet {
         }
 
         request.setAttribute("name", name);
+        request.setAttribute("methodPayment", methodPayment);
+        request.setAttribute("total", total);
         request.setAttribute("phone", phone);
         request.setAttribute("address", address);
         request.setAttribute("email", email);

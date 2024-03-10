@@ -26,6 +26,11 @@ public class Users {
     public Users() {
     }
 
+    public Users(int userID, String userName) {
+        this.userID = userID;
+        this.userName = userName;
+    }
+
     public Users(int userID, String userName, String gender, String email, String mobile, String avatar, String address, int roleID, int user_status) {
         this.userID = userID;
         this.userName = userName;
@@ -38,8 +43,6 @@ public class Users {
         this.user_status = user_status;
     }
 
-    
-    
     public Users(int userID, String userName, String gender, String email, String mobile, String avatar, String address, String user_role_name, int user_status) {
         this.userID = userID;
         this.userName = userName;

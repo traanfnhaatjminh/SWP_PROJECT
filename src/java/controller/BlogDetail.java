@@ -65,7 +65,6 @@ public class BlogDetail extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String id_raw = request.getParameter("id");
-        String active = request.getParameter("menu");
         try {
             int id = Integer.parseInt(id_raw);
             DAO d = new DAO();
@@ -88,7 +87,7 @@ public class BlogDetail extends HttpServlet {
             request.setAttribute("listC", listC);
             request.setAttribute("listBlogCategory", listBC);
             request.setAttribute("blogDetail", b);
-            request.setAttribute("menu", active);
+            request.setAttribute("menu", "blog");
             request.setAttribute("blogCategoryName", bcn);
             request.getRequestDispatcher("blogDetail.jsp").forward(request, response);
         } catch (NumberFormatException e) {

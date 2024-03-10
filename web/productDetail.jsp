@@ -11,7 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Home Page</title>
-
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.5/dist/sweetalert2.min.css">
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
         <!-- Bootstrap -->
@@ -65,16 +65,7 @@
                     <div class="col-md-5">
                         <div class="product-details">
                             <h2 class="product-name">${detail.name}</h2>
-                            <!--                            <div>
-                                                            <div class="product-rating">
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star"></i>
-                                                                <i class="fa fa-star-o"></i>
-                                                            </div>
-                                                            <a class="review-link" href="#">(*) Review(s) | Add your review</a>
-                                                        </div>-->
+
                             <div>
                                 <h3 class="product-price">${detail.sale_price} VND</h3>
                                 <span class="product-available" style="font-size: 16px">(${detail.quantity} stock)</span>
@@ -86,13 +77,20 @@
                                     <div class="qty-label">
                                         Qty
                                         <div class="input-number">
-                                            <input type="number" name="num" value="1">
+                                            <input type="number" name="num" value="1" max="${detail.quantity}" id="quantity">
                                             <input type="text" name="productId" value="${detail.id}" hidden/>
                                             <span class="qty-up">+</span>
                                             <span class="qty-down">-</span>
                                         </div>
                                     </div>
-                                    <button class="add-to-cart-btn" type="submit"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                    <div class="add-to-cart">
+                                        <c:if test="${sessionScope.accC == null}">
+                                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i><a href="login.jsp">add to cart</a> </button>
+                                                </c:if>
+                                                <c:if test="${sessionScope.accC != null}">
+                                            <button class="add-to-cart-btn" type="submit"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                        </c:if> 
+                                    </div>
                                 </div>
                             </form>
 
@@ -356,8 +354,14 @@
                                     </div>
                                 </div>
                                 <div class="add-to-cart">
-                                    <a href="buyProduct?productId=${c.id}&num=1" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</a>
+                                    <c:if test="${sessionScope.accC == null}">
+                                        <a href="login.jsp" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</a>
+                                    </c:if>
+                                    <c:if test="${sessionScope.accC != null}">
+                                        <a href="buyProduct?productId=${c.id}&num=1" class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</a>
+                                    </c:if> 
                                 </div>
+
                             </div>
                         </div>
                         <!-- /product -->
@@ -369,7 +373,7 @@
         </div>
         <!-- /Section -->
         <jsp:include page="footer.jsp"></jsp:include>
-
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!-- jQuery Plugins -->
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
@@ -377,6 +381,51 @@
         <script src="js/nouislider.min.js"></script>
         <script src="js/jquery.zoom.min.js"></script>
         <script src="js/main.js"></script>
+
+        <script type="text/javascript">
+
+            const quantity = document.querySelector("input[name='num']");
+            const max = parseInt(quantity.max);
+            quantity.addEventListener("change", (e) => {
+
+                if (e.target.value > max) {
+
+
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "You can just buy " + max,
+                        timer: 2000
+
+                    });
+                    e.target.value = max;
+
+
+
+                }
+                if (e.target.value <= 0) {
+
+
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "You must be buy more than 0",
+                        timer: 2000
+
+
+                    }).then(() => {
+                        e.target.value = 1;
+                    })
+
+
+
+
+                }
+
+            });
+
+
+        </script>
 
     </body>
 </html>

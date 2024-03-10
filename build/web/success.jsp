@@ -16,9 +16,6 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
         <link href="css/style.css" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" href="./css/menu.css"/>
-        <link rel="stylesheet" href="./css/orderForm.css"/>
-        <link rel="stylesheet" href="./css/footer.css"/>
         <link rel="stylesheet" href="./css/home.css"/>
     </head>
     <body>
@@ -26,23 +23,31 @@
             <!-- TOP HEADER -->
             <div id="top-header">
                 <div class="container">
-                    <ul class="header-links pull-left">
-                        <li><a href="#"><i class="fa fa-phone"></i>0773 648 867</a></li>
-                        <li><a href="#"><i class="fa fa-envelope-o"></i>smakerclothing@gmail.com</a></li>
-                        <li><a href="#"><i class="fa fa-map-marker"></i>Hanoi</a></li>
-                    </ul>
-                    <ul class="header-links pull-right">
-                        <!--<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>-->
-                        <c:if test="${sessionScope.accC == null}">
-                            <li><a href="login.jsp"><i class="fa fa-"></i> Login</a></li>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <ul class="header-links pull-left">
+                                <li><a href="#"><i class="fa fa-phone"></i>0773 648 867</a></li>
+                                <li><a href="#"><i class="fa fa-envelope-o"></i>smakerclothing@gmail.com</a></li>
+                                <li><a href="#"><i class="fa fa-map-marker"></i>Hanoi</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-2">
+                            <ul class="header-links pull-right">
+                                <!--<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>-->
+                                <c:if test="${sessionScope.accC == null}">
+                                    <li><a href="register.jsp"><i class="fa fa-"></i> Register</a></li>
+                                    <li><a href="login.jsp"><i class="fa fa-"></i> Login</a></li>
 
-                        </c:if>
-                        <c:if test="${sessionScope.accC != null}">
-                            <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
-                            <li><a href="logout"><i class="fa fa-"></i> Logout</a></li>
+                                </c:if>
+                                <c:if test="${sessionScope.accC != null}">
+                                    <li><a href="profile.jsp"><i class="fa fa-user-o"></i> My Account</a></li>
+                                    <li><a href="customer?action=logout"><i class="fa fa-"></i> Logout</a></li>
 
-                        </c:if>
-                    </ul>
+                                </c:if>
+                            </ul>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <!-- /TOP HEADER -->
@@ -57,79 +62,11 @@
                         <div class="col-md-3">
                             <div class="header-logo">
                                 <a href="home" class="logo">
-                                    $MAKER
+                                    CLOTHINGMAKER
                                 </a>
                             </div>
                         </div>
                         <!-- /LOGO -->
-
-                        <!-- SEARCH BAR -->
-                        <div class="col-md-6">
-                            <div class="header-search text-center">
-                                <form>
-                                    <input type="text" class="input" placeholder="Search here">
-                                    <button type="submit" class="search-btn">Search</button>
-                                </form>
-                            </div>
-                        </div>
-                        <!-- /SEARCH BAR -->
-
-                        <!-- ACCOUNT -->
-                        <div class="col-md-3 clearfix">
-                            <div class="header-ctn">
-                                <!-- Cart -->
-                                <div class="dropdown">
-                                    <a href="cart" class="dropdown-toggle">
-                                        <i class="fa fa-shopping-cart"></i>
-                                        <span>Shopping Cart</span>
-                                        <div class="qty">${size}</div>
-                                    </a>
-                                    <div class="cart-dropdown">
-                                        <div class="cart-list">
-                                            <div class="product-widget">
-                                                <div class="product-img">
-                                                    <img src="./img/product01.png" alt="">
-                                                </div>
-                                                <div class="product-body">
-                                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                                    <h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-                                                </div>
-                                                <button class="delete"><i class="fa fa-close"></i></button>
-                                            </div>
-
-                                            <div class="product-widget">
-                                                <div class="product-img">
-                                                    <img src="./img/product02.png" alt="">
-                                                </div>
-                                                <div class="product-body">
-                                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                                    <h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-                                                </div>
-                                                <button class="delete"><i class="fa fa-close"></i></button>
-                                            </div>
-                                        </div>
-                                        <div class="cart-summary">
-                                            <small>3 Item(s) selected</small>
-                                            <h5>SUBTOTAL: $2940.00</h5>
-                                        </div>
-                                        <div class="cart-btns">
-                                            <a href="#">View Cart</a>
-                                            <a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /Cart -->
-
-                                <!-- Menu Toogle -->
-                                <div class="menu-toggle">
-                                    <a href="#">
-                                        <i class="fa fa-bars"></i>
-                                        <span>Menu</span>
-                                    </a>
-                                </div>
-                                <!-- /Menu Toogle -->
-                            </div>
-                        </div>
                         <!-- /ACCOUNT -->
                     </div>
                     <!-- row -->
@@ -179,8 +116,22 @@
                         </tbody>
                     </table>
                 </div>
+                <c:if test="${ methodPayment == 'account'}">
+                    <div class="col-12">
+                        <h3>Please Paid to be confirm order</h3>
+                        <div class="form-group pay" id="payment" style="width: 50%">
+                            <div id="qr" style="
+                                 width: 40%;
+                                 height: 50%">
+                                <img style="margin-left: 100%" src="https://api.vietqr.io/image/970418-4271013180-rZ9LU6u.jpg?accountName=NGUYEN%20QUANG%20TOAN&amount=${total}&addInfo=$Bank to"alt="QR thanh toán VietQR" alt="alt" />
+                            </div>
+                        </div>
+                    </div>
+                </c:if>
             </div>
         </div>                 
-
+        <script>
+        </script>
+        <jsp:include page="footer.jsp"></jsp:include>
     </body>
 </html>

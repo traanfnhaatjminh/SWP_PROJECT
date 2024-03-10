@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.saleN;
+package controller.Order;
 
+import controller.saleN.*;
 import dal.orderDAO1;
-import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,18 +15,17 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Order;
+import model.OrderDetail;
 
 /**
  *
- * @author ADMIN
+ * @author nguye
  */
-@WebServlet(name = "searchOrdersIdForSaleServlet", urlPatterns = {"/searchOrdersIdForSaleServlet"})
-public class searchOrdersIdForSaleServlet extends HttpServlet {
+@WebServlet(name = "ChangeStatusCancelForSaleNormal", urlPatterns = {"/cancelOrder"})
+public class ChangeStatusCancelForSaleNormal extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,19 +40,18 @@ public class searchOrdersIdForSaleServlet extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            HttpSession session = request.getSession();
-            int sId = (int) session.getAttribute("sId");
             /* TODO output your page here. You may use following sample code. */
-            String value = request.getParameter("search1");
-            int searchValue = Integer.parseInt(value);
+ /* TODO output your page here. You may use following sample code. */
+            int oid = Integer.parseInt(request.getParameter("oid"));
             orderDAO1 dao = new orderDAO1();
-            ArrayList<Order> listOrders = dao.getSearchOrderIdForSale( searchValue);
-            List<model.Order> listOrderDisplay = new ArrayList<>();         
-            request.setAttribute("listOrderDisplay", listOrderDisplay);
-            request.setAttribute("listOrders", listOrders);            
-            request.setAttribute("listOrders", listOrders);
-            request.setAttribute("search1", value);
-            request.getRequestDispatcher("table-data-saleNormal.jsp").forward(request, response);
+            HttpSession session = request.getSession();
+            // Lấy giá trị indexBlogg từ session
+            int index = (session.getAttribute("index") != null) ? (int) session.getAttribute("index") : 1;
+            List<OrderDetail> listProductDetail = dao.getListProductByOrder(oid);
+            dao.changeStatusCancel1(oid, listProductDetail);
+            request.setAttribute("mess", "Đã cancel đơn hàng có id là :" + oid + "successful!! ");
+            request.setAttribute("curMenu", "Management Orders");
+           response.sendRedirect("order");
         }
     }
 
@@ -72,7 +70,7 @@ public class searchOrdersIdForSaleServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(searchOrdersIdForSaleServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ChangeStatusCancelForSaleNormal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -90,7 +88,7 @@ public class searchOrdersIdForSaleServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(searchOrdersIdForSaleServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ChangeStatusCancelForSaleNormal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

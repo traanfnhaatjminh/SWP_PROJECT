@@ -27,7 +27,7 @@ public class ReBuyControl extends HttpServlet {
         OrderDAO orderDao = new OrderDAO();
         DAO dao = new DAO();
         HttpSession session = request.getSession();
-        Customer customer = (Customer) session.getAttribute("customer");
+        Customer customer = (Customer) session.getAttribute("accC");
         if (customer != null) {
             Order o = orderDao.getOrdersByOrderId(orderId);
             ArrayList<OrderDetail> listOrderDetail = orderDao.getOrderDetailByOrderID(orderId);

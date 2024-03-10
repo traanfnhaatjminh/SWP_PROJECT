@@ -105,7 +105,7 @@ public class OrderDAO extends DBContext {
         }
     }
 
-    public ArrayList<Order> getOrdersByCustomerId(int customerId) {
+    public ArrayList<Order> getOrdersByCustomerId(int customerId,String searchDate) {
         ArrayList<Order> list = new ArrayList<>();
         String sql = "SELECT  [orderID]\n"
                 + "      ,[customerID]\n"
@@ -120,6 +120,9 @@ public class OrderDAO extends DBContext {
                 + "      ,[sellerID]\n"
                 + "  FROM [Swp_Project].[dbo].[Order]\n"
                 + "  WHERE customerID = ?";
+        if(!searchDate.equals("")){
+            sql += " AND "+ searchDate;
+        }
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, customerId);
@@ -131,7 +134,7 @@ public class OrderDAO extends DBContext {
             }
             return list;
         } catch (SQLException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
         return null;
     }

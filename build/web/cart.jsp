@@ -1,5 +1,3 @@
-
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -46,13 +44,11 @@
                         <c:if test="${sessionScope.accC == null}">
                             <li><a href="register.jsp"><i class="fa fa-"></i> Register</a></li>
                             <li><a href="login.jsp"><i class="fa fa-"></i> Login</a></li>
-
-                        </c:if>
-                        <c:if test="${sessionScope.accC != null}">
+                            </c:if>
+                            <c:if test="${sessionScope.accC != null}">
                             <li><a href="profile.jsp"><i class="fa fa-user-o"></i> My Account</a></li>
                             <li><a href="customer?action=logout"><i class="fa fa-"></i> Logout</a></li>
-
-                        </c:if>
+                            </c:if>
                     </ul>
                 </div>
             </div>
@@ -65,28 +61,17 @@
                     <!-- row -->
                     <div class="row">
                         <!-- LOGO -->
-                        <div class="col-md-3">
-                            <div class="header-logo">
-                                <a href="home" class="logo">
+                        <div class="col-md-9">
+                            <div class="header-logo ">
+                                <a style="color: whitesmoke" href="home" class="logo">
                                     CLOTHINGMAKER
                                 </a>
                             </div>
                         </div>
                         <!-- /LOGO -->
 
-                        <!-- SEARCH BAR -->
-                        <div class="col-md-6">
-                            <div class="header-search text-center">
-                                <form action="searchcart">
-                                    <input name="keyword" type="text" class="input" placeholder="Search here">
-                                    <button type="submit" class="search-btn">Search</button>
-                                </form>
-                            </div>
-                        </div>
-                        <!-- /SEARCH BAR -->
-
                         <!-- ACCOUNT -->
-                        <div class="col-md-3 clearfix">
+                        <div class="col-md-3 clearfix" style="float: right">
                             <div class="header-ctn">
                                 <!-- Cart -->
                                 <div class="dropdown">
@@ -105,18 +90,15 @@
                                         </a>
                                     </c:if>
                                 </div>
+
                             </div>
                         </div>
-                        <!-- /ACCOUNT -->
                     </div>
-                    <!-- row -->
                 </div>
-                <!-- container -->
             </div>
-            <!-- /MAIN HEADER -->
-        </header>
-        <!-- /HEADER -->
 
+
+        </header>
         <!--MY CART-->
 
         <div class="wrapper container">
@@ -141,7 +123,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items="${cart.list}" var="c" varStatus="loop">
+                            <c:forEach items="${cart.list}" var="c">
                                 <tr>
                                     <td>${c.product.id}</td>
                                     <td class="item">
@@ -150,17 +132,18 @@
                                                  alt="">
                                             <div>
                                                 ${c.product.name}
+                                                <span class="d-block fs-6 text-danger">Stock: ${c.product.quantity}</span>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <input max="${c.product.quantity}" min="1" type="number" product-id ="${c.product.id}" id="quantity${loop.index}" class="form-control form-control-lg text-center" name="num" value="${c.quantity}" 
+                                        <input max="${c.product.quantity}" min="1" type="number" product-id ="${c.product.id}" id="quantity" class="form-control form-control-lg text-center" name="num" value="${c.quantity}" 
                                                />
                                     </td>   
                                     <td class="d-flex flex-column">${c.product.sale_price}$
                                     </td>
                                     <td class="font-weight-bold">
-                                        ${c.quantity*c.product.sale_price}
+                                        $${c.quantity*c.product.sale_price}
                                     </td>
                                     <td>
                                         <div class="text-center">
@@ -175,7 +158,7 @@
             </div>
             <div class="d-flex justify-content-between flex-wrap">
                 <div class="text-muted">
-                    <a class="btn btn-block" href="home">
+                    <a class="btn btn-block" href="categoryDetail?cid=1&&menu=home">
                         Add product
                         <span class="fas fa-plus"></span>
                     </a>
@@ -183,7 +166,7 @@
                 <div class="d-flex flex-column justify-content-between align-items-end flex-wrap">
                     <div class="d-flex px-3 pr-md-5 subtotal col-12">
                         <div class="px-4">Subtotal:</div>
-                        <div class="h5 font-weight-bold px-md-2">${cart.getTotalMoney()}</div>
+                        <div class="h5 font-weight-bold px-md-2">$${cart.getTotalMoney()}</div>
                     </div>
                 </div>
                 <div class="px-4">
@@ -242,7 +225,9 @@
                             <!-- /tab -->
                         </div>
                     </div>
+
                 </div>
+
             </div>
 
 
@@ -251,31 +236,34 @@
             <!-- /FOOTER -->
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             <script type="text/javascript">
-                document.addEventListener("DOMContentLoaded", function () {
-                    const quantityInputs = document.querySelectorAll("input[name='num']");
 
-                    quantityInputs.forEach((input) => {
-                        input.addEventListener("change", (e) => {
-                            const num = e.target.value;
-                            const max = e.target.getAttribute("max");
-                            const id = e.target.getAttribute("product-id");
-
-                            if (num > max) {
-                                e.target.value = max;
-                            }
-                            
-                            if (1 < num < max){
-                                e.target.value = num;
-                            }
-
-                            if (num <= 0) {
-                                e.target.value = 1;
-                                alert("You must buy more than 0");
-                            }
-
-                            // Your other logic here
-                            window.location.href = "process?num=" + e.target.value + "&id=" + id;
-                        });
+                const quantity = document.querySelectorAll("input[name='num']");
+                quantity.forEach((item) => {
+                    item.addEventListener("change", (e) => {
+                        const max = parseInt(item.max);
+                        if (e.target.value > max) {
+                            e.target.value = max;
+                            Swal.fire({
+                                icon: "error",
+                                title: "Oops...",
+                                text: "You can just buy " + max,
+                                timer: 2000
+                            });
+                            return;
+                        }
+                        if (e.target.value <= 0) {
+                            e.target.value = 1;
+                            Swal.fire({
+                                icon: "error",
+                                title: "Oops...",
+                                text: "You must be buy more than 0",
+                                timer: 2000
+                            });
+                            return;
+                        }
+                        const num = e.target.value;
+                        const id = item.getAttribute("product-id");
+                        window.location.href = "process?num=" + num + "&id=" + id;
                     });
                 });
 

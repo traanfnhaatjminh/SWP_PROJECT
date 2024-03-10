@@ -38,6 +38,8 @@ public class feedbackControl extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Customer customer = (Customer) session.getAttribute("accC");
         String productId = request.getParameter("productId");
         String customerId = request.getParameter("customerId");
         String rate = request.getParameter("rate");
@@ -46,8 +48,18 @@ public class feedbackControl extends HttpServlet {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); // Định dạng ngày
         String dateString = dateFormat.format(currentDate);
         DAO dao = new DAO();
-        dao.addFeedback(customerId, content, productId, dateString, rate);
-        response.sendRedirect("order");
+        Product p = dao.getProductByID(productId);
+        if (content == null || content.equals("")) {
+            request.setAttribute("fail", "Please input content before send feedback!!!");
+            request.setAttribute("accC", customer);
+            request.setAttribute("p", p);
+        } else {
+            dao.addFeedback(customerId, content, productId, dateString, rate);
+            request.setAttribute("success", "Send feedback successfully.");
+            request.setAttribute("accC", customer);
+            request.setAttribute("p", p);
+        }
+        request.getRequestDispatcher("Feedback.jsp").forward(request, response);
     }
 
     @Override

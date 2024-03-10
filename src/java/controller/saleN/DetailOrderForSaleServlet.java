@@ -18,6 +18,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Users;
 
 /**
  *
@@ -44,10 +45,13 @@ public class DetailOrderForSaleServlet extends HttpServlet {
             model.Order orderDetail = dao.getOrderByid(oid);
             model.Customer customerDetail = dao.getInforCustomerByOrder(oid);
             List<model.OrderDetail> listProductDetail = dao.getListProductByOrder(oid);
+            String fullnameStaff = dao.getfullnameStaffByOrder(oid);
+            List<Users> listInFORStaff = dao.getListNameStaff();
             HttpSession session = request.getSession();
             session.setAttribute("orderDetail", orderDetail); 
             session.setAttribute("customerDetail", customerDetail);
             session.setAttribute("oid", oid);
+            session.setAttribute("listInFORStaff", listInFORStaff);
             request.setAttribute("listProductDetail", listProductDetail);
             request.setAttribute("curMenu", "Management Orders");
             request.getRequestDispatcher("Orderdetail.jsp").forward(request, response);

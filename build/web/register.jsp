@@ -11,7 +11,21 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Bootstrap Sign up Form with Rounded Social Buttons</title>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+        <link rel="stylesheet" href="./css/home.css"/>
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
+
+        <!-- Slick -->
+        <link type="text/css" rel="stylesheet" href="css/slick.css"/>
+        <link type="text/css" rel="stylesheet" href="css/slick-theme.css"/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!-- nouislider -->
+        <link type="text/css" rel="stylesheet" href="css/nouislider.min.css"/>
+
+        <!-- Font Awesome Icon -->
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+
+        <!-- Custom stlylesheet -->
+        <link type="text/css" rel="stylesheet" href="css/style.css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -127,6 +141,41 @@
         </style>
     </head>
     <body>
+        <header>
+            <!-- TOP HEADER -->
+            <div id="top-header">
+                <div class="container">
+                    <ul class="header-links pull-left">
+                        <li><a href="#"><i class="fa fa-phone"></i>0773 648 867</a></li>
+                        <li><a href="#"><i class="fa fa-envelope-o"></i>smakerclothing@gmail.com</a></li>
+                        <li><a href="#"><i class="fa fa-map-marker"></i>Hanoi</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /TOP HEADER -->
+
+            <!-- MAIN HEADER -->
+            <div id="header">
+                <!-- container -->
+                <div class="container">
+                    <!-- row -->
+                    <div class="row">
+                        <!-- LOGO -->
+                        <div class="col-md-3">
+                            <div class="header-logo ">
+                                <a href="home" class="logo">
+                                    CLOTHINGMAKER
+                                </a>
+                            </div>
+                        </div>
+                        <!-- /LOGO -->
+                    </div>
+                    <!-- row -->
+                </div>
+                <!-- container -->
+            </div>
+            <!-- /MAIN HEADER -->
+        </header>
         <div class="signup-form">
             <form action="register" method="post">
                 <p style="color: blue; text-align: center;">
@@ -149,7 +198,7 @@
                 </div>
                 <div class="form-group">
                     <label>Phone</label>
-                    <input type="tel" pattern="^09[0-9]{8}$" class="form-control input-lg" name="phone" required="required">
+                    <input type="tel" pattern="^0[2-9]{3}[0-9]{6}" class="form-control input-lg" name="phone" required="required">
                 </div>  
                 <div class="form-group">
                     <label>Email</label>
@@ -176,5 +225,6 @@
             </form>
             <div class="text-center">Already have an account? <a href="login.jsp">Login here</a></div>
         </div>
+        <jsp:include page="footer.jsp"></jsp:include>
     </body>
 </html>

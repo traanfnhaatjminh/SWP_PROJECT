@@ -30,6 +30,12 @@
         <link rel="stylesheet" href="./css/home.css"/>
         <link rel="stylesheet" href="./css/cart.css"/>
         <link rel="stylesheet" href="./css/checkout.css"/>
+
+        <style>
+            .errPhone{
+                display : none;
+            }
+        </style>
     </head>
     <body>
         <header>
@@ -155,6 +161,11 @@
             <div class="d-flex align-items-center justify-content-between">
                 <div class="d-flex flex-column mt-3 mb-3">
                     <div class="h3">Checkout</div>
+                     <c:if test="${mess!=''}">
+                        <div class="alert alert-danger" role="alert">
+                        ${mess}
+                    </div>
+                    </c:if>
                 </div>
             </div>
 
@@ -226,6 +237,9 @@
                         <div class="form-group col-md-6">
                             <label for="name">Phone number</label>
                             <input name="phone" type="text" id="phone" value="${accC.phone}" class="form-control mb-2" placeholder="Phone number" pattern="^0[2-9]{3}[0-9]{6}" required autofocus>
+                            <div class="alert alert-danger pt-1 pb-1 errPhone" role="alert">
+                                Phone number invalid
+                            </div>
                         </div>
                     </div>
 
@@ -237,7 +251,7 @@
                         <label for="address">Email</label>
                         <input name="email" type="email" id="email" value="${accC.email}"  class="form-control mb-2" placeholder="Email" required autofocus>
                     </div>
-
+                    <input hidden value="${cart.getTotalMoney()}" name="total">
                     <div class="form-group">
                         <label for="address">Gender</label>
                         <select id="id" class="form-control mb-2" name="gender">
@@ -252,9 +266,13 @@
                         <textarea class="form-control" name="notes" id="notes" rows="3"></textarea>
                     </div>
 
-
+                            <c:if test="${cart.getTotalMoney() >= 1000000}">
+                                <input type="radio" checked disabled>
+                                <label for="">Bank Transfer</label>
+                                <p class="text-warning">Auto choice method pay account when total amount of order greater 1000000</p>
+                            </c:if>
                     <!--Payment-->
-                    <div class="form-group pay" id="payment">
+                    <div class="form-group pay" id="payment" style="width: 50%">
                         <label for="pay"> Select a payment method</label>
                         <div class="form-group">
                             <input class="" type="radio" id="cash" name="payment" value="cash" checked>
@@ -263,8 +281,12 @@
                             <input class="" type="radio" id="account" name="payment" value="account">
                             <label for="account">Bank transfer</label>
                         </div>
-                        <div class="d-none" id="qr">
-                            <img src="./img/qr2.jpg" alt="alt"/>
+                        <div class="d-none" id="qr" style="
+                             width: 40%;
+                             height: 50%;
+                             overflow: hidden;
+                             ">
+                            <img src="./img/qr2.jpg" alt="alt" />
                         </div>
                     </div>
 
@@ -281,23 +303,26 @@
             <!-- /FOOTER -->
 
             <script>
+                var regex = /^0[2-9]{3}[0-9]{6}$/;
+                const phone = document.getElementById("phone");
+                phone.addEventListener("blur", (e) => {
+                    const errPhone = document.querySelector(".errPhone");
+                    if (regex.test(e.target.value)) {
+                        errPhone.style.display = "none";
+                    } else {
+                        errPhone.style.display = "block";
+                    }
+                })
                 const payment = document.getElementById("payment");
                 const transfer = payment.querySelector("input[value='account']");
                 const cash = payment.querySelector("input[value='cash']");
-                const qr = payment.querySelector("#qr");
-                transfer.addEventListener("change", function () {
-                    if (this.checked) {
-                        qr.innerHTML = '<div class="text-center"><img src="https://api.vietqr.io/image/970418-4271013180-rZ9LU6u.jpg?accountName=NGUYEN%20QUANG%20TOAN&amount=${cart.getTotalMoney()}&addInfo=$Bank to"alt="QR thanh toán VietQR" /></div>'
-                        qr.classList.add("d-block");
-                    }
-                });
-                cash.addEventListener("change", function () {
-                    if (this.checked) {
-                        qr.classList.remove("d-block");
-                    }
-                });
+                console.log(parseInt('${cart.getTotalMoney()}'));
+                if (parseInt('${cart.getTotalMoney()}') >= 1000000) {
+                    payment.innerHTML = '<input class="" hidden id="account" name="payment" value="account" /></div>'
+                }
+
 
         </script>
-
+        <a href="register.jsp"></a>
     </body>
 </html>

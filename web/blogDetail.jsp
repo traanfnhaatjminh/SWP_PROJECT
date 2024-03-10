@@ -486,17 +486,13 @@
                     </ul>
                     <ul class="header-links pull-right">
                         <!--<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>-->
-                        <c:if test="${sessionScope.accC == null && sessionScope.accS == null}">
+                        <c:if test="${sessionScope.accC == null}">
                             <li><a href="register.jsp"><i class="fa fa-"></i> Register</a></li>
                             <li><a href="login.jsp"><i class="fa fa-"></i> Login</a></li>
                             </c:if>
                             <c:if test="${sessionScope.accC != null}">
                             <li><a href="profile.jsp"><i class="fa fa-user-o"></i> My Account</a></li>
                             <li><a href="customer?action=logout"><i class="fa fa-"></i> Logout</a></li>
-                            </c:if>
-                            <c:if test="${sessionScope.accS != null}">
-                            <li><a href="profile.jsp"><i class="fa fa-user-o"></i> My Account</a></li>
-                            <li><a href="marketer?action=logout"><i class="fa fa-"></i> Logout</a></li>
                             </c:if>
                     </ul>
                 </div>

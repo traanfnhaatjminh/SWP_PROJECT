@@ -80,7 +80,7 @@
                     <li><a class="app-menu__item" href=""><i class='app-menu__icon bx bx-cog'></i><span class="app-menu__label">Change Password</span></a></li>
                 </ul>
         </aside>
-                    <main class="app-content" style="margin-left: 250px">
+        <main class="app-content" style="margin-left: 250px">
             <div class="container">
 
                 <div class="d-flex justify-content-between align-items-center py-3">
@@ -166,6 +166,16 @@
 
                             </div>
                         </div>
+                        <h3 class="h6">Change staff for this order</h3>
+                        <form action="changeStaffServlet" id="filterForm" style="margin-top: 10px;">
+                            <select name="groupby" id="group" style="padding: 5px; border: 1px solid #ccc; border-radius: 5px;">
+                                <c:forEach items="${sessionScope.listInFORStaff}" var="listInFORStaff">
+                                    <option value="${listInFORStaff.userID}" style="background-color: #f0f0f0;">${listInFORStaff.userName} - ID: ${listInFORStaff.userID}</option>\
+                                </c:forEach>
+                            </select>
+
+                            <input type="submit" value="Save" style="background-color: #007BFF; color: #fff; padding: 5px 10px; border: none; border-radius: 5px; cursor: pointer;">
+                        </form>
                         <div class="card mb-4">
 
                             <div class="card-body">

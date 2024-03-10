@@ -35,7 +35,7 @@
             body{
                 background:#f3f3f3;
                 margin-top:20px;
-                color: #616f80;
+                color: #000;
             }
             .card {
                 border: none;
@@ -60,7 +60,7 @@
                 box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
             }
             .card .body {
-                color: #444;
+                color: #fff;
                 padding: 20px;
                 font-weight: 400;
             }
@@ -74,6 +74,37 @@
             }
             tr , th , td {
                 padding: 5px;
+            }
+            /* Định dạng div chứa form */
+            .search-form {
+                display: flex;
+                align-items: center;
+            }
+
+            /* Định dạng select box */
+            #group {
+                padding: 8px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                background-color: #fff;
+                font-size: 14px;
+                margin-right: 5px;
+            }
+
+            /* Định dạng nút tìm kiếm */
+            .search-button {
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                border-radius: 4px;
+                padding: 8px 12px;
+                cursor: pointer;
+                font-size: 14px;
+            }
+
+            /* Hiệu ứng hover cho nút tìm kiếm */
+            .search-button:hover {
+                background-color: #0056b3;
             }
         </style>
     </head>
@@ -251,89 +282,98 @@ END FILTERS
 </div>-->
 
 <div class="container mt-4 mb-5">
-    <div class="row justify-content-end pr-5">
-        <div class="col-4">
-            <form action="searchOrder pr-4">
-                <div class="form-group mb-0 " >
-                    <div class="input-group mb-0 flex-nowrap">
-                        <input style="width: 360px" type="text" name="searchBlog" class="form-control" value="${searchValue}" placeholder="Search..." aria-describedby="project-search-addon" />
-                        <div class="input-group-append searchblog">
-                            <button class="btn btn-danger" type="submit" id="project-search-addon"><i class="fa fa-search search-icon font-12"></i></button>
-                                <c:if test="${error != null}">
-                                <h5 class="text-danger">${error}</h5>
-                            </c:if>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
+    <!--    <div class="row justify-content-end pr-5">
+            <div class="col-4">
+                <form action="searchOrder pr-4">
+                    <div class="form-group mb-0 " >
+                        <div class="input-group mb-0 flex-nowrap">
+                            <input style="width: 360px" type="text" name="searchBlog" class="form-control" value="${searchValue}" placeholder="Search..." aria-describedby="project-search-addon" />
+                            <div class="input-group-append searchblog">
+                                <button class="btn btn-danger" type="submit" id="project-search-addon"><i class="fa fa-search search-icon font-12"></i></button>
+    <c:if test="${error != null}">
+    <h5 class="text-danger">${error}</h5>
+    </c:if>
+</div>
+</div>
+</div>
+</form>
+</div>
+</div>-->
     <!-- end row -->
 
     <div class="row mt-4">
+        <h2 class="m-3 col-12"> My Order</h2>
+        <div class="search-form ml-4 mb-3">
+            <form action="" class="date-search-form">
+                <label for="startDate" class="search-label">From date:</label>
+                <input type="date" name="startDate" value="" class="date-input" required>
+
+                <label for="endDate" class="search-label">To date:</label>
+                <input type="date" name="endDate" value="" class="date-input" required>
+                <br>
+                <button type="submit" class="search-button">Search</button>
+            </form>
+        </div>
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive project-list">
                         <div class="card">
-                            <c:forEach items="${listOrder}" var="o" varStatus="loop"> 
-                                <c:set value="1" var="index" />
-                                <b>${loop.index+1}</b>
-                                <div class="card-header ml-3 d-flex justify-content-between">
-                                    <table border="1">
-                                        <tr class="p-2">
-                                            <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Address</th>
-                                            <th>Phone</th>
-                                            <th>Date Buy</th>
-                                            <th>Total Cost</th>
-                                        </tr>
-                                        <tr>
-                                            <td>${o.orderID}</td>
-                                            <td>${o.orderName}</td>
-                                            <td>${o.orderAddress}</td>
-                                            <td>${o.orderPhone}</td>
-                                            <td>${o.orderDate}</td>
-                                            <td>$${o.totalCost}</td>
-                                        </tr>
+                            <table border="1">
+                                <tr class="p-2">
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Address</th>
+                                    <th>Phone</th>
+                                    <th>Date Buy</th>
+                                    <th>Total Cost</th>
+                                    <th>Status</th>
+                                    <td>Action</td>
+                                </tr>
+                                <c:forEach items="${listOrder}" var="o" varStatus="loop"> 
+                                    <c:set value="1" var="index" />
+                                    <tr>
+                                        <td>${o.orderID}</td>
+                                        <td>${o.orderName}</td>
+                                        <td>${o.orderAddress}</td>
+                                        <td>${o.orderPhone}</td>
+                                        <td>${o.orderDate}</td>
+                                        <td>$${o.totalCost}</td>
 
-                                    </table>
-                                        <div><a href="orderDetail?orderID=${o.orderID}">Detail</a></div>
-                                </div>
-                                <div class="card-body">
-                                    <table class="table project-table table-centered table-nowrap">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">STT</th>
-                                                <th scope="col">Image</th>
-                                                <th scope="col">Title</th>
-                                                <th scope="col">Price</th>
-                                                <th scope="col">Quantity</th>
-                                                <th scope="col">Total</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <c:forEach items="${listOrderDetail}" var="od" varStatus="loop1">
-                                                <c:if test="${o.orderID == od.orderID}">
-                                                    <tr>
-                                                    <th scope="row">${index}</th>
-                                                    <td style="width: 20%">
-                                                        <img style="width: 25%" class="d-block img-fluid" src="${od.product.getImage()}" alt="">
-                                                    </td>
-                                                    <td>${od.product.name}</td>
-                                                    <td>${od.productPrice}</td>
-                                                    <td>${od.quantity}</td>
-                                                    <td>${od.totalCost}</td>
-                                                    <c:set value="${index+1}" var="index" />
-                                                </tr>    
-                                                </c:if>
-                                            </c:forEach>
+                                        <td>
+                                            <c:choose>
+                                                <c:when test="${o.getOrderStatus() == '1'}">
+                                                    <span class="badge bg-success"> Orders Pending Processing </span>
+                                                </c:when>
+                                                <c:when test="${o.getOrderStatus() == '2'}">
+                                                    <span class="badge bg-success"> Orders On Delivery </span>
+                                                </c:when>
+                                                <c:when test="${o.getOrderStatus() == '3'}">
+                                                    <span class="badge bg-success"> Order Successfully Delivered </span>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <span class="badge bg-danger"> Cancel </span>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <a href="orderDetail?orderID=${o.orderID}">Detail</a>
+                                                <c:choose>
+                                                    <c:when test="${o.getOrderStatus() == '1'}">
+                                                        <a href="cancelOrder?oid=${o.orderID}" class="">Cancel</span>
+                                                    </c:when>
+                                                    <c:when test="${o.getOrderStatus() == '2'}">
+                                                    <a href="cancelOrder?oid=${o.orderID}" class="">Cancel</span>
+                                                    </c:when>
+                                                </c:choose>
+                                            </div>
+                                        </td>
+                                    </tr>
 
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </c:forEach>
+
+                                </c:forEach>
+                            </table>
 
                         </div>
 

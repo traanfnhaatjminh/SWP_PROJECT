@@ -100,6 +100,47 @@ public class FilterFeedback extends HttpServlet {
             }
 
         }
+
+        if (selectedStar != null && selectedStar.length == 1) {
+            int endIndex = d.getAllFeedbackByRateStarFilter(selectedStar[0], "", "", "", "").size() / 6;
+            if (d.getAllFeedbackByRateStarFilter(selectedStar[0], "", "", "", "").size() % 6 != 0) {
+                endIndex++;
+            }
+            filteredFeedback = d.getAllFeedbackByRateStarFilterPage(selectedStar[0], "", "", "", "", currentPage);
+            request.setAttribute("endIndex", endIndex);
+            request.setAttribute("selectedStar", selectedStar[0]);
+        } else if (selectedStar != null && selectedStar.length > 1) {
+            if (selectedStar.length == 2) {
+                int endIndex = d.getAllFeedbackByRateStarFilter(selectedStar[0], selectedStar[1], "", "", "").size() / 6;
+                if (d.getAllFeedbackByRateStarFilter(selectedStar[0], selectedStar[1], "", "", "").size() % 6 != 0) {
+                    endIndex++;
+                }
+                filteredFeedback = d.getAllFeedbackByRateStarFilterPage(selectedStar[0], selectedStar[1], "", "", "", currentPage);
+                request.setAttribute("endIndex", endIndex);
+            } else if (selectedStar.length == 3) {
+                int endIndex = d.getAllFeedbackByRateStarFilter(selectedStar[0], selectedStar[1], selectedStar[2], "", "").size() / 6;
+                if (d.getAllFeedbackByRateStarFilter(selectedStar[0], selectedStar[1], selectedStar[2], "", "").size() % 6 != 0) {
+                    endIndex++;
+                }
+                filteredFeedback = d.getAllFeedbackByRateStarFilterPage(selectedStar[0], selectedStar[1], selectedStar[2], "", "", currentPage);
+                request.setAttribute("endIndex", endIndex);
+            } else if (selectedStar.length == 4) {
+                int endIndex = d.getAllFeedbackByRateStarFilter(selectedStar[0], selectedStar[1], selectedStar[2], selectedStar[3], "").size() / 6;
+                if (d.getAllFeedbackByRateStarFilter(selectedStar[0], selectedStar[1], selectedStar[2], selectedStar[3], "").size() % 6 != 0) {
+                    endIndex++;
+                }
+                filteredFeedback = d.getAllFeedbackByRateStarFilterPage(selectedStar[0], selectedStar[1], selectedStar[2], selectedStar[3], "", currentPage);
+                request.setAttribute("endIndex", endIndex);
+            } else if (selectedStar.length == 5) {
+                int endIndex = d.getAllFeedbackByRateStarFilter(selectedStar[0], selectedStar[1], selectedStar[2], selectedStar[3], selectedStar[4]).size() / 6;
+                if (d.getAllFeedbackByRateStarFilter(selectedStar[0], selectedStar[1], selectedStar[2], selectedStar[3], selectedStar[4]).size() % 6 != 0) {
+                    endIndex++;
+                }
+                filteredFeedback = d.getAllFeedbackByRateStarFilterPage(selectedStar[0], selectedStar[1], selectedStar[2], selectedStar[3], selectedStar[4], currentPage);
+                request.setAttribute("selectedStarAll", "selectedStarAll");
+                request.setAttribute("endIndex", endIndex);
+            }
+        }
         request.setAttribute("listFeedback", filteredFeedback);
         request.setAttribute("currentPage", currentPage);
         request.setAttribute("menu", "feedbackList");

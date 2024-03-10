@@ -30,9 +30,6 @@
             </c:if>
             <c:if test="${sessionScope.accS != null}">
                 <ul class="main-nav nav navbar-nav">
-                    <li class="${menu == null ? 'active' : ''} ${menu eq 'blog' ? 'active' : ''}">
-                        <a href="blog?menu=blog">Blogs</a>
-                    </li>
                     <li class="${menu eq 'post' ? 'active' : ''}">
                         <a href="post?menu=post">Manage Blogs</a>
                     </li>

@@ -52,8 +52,8 @@ public class pageOrdersServletBySale extends HttpServlet {
                 //    HttpSession session = request.getSession();
                 session.setAttribute("index", index);
             }
-            List<model.Order> listOrders = dao.getOrderBySalePage(index,sId); 
-            List<String> listProductName = dao.getListNameProductForSale(sId);
+            List<model.Order> listOrders = dao.getOrderBySalePage(index); 
+            List<String> listProductName = dao.getListNameProductForSale();
             session.setAttribute("listProductName", listProductName);
             request.setAttribute("listOrders", listOrders);           
             request.setAttribute("curMenu", "Management Orders");

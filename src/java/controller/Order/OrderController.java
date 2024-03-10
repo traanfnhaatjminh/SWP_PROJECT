@@ -22,12 +22,18 @@ public class OrderController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String startDate = request.getParameter("startDate");
+        String endDate = request.getParameter("endDate");
+        String searchDate = "";
+        if(startDate != null && endDate != null){
+            searchDate = "[orderDate] between '"+ startDate+"' AND '"+endDate+"'";
+        }
         OrderDAO orderDao = new OrderDAO();
         DAO dao = new DAO();
         HttpSession session = request.getSession();
         Customer customer = (Customer) session.getAttribute("accC");
         if (customer != null) {
-            ArrayList<Order> listOrder = orderDao.getOrdersByCustomerId(customer.getCustomerID());
+            ArrayList<Order> listOrder = orderDao.getOrdersByCustomerId(customer.getCustomerID(), searchDate);
             ArrayList<OrderDetail> listOrderDetail = orderDao.getOrderDetailByCustomerID(customer.getCustomerID());
             if(listOrderDetail != null){
                 for(OrderDetail oi : listOrderDetail){

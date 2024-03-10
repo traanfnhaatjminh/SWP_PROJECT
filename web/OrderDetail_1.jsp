@@ -175,12 +175,27 @@
                                         </tr>
                                         <tr>
                                             <th>Order Status</th>
-                                            <td>${order.orderStatus=='1'?'Confirming':''}</td>
+                                            <td>
+                                                <c:choose>
+                                                    <c:when test="${order.orderStatus == '1'}">
+                                                        <span class="badge bg-success"> Orders Pending Processing </span>
+                                                    </c:when>
+                                                    <c:when test="${order.orderStatus == '2'}">
+                                                        <span class="badge bg-success"> Orders On Delivery </span>
+                                                    </c:when>
+                                                    <c:when test="${order.orderStatus == '3'}">
+                                                        <span class="badge bg-success"> Order Successfully Delivered </span>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <span class="badge bg-danger"> Cancel </span>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td>
                                         </tr>
                                     </table>
                                 </div>
                                 <div class="card-body row">
-                                    <table class="table project-table table-centered table-nowrap">
+                                    <table class="table project-table table-centered table-nowrap table-bordered">
                                         <thead>
                                             <tr>
                                                 <th scope="col">STT</th>
@@ -189,7 +204,10 @@
                                                 <th scope="col">Price</th>
                                                 <th scope="col">Quantity</th>
                                                 <th scope="col">Total</th>
-                                                <th>Actions</th>
+                                                    <c:if test="${order.getOrderStatus() == '3'}">
+                                                    <th>Actions</th>
+                                                    </c:if>
+
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -203,7 +221,11 @@
                                                     <td>${od.productPrice}</td>
                                                     <td>${od.quantity}</td>
                                                     <td>${od.totalCost}</td>
-                                                    <td>  <a href="feedback?productId=${od.product.id}" class="btn btn-primary">Feedback</a></td>
+                                                    <c:if test="${order.getOrderStatus() == '3'}">
+                                                        <td> 
+                                                            <a href="feedback?productId=${od.product.id}" class="btn btn-primary">Feedback</a>
+                                                        </td>
+                                                    </c:if>
                                                 </tr>    
                                             </c:forEach>
 

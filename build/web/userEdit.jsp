@@ -273,12 +273,11 @@
                                                 <h3 style="margin-right: 4px; padding-bottom: 10px">Full Name: ${user.userName}</h3>
                                                 <input style="color: #226e20; width: 420px; height: 37px; " class="form-control" type="hidden" name="userFullname" value="${user.userName}">
                                                 <h6>Gender:  ${user.gender}</h6>
-                                                <select class="form-control-input first-input" id="gender" name="userGender">
+<!--                                                <select class="form-control-input first-input" id="gender" name="userGender">
                                                     <option value="male" ${user.gender == 'male' ? 'selected' : ''}>Male</option>
                                                     <option value="female" ${user.gender == 'female' ? 'selected' : ''}>Female</option>
                                                     <option value="other" ${user.gender == 'other' ? 'selected' : ''}>Other</option>
-                                                </select>
-
+                                                </select>-->
                                                 <br>
                                                 <h6>Email:  ${user.email}</h6>
                                                 <input class="form-control-input " type="hidden" name="userEmail" value="${user.email}">

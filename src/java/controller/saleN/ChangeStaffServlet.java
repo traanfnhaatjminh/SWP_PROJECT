@@ -4,8 +4,8 @@
  */
 package controller.saleN;
 
+
 import dal.orderDAO1;
-import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,18 +15,16 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Order;
 
 /**
  *
  * @author ADMIN
  */
-@WebServlet(name = "searchOrdersIdForSaleServlet", urlPatterns = {"/searchOrdersIdForSaleServlet"})
-public class searchOrdersIdForSaleServlet extends HttpServlet {
+@WebServlet(name = "ChangeStaffServlet", urlPatterns = {"/changeStaffServlet"})
+public class ChangeStaffServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,18 +40,19 @@ public class searchOrdersIdForSaleServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
-            int sId = (int) session.getAttribute("sId");
-            /* TODO output your page here. You may use following sample code. */
-            String value = request.getParameter("search1");
-            int searchValue = Integer.parseInt(value);
+            int oid = (int) session.getAttribute("oid");
+            int idStaff = Integer.parseInt(request.getParameter("groupby"));
             orderDAO1 dao = new orderDAO1();
-            ArrayList<Order> listOrders = dao.getSearchOrderIdForSale( searchValue);
-            List<model.Order> listOrderDisplay = new ArrayList<>();         
-            request.setAttribute("listOrderDisplay", listOrderDisplay);
-            request.setAttribute("listOrders", listOrders);            
-            request.setAttribute("listOrders", listOrders);
-            request.setAttribute("search1", value);
-            request.getRequestDispatcher("table-data-saleNormal.jsp").forward(request, response);
+            List<model.OrderDetail> listProductDetail = dao.getListProductByOrder(oid);
+            boolean result = dao.changeStaffForOrders(oid, idStaff);
+            String fullnameStaff = dao.getfullnameStaffByOrder(oid);
+            request.setAttribute("listProductDetail", listProductDetail);
+            request.setAttribute("fullnameStaff", fullnameStaff);
+            request.setAttribute("curMenu", "Management All Orders");
+            request.getRequestDispatcher("Orderdetail1.jsp").forward(request, response);
+
+        } catch (Exception ex) {
+            System.out.println("loi change staff " + ex);
         }
     }
 
@@ -72,7 +71,7 @@ public class searchOrdersIdForSaleServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(searchOrdersIdForSaleServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ChangeStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -90,7 +89,7 @@ public class searchOrdersIdForSaleServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(searchOrdersIdForSaleServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ChangeStaffServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -40,29 +40,17 @@ public class UserEditDAO extends DBContext {
 
         try {
             if (connection != null) {
-                String sql = "UPDATE Users \n"
-                        + "SET \n"
-                        + "    userName = ?,\n"
-                        + "    gender = ?,\n"
-                        + "    email = ?,\n"
-                        + "    mobile = ?,\n"
-                        + "    avatar = ?,\n"
-                        + "    [address] = ?,\n"
+                String sql = "UPDATE Users\n"
+                        + "SET           \n"
                         + "    roleID = ?,\n"
-                        + "	userStatus = ?\n"
-                        + "WHERE \n"
-                        + "    userID = ?;";
+                        + "    userStatus = ?\n"
+                        + "WHERE userID = ?;";
                 PreparedStatement st;
                 st = connection.prepareStatement(sql);
-                st.setInt(1, u.getUserID());
-                st.setString(2, u.getUserName());
-                st.setString(3, u.getGender());
-                st.setString(4, u.getEmail());
-                st.setString(5, u.getMobile());
-                st.setString(6, u.getAvatar());
-                st.setString(7, u.getAddress());
-                st.setInt(8, u.getRoleID());
-                st.setInt(9, u.getUser_status());
+
+                st.setInt(1, u.getRoleID());
+                st.setInt(2, u.getUser_status());
+                st.setInt(3, u.getUserID());
                 st.executeUpdate();
             }
         } catch (Exception e) {

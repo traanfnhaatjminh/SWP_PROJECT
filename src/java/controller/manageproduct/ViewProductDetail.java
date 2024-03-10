@@ -2,31 +2,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.saleN;
+package controller.manageproduct;
 
-import dal.orderDAO1;
-import jakarta.servlet.RequestDispatcher;
+import dal.DAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import model.Order;
+import model.Category;
+import model.Product;
 
 /**
  *
- * @author ADMIN
+ * @author DUONG VIET DUY
  */
-@WebServlet(name = "searchOrdersIdForSaleServlet", urlPatterns = {"/searchOrdersIdForSaleServlet"})
-public class searchOrdersIdForSaleServlet extends HttpServlet {
+@WebServlet(name = "ViewProductDetail", urlPatterns = {"/viewProductDetail"})
+public class ViewProductDetail extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,23 +35,17 @@ public class searchOrdersIdForSaleServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            HttpSession session = request.getSession();
-            int sId = (int) session.getAttribute("sId");
-            /* TODO output your page here. You may use following sample code. */
-            String value = request.getParameter("search1");
-            int searchValue = Integer.parseInt(value);
-            orderDAO1 dao = new orderDAO1();
-            ArrayList<Order> listOrders = dao.getSearchOrderIdForSale( searchValue);
-            List<model.Order> listOrderDisplay = new ArrayList<>();         
-            request.setAttribute("listOrderDisplay", listOrderDisplay);
-            request.setAttribute("listOrders", listOrders);            
-            request.setAttribute("listOrders", listOrders);
-            request.setAttribute("search1", value);
-            request.getRequestDispatcher("table-data-saleNormal.jsp").forward(request, response);
-        }
+        String id = request.getParameter("pid");
+        DAO d = new DAO();
+        Product p = d.getProductByID(id);
+        List<Category> listC = d.getAllCategory();
+        request.setAttribute("details", p);
+        request.setAttribute("listC", listC);
+        request.setAttribute("cateID", d.getCidByPid(id));
+        request.setAttribute("menu", "");
+        request.getRequestDispatcher("viewManageProductDetail.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -69,11 +60,7 @@ public class searchOrdersIdForSaleServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(searchOrdersIdForSaleServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -87,11 +74,7 @@ public class searchOrdersIdForSaleServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(searchOrdersIdForSaleServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

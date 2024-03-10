@@ -46,7 +46,7 @@ public class FilterOrderDateServletBySale extends HttpServlet {
             String endDateStr = request.getParameter("endDate");
             orderDAO1 dao = new orderDAO1();
             ArrayList<Order> listOrders;
-            listOrders = dao.getOrdersByDateRangeBySale(sId, startDateStr, endDateStr);                             
+            listOrders = dao.getOrdersByDateRangeBySale(startDateStr, endDateStr);                             
             request.setAttribute("listOrders", listOrders);
             request.setAttribute("startDateStr", startDateStr);
             request.setAttribute("endDateStr", endDateStr);

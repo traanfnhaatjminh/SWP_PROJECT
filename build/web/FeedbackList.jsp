@@ -233,25 +233,25 @@
                             <h4>By rated star:</h4>
                             <div class="checkbox-group" style="margin-left: 10px;">
                                 <div class="checkbox-post">
-                                    <label><input name="ratedstar" type="checkbox" value="1" class="icheck">
+                                    <label><input name="ratedstar" type="checkbox" value="1" class="icheck" ${'1' eq selectedStar ? 'checked' : ''} ${selectedStarAll != null ? 'checked' : ''}>
                                         <i class="fa fa-star"></i>
                                     </label>
-                                    <label><input name="ratedstar" type="checkbox" value="2" class="icheck">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </label>
-                                    <label><input name="ratedstar" type="checkbox" value="3" class="icheck">
-                                        <i class="fa fa-star"></i>
+                                    <label><input name="ratedstar" type="checkbox" value="2" class="icheck" ${'2' eq selectedStar ? 'checked' : ''} ${selectedStarAll != null ? 'checked' : ''}>
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                     </label>
-                                    <label><input name="ratedstar" type="checkbox" value="4" class="icheck">
-                                        <i class="fa fa-star"></i>
+                                    <label><input name="ratedstar" type="checkbox" value="3" class="icheck" ${'3' eq selectedStar ? 'checked' : ''} ${selectedStarAll != null ? 'checked' : ''}>
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                     </label>
-                                    <label><input name="ratedstar" type="checkbox" value="5" class="icheck">
+                                    <label><input name="ratedstar" type="checkbox" value="4" class="icheck" ${'4' eq selectedStar ? 'checked' : ''} ${selectedStarAll != null ? 'checked' : ''}>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </label>
+                                    <label><input name="ratedstar" type="checkbox" value="5" class="icheck" ${'5' eq selectedStar ? 'checked' : ''} ${selectedStarAll != null ? 'checked' : ''}>
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>
                                         <i class="fa fa-star"></i>

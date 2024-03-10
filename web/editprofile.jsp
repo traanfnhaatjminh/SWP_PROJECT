@@ -10,10 +10,25 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        
+
         <link rel="stylesheet" href="./new_assetss/css/main.css"/>
         <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js'></script>
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
 
+        <!-- Slick -->
+        <link type="text/css" rel="stylesheet" href="css/slick.css"/>
+        <link type="text/css" rel="stylesheet" href="css/slick-theme.css"/>
+
+        <!-- nouislider -->
+        <link type="text/css" rel="stylesheet" href="css/nouislider.min.css"/>
+
+        <!-- Font Awesome Icon -->
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+
+        <!-- Custom stlylesheet -->
+        <link type="text/css" rel="stylesheet" href="css/style.css"/>
+
+        <link rel="stylesheet" href="./css/home.css"/>
         <style>
             body{
                 margin-top:20px;
@@ -78,6 +93,46 @@
         </style>
     </head>
     <body>
+        <header>
+            <!-- TOP HEADER -->
+            <div id="top-header">
+                <div class="container">
+                    <ul class="header-links pull-left">
+                        <li><a href="#"><i class="fa fa-phone"></i>0773 648 867</a></li>
+                        <li><a href="#"><i class="fa fa-envelope-o"></i>smakerclothing@gmail.com</a></li>
+                        <li><a href="#"><i class="fa fa-map-marker"></i>Hanoi</a></li>
+                    </ul>
+                    <ul class="header-links pull-right">
+                        <c:if test="${sessionScope.accC != null}">
+                            <li><a href="profile"><i class="fa fa-user-o"></i> My Account</a></li>
+                            <li><a href="customer?action=logout"><i class="fa fa-"></i> Logout</a></li>
+                        </c:if>
+                    </ul>
+                </div>
+            </div>
+            <!-- /TOP HEADER -->
+
+            <!-- MAIN HEADER -->
+            <div id="header">
+                <!-- container -->
+                <div class="container">
+                    <!-- row -->
+                    <div class="row">
+                        <!-- LOGO -->
+                        <div class="col-md-3">
+                            <div class="header-logo ">
+                                <a style="color: whitesmoke" href="home" class="logo">
+                                    CLOTHINGMAKER
+                                </a>
+                            </div>
+                        </div>
+                        <!-- /LOGO -->
+                    </div>
+                </div>
+            </div>
+
+
+        </header>
         <div class="app-title">
             <ul class="app-breadcrumb breadcrumb side">
                 <li class="glyphicon glyphicon-lock text-primary"><a href="profile.jsp"><b>Profile</b></a></li>
@@ -110,7 +165,6 @@
                             <!-- Hiển thị ảnh avatar hiện tại -->
                             <img id="avatarImage" class="img-account-profile rounded-circle mb-2" src="${sessionScope.accC.avatar}" alt="">                                                                               
                         </div>
-
 
                     </div>
                 </div>

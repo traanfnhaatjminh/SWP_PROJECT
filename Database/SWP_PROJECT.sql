@@ -13,29 +13,26 @@ values
 
 drop table product
 
-SELECT fb.*, c.fullName, p.[name]
-FROM [Feedback] fb
-JOIN Product p ON fb.productID = p.id
-JOIN Customer c ON fb.customerID = c.customerID
-WHERE TRIM(c.fullName) LIKE N'%' + REPLACE(?,' ','') + '%'
-   OR TRIM(fb.content) LIKE N'%' + REPLACE(?,' ','') + '%'
-ORDER BY c.fullName
-OFFSET (? - 1) * 6 ROWS
-FETCH NEXT 6 ROWS ONLY;
+select * from [orderDetail]
 
 SELECT fb.*, c.fullName, p.[name]
 FROM [Feedback] fb
 JOIN Product p ON fb.productID = p.id
 JOIN Customer c ON fb.customerID = c.customerID
-where [status] in (?,?,?,?)
+where rate_star in (?,?,?,?,?)
 ORDER BY feedbackID
 OFFSET (? - 1) * 6 ROWS
 FETCH NEXT 6 ROWS ONLY;
 
-
-update Feedback 
-set [status] = '1'
-where feedbackID = 1
+SELECT fb.*, c.fullName, p.[name]
+FROM [Feedback] fb
+JOIN Product p ON fb.productID = p.id
+JOIN Customer c ON fb.customerID = c.customerID
+WHERE TRIM(c.fullName) LIKE N'%' + REPLACE('xuất sắc',' ','') + '%'
+OR TRIM(fb.content) LIKE N'%' + REPLACE('xuất sắc',' ','') + '%'
+ORDER BY c.fullName
+OFFSET (1 - 1) * 6 ROWS
+FETCH NEXT 6 ROWS ONLY;
 
 
 create table product
@@ -244,6 +241,8 @@ totalCost float,
 sellerID int,
 FOREIGN KEY (customerID) REFERENCES Customer(customerID)
 )
+
+select * from [Order]
 
 create table orderDetail(
 detailID int IDENTITY(1,1) NOT NULL,

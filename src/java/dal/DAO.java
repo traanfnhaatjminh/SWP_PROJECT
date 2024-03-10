@@ -139,7 +139,7 @@ public class DAO extends DBContext {
         List<Product> list = new ArrayList<>();
         String sql = "SELECT TOP 8 *\n"
                 + "FROM product\n"
-                + "ORDER BY id DESC;";
+                + "Where [quantity] != '0' ORDER BY id DESC ";
         try {
             PreparedStatement st;
             st = connection.prepareStatement(sql);
@@ -1427,6 +1427,82 @@ public class DAO extends DBContext {
         return list;
     }
 
+    public List<Feedback> getAllFeedbackByRateStarFilter(String status1,
+            String status2, String status3, String status4, String status5) {
+        List<Feedback> list = new ArrayList<>();
+        String sql = "SELECT fb.*, c.fullName, p.[name]\n"
+                + "FROM [Feedback] fb\n"
+                + "JOIN Product p ON fb.productID = p.id\n"
+                + "JOIN Customer c ON fb.customerID = c.customerID\n"
+                + "where rate_star in (?,?,?,?,?)";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setString(1, status1);
+            st.setString(2, status2);
+            st.setString(3, status3);
+            st.setString(4, status4);
+            st.setString(5, status5);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Feedback c = new Feedback(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getFloat(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9));
+                list.add(c);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Feedback> getAllFeedbackByRateStarFilterPage(String status1,
+            String status2, String status3, String status4, String status5, int index) {
+        List<Feedback> list = new ArrayList<>();
+        String sql = "SELECT fb.*, c.fullName, p.[name]\n"
+                + "FROM [Feedback] fb\n"
+                + "JOIN Product p ON fb.productID = p.id\n"
+                + "JOIN Customer c ON fb.customerID = c.customerID\n"
+                + "where rate_star in (?,?,?,?,?)\n"
+                + "ORDER BY feedbackID\n"
+                + "OFFSET (? - 1) * 6 ROWS\n"
+                + "FETCH NEXT 6 ROWS ONLY;";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setString(1, status1);
+            st.setString(2, status2);
+            st.setString(3, status3);
+            st.setString(4, status4);
+            st.setString(5, status5);
+            st.setInt(6, index);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Feedback c = new Feedback(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getFloat(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9));
+                list.add(c);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
     public List<Feedback> getAllFeedbackByStatusFilterPage(String status1,
             String status2, String status3, String status4, int index) {
         List<Feedback> list = new ArrayList<>();
@@ -1580,7 +1656,8 @@ public class DAO extends DBContext {
             System.out.println(e);
         }
     }
-public List<Product> searchProductList(String searchValue, int pageIndex) {
+
+    public List<Product> searchProductList(String searchValue, int pageIndex) {
         List<Product> list = new ArrayList<>();
         String sql = "select * from product\n"
                 + "where name like N'%' + ? + '%' ORDER BY id\n"
@@ -1740,7 +1817,7 @@ public List<Product> searchProductList(String searchValue, int pageIndex) {
         }
         return list;
     }
-    
+
     public List<Product> getManageProductByCidPage(int cid, int pageIndex) {
         List<Product> list = new ArrayList<>();
         String sql = "select * from product\n"

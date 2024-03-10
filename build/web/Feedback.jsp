@@ -55,18 +55,15 @@
                         <li><a href="#"><i class="fa fa-envelope-o"></i>smakerclothing@gmail.com</a></li>
                         <li><a href="#"><i class="fa fa-map-marker"></i>Hanoi</a></li>
                     </ul>
-                  <ul class="header-links pull-right">
+                    <ul class="header-links pull-right">
                         <!--<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>-->
-                        <c:if test="${sessionScope.accC == null && sessionScope.accS == null}">
+                        <c:if test="${sessionScope.accC == null}">
                             <li><a href="register.jsp"><i class="fa fa-"></i> Register</a></li>
                             <li><a href="login.jsp"><i class="fa fa-"></i> Login</a></li>
                             </c:if>
                             <c:if test="${sessionScope.accC != null}">
                             <li><a href="profile.jsp"><i class="fa fa-user-o"></i> My Account</a></li>
                             <li><a href="customer?action=logout"><i class="fa fa-"></i> Logout</a></li>
-                            </c:if>
-                            <c:if test="${sessionScope.accS != null}">
-                            <li><a href="loginSystem?action=logout"><i class="fa fa-"></i> Logout</a></li>
                             </c:if>
                     </ul>
                 </div>
@@ -156,10 +153,16 @@
                 <div class="col-md-12">
                     <label for="Content" class="form-label">Content</label>
                     <textarea class="form-control" id="Content" name="content" rows="3" required=""></textarea>
-
                 </div>
                 <div class="col-12 mt-3">
                     <button  class="btn btn-primary" id="btnSubmitComment">Send</button>
+                </div>
+
+                <div class="col-12 mt-3">
+                    <h5 style="color: greenyellow">${success}</h5>
+                </div>
+                <div class="col-12 mt-3">
+                    <h5 style="color: red">${fail}</h5>
                 </div>
             </form>
 
