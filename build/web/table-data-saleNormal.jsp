@@ -424,7 +424,7 @@
                                             <td>
                                                 <c:choose>
                                                     <c:when test="${o.orderStatus == '1' || o.orderStatus == '2' }">
-                                                        <form action="changeStatusCancelForSaleNormal " method="post">
+                                                        <form action="changeStatusCancelForSaleNormal" method="post">
                                                             <input type="hidden" name="oid" value="${o.getOrderID()}">
                                                             <button type="submit" class="btn btn-danger" id="Button">Cancel</button>
                                                         </form>

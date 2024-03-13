@@ -69,80 +69,28 @@
                     <!-- row -->
                     <div class="row">
                         <!-- LOGO -->
-                        <div class="col-md-3">
+                        <div class="col-md-10">
                             <div class="header-logo">
                                 <a href="home" class="logo">
-                                    $MAKER
+                                    CLOTHINGMAKER
                                 </a>
                             </div>
                         </div>
                         <!-- /LOGO -->
 
-                        <!-- SEARCH BAR -->
-                        <div class="col-md-6">
-                            <div class="header-search text-center">
-                                <form action="searchcart">
-                                    <input name="keyword" type="text" class="input" placeholder="Search here">
-                                    <button type="submit" class="search-btn">Search</button>
-                                </form>
-                            </div>
-                        </div>
-                        <!-- /SEARCH BAR -->
-
                         <!-- ACCOUNT -->
-                        <div class="col-md-3 clearfix">
+                        <div class="col-md-2 clearfix">
                             <div class="header-ctn">
                                 <!-- Cart -->
-                                <div class="dropdown">
-                                    <a href="cart" class="dropdown-toggle">
+                                <div>
+                                    <a href="cart">
                                         <i class="fa fa-shopping-cart"></i>
                                         <span>Shopping Cart</span>
                                         <div class="qty">${size}</div>
                                     </a>
-                                    <div class="cart-dropdown">
-                                        <div class="cart-list">
-                                            <div class="product-widget">
-                                                <div class="product-img">
-                                                    <img src="./img/product01.png" alt="">
-                                                </div>
-                                                <div class="product-body">
-                                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                                    <h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-                                                </div>
-                                                <button class="delete"><i class="fa fa-close"></i></button>
-                                            </div>
 
-                                            <div class="product-widget">
-                                                <div class="product-img">
-                                                    <img src="./img/product02.png" alt="">
-                                                </div>
-                                                <div class="product-body">
-                                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                                    <h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-                                                </div>
-                                                <button class="delete"><i class="fa fa-close"></i></button>
-                                            </div>
-                                        </div>
-                                        <div class="cart-summary">
-                                            <small>3 Item(s) selected</small>
-                                            <h5>SUBTOTAL: $2940.00</h5>
-                                        </div>
-                                        <div class="cart-btns">
-                                            <a href="#">View Cart</a>
-                                            <a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
-                                        </div>
-                                    </div>
                                 </div>
                                 <!-- /Cart -->
-
-                                <!-- Menu Toogle -->
-                                <div class="menu-toggle">
-                                    <a href="#">
-                                        <i class="fa fa-bars"></i>
-                                        <span>Menu</span>
-                                    </a>
-                                </div>
-                                <!-- /Menu Toogle -->
                             </div>
                         </div>
                         <!-- /ACCOUNT -->
@@ -161,10 +109,10 @@
             <div class="d-flex align-items-center justify-content-between">
                 <div class="d-flex flex-column mt-3 mb-3">
                     <div class="h3">Checkout</div>
-                     <c:if test="${mess!=''}">
+                    <c:if test="${mess!=''}">
                         <div class="alert alert-danger" role="alert">
-                        ${mess}
-                    </div>
+                            ${mess}
+                        </div>
                     </c:if>
                 </div>
             </div>
@@ -199,10 +147,10 @@
 
                                         ${c.quantity}
                                     </td>
-                                    <td class="d-flex flex-column">${c.product.sale_price}$
+                                    <td class="d-flex flex-column">${c.product.sale_price} VND
                                     </td>
                                     <td class="font-weight-bold">
-                                        $${c.quantity*c.product.sale_price}
+                                        ${c.quantity*c.product.sale_price} VND
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -220,7 +168,7 @@
                 <div class="d-flex flex-column justify-content-between align-items-end flex-wrap">
                     <div class="d-flex px-3 pr-md-5 subtotal col-12">
                         <div class="px-4">Subtotal:</div>
-                        <div class="h5 font-weight-bold px-md-2">$${cart.getTotalMoney()}</div>
+                        <div class="h5 font-weight-bold px-md-2">${cart.getTotalMoney()} VND</div>
                     </div>
                 </div>
             </div>
@@ -266,11 +214,11 @@
                         <textarea class="form-control" name="notes" id="notes" rows="3"></textarea>
                     </div>
 
-                            <c:if test="${cart.getTotalMoney() >= 1000000}">
-                                <input type="radio" checked disabled>
-                                <label for="">Bank Transfer</label>
-                                <p class="text-warning">Auto choice method pay account when total amount of order greater 1000000</p>
-                            </c:if>
+                    <c:if test="${cart.getTotalMoney() >= 1000000}">
+                        <input type="radio" checked disabled>
+                        <label for="">Bank Transfer</label>
+                        <p class="text-warning">Auto choice method pay account when total amount of order greater 1000000 VND</p>
+                    </c:if>
                     <!--Payment-->
                     <div class="form-group pay" id="payment" style="width: 50%">
                         <label for="pay"> Select a payment method</label>

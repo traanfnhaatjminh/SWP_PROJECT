@@ -3,7 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/web/table-data-saleNormal.jsp</file>
+            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/web/home.jsp</file>
+            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/web/menu.jsp</file>
+            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/web/checkout.jsp</file>
+            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/web/cart.jsp</file>
+            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/web/categoryDetail.jsp</file>
         </group>
     </open-files>
 </project-private>

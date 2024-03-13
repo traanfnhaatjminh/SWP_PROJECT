@@ -140,10 +140,10 @@
                                         <input max="${c.product.quantity}" min="1" type="number" product-id ="${c.product.id}" id="quantity" class="form-control form-control-lg text-center" name="num" value="${c.quantity}" 
                                                />
                                     </td>   
-                                    <td class="d-flex flex-column">${c.product.sale_price}$
+                                    <td class="d-flex flex-column">${c.product.sale_price} VND
                                     </td>
                                     <td class="font-weight-bold">
-                                        $${c.quantity*c.product.sale_price}
+                                        ${c.quantity*c.product.sale_price} VND
                                     </td>
                                     <td>
                                         <div class="text-center">
@@ -166,7 +166,7 @@
                 <div class="d-flex flex-column justify-content-between align-items-end flex-wrap">
                     <div class="d-flex px-3 pr-md-5 subtotal col-12">
                         <div class="px-4">Subtotal:</div>
-                        <div class="h5 font-weight-bold px-md-2">$${cart.getTotalMoney()}</div>
+                        <div class="h5 font-weight-bold px-md-2">${cart.getTotalMoney()} VND</div>
                     </div>
                 </div>
                 <div class="px-4">

@@ -112,8 +112,10 @@ FETCH NEXT 6 ROWS ONLY;
 
 insert into Users(userName, gender, email, mobile, avatar, [address], pass, roleID, userPoint)
 values 
+('nguyentahoang','male', 'hoang@gmail.com','0969112003','null','ha noi','123',2,0),
 ('tahoang','male', 'tahoang@gmail.com','0969112003','null','ha noi','123',2,0),
 ('nhatminh','male', 'minhnhat@gmail.com','0969102003','null','tu son','123',3,0)
+
 
 create table Roles (
 roleID int primary key,
@@ -242,7 +244,7 @@ sellerID int,
 FOREIGN KEY (customerID) REFERENCES Customer(customerID)
 )
 
-select * from [Order]
+select * from Users
 
 create table orderDetail(
 detailID int IDENTITY(1,1) NOT NULL,

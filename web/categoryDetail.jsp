@@ -92,11 +92,20 @@
                             <div class="header-ctn">
                                 <!-- Cart -->
                                 <div class="dropdown">
-                                    <a class="dropdown-toggle" href="cart">
-                                        <i class="fa fa-shopping-cart"></i>
-                                        <span>Shopping Cart</span>
-                                        <div class="qty">${size}</div>
-                                    </a>
+                                    <c:if test="${sessionScope.accC == null}">
+                                        <a href="login.jsp" class="">
+                                            <i class="fa fa-shopping-cart"></i>
+                                            <span>Shopping Cart</span>
+                                            <div class="qty">${size}</div>
+                                        </a>
+                                    </c:if>
+                                    <c:if test="${sessionScope.accC != null}">
+                                        <a href="cart" class="">
+                                            <i class="fa fa-shopping-cart"></i>
+                                            <span>Shopping Cart</span>
+                                            <div class="qty">${size}</div>
+                                        </a>
+                                    </c:if>
 
                                 </div>
                                 <!-- /Cart -->
