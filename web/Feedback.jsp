@@ -85,22 +85,6 @@
                             </div>
                         </div>
                         <!-- /LOGO -->
-
-                        <!-- ACCOUNT -->
-                        <div class="col-md-3 clearfix" style="float: right">
-                            <div class="header-ctn">
-
-                                <!-- Menu Toogle -->
-                                <div class="menu-toggle">
-                                    <a href="#">
-                                        <i class="fa fa-bars"></i>
-                                        <span>Menu</span>
-                                    </a>
-                                </div>
-                                <!-- /Menu Toogle -->
-                            </div>
-                        </div>
-                        <!-- /ACCOUNT -->
                     </div>
                     <!-- row -->
                 </div>

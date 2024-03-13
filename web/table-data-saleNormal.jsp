@@ -410,7 +410,7 @@
                                                     <c:when test="${o.getOrderStatus() == '1'}"> 
                                                         <form id="statusForm" action="changeStatusSendOrdersForSale" method="post">
                                                             <input type="hidden" name="oid" value="${o.getOrderID()}">
-                                                            <button type="button" class="btn btn-success mark-delivered" id="Button">Shipping</button>
+                                                            <button type="button" class="btn btn-success mark-delivered" id="Button">Confirm</button>
                                                         </form>
                                                     </c:when>
                                                     <c:when test="${o.getOrderStatus() == '2'}"> 

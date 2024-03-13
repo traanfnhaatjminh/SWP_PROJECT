@@ -15,7 +15,7 @@
         <!-- responsive-nav -->
         <div id="responsive-nav">
             <!-- NAV -->
-            <c:if test="${sessionScope.accS == null}">
+            <c:if test="${sessionScope.accC != null}">
                 <ul class="main-nav nav navbar-nav">
                     <li class="${menu == null ? 'active' : ''}"><a href="home">Home</a></li>
                     <li class="${menu eq 'blog' ? 'active' : ''}">
@@ -26,13 +26,6 @@
                             <a href="categoryDetail?cid=${c.cid}&&menu=home">${c.cname}</a>
                         </li>
                     </c:forEach>
-                </ul>
-            </c:if>
-            <c:if test="${sessionScope.accS != null}">
-                <ul class="main-nav nav navbar-nav">
-                    <li class="${menu eq 'post' ? 'active' : ''}">
-                        <a href="post?menu=post">Manage Blogs</a>
-                    </li>
                 </ul>
             </c:if>
 

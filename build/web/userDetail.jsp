@@ -93,46 +93,44 @@
 
     <body onload="time()" class="app sidebar-mini rtl">
         <!-- Navbar-->
-        
-            <!-- Sidebar menu-->
-        
-            <main class="">
-                <div class="app-title">
-                    <ul class="app-breadcrumb breadcrumb side">
-                        <li class="breadcrumb-item"><a href="userlist">User List</a></li>
-                        <li class="breadcrumb-item"><a href="userDetail?userId=${user.userID}">User Detail</a></li>
-                    </ul>
-                    <div id="clock"></div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="tile">
-                            <div class="tile-body">
-                                <div class="row element-button">
-                                    <div class="col-sm-2">
 
-                                        <a class="btn btn-add btn-sm" href="" title="Thêm"><i class="fas fa-plus"></i>
-                                            Tạo Tài Khoản Mới</a>
-                                    </div>
-                                    <div class="col-sm-2">
+        <!-- Sidebar menu-->
 
-                                    </div>
+        <main class="">
+            <div class="app-title">
+                <ul class="app-breadcrumb breadcrumb side">
+                    <li class="breadcrumb-item"><a href="userlist">User List</a></li>
+                    <li class="breadcrumb-item"><a href="userDetail?userId=${user.userID}">User Detail</a></li>
+                </ul>
+                <div id="clock"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tile">
+                        <div class="tile-body">
+                            <div class="row element-button">
+                                <div class="col-sm-2">
+
+                                    <a class="btn btn-add btn-sm" href="" title="Thêm"><i class="fas fa-plus"></i>
+                                        Create new Account</a>
+                                </div>
+                                <div class="col-sm-2">
+
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="container detail" style="display: flex; background-color: #f5f5f5; padding-bottom: 25px; padding-top: 25px; border-radius: 8px; filter: drop-shadow(0 0 3px grey)">
-                                <div class="container-left col-md-4" style="border-radius: 30px; padding-top: 5px; padding-left: -2.5px; padding-right: -2.5px">
-
-                                    <div><h6 style=" width: 112px; height: 25px; padding-top: 5px; padding-left: 5px;">Ảnh Đại Diện:</h6></div>
-                                    <div class="image_feedback" style="width: 340px; height: 340px;  overflow: hidden; position: relative">
-                                        <img style="width: 100%; display: absolute; border-radius: 10px; filter: drop-shadow(0 0 5px grey); object-fit: cover; position: absolute" src="${user.avatar}" alt="alt"/>
+                        <div class="container detail" style="display: flex; background-color: #f5f5f5; padding-bottom: 25px; padding-top: 25px; border-radius: 8px; filter: drop-shadow(0 0 3px grey)">
+                            <div class="container-left col-md-4" style="border-radius: 30px; padding-top: 5px; padding-left: -2.5px; padding-right: -2.5px">
+                                <div><h6 style=" width: 112px; height: 25px; padding-top: 5px; padding-left: 5px;">Avatar:</h6></div>
+                                <div class="image_feedback" style="width: 340px; height: 340px;  overflow: hidden; position: relative">
+                                    <img style="width: 100%; display: absolute; border-radius: 10px; filter: drop-shadow(0 0 5px grey); object-fit: cover; position: absolute" src="https://img.nimo.tv/t/1629531681249/202403131710298008256_1629531681249_avatar.png/w240_l0/img.webp" alt="alt"/>
                                 </div>
-
                             </div>
                             <div class="container-right col-md-8">
                                 <div class="contact-name">
                                     <div style="display: flex" class="col-md-12">
-                                        <h3>Họ Và Tên: </h3> 
+                                        <h3>FullName: </h3> 
                                         <h3 style="color: #226e20"> ${user.userName}</h3>
                                         <div style="margin-left: auto">
                                             <form action="userEdit" method="get">
@@ -145,15 +143,15 @@
                                     </div>
                                     <br>
                                     <div class="container-content col-md-12" style="background-color: white; padding-top: 13px; padding-bottom: 11px; border-radius: 10px; filter: drop-shadow(0 0 -3px grey)">
-                                        <h6>Giới tính: ${user.gender}</h6>
+                                        <h6>Gender: ${user.gender}</h6>
                                         <br>
                                         <h6>Email: ${user.email}</h6>
                                         <br>
-                                        <h6>SĐT: ${user.mobile}</h6>
+                                        <h6>Phone: ${user.mobile}</h6>
                                         <br>
-                                        <h6>Vai Trò: ${user.user_role_name} </h6>
+                                        <h6>Role: ${user.user_role_name} </h6>
                                         <br>
-                                        <h6>Địa Chỉ: ${user.address}</h6>
+                                        <h6>Address: ${user.address}</h6>
                                         <br>
                                         <h6>Status: 
                                             <c:choose>
@@ -164,7 +162,7 @@
                                                     Hidden
                                                 </c:otherwise>
                                             </c:choose>
-                                            
+
                                         </h6>                                      
                                     </div>
                                 </div>

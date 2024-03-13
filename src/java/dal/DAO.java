@@ -1041,6 +1041,56 @@ public class DAO extends DBContext {
         return list;
     }
 
+    public Feedback getFeedbackByFid(String fid) {
+        String sql = "select fb.*,c.fullName,p.[name] from [Feedback] fb join product p on fb.productID = p.id\n"
+                + "join Customer c on fb.customerID = c.customerID\n"
+                + "where fb.feedbackID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, fid);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                return new Feedback(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getFloat(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public Customer getCustomerByCid(int Cid) {
+        String sql = "select * from Customer\n"
+                + "where customerID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, Cid);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                return new Customer(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
     public List<Feedback> getAllFeedbackPage(int index) {
         List<Feedback> list = new ArrayList<>();
         String sql = "select fb.*,c.fullName,p.[name] from [Feedback] fb join product p on fb.productID = p.id\n"

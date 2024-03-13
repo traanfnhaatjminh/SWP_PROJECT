@@ -305,7 +305,9 @@
                                         <c:forEach items="${listFeedback}" var="c">
                                             <tr>
                                                 <th scope="row">${c.customerName}</th>
-                                                <td>${c.productName}</td>
+                                                <td>
+                                                    <a href="feedbackDetail?fid=${c.feedbackID}">${c.productName}</a>
+                                                </td>
                                                 <td>${c.content}</td>
                                                 <td>
                                                     <c:forEach begin="1" end="${c.ratedStar}">
@@ -322,7 +324,6 @@
                                                             <option value="4" ${c.status eq '4'?'selected':''}>Rejected</option>
                                                         </select>
                                                     </form>
-
                                                 </td>
                                             </tr>
                                         <script>

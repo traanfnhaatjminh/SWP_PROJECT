@@ -26,7 +26,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
         <link rel="stylesheet" type="text/css"
               href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <!-- <script type="text/javascript" src="/ckeditor/ckeditor.js"></script> -->
         <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
         <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
         <script>
@@ -221,10 +220,7 @@
                 border-radius: 50%;
             }
         </style>
-        <!-- Navbar-->
-        <!-- Sidebar menu-->
 
-        <!-- Sidebar menu end-->
         <main class="">
             <div class="app-title">
                 <ul class="app-breadcrumb breadcrumb">
@@ -273,11 +269,11 @@
                                                 <h3 style="margin-right: 4px; padding-bottom: 10px">Full Name: ${user.userName}</h3>
                                                 <input style="color: #226e20; width: 420px; height: 37px; " class="form-control" type="hidden" name="userFullname" value="${user.userName}">
                                                 <h6>Gender:  ${user.gender}</h6>
-<!--                                                <select class="form-control-input first-input" id="gender" name="userGender">
-                                                    <option value="male" ${user.gender == 'male' ? 'selected' : ''}>Male</option>
-                                                    <option value="female" ${user.gender == 'female' ? 'selected' : ''}>Female</option>
-                                                    <option value="other" ${user.gender == 'other' ? 'selected' : ''}>Other</option>
-                                                </select>-->
+                                                <!--                                                <select class="form-control-input first-input" id="gender" name="userGender">
+                                                                                                    <option value="male" ${user.gender == 'male' ? 'selected' : ''}>Male</option>
+                                                                                                    <option value="female" ${user.gender == 'female' ? 'selected' : ''}>Female</option>
+                                                                                                    <option value="other" ${user.gender == 'other' ? 'selected' : ''}>Other</option>
+                                                                                                </select>-->
                                                 <br>
                                                 <h6>Email:  ${user.email}</h6>
                                                 <input class="form-control-input " type="hidden" name="userEmail" value="${user.email}">
@@ -337,24 +333,24 @@
         <script src="new_assetss/js/main.js"></script>
         <script src="new_assetss/js/plugins/pace.min.js"></script>
         <script>
-const inpFile = document.getElementById("inpFile");
-const loadFile = document.getElementById("loadFile");
-const previewContainer = document.getElementById("imagePreview");
-const previewContainer = document.getElementById("imagePreview");
-const previewImage = previewContainer.querySelector(".image-preview__image");
-const previewDefaultText = previewContainer.querySelector(".image-preview__default-text");
-inpFile.addEventListener("change", function () {
-    const file = this.files[0];
-    if (file) {
-        const reader = new FileReader();
-        previewDefaultText.style.display = "none";
-        previewImage.style.display = "block";
-        reader.addEventListener("load", function () {
-            previewImage.setAttribute("src", this.result);
-        });
-        reader.readAsDataURL(file);
-    }
-});
+            const inpFile = document.getElementById("inpFile");
+            const loadFile = document.getElementById("loadFile");
+            const previewContainer = document.getElementById("imagePreview");
+            const previewContainer = document.getElementById("imagePreview");
+            const previewImage = previewContainer.querySelector(".image-preview__image");
+            const previewDefaultText = previewContainer.querySelector(".image-preview__default-text");
+            inpFile.addEventListener("change", function () {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    previewDefaultText.style.display = "none";
+                    previewImage.style.display = "block";
+                    reader.addEventListener("load", function () {
+                        previewImage.setAttribute("src", this.result);
+                    });
+                    reader.readAsDataURL(file);
+                }
+            });
 
         </script>
         <script>
