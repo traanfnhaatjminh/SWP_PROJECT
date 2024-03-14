@@ -11,8 +11,6 @@ values
 (4, 'PANTS')
 
 
-select * from Feedback
-
 create table product
 (
 [id] int identity(1,1) primary key,
@@ -25,7 +23,7 @@ quantity int,
 cid int
 FOREIGN KEY (cid) REFERENCES Category(cid)
 )
-select * from Users
+
 insert into product([name],[original_price],[sale_price],quantity,describe,[image],cid)
 values 
  ('$MAKER THINGS TEE IN WHITE',600000.000,500000.00,20,N'Unisex,Oversize,100% Cotton,In nổi,Model wears size L','https://smakerclothing.com/upload/sanpham/dscf9477-1710.jpg',1),
@@ -115,8 +113,8 @@ blogCategoryID int,
 FOREIGN KEY (blogCategoryID) REFERENCES Blog_Category(blogCategoryID),
 )
 
-delete from [product]
-select * from [orderDetail]
+delete from [Feedback]
+select * from [Feedback]
 
 create table Blog_Category(
 blogCategoryID int primary key,
@@ -197,12 +195,14 @@ feedbackID int IDENTITY(1,1) primary key not null,
 customerID int,
 content nvarchar(1000),
 productID int,
-postDate Date,
+postDate nvarchar(20),
 rate_star float,
 [status] nvarchar(20),
 FOREIGN KEY (customerID) REFERENCES Customer(customerID),
 FOREIGN KEY (productID) REFERENCES [product](id)
 )
+
+select * from Feedback
 
 create table [Order](
 orderID int IDENTITY(1,1) primary key NOT NULL,
@@ -219,7 +219,7 @@ sellerID int,
 FOREIGN KEY (customerID) REFERENCES Customer(customerID)
 )
 
-select * from Users
+select * from [Order]
 
 create table orderDetail(
 detailID int IDENTITY(1,1) NOT NULL,

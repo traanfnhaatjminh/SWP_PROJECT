@@ -228,6 +228,11 @@
                                                     <option value="4" ${feedback.status eq '4'?'selected':''}>Rejected</option>
                                                 </select>
                                             </form>
+                                            <script>
+                                                function submitForm() {
+                                                    document.getElementById("statusForm").submit();
+                                                }
+                                            </script>
                                         </div>
                                     </div>
                                 </div>
