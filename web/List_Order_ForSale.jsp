@@ -286,8 +286,8 @@
             <ul class="app-menu">
                 <ul class="app-menu">
                     <li><a class="app-menu__item haha">
-                            <span class="app-menu__label">Sale Management</span></a></li>
-                    <li><a class="app-menu__item " href="pageOrdersServletBySale"><i class='app-menu__icon bx bx-dollar'></i><span
+                            <span class="app-menu__label">Sale</span></a></li>
+                    <li><a class="app-menu__item " href="pageOrder"><i class='app-menu__icon bx bx-dollar'></i><span
                                 class="app-menu__label">Management Orders</span></a></li>
                     <li><a class="app-menu__item" href="ChangePassForSale.jsp"><i class='app-menu__icon bx bx-cog'></i><span class="app-menu__label">Change Password</span></a></li>
                 </ul>
@@ -300,15 +300,14 @@
                 <div id="clock"></div>
             </div>
             <div class="search-form">
-                <form action="filterOrderForSaleServlet" >
+                <form action="" >
                     <select name="groupby" id="group">
                         <option selected="" value="1">All</option>
                         <optgroup label="Status">
-                            <option value="2">Pending Confirmation</option>
-                            <option value="3" >Waiting for delivery</option>
-                            <option value="4">Shipping In Progress</option>
-                            <option value="5">Delivered Successfully</option>
-                            <option value="6">Cancel</option>
+                            <option value="2">Orders Pending Processing</option>
+                            <option value="3" >Orders On Delivery</option>
+                            <option value="4">Order Successfully Delivered</option>
+                            <option value="5">Cancel</option>
                         </optgroup>
                         <optgroup label="Product Name">
                             <c:forEach items="${listProductName}" var="listProductName">
@@ -324,7 +323,7 @@
             </div>
 
             <div class="search-form">
-                <form action="FilterOrderDateServletBySale" class="date-search-form">
+                <form action="" class="date-search-form">
                     <label for="startDate" class="search-label">From date:</label>
                     <input type="date" name="startDate" value="" class="date-input" required>
 
@@ -335,7 +334,7 @@
                 </form>
             </div>
             <div style="margin-top: -2cm"><div class="col-sm-2" >
-                    <form action="SearchOrdersByCustomerForSaleServlet" method="post"> 
+                    <form action="" method="post"> 
                         <div  style="margin-left: 21.5cm"class="search-box">
                             <button type="submit" class="btn-search" style="margin-right: 5px"><i class="fas fa-search"></i></button>
                             <input type="text" class="input-search" placeholder="Search customer..." name="search2" value="${search2}" required>
@@ -343,7 +342,7 @@
                     </form> 
                 </div>
                 <div class="col-sm-2">
-                    <form action="searchOrdersIdForSaleServlet" method="post">
+                    <form action="" method="post">
                         <div style="margin-left: 21.5cm" class="search-box">
                             <button type="submit" class="btn-search" style="margin-right: 5px"><i class="fas fa-search"></i></button>
                             <input type="text" class="input-search" placeholder="Search order id..." name="search1" value="${search1}" required oninput="this.value = this.value.replace(/[^0-9]/g, '')">
@@ -401,7 +400,7 @@
                                                     <c:when test="${o.getOrderStatus() == '3'}">
                                                         <span class="badge bg-success"> Shipping In Progress </span>
                                                     </c:when>
-                                                    <c:when test="${o.getOrderStatus() == '4'}">
+                                                        <c:when test="${o.getOrderStatus() == '4'}">
                                                         <span class="badge bg-success"> Delivered Successfully </span>
                                                     </c:when>
                                                     <c:otherwise>
@@ -412,19 +411,19 @@
                                             <td class="table-td-center">  
                                                 <c:choose>
                                                     <c:when test="${o.getOrderStatus() == '1'}"> 
-                                                        <form id="statusForm" action="changeStatusConfirmed" method="post">
+                                                        <form id="statusForm" action="" method="post">
                                                             <input type="hidden" name="oid" value="${o.getOrderID()}">
                                                             <button type="button" class="btn btn-success mark-delivered" id="Button">Confirmed</button>
                                                         </form>
                                                     </c:when>
                                                     <c:when test="${o.getOrderStatus() == '2'}"> 
-                                                        <form id="statusForm" action="changeStatusSendOrdersForSale" method="post">
+                                                        <form id="statusForm" action="" method="post">
                                                             <input type="hidden" name="oid" value="${o.getOrderID()}">
                                                             <button type="button" class="btn btn-success mark-delivered" id="Button">delivery</button>
                                                         </form>
                                                     </c:when>
                                                     <c:when test="${o.getOrderStatus() == '3'}"> 
-                                                        <form id="statusFormSucsess" action="changeStatusSucsessForSale" method="post">
+                                                        <form id="statusFormSucsess" action="" method="post">
                                                             <input type="hidden" name="oid" value="${o.getOrderID()}">
                                                             <button type="button" class="btn btn-success mark-delivered" id="Button">Successful delivery</button>
                                                         </form>
@@ -434,7 +433,7 @@
                                             <td>
                                                 <c:choose>
                                                     <c:when test="${o.orderStatus == '1' || o.orderStatus == '2' || o.orderStatus == '3'}">
-                                                        <form action="changeStatusCanelForSale" method="post">
+                                                        <form action="" method="post">
                                                             <input type="hidden" name="oid" value="${o.getOrderID()}">
                                                             <button type="submit" class="btn btn-danger" id="Button">Cancel</button>
                                                         </form>
@@ -451,7 +450,7 @@
                                 <ul class="pagination pagination-sm">
                                     <c:forEach begin="1" end="${a.getNumberPage()}" var="i">
                                         <li class="page-item ${i == param.index ? 'active' : ''}">
-                                            <a class="page-link" href="pageOrdersServletBySale?index=${i}">${i}</a>
+                                            <a class="page-link" href="pageOrder?index=${i}">${i}</a>
                                         </li>
                                     </c:forEach>
 

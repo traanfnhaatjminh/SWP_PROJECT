@@ -289,7 +289,7 @@
                             <span class="app-menu__label">Sale Management</span></a></li>
                     <li><a class="app-menu__item " href="pageOrdersServletBySale"><i class='app-menu__icon bx bx-dollar'></i><span
                                 class="app-menu__label">Management Orders</span></a></li>
-                    <li><a class="app-menu__item" href=""><i class='app-menu__icon bx bx-cog'></i><span class="app-menu__label">Change Password</span></a></li>
+                    <li><a class="app-menu__item" href="ChangePassForSale.jsp"><i class='app-menu__icon bx bx-cog'></i><span class="app-menu__label">Change Password</span></a></li>
                 </ul>
         </aside>
         <main class="app-content" style="margin-left: 250px;">
@@ -304,10 +304,11 @@
                     <select name="groupby" id="group">
                         <option selected="" value="1">All</option>
                         <optgroup label="Status">
-                            <option value="2">Orders Pending Processing</option>
-                            <option value="3" >Orders On Delivery</option>
-                            <option value="4">Order Successfully Delivered</option>
-                            <option value="5">Cancel</option>
+                            <option value="2">Pending Confirmation</option>
+                            <option value="3" >Waiting for delivery</option>
+                            <option value="4">Shipping In Progress</option>
+                            <option value="5">Delivered Successfully</option>
+                            <option value="6">Cancel</option>
                         </optgroup>
                         <optgroup label="Product Name">
                             <c:forEach items="${listProductName}" var="listProductName">
@@ -392,13 +393,16 @@
                                             <td>
                                                 <c:choose>
                                                     <c:when test="${o.getOrderStatus() == '1'}">
-                                                        <span class="badge bg-success"> Orders Pending Processing </span>
+                                                        <span class="badge bg-success"> Pending Confirmation </span>
                                                     </c:when>
                                                     <c:when test="${o.getOrderStatus() == '2'}">
-                                                        <span class="badge bg-success"> Orders On Delivery </span>
+                                                        <span class="badge bg-success"> Waiting for delivery </span>
                                                     </c:when>
                                                     <c:when test="${o.getOrderStatus() == '3'}">
-                                                        <span class="badge bg-success"> Order Successfully Delivered </span>
+                                                        <span class="badge bg-success"> Shipping In Progress </span>
+                                                    </c:when>
+                                                    <c:when test="${o.getOrderStatus() == '4'}">
+                                                        <span class="badge bg-success"> Delivered Successfully </span>
                                                     </c:when>
                                                     <c:otherwise>
                                                         <span class="badge bg-danger"> Cancel </span>
@@ -408,12 +412,18 @@
                                             <td class="table-td-center">  
                                                 <c:choose>
                                                     <c:when test="${o.getOrderStatus() == '1'}"> 
-                                                        <form id="statusForm" action="changeStatusSendOrdersForSale" method="post">
+                                                        <form id="statusForm" action="changeStatusConfirmed" method="post">
                                                             <input type="hidden" name="oid" value="${o.getOrderID()}">
-                                                            <button type="button" class="btn btn-success mark-delivered" id="Button">Confirm</button>
+                                                            <button type="button" class="btn btn-success mark-delivered" id="Button">Confirmed</button>
                                                         </form>
                                                     </c:when>
                                                     <c:when test="${o.getOrderStatus() == '2'}"> 
+                                                        <form id="statusForm" action="changeStatusSendOrdersForSale" method="post">
+                                                            <input type="hidden" name="oid" value="${o.getOrderID()}">
+                                                            <button type="button" class="btn btn-success mark-delivered" id="Button">delivery</button>
+                                                        </form>
+                                                    </c:when>
+                                                    <c:when test="${o.getOrderStatus() == '3'}"> 
                                                         <form id="statusFormSucsess" action="changeStatusSucsessForSale" method="post">
                                                             <input type="hidden" name="oid" value="${o.getOrderID()}">
                                                             <button type="button" class="btn btn-success mark-delivered" id="Button">Successful delivery</button>
@@ -423,14 +433,14 @@
                                             </td>
                                             <td>
                                                 <c:choose>
-                                                    <c:when test="${o.orderStatus == '1' || o.orderStatus == '2' }">
-                                                        <form action="changeStatusCancelForSaleNormal" method="post">
+                                                    <c:when test="${o.orderStatus == '1' || o.orderStatus == '2' || o.orderStatus == '3'}">
+                                                        <form action="changeStatusCanelForSale" method="post">
                                                             <input type="hidden" name="oid" value="${o.getOrderID()}">
                                                             <button type="submit" class="btn btn-danger" id="Button">Cancel</button>
                                                         </form>
                                                     </c:when>
                                                 </c:choose> 
-                                            </td>
+                                            </td>                     
                                         </tr>
                                     </c:forEach>
                                 </tbody>

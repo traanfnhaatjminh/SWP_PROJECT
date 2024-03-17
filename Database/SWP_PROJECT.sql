@@ -81,10 +81,17 @@ FOREIGN KEY (roleID) REFERENCES Roles(roleID)
 
 insert into Users(userName, gender, email, mobile, avatar, [address], pass, roleID, userPoint)
 values 
-('nguyenhoang','male', 'hoangnguyen@gmail.com','0939152003','https://img.nimo.tv/t/1629526287189/202403131710297308141_1629526287189_avatar.png/w240_l0/img.webp?fbclid=IwAR3V7OOezTPkRufvUleMwrD8JtWuIaskpQO3m3RZImBtUY3sLkw2DpAFSkc','ha noi','123',2,0),
+('nguyenhoang','male', 'hoangnguyen@gmail.com','0939152003','https://img.nimo.tv/t/1629526287189/202403131710297308141_1629526287189_avatar.png/w240_l0/img.webp?fbclid=IwAR3V7OOezTPkRufvUleMwrD8JtWuIaskpQO3m3RZImBtUY3sLkw2DpAFSkc','ha noi','123',1,0),
 ('nguyentahoang','male', 'hoang@gmail.com','0969112003','null','ha noi','123',2,0),
 ('tahoang','male', 'tahoang@gmail.com','0969112003','null','ha noi','123',2,0),
-('nhatminh','male', 'minhnhat@gmail.com','0969102003','null','tu son','123',3,0)
+('nhatminh','male', 'minhnhat@gmail.com','0969102003','null','tu son','123',3,0),
+('tahoang1','male', 'nguyentahoang@gmail.com','0969112003','null','ha noi','123',4,0)
+
+select * from [Feedback]
+
+update Feedback
+set [status] = '2'
+where feedbackID = 3
 
 update Users
 set avatar = 'https://img.nimo.tv/t/1629526287189/202403131710297308141_1629526287189_avatar.png/w240_l0/img.webp?fbclid=IwAR3V7OOezTPkRufvUleMwrD8JtWuIaskpQO3m3RZImBtUY3sLkw2DpAFSkc'
@@ -95,11 +102,15 @@ roleID int primary key,
 roleName nvarchar(20)
 )
 
+select * from Customer
+
 insert into Roles (roleID, roleName)
 values 
+(1, 'SaleManager'),
+(2, 'Admin'),
 (3, 'Marketer'),
-(1, 'Seller'),
-(2, 'Admin')
+(4, 'Seller')
+
 
 create table Blog (
 blogID int identity(1,1) primary key,
@@ -112,9 +123,6 @@ author varchar(45),
 blogCategoryID int,
 FOREIGN KEY (blogCategoryID) REFERENCES Blog_Category(blogCategoryID),
 )
-
-delete from [Feedback]
-select * from [Feedback]
 
 create table Blog_Category(
 blogCategoryID int primary key,

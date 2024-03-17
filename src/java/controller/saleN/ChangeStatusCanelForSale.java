@@ -23,8 +23,8 @@ import model.OrderDetail;
  *
  * @author nguye
  */
-@WebServlet(name = "ChangeStatusCancelForSaleNormal", urlPatterns = {"/changeStatusCancelForSaleNormal"})
-public class ChangeStatusCancelForSaleNormal extends HttpServlet {
+@WebServlet(name = "ChangeStatusCanelForSale", urlPatterns = {"/changeStatusCanelForSale"})
+public class ChangeStatusCanelForSale extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -69,7 +69,7 @@ public class ChangeStatusCancelForSaleNormal extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(ChangeStatusCancelForSaleNormal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ChangeStatusCanelForSale.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -87,7 +87,7 @@ public class ChangeStatusCancelForSaleNormal extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(ChangeStatusCancelForSaleNormal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ChangeStatusCanelForSale.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

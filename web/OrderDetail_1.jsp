@@ -174,14 +174,17 @@
                                             <th>Order Status</th>
                                             <td>
                                                 <c:choose>
-                                                    <c:when test="${order.orderStatus == '1'}">
-                                                        <span class="badge bg-success"> Orders Pending Processing </span>
+                                                    <c:when test="${order.getOrderStatus() == '1'}">
+                                                        <span class="badge bg-success"> Pending Confirmation </span>
                                                     </c:when>
-                                                    <c:when test="${order.orderStatus == '2'}">
-                                                        <span class="badge bg-success"> Orders On Delivery </span>
+                                                    <c:when test="${order.getOrderStatus() == '2'}">
+                                                        <span class="badge bg-success"> Waiting for delivery </span>
                                                     </c:when>
-                                                    <c:when test="${order.orderStatus == '3'}">
-                                                        <span class="badge bg-success"> Order Successfully Delivered </span>
+                                                    <c:when test="${order.getOrderStatus() == '3'}">
+                                                        <span class="badge bg-success"> Shipping In Progress </span>
+                                                    </c:when>
+                                                    <c:when test="${order.getOrderStatus() == '4'}">
+                                                        <span class="badge bg-success"> Delivered Successfully </span>
                                                     </c:when>
                                                     <c:otherwise>
                                                         <span class="badge bg-danger"> Cancel </span>
@@ -201,7 +204,7 @@
                                                 <th scope="col">Price</th>
                                                 <th scope="col">Quantity</th>
                                                 <th scope="col">Total</th>
-                                                    <c:if test="${order.getOrderStatus() == '3'}">
+                                                    <c:if test="${order.getOrderStatus() == '4'}">
                                                     <th>Actions</th>
                                                     </c:if>
 
@@ -218,7 +221,7 @@
                                                     <td>${od.productPrice}</td>
                                                     <td>${od.quantity}</td>
                                                     <td>${od.totalCost}</td>
-                                                    <c:if test="${order.getOrderStatus() == '3'}">
+                                                    <c:if test="${order.getOrderStatus() == '4'}">
                                                         <td> 
                                                             <a href="feedback?productId=${od.product.id}" class="btn btn-primary">Feedback</a>
                                                         </td>

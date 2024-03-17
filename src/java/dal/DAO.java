@@ -1122,6 +1122,72 @@ public class DAO extends DBContext {
         return list;
     }
 
+    public List<Feedback> getAllFeedbackByPidPage(String pid, int index) {
+        List<Feedback> list = new ArrayList<>();
+        String sql = "SELECT fb.*, c.fullName, p.[name]\n"
+                + "FROM [Feedback] fb\n"
+                + "JOIN Product p ON fb.productID = p.id\n"
+                + "JOIN Customer c ON fb.customerID = c.customerID\n"
+                + "where fb.productID = ?\n"
+                + "order by fb.feedbackID\n"
+                + "OFFSET (? - 1) * 3 ROWS\n"
+                + "FETCH NEXT 3 ROWS ONLY;";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setString(1, pid);
+            st.setInt(2, index);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Feedback c = new Feedback(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getFloat(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9));
+                list.add(c);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Feedback> getAllFeedbackByPid(String pid) {
+        List<Feedback> list = new ArrayList<>();
+        String sql = "SELECT fb.*, c.fullName, p.[name]\n"
+                + "FROM [Feedback] fb\n"
+                + "JOIN Product p ON fb.productID = p.id\n"
+                + "JOIN Customer c ON fb.customerID = c.customerID\n"
+                + "where fb.productID = ?\n";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            st.setString(1, pid);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Feedback c = new Feedback(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getString(5),
+                        rs.getFloat(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9));
+                list.add(c);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
     public List<Feedback> getCustomerNameAscPage(int index) {
         List<Feedback> list = new ArrayList<>();
         String sql = "select fb.*,c.fullName,p.[name] from [Feedback] fb join product p on fb.productID = p.id\n"

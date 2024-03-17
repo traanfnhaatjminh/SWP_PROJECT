@@ -21,13 +21,12 @@ import model.Users;
  */
 public class orderDAO1 extends DBContext {
 
-    public ArrayList<model.Order> getSearchbyStatusForSale(int sId, String value) {
+    public ArrayList<model.Order> getSearchbyStatusForSale(String value) {
         ArrayList<model.Order> data = new ArrayList<>();
-        String sql = "select * from [Order] where [sellerID] = ? and [orderStatus] = ?";
+        String sql = "select * from [Order] where  [orderStatus] = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, sId);
-            st.setString(2, value);
+            st.setString(1, value);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 int idO = rs.getInt(1);
@@ -263,7 +262,7 @@ public class orderDAO1 extends DBContext {
             if (connection != null) {
                 String sql = "UPDATE [Order]\n"
                         + "SET orderStatus = CASE  \n"
-                        + "    WHEN orderStatus = '1' THEN '2'\n"
+                        + "    WHEN orderStatus = '2' THEN '3'\n"
                         + "    ELSE orderStatus\n"
                         + "END\n"
                         + "WHERE orderID = ?;";
@@ -280,7 +279,7 @@ public class orderDAO1 extends DBContext {
         return false;
     }
 
-    public ArrayList<Order> getSearchbyNameProductForSale(int sid, String groupby) throws SQLException {
+    public ArrayList<Order> getSearchbyNameProductForSale(String groupby) throws SQLException {
         ArrayList<Order> data = new ArrayList<>();
 
         try {
@@ -289,11 +288,9 @@ public class orderDAO1 extends DBContext {
                         + "FROM orderDetail AS od\n"
                         + "INNER JOIN product AS p ON od.productID = p.id\n"
                         + "INNER JOIN [Order] AS o ON o.orderID = od.orderID\n"
-                        + "WHERE sellerID = ? AND p.name LIKE ?";
-
+                        + "WHERE  p.name LIKE ?";
                 PreparedStatement st = connection.prepareStatement(sql);
-                st.setInt(1, sid);
-                st.setString(2, "%" + groupby + "%");
+                st.setString(1, "%" + groupby + "%");
                 ResultSet rs = st.executeQuery();
                 while (rs.next()) {
                     int idO = rs.getInt(1);
@@ -412,12 +409,35 @@ public class orderDAO1 extends DBContext {
         return data;
     }
 
+    public boolean changStatusConfirmed(int oid) throws SQLException {
+        try {
+            if (connection != null) {
+                String sql = "UPDATE [Order]\n"
+                        + "SET orderStatus = \n"
+                        + "    CASE \n"
+                        + "        WHEN orderStatus = '1' THEN '2'\n"
+                        + "        ELSE orderStatus \n"
+                        + "    END\n"
+                        + "WHERE orderID = ?";
+                PreparedStatement st = connection.prepareStatement(sql);
+                st.setInt(1, oid);
+                int row = st.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("loi" + e.getMessage());
+        }
+        return false;
+    }
+
     public boolean changeStatusSussess(int oid) throws SQLException {
         try {
             if (connection != null) {
                 String sql = "UPDATE [Order]\n"
                         + "SET orderStatus = CASE\n"
-                        + "    WHEN orderStatus = '2' THEN '3'\n"
+                        + "    WHEN orderStatus = '3' THEN '4'\n"
                         + "    ELSE orderStatus\n"
                         + "END\n"
                         + "WHERE orderID = ?;";
@@ -438,9 +458,9 @@ public class orderDAO1 extends DBContext {
         try {
             if (connection != null) {
                 String sql = "UPDATE [Order]\n"
-                        + "SET orderStatus = CASE  \n"
-                        + "    WHEN orderStatus = '1' OR orderStatus = '2' THEN '4'\n"
-                        + "    ELSE orderStatus\n"
+                        + "SET orderStatus = CASE \n"
+                        + "WHEN orderStatus = '1' OR orderStatus = '2' OR orderStatus = '3' THEN '5'\n"
+                        + "ELSE orderStatus\n"
                         + "END\n"
                         + "WHERE orderID = ?;";
                 PreparedStatement st = connection.prepareStatement(sql);

@@ -110,7 +110,7 @@
                 <div class="d-flex flex-column mt-3 mb-3">
                     <div class="h3">Checkout</div>
                     <c:if test="${mess!=''}">
-                        <div class="alert alert-danger" role="alert">
+                        <div class="text-danger" role="alert">
                             ${mess}
                         </div>
                     </c:if>

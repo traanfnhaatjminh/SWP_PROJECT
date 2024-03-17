@@ -95,7 +95,7 @@
                         <li><a href="#"><i class="fa fa-map-marker"></i>Hanoi</a></li>
                     </ul>
                     <ul class="header-links pull-right">
-                            <c:if test="${sessionScope.accS != null}">
+                        <c:if test="${sessionScope.accS != null}">
                             <li><a href="loginSystem?action=logout"><i class="fa fa-"></i> Logout</a></li>
                             </c:if>
                     </ul>
@@ -146,21 +146,6 @@
             <div class="container">
                 <!-- responsive-nav -->
                 <div id="responsive-nav">
-                    <!-- NAV -->
-                    <c:if test="${sessionScope.accS == null}">
-                        <ul class="main-nav nav navbar-nav">
-                            <li class="${menu == null ? 'active' : ''}"><a href="home">Home</a></li>
-                            <!--<li><a href="#">Hot Deals</a></li>-->
-                            <li class="${menu eq 'blog' ? 'active' : ''}">
-                                <a href="blog?menu=blog">Blogs</a>
-                            </li>
-                            <c:forEach items="${listC}" var="c">
-                                <li class="${cateID == c.cid ? 'active' : ''}">   
-                                    <a href="categoryDetail?cid=${c.cid}&&menu=home">${c.cname}</a>
-                                </li>
-                            </c:forEach>
-                        </ul>
-                    </c:if>
                     <c:if test="${sessionScope.accS != null}">
                         <ul class="main-nav nav navbar-nav">
                             <li class="${menu eq 'post' ? 'active' : ''}">
@@ -174,7 +159,6 @@
                             </li>
                         </ul>
                     </c:if>
-
                     <!-- /NAV -->
                 </div>
                 <!-- /responsive-nav -->

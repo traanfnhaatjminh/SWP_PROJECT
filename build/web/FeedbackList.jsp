@@ -324,14 +324,15 @@
                                                             <option value="4" ${c.status eq '4'?'selected':''}>Rejected</option>
                                                         </select>
                                                     </form>
+                                                    <script>
+                                                        function submitForm() {
+                                                            document.getElementById("statusForm").submit();
+                                                        }
+                                                    </script>  
                                                 </td>
                                             </tr>
-                                        <script>
-                                            function submitForm() {
-                                                document.getElementById("statusForm").submit();
-                                            }
-                                        </script>
-                                    </c:forEach>
+
+                                        </c:forEach>
 
                                     </tbody>
                                 </table>

@@ -2,29 +2,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package controller.saleN;
 
-import dal.DAO;
+import dal.orderDAO1;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.List;
-import model.Category;
-import model.Feedback;
-import model.Product;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
- * @author DUONG VIET DUY
+ * @author nguye
  */
-@WebServlet(name = "ProductDetail", urlPatterns = {"/detail"})
-public class ProductDetail extends HttpServlet {
+@WebServlet(name = "ChangeStatusConfirmed", urlPatterns = {"/changeStatusConfirmed"})
+public class ChangeStatusConfirmed extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,49 +34,19 @@ public class ProductDetail extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
-        int currentPage = 1;
-        String id = request.getParameter("pid");
-        String url = request.getRequestURI() + "?pid=" + id;
-        System.out.println(url);
-        session.setAttribute("prevUrl", url);
-        DAO d = new DAO();
-        List<Feedback> f = d.getAllFeedbackByPidPage(id, currentPage);
-        if (f == null || f.isEmpty()) {
-            request.setAttribute("noFeedback", "There are no feedback for this product!");
-        } else {
-            int endIndex = d.getAllFeedbackByPid(id).size() / 6;
-            if (d.getAllFeedbackByPid(id).size() % 6 != 0) {
-                endIndex++;
-            }
-            request.setAttribute("endIndex", endIndex);
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            int oid = Integer.parseInt(request.getParameter("oid"));
+            orderDAO1 dao = new orderDAO1();
+            HttpSession session = request.getSession();
+            int index = (session.getAttribute("index") != null) ? (int) session.getAttribute("index") : 1;
+            boolean result = dao.changStatusConfirmed(oid);
+            request.setAttribute("mess", "Confirmed Order :" + oid + " successfully!! ");
+            request.setAttribute("curMenu", "Management Orders");
+            request.getRequestDispatcher("pageOrdersServletBySale?index=" + index).forward(request, response);
         }
-
-        List<Product> list = d.getAllProduct();
-        List<Product> listLast = d.getLatestProduct();
-        Cookie[] c = request.getCookies();
-        String txt = "";
-        if (c != null) {
-            for (Cookie o : c) {
-                if (o.getName().equals("cart")) {
-                    txt += o.getValue();
-                }
-            }
-        }
-        model.Cart cart = new model.Cart(txt, list);
-        Product p = d.getProductByID(id);
-        List<Category> listC = d.getAllCategory();
-        request.setAttribute("size", cart.getList().size());
-        request.setAttribute("detail", p);
-        request.setAttribute("listF", f);
-        request.setAttribute("currentPage", currentPage);
-        request.setAttribute("listC", listC);
-        request.setAttribute("listLast", listLast);
-        request.setAttribute("cateID", d.getCidByPid(id));
-        request.setAttribute("menu", "");
-        request.getRequestDispatcher("productDetail.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -93,7 +61,11 @@ public class ProductDetail extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ChangeStatusConfirmed.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -107,7 +79,11 @@ public class ProductDetail extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ChangeStatusConfirmed.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

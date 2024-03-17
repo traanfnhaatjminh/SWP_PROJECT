@@ -340,13 +340,16 @@ END FILTERS
                                         <td>
                                             <c:choose>
                                                 <c:when test="${o.getOrderStatus() == '1'}">
-                                                    <span class="badge bg-success"> Orders Pending Processing </span>
+                                                    <span class="badge bg-success"> Pending Confirmation </span>
                                                 </c:when>
                                                 <c:when test="${o.getOrderStatus() == '2'}">
-                                                    <span class="badge bg-success"> Orders On Delivery </span>
+                                                    <span class="badge bg-success"> Waiting for delivery </span>
                                                 </c:when>
                                                 <c:when test="${o.getOrderStatus() == '3'}">
-                                                    <span class="badge bg-success"> Order Successfully Delivered </span>
+                                                    <span class="badge bg-success"> Shipping In Progress </span>
+                                                </c:when>
+                                                <c:when test="${o.getOrderStatus() == '4'}">
+                                                    <span class="badge bg-success"> Delivered Successfully </span>
                                                 </c:when>
                                                 <c:otherwise>
                                                     <span class="badge bg-danger"> Cancel </span>
@@ -359,57 +362,57 @@ END FILTERS
                                                 <c:choose>
                                                     <c:when test="${o.getOrderStatus() == '1'}">
                                                         <a href="cancelOrder?oid=${o.orderID}" class="">Cancel</span>
-                                                    </c:when>
-                                                    <c:when test="${o.getOrderStatus() == '2'}">
-                                                    <a href="cancelOrder?oid=${o.orderID}" class="">Cancel</span>
-                                                    </c:when>
-                                                </c:choose>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                                        </c:when>
+                                                        <c:when test="${o.getOrderStatus() == '2'}">
+                                                            <a href="cancelOrder?oid=${o.orderID}" class="">Cancel</span>
+                                                            </c:when>           
+                                                            </c:choose>
+                                                            </div>
+                                                            </td>
+                                                            </tr>
 
 
-                                </c:forEach>
-                            </table>
+                                                        </c:forEach>
+                                                        </table>
 
-                        </div>
+                                                        </div>
 
-                    </div>
-                    <!-- end project-list -->
+                                                        </div>
+                                                        <!-- end project-list -->
 
-                    <div class="pt-3">
-                        <c:if test="${error == null}">
-                            <ul class="pagination justify-content-end mb-0">
-                                <!--                                        <li class="page-item disabled">
-                                                                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                                                                        </li>-->
-                                <c:forEach begin="1" end="${endIndex}" var="c">
-                                    <c:set var="isActive" value="${c eq currentPage ? 'active' : ''}" />
-                                    <li class="${isActive}"><a class="page-link" href="postListPage?index=${c}">${c}</a></li>
-                                    </c:forEach>
-                                <!--                                        <li class="page-item">
-                                                                            <a class="page-link" href="#">Next</a>
-                                                                        </li>-->
-                            </ul>
-                        </c:if>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end row -->
-</div>
+                                                        <div class="pt-3">
+                                                            <c:if test="${error == null}">
+                                                                <ul class="pagination justify-content-end mb-0">
+                                                                    <!--                                        <li class="page-item disabled">
+                                                                                                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                                                                                            </li>-->
+                                                                    <c:forEach begin="1" end="${endIndex}" var="c">
+                                                                        <c:set var="isActive" value="${c eq currentPage ? 'active' : ''}" />
+                                                                        <li class="${isActive}"><a class="page-link" href="postListPage?index=${c}">${c}</a></li>
+                                                                        </c:forEach>
+                                                                    <!--                                        <li class="page-item">
+                                                                                                                <a class="page-link" href="#">Next</a>
+                                                                                                            </li>-->
+                                                                </ul>
+                                                            </c:if>
+                                                        </div>
+                                                        </div>
+                                                        </div>
+                                                        </div>
+                                                        </div>
+                                                        <!-- end row -->
+                                                        </div>
 
-<script>
-    function confirmDelete(blogID, currentPage) {
-        var confirmDelete = confirm("Are you sure you want to delete this blog?");
-        if (confirmDelete) {
-            window.location.href = "deleteBlog?id=" + blogID + "&&index=" + currentPage;
-        }
-    }
-</script>
+                                                        <script>
+                                                            function confirmDelete(blogID, currentPage) {
+                                                                var confirmDelete = confirm("Are you sure you want to delete this blog?");
+                                                                if (confirmDelete) {
+                                                                    window.location.href = "deleteBlog?id=" + blogID + "&&index=" + currentPage;
+                                                                }
+                                                            }
+                                                        </script>
 
-<jsp:include page="footer.jsp"></jsp:include>
-</body>
-</html>
+                                                        <jsp:include page="footer.jsp"></jsp:include>
+                                                        </body>
+                                                        </html>
 
