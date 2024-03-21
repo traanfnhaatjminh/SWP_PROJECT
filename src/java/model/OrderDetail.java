@@ -10,11 +10,13 @@ package model;
  */
 public class OrderDetail {
 
+    private int detailID;
     private int orderID;
     private int productID;
     private double productPrice;
     private int quantity;
     private double totalCost;
+    private String isFeedback;
     private String product_img;
     private String product_name;
     private String product_cate;
@@ -35,13 +37,16 @@ public class OrderDetail {
 
     }
 
-    public OrderDetail(int orderID, int productID, double productPrice, int quantity, double totalCost) {
+    public OrderDetail(int detailID, int orderID, int productID, double productPrice, int quantity, double totalCost, String isFeedback) {
+        this.detailID = detailID;
         this.orderID = orderID;
         this.productID = productID;
         this.productPrice = productPrice;
         this.quantity = quantity;
         this.totalCost = totalCost;
+        this.isFeedback = isFeedback;
     }
+
 
     public int getOrderID() {
         return orderID;
@@ -114,5 +119,23 @@ public class OrderDetail {
     public void setProduct_cate(String product_cate) {
         this.product_cate = product_cate;
     }
+
+    public String getIsFeedback() {
+        return isFeedback;
+    }
+
+    public void setIsFeedback(String isFeedback) {
+        this.isFeedback = isFeedback;
+    }
+
+    public int getDetailID() {
+        return detailID;
+    }
+
+    public void setDetailID(int detailID) {
+        this.detailID = detailID;
+    }
+    
+    
 
 }

@@ -118,7 +118,7 @@ public class CheckoutContorller extends HttpServlet {
         Customer customer = (Customer) session.getAttribute("accC");
         if (customer != null) {
             OrderDAO odb = new OrderDAO();
-            odb.addOrder(name, phone, address, email, gender, notes, cart, customer, "1", cart.getTotalMoney(), 1);
+            odb.addOrder(name, phone, address, email, gender, notes, cart, customer, "1", cart.getTotalMoney(), 0);
             String textPayment = "<div  id=\"qr\">\n"
                     + "               <img\n"
                     + "                  src=\"https://firebasestorage.googleapis.com/v0/b/shop-f6d2b.appspot.com/o/qr.png?alt=media&token=08c1bfcb-7290-4a4a-8a99-2af6032df2bf\"\n"
@@ -289,6 +289,14 @@ public class CheckoutContorller extends HttpServlet {
                         + "<h1> Subtotal: "
                         + cart.getTotalMoney()
                         + "VND</h1>"
+                        + "<h4>Lưu ý: Quý khách vui lòng thanh toán đơn hàng trong vòng 24h!</h4>"
+                        + "<div id=\"qr\" style=\"\n"
+                        + "                                 width: 50%;\n"
+                        + "                                 height: 60%\">\n"
+                        + "                                <img style=\"margin-left: 80%\" src=\"https://api.vietqr.io/image/970418-4271013180-rZ9LU6u.jpg?accountName=NGUYEN%20QUANG%20TOAN&amount="
+                        + total
+                        + "&addInfo=$Bank to\"alt=\"QR thanh toán VietQR\" alt=\"alt\" />\n"
+                        + "                            </div>"
                         + "</body>"
                         + "</html>";
 

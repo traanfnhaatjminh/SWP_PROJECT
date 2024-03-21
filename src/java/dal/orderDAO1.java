@@ -158,10 +158,10 @@ public class orderDAO1 extends DBContext {
             st.setInt(1, oid);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                int orderID = rs.getInt(1);
-                int productID = rs.getInt(2);
-                double productPrice = rs.getDouble(3);
-                float totalCost = rs.getFloat(4);
+                int orderID = rs.getInt(2);
+                int productID = rs.getInt(3);
+                double productPrice = rs.getDouble(4);
+                float totalCost = rs.getFloat(6);
                 int quantity = rs.getInt(5);
                 String product_img = getProductImgByID(productID);
                 String product_name = getProductNameByID(productID);
@@ -197,19 +197,21 @@ public class orderDAO1 extends DBContext {
         return productNames;
     }
 
-    public ArrayList<Order> getOrderBySalePage(int index) throws SQLException {
+    public ArrayList<Order> getOrderBySalePage(int index, int sid) throws SQLException {
         ArrayList<Order> dataOrders = new ArrayList<>();
         int id = (index - 1) * 5;
         try {
             if (connection != null) {
                 String sql = "SELECT * \n"
                         + "FROM [Order]\n"
-                        + "ORDER BY orderID ASC\n"
+                        + "where sellerID = ?\n"
+                        + "ORDER BY orderID \n"
                         + "OFFSET ? ROWS\n"
                         + "FETCH NEXT 5 ROWS ONLY";
 
                 PreparedStatement st = connection.prepareStatement(sql);
-                st.setInt(1, id);
+                st.setInt(1, sid);
+                st.setInt(2, id);
                 ResultSet rs = st.executeQuery();
                 while (rs.next()) {
                     int idO = rs.getInt("orderID");
@@ -313,15 +315,16 @@ public class orderDAO1 extends DBContext {
         return data;
     }
 
-    public ArrayList<Order> getSearchOrderIdForSale(int searchValue) throws SQLException {
+    public ArrayList<Order> getSearchOrderIdForSale(int searchValue, int sId) throws SQLException {
         ArrayList<Order> data = new ArrayList<>();
         try {
             if (connection != null) {
                 String sql = "SELECT *\n"
                         + "FROM [Order]\n"
-                        + "Where orderID = ?;";
+                        + "Where sellerID = ? and orderID = ?;";
                 PreparedStatement st = connection.prepareStatement(sql);
-                st.setInt(1, searchValue);
+                st.setInt(1, sId);
+                st.setInt(2, searchValue);
                 ResultSet rs = st.executeQuery();
                 while (rs.next()) {
                     int idO = rs.getInt(1);
@@ -466,18 +469,19 @@ public class orderDAO1 extends DBContext {
                 PreparedStatement st = connection.prepareStatement(sql);
                 st.setInt(1, oid);
                 st.executeUpdate();
-                for (OrderDetail orderDetail : list) {
-                    String updateProductQuantitySql = "select * from product\n"
-                            + "UPDATE product \n"
-                            + "SET quantity = quantity + ? \n"
-                            + "WHERE id = ?";
-                    try ( PreparedStatement updateProductQuantity = connection.prepareStatement(updateProductQuantitySql)) {
-                        updateProductQuantity.setInt(1, orderDetail.getQuantity());
-                        updateProductQuantity.setInt(2, orderDetail.getProductID());
-                        updateProductQuantity.executeUpdate();
-                    } catch (Exception e) {
-                        System.out.println(e.getMessage());
+                String updateProductQuantitySql
+                        = "UPDATE product \n"
+                        + "SET quantity = quantity + ? \n"
+                        + "WHERE id = ?";
+                try ( PreparedStatement preparedStatement = connection.prepareStatement(updateProductQuantitySql)) {
+                    for (OrderDetail orderDetail : list) {
+
+                        preparedStatement.setInt(1, orderDetail.getQuantity());
+                        preparedStatement.setInt(2, orderDetail.getProductID());
+                        preparedStatement.executeUpdate();
                     }
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
                 }
             }
         } catch (SQLException e) {

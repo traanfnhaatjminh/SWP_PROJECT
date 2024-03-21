@@ -47,7 +47,7 @@ public class searchOrdersIdForSaleServlet extends HttpServlet {
             String value = request.getParameter("search1");
             int searchValue = Integer.parseInt(value);
             orderDAO1 dao = new orderDAO1();
-            ArrayList<Order> listOrders = dao.getSearchOrderIdForSale( searchValue);
+            ArrayList<Order> listOrders = dao.getSearchOrderIdForSale( sId, searchValue);
             List<model.Order> listOrderDisplay = new ArrayList<>();         
             request.setAttribute("listOrderDisplay", listOrderDisplay);
             request.setAttribute("listOrders", listOrders);            

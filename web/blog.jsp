@@ -468,7 +468,7 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="single_post">
-                                            <h3 class="product-name"><a href="blogDetail?id=${latestBlog.blogID}">${latestBlog.blogTitle}</a></h3>
+                                            <h3><a href="blogDetail?id=${latestBlog.blogID}">${latestBlog.blogTitle}</a></h3>
                                             <p class="product-name">${latestBlog.content}</p>
                                             <p>Date: ${latestBlog.postDate}</p>
                                             <p>Author: ${latestBlog.author}</p>

@@ -2,6 +2,15 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/src/java/model/OrderDetail.java</file>
+            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/web/table-data-saleNormal.jsp</file>
+            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/web/OrderDetail_1.jsp</file>
+            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/src/java/controller/feedbackControl.java</file>
+            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/src/java/dal/OrderDAO.java</file>
+            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/web/blog.jsp</file>
+            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/src/java/controller/OrderDetailControl.java</file>
+            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/src/java/controller/manageproduct/ViewProductDetail.java</file>
+        </group>
     </open-files>
 </project-private>

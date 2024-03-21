@@ -100,6 +100,7 @@
             </div>
             <form id="formComment" class="row g-3 needs-validation" novalidate="novalidate" action="feedback" method="post">
                 <input type="text" id="id" name="productId" value="${p.id}" hidden="">
+                <input type="text" id="id" name="detailID" value="${detailID}" hidden="">
                 <input type="text" id="id" name="customerId" value="${accC.customerID}" hidden="">
                 <div class="col-md-4">
                     <label for="FullName" class="form-label">Full Name</label>

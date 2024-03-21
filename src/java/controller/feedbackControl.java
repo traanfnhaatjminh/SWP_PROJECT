@@ -23,22 +23,28 @@ public class feedbackControl extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         Customer customer = (Customer) session.getAttribute("accC");
+        String detailID_raw = request.getParameter("detailID");
         String productId = request.getParameter("productId");
         DAO dao = new DAO();
         Product p = dao.getProductByID(productId);
-
-        if (customer != null) {
-            request.setAttribute("accC", customer);
-            request.setAttribute("p", p);
-            request.getRequestDispatcher("Feedback.jsp").forward(request, response);
+        try {
+            int detailID = Integer.parseInt(detailID_raw);
+            if (customer != null) {
+                request.setAttribute("accC", customer);
+                request.setAttribute("p", p);
+                request.setAttribute("detailID", detailID);
+            }
+        } catch (NumberFormatException e) {
+            System.out.println(e);
         }
-
+        request.getRequestDispatcher("Feedback.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String productId = request.getParameter("productId");
+        String detailID_raw = request.getParameter("detailID");
         String customerId = request.getParameter("customerId");
         String rate = request.getParameter("rate");
         String content = request.getParameter("content");
@@ -47,14 +53,21 @@ public class feedbackControl extends HttpServlet {
         String dateString = dateFormat.format(currentDate);
         DAO dao = new DAO();
         Product p = dao.getProductByID(productId);
-        if (content == null || content.equals("")) {
-            request.setAttribute("fail", "Please input content before send feedback!!!");
-            request.setAttribute("p", p);
-        } else {
-            dao.addFeedback(customerId, content, productId, dateString, rate);
-            request.setAttribute("p", p);
-            request.setAttribute("success", "Send feedback successfully.");
+        try {
+            int detailID = Integer.parseInt(detailID_raw);
+            if (content == null || content.equals("")) {
+                request.setAttribute("fail", "Please input content before send feedback!!!");
+                request.setAttribute("p", p);
+            } else {
+                dao.addFeedback(customerId, content, productId, dateString, rate);
+                dao.isFeedback(detailID);
+                request.setAttribute("p", p);
+                request.setAttribute("success", "Send feedback successfully.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println(e);
         }
+
         request.getRequestDispatcher("Feedback.jsp").forward(request, response);
     }
 

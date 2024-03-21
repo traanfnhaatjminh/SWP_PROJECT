@@ -172,209 +172,82 @@
             <!-- /MAIN HEADER -->
         </header>
         <!-- container -->
-        <!-- responsive-nav -->
-        <div id="responsive-nav">
-            <!-- NAV -->
-            <c:if test="${sessionScope.marketer != null}">
-                <ul class="main-nav nav navbar-nav">
-                    <li class="${menu == null ? 'active' : ''} ${menu eq 'blog' ? 'active' : ''}">
-                        <a href="blog?menu=blog">Blogs</a>
-                    </li>
-                    <li class="${menu eq 'post' ? 'active' : ''}">
-                        <a href="post?menu=post">Manage Blogs</a>
-                    </li>
-                </ul>
-            </c:if>
 
-            <!-- /NAV -->
-        </div>
-        <!-- /responsive-nav -->
-    </div>
-    <!-- /container -->
-</nav>
-<!--            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-3">
-                        <h2 style="margin-top: 7%" class="grid-title"><i class="fa fa-filter"></i> Filters</h2>
-                        <hr>
+        <div class="row mt-4">
+            <h2 class="m-3 col-12"> My Order</h2>
+            <div class="search-form ml-4 mb-3">
+                <form action="" class="date-search-form">
+                    <label for="startDate" class="search-label">From date:</label>
+                    <input type="date" name="startDate" value="" class="date-input" required>
 
-                        <form id="categoryFilterForm" action="filterPost">
-                            <h4>By category:</h4>
-<c:forEach items="${listBlogCategory}" var="c">
-    <div class="checkbox">
-        <label><input name="categories" type="checkbox" value="${c.name}" class="icheck">${c.name}</label>
-    </div>
-</c:forEach>
-<h4>By status:</h4>
-<div class="checkbox">
-    <label><input name="status" type="checkbox" value="Public" class="icheck" ${'Public' eq selectedStatus ? 'checked' : ''} ${selectedStatusAll != null ? 'checked' : ''}>Public</label>
-    <label><input name="status" type="checkbox" value="Private" class="icheck" ${'Private' eq selectedStatus ? 'checked' : ''} ${selectedStatusAll != null ? 'checked' : ''}>Private</label>
-</div>
-<button type="submit" class="btn btn-default">Submit</button>
-</form>
+                    <label for="endDate" class="search-label">To date:</label>
+                    <input type="date" name="endDate" value="" class="date-input" required>
+                    <br>
+                    <button type="submit" class="search-button">Search</button>
+                </form>
+            </div>
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive project-list">
+                            <div class="card">
+                                <table border="1">
+                                    <tr class="p-2">
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Address</th>
+                                        <th>Phone</th>
+                                        <th>Date Buy</th>
+                                        <th>Total Cost</th>
+                                        <th>Status</th>
+                                        <td>Action</td>
+                                    </tr>
+                                    <c:forEach items="${listOrder}" var="o" varStatus="loop"> 
+                                        <c:set value="1" var="index" />
+                                        <tr>
+                                            <td>${o.orderID}</td>
+                                            <td>${o.orderName}</td>
+                                            <td>${o.orderAddress}</td>
+                                            <td>${o.orderPhone}</td>
+                                            <td>${o.orderDate}</td>
+                                            <td>$${o.totalCost}</td>
 
-END FILTER BY CATEGORY 
-
-<div class="padding"></div>
-</div>
-END FILTERS 
-<div id="main-content" class="blog-page col-md-9">
-<div class="container">
-<div class="row clearfix">
-    <div class="col-lg-9 col-md-12 left-box">
-        <label style="margin-top: 2%" for="addPost">ADD A NEW BLOG:</label>
-        <button type="button" class="btn btn-default">
-            <a href="addBlog" target="target">Add</a>
-        </button>
-        <div class="store-filter clearfix">
-            <div class="store-sort">
-                <form action="sortPost">
-                    SORT BY:
-                    <select name="sortSelect">
-                        <option value="atoz">Title from A to Z</option>
-                        <option value="ztoa">Title from Z to A</option>
-<c:forEach items="${listBlogCategory}" var="c">
-    <option value="${c.id}">Category: ${c.name}</option>
-</c:forEach>
-<option value="Public">Status: Public</option>
-<option value="Private">Status: Private</option>
-</select>
-<button type="submit" class="btn btn-default">Sort</button>
-</form>
-</div>
-</div>
-<div class="card">
-<div class="body search">
-<form action="searchPost">
-<div class="input-group m-b-0">
-<div class="input-group-prepend">
-    <span class="input-group-text"><i class="fa fa-search"></i></span>
-</div>
-<input type="text" class="form-control" name="searchBlog" value="${searchValue}" placeholder="Search...">
-<button type="submit" class="btn btn-primary">Search</button>
-<c:if test="${error != null}">
-    <h5 class="text-danger">${error}</h5>
-</c:if>
-</div>
-</form>
-</div>
-</div>
-
-                
-<c:if test="${error == null}">
-    <div class="store-filter clearfix col-md-12">
-        <ul class="store-pagination">
-    <c:forEach begin="1" end="${endIndex}" var="c">
-        <c:set var="isActive" value="${c eq currentPage ? 'active' : ''}" />
-        <li class="${isActive}"><a href="postListPage?index=${c}">${c}</a></li>
-    </c:forEach>
-</ul>
-</div>
-</c:if>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>-->
-
-<div class="container mt-4 mb-5">
-    <!--    <div class="row justify-content-end pr-5">
-            <div class="col-4">
-                <form action="searchOrder pr-4">
-                    <div class="form-group mb-0 " >
-                        <div class="input-group mb-0 flex-nowrap">
-                            <input style="width: 360px" type="text" name="searchBlog" class="form-control" value="${searchValue}" placeholder="Search..." aria-describedby="project-search-addon" />
-                            <div class="input-group-append searchblog">
-                                <button class="btn btn-danger" type="submit" id="project-search-addon"><i class="fa fa-search search-icon font-12"></i></button>
-    <c:if test="${error != null}">
-    <h5 class="text-danger">${error}</h5>
-    </c:if>
-</div>
-</div>
-</div>
-</form>
-</div>
-</div>-->
-    <!-- end row -->
-
-    <div class="row mt-4">
-        <h2 class="m-3 col-12"> My Order</h2>
-        <div class="search-form ml-4 mb-3">
-            <form action="" class="date-search-form">
-                <label for="startDate" class="search-label">From date:</label>
-                <input type="date" name="startDate" value="" class="date-input" required>
-
-                <label for="endDate" class="search-label">To date:</label>
-                <input type="date" name="endDate" value="" class="date-input" required>
-                <br>
-                <button type="submit" class="search-button">Search</button>
-            </form>
-        </div>
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="table-responsive project-list">
-                        <div class="card">
-                            <table border="1">
-                                <tr class="p-2">
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Address</th>
-                                    <th>Phone</th>
-                                    <th>Date Buy</th>
-                                    <th>Total Cost</th>
-                                    <th>Status</th>
-                                    <td>Action</td>
-                                </tr>
-                                <c:forEach items="${listOrder}" var="o" varStatus="loop"> 
-                                    <c:set value="1" var="index" />
-                                    <tr>
-                                        <td>${o.orderID}</td>
-                                        <td>${o.orderName}</td>
-                                        <td>${o.orderAddress}</td>
-                                        <td>${o.orderPhone}</td>
-                                        <td>${o.orderDate}</td>
-                                        <td>$${o.totalCost}</td>
-
-                                        <td>
-                                            <c:choose>
-                                                <c:when test="${o.getOrderStatus() == '1'}">
-                                                    <span class="badge bg-success"> Pending Confirmation </span>
-                                                </c:when>
-                                                <c:when test="${o.getOrderStatus() == '2'}">
-                                                    <span class="badge bg-success"> Waiting for delivery </span>
-                                                </c:when>
-                                                <c:when test="${o.getOrderStatus() == '3'}">
-                                                    <span class="badge bg-success"> Shipping In Progress </span>
-                                                </c:when>
-                                                <c:when test="${o.getOrderStatus() == '4'}">
-                                                    <span class="badge bg-success"> Delivered Successfully </span>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <span class="badge bg-danger"> Cancel </span>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <a href="orderDetail?orderID=${o.orderID}">Detail</a>
+                                            <td>
                                                 <c:choose>
                                                     <c:when test="${o.getOrderStatus() == '1'}">
-                                                        <a href="cancelOrder?oid=${o.orderID}" class="">Cancel</span>
-                                                        </c:when>
-                                                        <c:when test="${o.getOrderStatus() == '2'}">
+                                                        <span class="badge bg-success"> Pending Confirmation </span>
+                                                    </c:when>
+                                                    <c:when test="${o.getOrderStatus() == '2'}">
+                                                        <span class="badge bg-success"> Waiting for delivery </span>
+                                                    </c:when>
+                                                    <c:when test="${o.getOrderStatus() == '3'}">
+                                                        <span class="badge bg-success"> Shipping In Progress </span>
+                                                    </c:when>
+                                                    <c:when test="${o.getOrderStatus() == '4'}">
+                                                        <span class="badge bg-success"> Delivered Successfully </span>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <span class="badge bg-danger"> Cancel </span>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <a href="orderDetail?orderID=${o.orderID}">Detail</a>
+                                                    <c:choose>
+                                                        <c:when test="${o.getOrderStatus() == '1'}">
                                                             <a href="cancelOrder?oid=${o.orderID}" class="">Cancel</span>
-                                                            </c:when>           
+                                                            </c:when>
+                                                            <c:when test="${o.getOrderStatus() == '2'}">
+                                                                <a href="cancelOrder?oid=${o.orderID}" class="">Cancel</span>
+                                                                </c:when>           
                                                             </c:choose>
                                                             </div>
                                                             </td>
                                                             </tr>
-
-
                                                         </c:forEach>
                                                         </table>
-
+                                                        
                                                         </div>
 
                                                         </div>

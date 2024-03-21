@@ -51,7 +51,7 @@ public class ChangeStatusCancelForSaleNormal extends HttpServlet {
             dao.changeStatusCancel1(oid, listProductDetail);
             request.setAttribute("mess", "Đã cancel đơn hàng có id là :" + oid + "successful!! ");
             request.setAttribute("curMenu", "Management Orders");
-           response.sendRedirect("order");
+            response.sendRedirect("order");
         }
     }
 

@@ -18,6 +18,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Users;
 
 /**
  *
@@ -37,10 +38,8 @@ public class PageOrder extends HttpServlet {
     throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
             int index;
             HttpSession session = request.getSession();
-            int sId = (int) session.getAttribute("sId");
             saleDAO sale = new saleDAO();
             if(request.getParameter("index") == null) {
                 index = 1;
@@ -48,10 +47,12 @@ public class PageOrder extends HttpServlet {
                 index = Integer.parseInt(request.getParameter("index"));
                 session.setAttribute("index", index);
             }
-            List<model.Order> listOrders = sale.getOrderBySalepage(index, sId);
-            List<String> listProductName = sale.getListNameProductForSale(sId);
-            session.setAttribute("listProductName", listProductName);
-            request.setAttribute("listOrders", listOrders);           
+            List<model.Order> listOrders = sale.getOrderBySalepage(index);
+            List<String> listProductName = sale.getListNameProductForSale();
+            List<Users> listInFORStaff = sale.getListNameStaff();
+            request.setAttribute("listInFORStaff", listInFORStaff);
+            request.setAttribute("listProductName", listProductName);
+            request.setAttribute("listOrders", listOrders);         
             request.setAttribute("curMenu", "Management Orders");
             request.getRequestDispatcher("List_Order_ForSale.jsp").forward(request, response);
         }

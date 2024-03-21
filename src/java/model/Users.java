@@ -20,9 +20,9 @@ public class Users {
     private String password;
     private String user_role_name;
     private int roleID;
-    private float userPoint;
+    private int numberOrders;
     private int user_status;
-    
+
     public Users() {
     }
 
@@ -54,8 +54,8 @@ public class Users {
         this.user_role_name = user_role_name;
         this.user_status = user_status;
     }
-    
-    public Users(int userID, String userName, String gender, String email, String mobile, String avatar, String address, String password, int roleID, float userPoint, int user_status) {
+
+    public Users(int userID, String userName, String gender, String email, String mobile, String avatar, String address, String password, int roleID, int numberOrders, int user_status) {
         this.userID = userID;
         this.userName = userName;
         this.gender = gender;
@@ -65,11 +65,11 @@ public class Users {
         this.address = address;
         this.password = password;
         this.roleID = roleID;
-        this.userPoint = userPoint;
+        this.numberOrders = numberOrders;
         this.user_status = user_status;
     }
-    
-    public Users(int userID, String userName, String gender, String email, String mobile, String avatar, String address, String password, String user_role_name, int roleID, float userPoint) {
+
+    public Users(int userID, String userName, String gender, String email, String mobile, String avatar, String address, String password, String user_role_name, int roleID, int numberOrders) {
         this.userID = userID;
         this.userName = userName;
         this.gender = gender;
@@ -80,7 +80,7 @@ public class Users {
         this.password = password;
         this.user_role_name = user_role_name;
         this.roleID = roleID;
-        this.userPoint = userPoint;
+        this.numberOrders = numberOrders;
     }
 
     public Users(int userID, String userName, String gender, String email, String mobile, String avatar, String address, String user_role_name) {
@@ -93,8 +93,7 @@ public class Users {
         this.address = address;
         this.user_role_name = user_role_name;
     }
-    
-    
+
     public Users(String userName, String gender, String email, String mobile, String avatar, String address, String password, int roleID) {
         this.userName = userName;
         this.gender = gender;
@@ -124,7 +123,7 @@ public class Users {
         this.user_role_name = user_role_name;
     }
 
-    public Users(int userID, String userName, String gender, String email, String mobile, String avatar, String address, String password, int roleID, float userPoint) {
+    public Users(int userID, String userName, String gender, String email, String mobile, String avatar, String address, String password, int roleID, int numberOrders) {
         this.userID = userID;
         this.userName = userName;
         this.gender = gender;
@@ -134,7 +133,7 @@ public class Users {
         this.address = address;
         this.password = password;
         this.roleID = roleID;
-        this.userPoint = userPoint;
+        this.numberOrders = numberOrders;
     }
 
     public Users(String userName, String gender, String email, String mobile, String avatar, String address, int roleID) {
@@ -157,8 +156,17 @@ public class Users {
         this.address = address;
         this.roleID = roleID;
     }
-   
-    
+
+    public Users(int userID, String userName, String gender, String email, String mobile, String address, int numberOrders) {
+        this.userID = userID;
+        this.userName = userName;
+        this.gender = gender;
+        this.email = email;
+        this.mobile = mobile;
+        this.address = address;
+        this.numberOrders = numberOrders;
+    }
+
     public int getUserID() {
         return userID;
     }
@@ -231,12 +239,12 @@ public class Users {
         this.roleID = roleID;
     }
 
-    public float getUserPoint() {
-        return userPoint;
+    public int getNumberOrders() {
+        return numberOrders;
     }
 
-    public void setUserPoint(float userPoint) {
-        this.userPoint = userPoint;
+    public void setNumberOrders(int numberOrders) {
+        this.numberOrders = numberOrders;
     }
 
     public int getUser_status() {
@@ -246,5 +254,5 @@ public class Users {
     public void setUser_status(int user_status) {
         this.user_status = user_status;
     }
-    
+
 }

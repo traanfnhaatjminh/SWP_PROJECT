@@ -73,15 +73,17 @@ public class OrderDAO extends DBContext {
                             + "           ,[productID]\n"
                             + "           ,[productPrice]\n"
                             + "           ,[quantity]\n"
-                            + "           ,[totalCost])\n"
+                            + "           ,[totalCost]"
+                            + "           ,[isFeedback])\n"
                             + "     VALUES\n"
-                            + "           (?,?,?,?,?)";
+                            + "           (?,?,?,?,?,?)";
                     PreparedStatement st2 = connection.prepareStatement(sql2);
                     st2.setInt(1, oid);
                     st2.setInt(2, i.getProduct().getId());
                     st2.setDouble(3, i.getProduct().getSale_price());
                     st2.setInt(4, i.getQuantity());
                     st2.setDouble(5, i.getPrice() * i.getQuantity());
+                    st2.setString(6, "0");
                     st2.executeUpdate();
                 }
             }
@@ -105,7 +107,7 @@ public class OrderDAO extends DBContext {
         }
     }
 
-    public ArrayList<Order> getOrdersByCustomerId(int customerId,String searchDate) {
+    public ArrayList<Order> getOrdersByCustomerId(int customerId, String searchDate) {
         ArrayList<Order> list = new ArrayList<>();
         String sql = "SELECT  [orderID]\n"
                 + "      ,[customerID]\n"
@@ -120,8 +122,8 @@ public class OrderDAO extends DBContext {
                 + "      ,[sellerID]\n"
                 + "  FROM [Swp_Project].[dbo].[Order]\n"
                 + "  WHERE customerID = ?";
-        if(!searchDate.equals("")){
-            sql += " AND "+ searchDate;
+        if (!searchDate.equals("")) {
+            sql += " AND " + searchDate;
         }
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -175,7 +177,8 @@ public class OrderDAO extends DBContext {
                 + "      ,[productID]\n"
                 + "      ,[productPrice]\n"
                 + "      ,[quantity]\n"
-                + "      ,od.totalCost\n"
+                + "      ,od.totalCost"
+                + "      ,od.isFeedback\n"
                 + "  FROM [Swp_Project].[dbo].[orderDetail] od\n"
                 + "  JOIN [Order] o ON o.orderID = od.orderID\n"
                 + "  WHERE o.customerID = ?";
@@ -184,7 +187,9 @@ public class OrderDAO extends DBContext {
             st.setInt(1, customerId);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                OrderDetail od = new OrderDetail(rs.getInt(1), rs.getInt(2), rs.getDouble(3), rs.getInt(4), rs.getDouble(5));
+                OrderDetail od = new OrderDetail(rs.getInt(1), rs.getInt(2), rs.getInt(3),
+                        rs.getDouble(4), rs.getInt(5), rs.getDouble(6),
+                        rs.getString(7));
                 list.add(od);
             }
             return list;
@@ -199,11 +204,13 @@ public class OrderDAO extends DBContext {
         ArrayList<OrderDetail> list = new ArrayList<>();
         try {
             if (connection != null) {
-                String sql = "SELECT od.orderID\n"
+                String sql = "SELECT od.detailID"
+                        + "      ,od.orderID\n"
                         + "      ,[productID]\n"
                         + "      ,[productPrice]\n"
                         + "      ,[quantity]\n"
-                        + "      ,od.totalCost\n"
+                        + "      ,od.totalCost"
+                        + "      ,od.isFeedback\n"
                         + "  FROM [Swp_Project].[dbo].[orderDetail] od\n"
                         + "  JOIN [Order] o ON o.orderID = od.orderID\n"
                         + "  WHERE od.orderID = ?";
@@ -211,7 +218,9 @@ public class OrderDAO extends DBContext {
                 st.setString(1, orderId);
                 ResultSet rs = st.executeQuery();
                 while (rs.next()) {
-                    OrderDetail od = new OrderDetail(rs.getInt(1), rs.getInt(2), rs.getDouble(3), rs.getInt(4), rs.getDouble(5));
+                    OrderDetail od = new OrderDetail(rs.getInt(1), rs.getInt(2), rs.getInt(3),
+                            rs.getDouble(4), rs.getInt(5), rs.getDouble(6),
+                            rs.getString(7));
                     list.add(od);
                 }
                 return list;

@@ -86,7 +86,7 @@ public class UserDAO extends DBContext {
 
     public int getSid(String email, String password) {
         int sid = -1;
-        String sql = "select * from Users where email = ? and pass = ?";
+        String sql = "select userID from Users where email = ? and pass = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, email);

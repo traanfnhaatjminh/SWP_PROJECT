@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Order;
+import model.Users;
 
 /**
  *
@@ -40,7 +41,7 @@ public class saleDAO extends DBContext {
         return productNames;
     }
 
-    public List<String> getListNameProductForSale(int sId) throws SQLException {
+    public List<String> getListNameProductForSale() throws SQLException {
         List<String> productNames = new ArrayList<>();
 
         try {
@@ -49,11 +50,9 @@ public class saleDAO extends DBContext {
                         + "FROM product p\n"
                         + "INNER JOIN orderDetail od ON p.id = od.productID\n"
                         + "INNER JOIN [Order] o ON o.orderID = od.orderID\n"
-                        + "Where p.id in (select id from orderDetail)\n"
-                        + "and sellerID = ?";
+                        + "Where p.id in (select id from orderDetail)\n";
 
                 PreparedStatement st = connection.prepareStatement(sql);
-                st.setInt(1, sId);
                 ResultSet rs = st.executeQuery();
                 while (rs.next()) {
                     String nameProduct = rs.getString("name");
@@ -66,20 +65,18 @@ public class saleDAO extends DBContext {
         return productNames;
     }
 
-    public ArrayList<Order> getOrderBySalepage(int index, int sid) throws SQLException {
+    public ArrayList<Order> getOrderBySalepage(int index) throws SQLException {
         ArrayList<Order> dataOrders = new ArrayList<>();
         int id = (index - 1) * 5;
         try {
             if (connection != null) {
                 String sql = "SELECT *\n"
                         + "FROM [Order]\n"
-                        + "where sellerID = ?\n"
                         + "ORDER BY orderID ASC\n"
                         + "OFFSET ? ROWS\n"
                         + "FETCH NEXT 5 ROWS ONLY";
                 PreparedStatement st = connection.prepareStatement(sql);
-                st.setInt(1, sid);
-                st.setInt(2, id);
+                st.setInt(1, id);
                 ResultSet rs = st.executeQuery();
                 while (rs.next()) {
                     int idO = rs.getInt("orderID");
@@ -101,6 +98,59 @@ public class saleDAO extends DBContext {
             System.out.println("Error" + e.getMessage());
         }
         return dataOrders;
+    }
+
+    public String getNameSalerByOrder(int oid) throws SQLException {
+        try {
+            if (connection != null) {
+                String sql = "select u.userName from Users u join [Order] o \n"
+                        + "on u.userID = o.sellerID\n"
+                        + "where o.orderID = ? and u.roleID = 1";
+                PreparedStatement st = connection.prepareStatement(sql);
+                st.setInt(1, oid);
+                ResultSet rs = st.executeQuery();
+                while (rs.next()) {
+                    return rs.getString(1);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public void assignSaler(int sId, int oId) {
+        String sql = "update [Order] \n"
+                + "set sellerID = ?\n"
+                + "where orderID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, sId);
+            st.setInt(2, oId);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public List<model.Users> getListNameStaff() throws SQLException {
+        List<Users> staffList = new ArrayList<>();
+        try {
+            String sql = "SELECT userID, userName\n"
+                    + "FROM Users\n"
+                    + "WHERE roleID = 1;";
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                int staffId = rs.getInt("userID");
+                String staffName = rs.getString("userName");
+                Users staffInfo = new Users(staffId, staffName);
+                staffList.add(staffInfo);
+            }
+        } catch (SQLException e) {
+            System.out.println("loi" + e.getMessage());
+        }
+        return staffList;
     }
 
 }

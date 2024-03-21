@@ -286,10 +286,10 @@
             <ul class="app-menu">
                 <ul class="app-menu">
                     <li><a class="app-menu__item haha">
-                            <span class="app-menu__label">Sale Management</span></a></li>
+                            <span class="app-menu__label">Saler</span></a></li>
                     <li><a class="app-menu__item " href="pageOrdersServletBySale"><i class='app-menu__icon bx bx-dollar'></i><span
                                 class="app-menu__label">Management Orders</span></a></li>
-                    <li><a class="app-menu__item" href="ChangePassForSale.jsp"><i class='app-menu__icon bx bx-cog'></i><span class="app-menu__label">Change Password</span></a></li>
+                    <!--<li><a class="app-menu__item" href="ChangePassForSale.jsp"><i class='app-menu__icon bx bx-cog'></i><span class="app-menu__label">Change Password</span></a></li>-->
                 </ul>
         </aside>
         <main class="app-content" style="margin-left: 250px;">
@@ -454,7 +454,6 @@
                                             <a class="page-link" href="pageOrdersServletBySale?index=${i}">${i}</a>
                                         </li>
                                     </c:forEach>
-
                                 </ul>
                             </nav>
                         </div>

@@ -87,7 +87,7 @@ public class userDAO_1 extends DBContext {
                         rs.getString(7),
                         rs.getString(8),
                         rs.getInt(9),
-                        rs.getFloat(10)
+                        rs.getInt(10)
                 );
                 list.add(u);
             }
@@ -95,6 +95,7 @@ public class userDAO_1 extends DBContext {
         }
         return list;
     }
+    
 
     public Users getUserDetailByID(String user_id) throws SQLException {
         String sql = "SELECT u.userID,\n"

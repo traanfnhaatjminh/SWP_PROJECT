@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dal.DAO;
 import dal.UserDAO;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -87,10 +88,30 @@ public class LoginSystem extends HttpServlet {
                     response.addCookie(pass);
                     response.addCookie(rem);
                     response.sendRedirect("userlist");
+                } else if (user.getRoleID() == 4) {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("accS", user);
+                    Cookie email = new Cookie("email", user_email);
+                    Cookie pass = new Cookie("pass", user_pass);
+                    Cookie rem = new Cookie("rememeber", remember);
+                    if (remember != null) {
+                        email.setMaxAge(60 * 60 * 24 * 30);
+                        pass.setMaxAge(60 * 60 * 24 * 30);
+                        rem.setMaxAge(60 * 60 * 24 * 30);
+                    } else {
+                        email.setMaxAge(0);
+                        pass.setMaxAge(0);
+                        rem.setMaxAge(0);
+                    }
+                    response.addCookie(email);
+                    response.addCookie(pass);
+                    response.addCookie(rem);
+                    response.sendRedirect("pageOrder");
                 } else if (user.getRoleID() == 1) {
                     HttpSession session = request.getSession();
-                    int sId = dao.getSid(user_email, user_pass);
                     session.setAttribute("accS", user);
+                    UserDAO d = new UserDAO();
+                    int sId = d.getSid(user_email, user_pass);
                     session.setAttribute("sId", sId);
                     Cookie email = new Cookie("email", user_email);
                     Cookie pass = new Cookie("pass", user_pass);
@@ -108,27 +129,6 @@ public class LoginSystem extends HttpServlet {
                     response.addCookie(pass);
                     response.addCookie(rem);
                     response.sendRedirect("pageOrdersServletBySale");
-                } else if (user.getRoleID() == 4) {
-                    HttpSession session = request.getSession();
-                    int sId = dao.getSid(user_email, user_pass);
-                    session.setAttribute("accS", user);
-                    session.setAttribute("sId", sId);
-                    Cookie email = new Cookie("email", user_email);
-                    Cookie pass = new Cookie("pass", user_pass);
-                    Cookie rem = new Cookie("rememeber", remember);
-                    if (remember != null) {
-                        email.setMaxAge(60 * 60 * 24 * 30);
-                        pass.setMaxAge(60 * 60 * 24 * 30);
-                        rem.setMaxAge(60 * 60 * 24 * 30);
-                    } else {
-                        email.setMaxAge(0);
-                        pass.setMaxAge(0);
-                        rem.setMaxAge(0);
-                    }
-                    response.addCookie(email);
-                    response.addCookie(pass);
-                    response.addCookie(rem);
-                    response.sendRedirect("pageOrder");
                 }
             }
         }
@@ -196,10 +196,10 @@ public class LoginSystem extends HttpServlet {
                             user.getAddress(),
                             user.getPassword(),
                             user.getRoleID(),
-                            user.getUserPoint());
+                            user.getNumberOrders());
 
                     HttpSession session = request.getSession();
-                    session.setAttribute("marketer", user1);
+                    session.setAttribute("accS", user1);
                     request.setAttribute("mess", "change password success");
                     request.getRequestDispatcher("changepass.jsp").forward(request, response);
                 }

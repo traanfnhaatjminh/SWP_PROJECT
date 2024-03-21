@@ -1773,6 +1773,19 @@ public class DAO extends DBContext {
         }
     }
 
+    public void isFeedback(int detailID) {
+        String sql = "update orderDetail\n"
+                + "set isFeedback = '1'\n"
+                + "where detailID = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, detailID);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
     public List<Product> searchProductList(String searchValue, int pageIndex) {
         List<Product> list = new ArrayList<>();
         String sql = "select * from product\n"

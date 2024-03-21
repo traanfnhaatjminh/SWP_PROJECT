@@ -166,7 +166,7 @@
 
                             </div>
                         </div>
-                        <h3 class="h6">Change staff for this order</h3>
+<!--                        <h3 class="h6">Change staff for this order</h3>
                         <form action="changeStaffServlet" id="filterForm" style="margin-top: 10px;">
                             <select name="groupby" id="group" style="padding: 5px; border: 1px solid #ccc; border-radius: 5px;">
                                 <c:forEach items="${sessionScope.listInFORStaff}" var="listInFORStaff">
@@ -175,7 +175,7 @@
                             </select>
 
                             <input type="submit" value="Save" style="background-color: #007BFF; color: #fff; padding: 5px 10px; border: none; border-radius: 5px; cursor: pointer;">
-                        </form>
+                        </form>-->
                         <div class="card mb-4">
 
                             <div class="card-body">

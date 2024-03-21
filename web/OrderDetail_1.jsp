@@ -222,9 +222,18 @@
                                                     <td>${od.quantity}</td>
                                                     <td>${od.totalCost}</td>
                                                     <c:if test="${order.getOrderStatus() == '4'}">
-                                                        <td> 
-                                                            <a href="feedback?productId=${od.product.id}" class="btn btn-primary">Feedback</a>
-                                                        </td>
+                                                        <c:if test="${od.isFeedback == '0'}">
+                                                            <td> 
+                                                                <a href="feedback?productId=${od.product.id}&&detailID=${od.detailID}" class="btn btn-primary">Feedback</a>
+                                                            </td>
+                                                        </c:if>
+                                                        <c:if test="${od.isFeedback == '1'}">
+                                                            <td> 
+                                                                <h5 style="color: green">
+                                                                    Sent Feedback
+                                                                </h5>
+                                                            </td>
+                                                        </c:if>
                                                     </c:if>
                                                 </tr>    
                                             </c:forEach>

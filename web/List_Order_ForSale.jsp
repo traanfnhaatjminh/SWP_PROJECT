@@ -286,7 +286,7 @@
             <ul class="app-menu">
                 <ul class="app-menu">
                     <li><a class="app-menu__item haha">
-                            <span class="app-menu__label">Sale</span></a></li>
+                            <span class="app-menu__label">Saler Manager</span></a></li>
                     <li><a class="app-menu__item " href="pageOrder"><i class='app-menu__icon bx bx-dollar'></i><span
                                 class="app-menu__label">Management Orders</span></a></li>
                     <li><a class="app-menu__item" href="ChangePassForSale.jsp"><i class='app-menu__icon bx bx-cog'></i><span class="app-menu__label">Change Password</span></a></li>
@@ -365,9 +365,8 @@
                                         <th>Recipient name </th>
                                         <th>Product </th>
                                         <th>Total cost</th>
-                                        <th>Status</th>
-                                        <th>Update Status</th>
-                                        <th>Cancel</th>
+                                        <th>Saler ID</th>
+                                        <th>Assign saler</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -390,56 +389,20 @@
                                                 </c:choose></td>
                                             <td>${o.getTotalCost()}</td>
                                             <td>
-                                                <c:choose>
-                                                    <c:when test="${o.getOrderStatus() == '1'}">
-                                                        <span class="badge bg-success"> Pending Confirmation </span>
-                                                    </c:when>
-                                                    <c:when test="${o.getOrderStatus() == '2'}">
-                                                        <span class="badge bg-success"> Waiting for delivery </span>
-                                                    </c:when>
-                                                    <c:when test="${o.getOrderStatus() == '3'}">
-                                                        <span class="badge bg-success"> Shipping In Progress </span>
-                                                    </c:when>
-                                                        <c:when test="${o.getOrderStatus() == '4'}">
-                                                        <span class="badge bg-success"> Delivered Successfully </span>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <span class="badge bg-danger"> Cancel </span>
-                                                    </c:otherwise>
-                                                </c:choose>
+                                                ${o.getSellerID()}
                                             </td>
-                                            <td class="table-td-center">  
-                                                <c:choose>
-                                                    <c:when test="${o.getOrderStatus() == '1'}"> 
-                                                        <form id="statusForm" action="" method="post">
-                                                            <input type="hidden" name="oid" value="${o.getOrderID()}">
-                                                            <button type="button" class="btn btn-success mark-delivered" id="Button">Confirmed</button>
-                                                        </form>
-                                                    </c:when>
-                                                    <c:when test="${o.getOrderStatus() == '2'}"> 
-                                                        <form id="statusForm" action="" method="post">
-                                                            <input type="hidden" name="oid" value="${o.getOrderID()}">
-                                                            <button type="button" class="btn btn-success mark-delivered" id="Button">delivery</button>
-                                                        </form>
-                                                    </c:when>
-                                                    <c:when test="${o.getOrderStatus() == '3'}"> 
-                                                        <form id="statusFormSucsess" action="" method="post">
-                                                            <input type="hidden" name="oid" value="${o.getOrderID()}">
-                                                            <button type="button" class="btn btn-success mark-delivered" id="Button">Successful delivery</button>
-                                                        </form>
-                                                    </c:when>
-                                                </c:choose> 
+                                            <td>  
+                                                <form action="assignSaler" id="filterForm" style="margin-top: 10px;">
+                                                    <input type="text" id="id" name="oId" value="${o.getOrderID()}" hidden="">
+                                                    <select name="groupby" id="group" style="padding: 5px; border: 1px solid #ccc; border-radius: 5px;">
+                                                        <c:forEach items="${listInFORStaff}" var="listInFORStaff">
+                                                            <option value="${listInFORStaff.userID}" style="background-color: #f0f0f0;">${listInFORStaff.userName} - ID: ${listInFORStaff.userID}</option>
+                                                        </c:forEach>
+                                                    </select>
+
+                                                    <input type="submit" value="Save" style="background-color: #007BFF; color: #fff; padding: 5px 10px; border: none; border-radius: 5px; cursor: pointer;">
+                                                </form>
                                             </td>
-                                            <td>
-                                                <c:choose>
-                                                    <c:when test="${o.orderStatus == '1' || o.orderStatus == '2' || o.orderStatus == '3'}">
-                                                        <form action="" method="post">
-                                                            <input type="hidden" name="oid" value="${o.getOrderID()}">
-                                                            <button type="submit" class="btn btn-danger" id="Button">Cancel</button>
-                                                        </form>
-                                                    </c:when>
-                                                </c:choose> 
-                                            </td>                     
                                         </tr>
                                     </c:forEach>
                                 </tbody>
@@ -453,7 +416,6 @@
                                             <a class="page-link" href="pageOrder?index=${i}">${i}</a>
                                         </li>
                                     </c:forEach>
-
                                 </ul>
                             </nav>
                         </div>
