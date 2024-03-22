@@ -51,35 +51,35 @@ public class FilterOrderForSaleServlet extends HttpServlet {
                     request.getRequestDispatcher("pageOrdersServletBySale").forward(request, response);
                     break;
                 case "2":
-                    listOrders = dao.getSearchbyStatusForSale("1");
+                    listOrders = dao.getSearchbyStatusForSale("1", sId);
                     request.setAttribute("listOrders", listOrders);
                     request.setAttribute("curMenu", "Management Orders");
                     RequestDispatcher rd = request.getRequestDispatcher("table-data-saleNormal.jsp");
                     rd.forward(request, response);
                     break;
                 case "3":
-                    listOrders = dao.getSearchbyStatusForSale("2");
+                    listOrders = dao.getSearchbyStatusForSale("2", sId);
                     request.setAttribute("listOrders", listOrders);
                     request.setAttribute("curMenu", "Management Orders");
                     request.getRequestDispatcher("table-data-saleNormal.jsp").forward(request, response);
 
                     break;
                 case "4":
-                    listOrders = dao.getSearchbyStatusForSale("3");
+                    listOrders = dao.getSearchbyStatusForSale("3", sId);
                     request.setAttribute("listOrders", listOrders);
                     request.setAttribute("curMenu", "Management Orders");
                     request.getRequestDispatcher("table-data-saleNormal.jsp").forward(request, response);
 
                     break;
                 case "5":
-                    listOrders = dao.getSearchbyStatusForSale("4");
+                    listOrders = dao.getSearchbyStatusForSale("4", sId);
                     request.setAttribute("listOrders", listOrders);
                     request.setAttribute("curMenu", "Management Orders");
                     request.getRequestDispatcher("table-data-saleNormal.jsp").forward(request, response);
 
                     break;
                 case "6":
-                    listOrders = dao.getSearchbyStatusForSale("5");
+                    listOrders = dao.getSearchbyStatusForSale("5", sId);
                     request.setAttribute("listOrders", listOrders);
                     request.setAttribute("curMenu", "Management Orders");
                     request.getRequestDispatcher("table-data-saleNormal.jsp").forward(request, response);

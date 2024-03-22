@@ -44,7 +44,7 @@ public class SearchOrdersByCustomerForSaleServlet extends HttpServlet {
             int sId = (int) session.getAttribute("sId");
             String value = request.getParameter("search2");
             orderDAO1 dao = new orderDAO1();
-            ArrayList<model.Order> listOrders = dao.getSearchOrderByCustomerforSale(value);
+            ArrayList<model.Order> listOrders = dao.getSearchOrderByCustomerforSale(value, sId);
             request.setAttribute("listOrders", listOrders);
             request.setAttribute("search2", value);
             request.setAttribute("curMenu", "Management Orders");

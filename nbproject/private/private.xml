@@ -3,14 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/src/java/model/OrderDetail.java</file>
-            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/web/table-data-saleNormal.jsp</file>
-            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/web/OrderDetail_1.jsp</file>
-            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/src/java/controller/feedbackControl.java</file>
+            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/src/java/controller/saleN/ChangeStatusCanelForSale.java</file>
+            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/src/java/controller/CheckoutContorller.java</file>
+            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/web/checkout.jsp</file>
+            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/src/java/dal/ShopDAO.java</file>
             <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/src/java/dal/OrderDAO.java</file>
-            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/web/blog.jsp</file>
-            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/src/java/controller/OrderDetailControl.java</file>
-            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/src/java/controller/manageproduct/ViewProductDetail.java</file>
+            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/web/myorder.jsp</file>
+            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/src/java/dal/orderDAO1.java</file>
+            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/src/java/controller/VNP/vnpay.java</file>
+            <file>file:/D:/ApacheNetBeansIDE13/SWP_PROJECT/src/java/controller/Order/ChangeStatusCancelForSaleNormal.java</file>
         </group>
     </open-files>
 </project-private>

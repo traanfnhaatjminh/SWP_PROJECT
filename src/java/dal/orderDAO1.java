@@ -21,12 +21,13 @@ import model.Users;
  */
 public class orderDAO1 extends DBContext {
 
-    public ArrayList<model.Order> getSearchbyStatusForSale(String value) {
+    public ArrayList<model.Order> getSearchbyStatusForSale(String value, int sid) {
         ArrayList<model.Order> data = new ArrayList<>();
-        String sql = "select * from [Order] where  [orderStatus] = ?";
+        String sql = "select * from [Order] where  [orderStatus] = ? and sellerID = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, value);
+            st.setInt(2, sid);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 int idO = rs.getInt(1);
@@ -235,6 +236,39 @@ public class orderDAO1 extends DBContext {
         return dataOrders;
     }
 
+    public ArrayList<Order> getOrderBySale(int sid) throws SQLException {
+        ArrayList<Order> dataOrders = new ArrayList<>();
+        try {
+            if (connection != null) {
+                String sql = "SELECT * \n"
+                        + "FROM [Order]\n"
+                        + "where sellerID = ?\n";
+
+                PreparedStatement st = connection.prepareStatement(sql);
+                st.setInt(1, sid);
+                ResultSet rs = st.executeQuery();
+                while (rs.next()) {
+                    int idO = rs.getInt("orderID");
+                    int idC = rs.getInt("customerID");
+                    String order_name = rs.getString("orderName");
+                    int order_discount = rs.getInt(4);
+                    String order_date = rs.getString("orderDate");
+                    String order_note = rs.getString("notes");
+                    String order_address = rs.getString("orderAddress");
+                    int order_phone = rs.getInt("orderPhone");
+                    String order_status = rs.getString("orderStatus");
+                    float total_cost = rs.getFloat("totalCost");
+                    int idS = rs.getInt("sellerID");
+                    List<String> productName = getListProductByOrder1(idO);
+                    dataOrders.add(new Order(idO, idC, order_name, order_discount, order_date, order_note, order_address, order_phone, order_status, total_cost, idS, productName));
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("loi" + e.getMessage());
+        }
+        return dataOrders;
+    }
+
     public List<String> getListNameProductForSale() throws SQLException {
         List<String> productNames = new ArrayList<>();
 
@@ -348,15 +382,16 @@ public class orderDAO1 extends DBContext {
         return data;
     }
 
-    public ArrayList<Order> getSearchOrderByCustomerforSale(String value) throws SQLException {
+    public ArrayList<Order> getSearchOrderByCustomerforSale(String value, int sid) throws SQLException {
         ArrayList<Order> data = new ArrayList<>();
         try {
             if (connection != null) {
                 String sql = "SELECT *\n"
                         + "FROM [Order]\n"
-                        + "where orderName LIKE ?;";
+                        + "where orderName LIKE N'%'+?+'%' and sellerID = ?";
                 PreparedStatement st = connection.prepareStatement(sql);
                 st.setString(1, value);
+                st.setInt(2, sid);
                 ResultSet rs = st.executeQuery();
                 while (rs.next()) {
                     int idO = rs.getInt(1);
@@ -380,16 +415,18 @@ public class orderDAO1 extends DBContext {
         return data;
     }
 
-    public ArrayList<Order> getOrdersByDateRangeBySale(String startDateStr, String endDateStr) throws SQLException {
+    public ArrayList<Order> getOrdersByDateRangeBySale(String startDateStr,
+            String endDateStr, int sid) throws SQLException {
         ArrayList data = new ArrayList();
         try {
             if (connection != null) {
                 String sql = "SELECT *\n"
                         + "FROM [Order]\n"
-                        + "where orderDate BETWEEN ? AND ?;";
+                        + "where orderDate BETWEEN ? AND ? AND sellerID = ?;";
                 PreparedStatement st = connection.prepareStatement(sql);
                 st.setString(1, startDateStr);
                 st.setString(2, endDateStr);
+                st.setInt(3, sid);
                 ResultSet rs = st.executeQuery();
                 while (rs.next()) {
                     int idO = rs.getInt(1);
@@ -560,10 +597,12 @@ public class orderDAO1 extends DBContext {
         return fullname;
     }
 
-    public int getNumberPage() {
-        String sql = "select  count(*) from [Order]";
+    public int getNumberPage(int sid) {
+        String sql = "select  count(*) from [Order]\n"
+                + "where sellerID = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, sid);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 int total = rs.getInt(1);

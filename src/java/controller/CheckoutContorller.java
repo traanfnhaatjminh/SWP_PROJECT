@@ -118,7 +118,7 @@ public class CheckoutContorller extends HttpServlet {
         Customer customer = (Customer) session.getAttribute("accC");
         if (customer != null) {
             OrderDAO odb = new OrderDAO();
-            odb.addOrder(name, phone, address, email, gender, notes, cart, customer, "1", cart.getTotalMoney(), 0);
+            odb.addOrder(name, phone, address, email, gender, notes, cart, customer, "1", cart.getTotalMoney(), odb.getSellerID());
             String textPayment = "<div  id=\"qr\">\n"
                     + "               <img\n"
                     + "                  src=\"https://firebasestorage.googleapis.com/v0/b/shop-f6d2b.appspot.com/o/qr.png?alt=media&token=08c1bfcb-7290-4a4a-8a99-2af6032df2bf\"\n"
@@ -320,7 +320,7 @@ public class CheckoutContorller extends HttpServlet {
         request.setAttribute("email", email);
         request.setAttribute("gender", gender);
         request.setAttribute("notes", notes);
-        request.getRequestDispatcher("success.jsp").forward(request, response);
+        request.getRequestDispatcher("vnp.jsp").forward(request, response);
     }
 
 }

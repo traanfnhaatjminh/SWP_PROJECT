@@ -238,7 +238,6 @@
                         </div>
                     </div>
 
-
                     <!--Payment-->
                     <button class="btn bg-success text-white">Submit</button>
                 </form>

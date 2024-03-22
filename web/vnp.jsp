@@ -110,54 +110,14 @@
                 <div class="d-flex flex-column mt-3 mb-3">
                     <div class="h3">Checkout</div>
                     <c:if test="${mess!=''}">
-                        <div class="text-danger" role="alert">
+                        <div class="alert alert-danger" role="alert">
                             ${mess}
                         </div>
                     </c:if>
                 </div>
             </div>
 
-            <div id="table" class="bg-white rounded">
-                <div class="table-responsive-md">
-                    <table class="table table-hover">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th scope="col" class="text-uppercase header">ID</th>
-                                <th scope="col" class="text-uppercase header">Title</th>
-                                <th scope="col-lg-3" class="text-uppercase" style="
-                                    width: 100px;">Quantity</th>
-                                <th scope="col" class="text-uppercase">price each</th>
-                                <th scope="col" class="text-uppercase">total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach items="${cart.list}" var="c">
-                                <tr>
-                                    <td>${c.product.id}</td>
-                                    <td class="item">
-                                        <div class="d-flex align-items-start">
-                                            <img src="${c.product.image}"
-                                                 alt="">
-                                            <div>
-                                                ${c.product.name}
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-
-                                        ${c.quantity}
-                                    </td>
-                                    <td class="d-flex flex-column">${c.product.sale_price} VND
-                                    </td>
-                                    <td class="font-weight-bold">
-                                        ${c.quantity*c.product.sale_price} VND
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+          
             <div class="d-flex justify-content-between flex-wrap">
                 <div class="text-muted">
                     <a class="btn btn-block bg-primary text-white" href="cart">
@@ -175,72 +135,24 @@
 
             <!--information user-->
             <div class="order-form">
-                <form action="checkout" method="post" class="form-signup">
-                    <h1 class="h3 mb-3 font-weight-normal text-info bg-light" style="text-align: center">Delivery information</h1>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="name">Full name</label>
-                            <input name="name" id="name" type="text" value="${accC.fullName}" class="form-control" placeholder="Full name" required="" autofocus>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="name">Phone number</label>
-                            <input name="phone" type="text" id="phone" value="${accC.phone}" class="form-control mb-2" placeholder="Phone number" pattern="^0[2-9]{3}[0-9]{6}" required autofocus>
-                            <div class="alert alert-danger pt-1 pb-1 errPhone" role="alert">
-                                Phone number invalid
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="address">Address</label>
-                        <input name="address" type="text" id="address" value="${accC.address}"  class="form-control mb-2" placeholder="Address" required autofocus>
-                    </div>
-                    <div class="form-group">
-                        <label for="address">Email</label>
-                        <input name="email" type="email" id="email" value="${accC.email}"  class="form-control mb-2" placeholder="Email" required autofocus>
-                    </div>
-                    <input hidden value="${cart.getTotalMoney()}" name="total">
-                    <div class="form-group">
-                        <label for="address">Gender</label>
-                        <select id="id" class="form-control mb-2" name="gender">
-                            <option value="female" ${accC.gender== 'female' ?  'selected' :'' }  >Female</option>
-                            <option value="male" ${accC.gender== 'male' ?  'selected' :'' } >Male</option>
-                            <option value="other">Others</option>
-                        </select>
-
-                    </div>
-                    <div class="form-group">
-                        <label for="notes">Notes</label>
-                        <textarea class="form-control" name="notes" id="notes" rows="3"></textarea>
-                    </div>
-
-                    <c:if test="${cart.getTotalMoney() >= 1000000}">
-                        <input type="radio" checked disabled>
-                        <label for="">Bank Transfer</label>
-                        <p class="text-warning">Auto choice method pay account when total amount of order greater 1000000 VND</p>
-                    </c:if>
+                <form action="vnpay" method="post" class="form-signup">                                                                                   
                     <!--Payment-->
-                    <div class="form-group pay" id="payment" style="width: 50%">
+                    <div class="form-group pay" id="payment">
                         <label for="pay"> Select a payment method</label>
                         <div class="form-group">
-                            <input class="" type="radio" id="cash" name="payment" value="cash" checked>
+                            <input class="" type="radio" id="cash" value="2" name="paymentMethod" value="cash" checked>
                             <label for="cash">Payment on delivery</label>
                             <br>
-                            <input class="" type="radio" id="account" name="payment" value="account">
+                            <input class="" type="radio" id="account" value="1" name="paymentMethod" value="account">
                             <label for="account">Bank transfer</label>
                         </div>
-                        <div class="d-none" id="qr" style="
-                             width: 40%;
-                             height: 50%;
-                             overflow: hidden;
-                             ">
-                            <img src="./img/qr2.jpg" alt="alt" />
+                        <div class="d-none" id="qr">
+                            <img src="./img/qr2.jpg" alt="alt"/>
                         </div>
                     </div>
-
-                    <!--Payment-->
-                    <button class="btn bg-success text-white">Submit</button>
+                        <button type="submit" class="site-btn">PLACE ORDER</button>                
                 </form>
+
             </div>   
             <!--information user-->
         </div>
@@ -270,6 +182,24 @@
 
 
         </script>
+<!--        <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Lắng nghe sự kiện click trên nút "PLACE ORDER"
+        document.querySelector('.site-btn').addEventListener('click', function(event) {
+            // Lấy phương thức thanh toán được chọn
+            var paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+            
+            // Nếu phương thức thanh toán là VN pay
+            if (paymentMethod === '2') {
+                // Chuyển hướng đến link thanh toán của VNP
+                window.location.href = 'https://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=55000&vnp_Command=pay&vnp_CreateDate=20240321221050&vnp_CurrCode=VND&vnp_ExpireDate=20240321222550&vnp_IpAddr=0%3A0%3A0%3A0%3A0%3A0%3A0%3A1&vnp_Locale=vn&vnp_OrderInfo=Thanh+toan+don+hang%3AA1006&vnp_OrderType=sale&vnp_ReturnUrl=http%3A%2F%2Flocalhost%3A9999%2Fswpproject%2Fhome&vnp_TmnCode=DUJ8ND6D&vnp_TxnRef=A1006&vnp_Version=2.1.0&vnp_SecureHash=7485f1bd2fa509cdefb8d267fbc7b9c679399b3ccc59ff17ecba73a94bc373d70b60e1211d986745c31c26ef20261daace629b101c78ce571d4af7706c9e5499';
+                
+                // Ngăn chặn hành vi mặc định của nút "PLACE ORDER" (nếu cần)
+                event.preventDefault();
+            }
+        });
+    });
+</script>-->
         <a href="register.jsp"></a>
     </body>
 </html>

@@ -6,11 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 import model.Cart;
 import model.Customer;
 import model.Item;
 import model.Order;
 import model.OrderDetail;
+import model.Product;
 import model.Users;
 
 /**
@@ -232,18 +234,52 @@ public class OrderDAO extends DBContext {
 
     }
 
+    public int getOrderItemIDbyUser(int rol) {
+        String sql = "SELECT TOP 1 o.orderID\n"
+                + "FROM Customer u\n"
+                + "JOIN [Order] o ON o.customerID = u.customerID\n"
+                + "JOIN orderDetail od ON od.orderID = o.orderID\n"
+                + "WHERE u.customerID = ?\n"
+                + "ORDER BY od.detailID DESC;";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, rol);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int getSellerID() {
+        String sql = "SELECT TOP 1 u.userID \n"
+                + "FROM Users u \n"
+                + "LEFT JOIN [Order] o ON u.userID = o.sellerID \n"
+                + "WHERE u.roleID = 1\n"
+                + "GROUP BY u.userID \n"
+                + "ORDER BY COUNT(o.orderID)\n"
+                + "";
+        try {
+            PreparedStatement st;
+            st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
+
     public static void main(String[] args) {
         // Tạo một đối tượng của lớp có phương thức getOrderDetailByOrderID
-        OrderDAO main = new OrderDAO();
-
-        // Gọi phương thức getOrderDetailByOrderID và in kết quả
-        ArrayList<OrderDetail> orderDetails = main.getOrderDetailByOrderID("3");
-        if (orderDetails != null) {
-            for (OrderDetail orderDetail : orderDetails) {
-                System.out.println("ten san pham " + orderDetail.getTotalCost());
-            }
-        } else {
-            System.out.println("Không có chi tiết đơn hàng được trả về.");
-        }
+        OrderDAO dao = new OrderDAO();
+        System.out.println(dao.getSellerID());
+        
+        
     }
 }

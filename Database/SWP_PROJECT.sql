@@ -74,18 +74,32 @@ avatar nvarchar(1255),
 [address] nvarchar(45),
 pass nvarchar(20),
 roleID int,
-numberOrders int,
 userStatus int,
 FOREIGN KEY (roleID) REFERENCES Roles(roleID)
 )
 
-insert into Users(userName, gender, email, mobile, avatar, [address], pass, roleID, numberOrders)
+insert into Users(userName, gender, email, mobile, avatar, [address], pass, roleID)
 values 
-('nguyenhoang','male', 'hoangnguyen@gmail.com','0939152003','https://img.nimo.tv/t/1629526287189/202403131710297308141_1629526287189_avatar.png/w240_l0/img.webp?fbclid=IwAR3V7OOezTPkRufvUleMwrD8JtWuIaskpQO3m3RZImBtUY3sLkw2DpAFSkc','ha noi','123',1,0),
-('nguyentahoang','male', 'hoang@gmail.com','0969112003','null','ha noi','123',2,0),
-('tahoang','male', 'tahoang@gmail.com','0969112003','null','ha noi','123',1,0),
-('nhatminh','male', 'minhnhat@gmail.com','0969102003','null','tu son','123',3,0),
-('tahoang1','male', 'nguyentahoang@gmail.com','0969112003','null','ha noi','123',4,0)
+('quangtoan','male', 'saler1@gmail.com','0939152003','https://img.nimo.tv/t/1629526287189/202403131710297308141_1629526287189_avatar.png/w240_l0/img.webp?fbclid=IwAR3V7OOezTPkRufvUleMwrD8JtWuIaskpQO3m3RZImBtUY3sLkw2DpAFSkc','ha noi','123',1),
+('nguyentahoang','male', 'admin@gmail.com','0969112003','null','ha noi','123',2),
+('tahoang','male', 'saler2@gmail.com','0969112003','null','ha noi','123',1),
+('nhatminh','male', 'marketer@gmail.com','0969102003','null','tu son','123',3),
+('duongduy','male', 'salemanager@gmail.com','0969112003','null','ha noi','123',4),
+('vietduy','male', 'staff@gmail.com','0902283551','null','Son Tay','123',5),
+('minhnhat','male', 'saler3@gmail.com','0969112003','null','ha noi','123',1)
+
+SELECT u.userID, u.userName, COUNT(o.orderID) AS NumOrdersWithUserID
+FROM Users u
+LEFT JOIN [Order] o ON u.userID = o.sellerID
+WHERE u.roleID = 1
+GROUP BY u.userID, u.userName
+
+SELECT TOP 1 u.userID 
+FROM Users u 
+LEFT JOIN [Order] o ON u.userID = o.sellerID 
+WHERE u.roleID = 1
+GROUP BY u.userID 
+ORDER BY COUNT(o.orderID)
 
 select * from [Feedback]
 select * from Customer
@@ -95,30 +109,18 @@ select * from Users
 select * from product
 select * from Roles
 
-
-select * from Users
-where roleID = 1
-order by userID
-OFFSET (? - 1) * 3 ROWS
-FETCH NEXT 3 ROWS ONLY;
-
-SELECT *
-FROM [Order]
-Where sellerID = ? and orderID = ?;
-
 create table Roles (
 roleID int primary key,
 roleName nvarchar(20)
 )
 
-select userID from Users where email = ? and pass = ?
-
 insert into Roles (roleID, roleName)
 values 
-(1, 'SaleManager'),
+(1, 'Saler'),
 (2, 'Admin'),
 (3, 'Marketer'),
-(4, 'Saler')
+(4, 'Sale Manager'),
+(5, 'Warehouse Staff')
 
 
 create table Blog (

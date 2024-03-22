@@ -369,6 +369,7 @@
                                         <th>Status</th>
                                         <th>Update Status</th>
                                         <th>Cancel</th>
+                                        <th>Request change saler</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -388,7 +389,8 @@
                                                     <c:otherwise>
                                                         No products
                                                     </c:otherwise>
-                                                </c:choose></td>
+                                                </c:choose>
+                                            </td>
                                             <td>${o.getTotalCost()}</td>
                                             <td>
                                                 <c:choose>
@@ -440,7 +442,8 @@
                                                         </form>
                                                     </c:when>
                                                 </c:choose> 
-                                            </td>                     
+                                            </td>   
+                                            <td>cell</td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>
@@ -449,7 +452,7 @@
                             </p>
                             <nav aria-label="...">
                                 <ul class="pagination pagination-sm">
-                                    <c:forEach begin="1" end="${a.getNumberPage()}" var="i">
+                                    <c:forEach begin="1" end="${endIndex}" var="i">
                                         <li class="page-item ${i == param.index ? 'active' : ''}">
                                             <a class="page-link" href="pageOrdersServletBySale?index=${i}">${i}</a>
                                         </li>
@@ -471,8 +474,6 @@
                 <div class="modal-content">
 
                     <div class="modal-body">
-
-
                         <BR>
                         <a href="#" style="    float: right;
                            font-weight: 600;

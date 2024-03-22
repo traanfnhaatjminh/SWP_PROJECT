@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.OrderDetail;
+import model.Users;
 
 /**
  *
@@ -43,8 +44,10 @@ public class ChangeStatusCancelForSaleNormal extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
  /* TODO output your page here. You may use following sample code. */
             int oid = Integer.parseInt(request.getParameter("oid"));
-            orderDAO1 dao = new orderDAO1();
             HttpSession session = request.getSession();
+//            Users u = (Users)session.getAttribute("accS");
+//            int sid = u.getUserID();
+            orderDAO1 dao = new orderDAO1();
             // Lấy giá trị indexBlogg từ session
             int index = (session.getAttribute("index") != null) ? (int) session.getAttribute("index") : 1;
             List<OrderDetail> listProductDetail = dao.getListProductByOrder(oid);

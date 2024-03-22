@@ -43,7 +43,7 @@ public class pageOrdersServletBySale extends HttpServlet {
 
             int index;
             HttpSession session = request.getSession();
-            int sId = (int)session.getAttribute("sId");
+            int sId = (int) session.getAttribute("sId");
             orderDAO1 dao = new orderDAO1();
             if (request.getParameter("index") == null) {
                 index = 1;
@@ -52,10 +52,15 @@ public class pageOrdersServletBySale extends HttpServlet {
                 //    HttpSession session = request.getSession();
                 session.setAttribute("index", index);
             }
-            List<model.Order> listOrders = dao.getOrderBySalePage(index, sId); 
+            List<model.Order> listOrders = dao.getOrderBySalePage(index, sId);
+            int endIndex = dao.getOrderBySale(sId).size() / 5;
+            if (dao.getOrderBySale(sId).size() % 5 != 0) {
+                endIndex++;
+            }
             List<String> listProductName = dao.getListNameProductForSale();
             session.setAttribute("listProductName", listProductName);
-            request.setAttribute("listOrders", listOrders);           
+            request.setAttribute("listOrders", listOrders);
+            request.setAttribute("endIndex", endIndex);
             request.setAttribute("curMenu", "Management Orders");
             request.getRequestDispatcher("table-data-saleNormal.jsp").forward(request, response);
 

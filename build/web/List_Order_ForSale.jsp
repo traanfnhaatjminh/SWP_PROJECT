@@ -289,7 +289,6 @@
                             <span class="app-menu__label">Saler Manager</span></a></li>
                     <li><a class="app-menu__item " href="pageOrder"><i class='app-menu__icon bx bx-dollar'></i><span
                                 class="app-menu__label">Management Orders</span></a></li>
-                    <li><a class="app-menu__item" href="ChangePassForSale.jsp"><i class='app-menu__icon bx bx-cog'></i><span class="app-menu__label">Change Password</span></a></li>
                 </ul>
         </aside>
         <main class="app-content" style="margin-left: 250px;">
@@ -300,15 +299,9 @@
                 <div id="clock"></div>
             </div>
             <div class="search-form">
-                <form action="" >
+                <form action="sortProduct">
                     <select name="groupby" id="group">
                         <option selected="" value="1">All</option>
-                        <optgroup label="Status">
-                            <option value="2">Orders Pending Processing</option>
-                            <option value="3" >Orders On Delivery</option>
-                            <option value="4">Order Successfully Delivered</option>
-                            <option value="5">Cancel</option>
-                        </optgroup>
                         <optgroup label="Product Name">
                             <c:forEach items="${listProductName}" var="listProductName">
                                 <option value="${listProductName}" ${listProductName.equals(request.getAttribute("valueName")) ? 'selected' : ''}>${listProductName}</option>
@@ -323,7 +316,7 @@
             </div>
 
             <div class="search-form">
-                <form action="" class="date-search-form">
+                <form action="FilterOrderDateServletBySale" class="date-search-form">
                     <label for="startDate" class="search-label">From date:</label>
                     <input type="date" name="startDate" value="" class="date-input" required>
 
@@ -333,19 +326,19 @@
                     <button type="submit" class="search-button">Search</button>
                 </form>
             </div>
-            <div style="margin-top: -2cm"><div class="col-sm-2" >
-                    <form action="" method="post"> 
-                        <div  style="margin-left: 21.5cm"class="search-box">
-                            <button type="submit" class="btn-search" style="margin-right: 5px"><i class="fas fa-search"></i></button>
-                            <input type="text" class="input-search" placeholder="Search customer..." name="search2" value="${search2}" required>
-                        </div>
-                    </form> 
+            <div style="margin-top: -2cm; margin-bottom: 5%"><div class="col-sm-2" >
+                    <!--                    <form action="" method="post"> 
+                                            <div  style="margin-left: 21.5cm"class="search-box">
+                                                <button type="submit" class="btn-search" style="margin-right: 5px"><i class="fas fa-search"></i></button>
+                                                <input type="text" class="input-search" placeholder="Search saler..." name="search2" value="${search2}" required>
+                                            </div>
+                                        </form> -->
                 </div>
                 <div class="col-sm-2">
                     <form action="" method="post">
                         <div style="margin-left: 21.5cm" class="search-box">
                             <button type="submit" class="btn-search" style="margin-right: 5px"><i class="fas fa-search"></i></button>
-                            <input type="text" class="input-search" placeholder="Search order id..." name="search1" value="${search1}" required oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                            <input type="text" class="input-search" placeholder="Search order id..." name="oid" value="${search1}" required oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                         </div>
                     </form>
                 </div>
@@ -386,7 +379,8 @@
                                                     <c:otherwise>
                                                         No products
                                                     </c:otherwise>
-                                                </c:choose></td>
+                                                </c:choose>
+                                            </td>
                                             <td>${o.getTotalCost()}</td>
                                             <td>
                                                 ${o.getSellerID()}
@@ -401,7 +395,7 @@
                                                     </select>
 
                                                     <input type="submit" value="Save" style="background-color: #007BFF; color: #fff; padding: 5px 10px; border: none; border-radius: 5px; cursor: pointer;">
-                                                </form>
+                                                </form>   
                                             </td>
                                         </tr>
                                     </c:forEach>
